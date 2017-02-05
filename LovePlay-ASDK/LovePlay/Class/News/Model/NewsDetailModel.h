@@ -41,10 +41,10 @@
 
 @end
 
-@interface NewsFavorInfo : NSObject
+@interface NewsRelativeInfo : NSObject
 
 @property (nonatomic, strong) NSString *docID;
-@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong) NSString *ID;
 @property (nonatomic, strong) NSString *imgsrc;
 @property (nonatomic, strong) NSString *ptime;
 @property (nonatomic, strong) NSString *source;

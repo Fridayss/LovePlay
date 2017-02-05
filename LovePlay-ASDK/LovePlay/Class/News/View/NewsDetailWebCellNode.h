@@ -8,6 +8,12 @@
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 
+typedef void (^webViewFinishLoadBlock)();
+
 @interface NewsDetailWebCellNode : ASCellNode
+
+- (instancetype)initWithHtmlBoby:(NSString *)htmlBody;
+
+- (void)webViewDidFinishLoadBlock:(webViewFinishLoadBlock)finishLoadBlock;
 
 @end

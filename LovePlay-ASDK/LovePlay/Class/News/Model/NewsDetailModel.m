@@ -16,7 +16,7 @@
 
 + (NSDictionary *)modelContainerPropertyGenericClass
 {
-    return @{@"img" : [NewsDetailImgeInfo class], @"relative_sys" : [NewsFavorInfo class]};
+    return @{@"img" : [NewsDetailImgeInfo class], @"relative_sys" : [NewsRelativeInfo class]};
 }
 
 @end
@@ -26,7 +26,11 @@
 
 @end
 
-@implementation NewsFavorInfo
+@implementation NewsRelativeInfo
 
++ (NSDictionary *)modelCustomPropertyMapper
+{
+    return @{@"ID" : @"id"};
+}
 
 @end

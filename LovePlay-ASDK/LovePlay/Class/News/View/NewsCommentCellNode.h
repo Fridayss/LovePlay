@@ -8,6 +8,9 @@
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 
+@class NewsCommentItem;
 @interface NewsCommentCellNode : ASCellNode
+
+- (instancetype)initWithcommentItem:(NewsCommentItem *)commentItem;
 
 @end

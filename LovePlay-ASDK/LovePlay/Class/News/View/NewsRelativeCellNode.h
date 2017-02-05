@@ -8,6 +8,9 @@
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 
+@class NewsRelativeInfo;
 @interface NewsRelativeCellNode : ASCellNode
+
+- (instancetype)initWithRelativeInfo:(NewsRelativeInfo *)relativeInfo;
 
 @end

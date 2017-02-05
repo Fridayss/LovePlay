@@ -8,12 +8,15 @@
 
 #import "NewsDetailViewController.h"
 #import "NewsDetailModel.h"
+#import "NewsDetailWebCellNode.h"
+#import "NewsRelativeCellNode.h"
+#import "NewsCommentCellNode.h"
 
 @interface NewsDetailViewController ()<ASTableDelegate, ASTableDataSource>
 //UI
 @property (nonatomic, strong) ASTableNode *tableNode;
 //Data
-
+@property (nonatomic, strong) NewsDetailModel *detailModel;
 @end
 
 @implementation NewsDetailViewController
@@ -33,6 +36,7 @@
     tableNode.backgroundColor = [UIColor whiteColor];
     tableNode.delegate = self;
     tableNode.dataSource = self;
+    tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.node addSubnode:tableNode];
     _tableNode = tableNode;
 }
@@ -56,6 +60,7 @@
     [[HttpRequest sharedInstance] GET:urlString parameters:params success:^(id response) {
         NSLog(@"list-succ : %@", response);
         NewsDetailModel *detailModel = [NewsDetailModel modelWithJSON:response[@"info"]];
+        _detailModel = detailModel;
         [_tableNode reloadData];
     } failure:^(NSError *error) {
         NSLog(@"list-fail : %@", error);
@@ -65,21 +70,60 @@
 #pragma mark - tableView delegate
 - (NSInteger)numberOfSectionsInTableNode:(ASTableNode *)tableNode
 {
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableNode:(ASTableNode *)tableNode numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    switch (section) {
+        case 0:
+            return 1;
+            break;
+        case 1:
+            return _detailModel.tie.commentIds.count;
+            break;
+        case 2:
+            return _detailModel.article.relative_sys.count;
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (ASCellNodeBlock)tableNode:(ASTableNode *)tableNode nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ASCellNode * (^cellNodeBlock)() = ^ASCellNode * (){
-        ASCellNode *cellNode = [[ASCellNode alloc] init];
-        return cellNode;
+        switch (indexPath.section) {
+            case 0:
+            {
+                NewsDetailWebCellNode *cellNode = [[NewsDetailWebCellNode alloc] initWithHtmlBoby:_detailModel.article.body];
+                return cellNode;
+            }
+                break;
+            case 1:
+            {
+                NSArray *floors = _detailModel.tie.commentIds[indexPath.row];
+                NSString *key = floors.firstObject;
+                NewsCommentItem *commentItem = _detailModel.tie.comments[key];
+                NewsCommentCellNode *cellNode = [[NewsCommentCellNode alloc] initWithcommentItem:commentItem];
+                return cellNode;
+            }
+                break;
+            case 2:
+            {
+                NewsRelativeInfo *relativeInfo = _detailModel.article.relative_sys[indexPath.row];
+                NewsRelativeCellNode *cellNode = [[NewsRelativeCellNode alloc] initWithRelativeInfo:relativeInfo];
+                return cellNode;
+            }
+                break;
+            default:
+                return nil;
+                break;
+        }
     };
     return cellNodeBlock;
+    
 }
 
 #pragma mark - tableView dataSource
