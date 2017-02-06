@@ -11,6 +11,8 @@
 @class NewsCommentItem;
 @interface NewsCommentCellNode : ASCellNode
 
-- (instancetype)initWithcommentItem:(NewsCommentItem *)commentItem;
+//- (instancetype)initWithcommentItem:(NewsCommentItem *)commentItem;
+
+- (instancetype)initWithcommentItems:(NSDictionary *)commentItems commmentIds:(NSArray *)commmentIds;
 
 @end

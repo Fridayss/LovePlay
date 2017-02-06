@@ -60,9 +60,6 @@
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
     _imageNode.style.preferredSize = CGSizeMake(80, 80);
-//    _textNode.style.flexShrink = 1.0;
-//    _textNode.style.flexGrow = 1.0;
-//    _textNode.style.alignSelf = ASStackLayoutAlignSelfStart;
     
     _replyBtnNode.style.preferredSize = CGSizeMake(50, 20);
     _underLineNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 0.5);

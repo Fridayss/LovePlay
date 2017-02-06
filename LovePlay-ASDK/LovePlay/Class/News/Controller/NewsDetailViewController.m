@@ -104,9 +104,10 @@
             case 1:
             {
                 NSArray *floors = _detailModel.tie.commentIds[indexPath.row];
-                NSString *key = floors.firstObject;
-                NewsCommentItem *commentItem = _detailModel.tie.comments[key];
-                NewsCommentCellNode *cellNode = [[NewsCommentCellNode alloc] initWithcommentItem:commentItem];
+//                NSString *key = floors.firstObject;
+//                NewsCommentItem *commentItem = _detailModel.tie.comments[key];
+//                NewsCommentCellNode *cellNode = [[NewsCommentCellNode alloc] initWithcommentItem:commentItem];
+                NewsCommentCellNode *cellNode = [[NewsCommentCellNode alloc] initWithcommentItems:_detailModel.tie.comments commmentIds:floors];
                 return cellNode;
             }
                 break;

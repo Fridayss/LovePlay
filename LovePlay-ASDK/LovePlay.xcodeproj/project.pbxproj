@@ -16,6 +16,8 @@
 		A17544181E348AF200516411 /* ADLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17544171E348AF200516411 /* ADLaunchView.m */; };
 		A175441B1E348B8300516411 /* ADLaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = A175441A1E348B8300516411 /* ADLaunchController.m */; };
 		A175441E1E348B9E00516411 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A175441D1E348B9E00516411 /* MainNavigationController.m */; };
+		A1E9B7E91E486A93009C8883 /* NewsCommentReplyAreaNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E9B7E81E486A93009C8883 /* NewsCommentReplyAreaNode.m */; };
+		A1E9B7EC1E486AA5009C8883 /* NewsCommentReplyNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E9B7EB1E486AA5009C8883 /* NewsCommentReplyNode.m */; };
 		A701D9891E390A9E00756C97 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D9881E390A9E00756C97 /* HttpRequest.m */; };
 		A701D98C1E390B7B00756C97 /* UrlConst.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D98B1E390B7B00756C97 /* UrlConst.m */; };
 		A701D98F1E390D4B00756C97 /* RecommendOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D98E1E390D4B00756C97 /* RecommendOperation.m */; };
@@ -70,6 +72,10 @@
 		A175441A1E348B8300516411 /* ADLaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLaunchController.m; sourceTree = "<group>"; };
 		A175441C1E348B9E00516411 /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
 		A175441D1E348B9E00516411 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
+		A1E9B7E71E486A93009C8883 /* NewsCommentReplyAreaNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentReplyAreaNode.h; sourceTree = "<group>"; };
+		A1E9B7E81E486A93009C8883 /* NewsCommentReplyAreaNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentReplyAreaNode.m; sourceTree = "<group>"; };
+		A1E9B7EA1E486AA5009C8883 /* NewsCommentReplyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentReplyNode.h; sourceTree = "<group>"; };
+		A1E9B7EB1E486AA5009C8883 /* NewsCommentReplyNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentReplyNode.m; sourceTree = "<group>"; };
 		A701D9871E390A9E00756C97 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
 		A701D9881E390A9E00756C97 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
 		A701D98A1E390B7B00756C97 /* UrlConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlConst.h; sourceTree = "<group>"; };
@@ -297,6 +303,10 @@
 				A7DDF8221E4596F5005843FD /* NewsRelativeCellNode.m */,
 				A7DDF81E1E4596DA005843FD /* NewsCommentCellNode.h */,
 				A7DDF81F1E4596DA005843FD /* NewsCommentCellNode.m */,
+				A1E9B7E71E486A93009C8883 /* NewsCommentReplyAreaNode.h */,
+				A1E9B7E81E486A93009C8883 /* NewsCommentReplyAreaNode.m */,
+				A1E9B7EA1E486AA5009C8883 /* NewsCommentReplyNode.h */,
+				A1E9B7EB1E486AA5009C8883 /* NewsCommentReplyNode.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -562,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7DDF8231E4596F5005843FD /* NewsRelativeCellNode.m in Sources */,
+				A1E9B7EC1E486AA5009C8883 /* NewsCommentReplyNode.m in Sources */,
 				A7650F561E3E350900BF30EB /* NewsCommentViewController.m in Sources */,
 				A7650F771E3F773C00BF30EB /* NewsDetailModel.m in Sources */,
 				A7FFE2141E44CD96005D0FA0 /* DiscussListHeaderView.m in Sources */,
@@ -592,6 +603,7 @@
 				A7650F3B1E3D79C700BF30EB /* RecommendTopicCellNode.m in Sources */,
 				A7CC0FB31E42F5020090CBB7 /* DiscussListModel.m in Sources */,
 				A17543EA1E3484F800516411 /* main.m in Sources */,
+				A1E9B7E91E486A93009C8883 /* NewsCommentReplyAreaNode.m in Sources */,
 				A17544151E348ABC00516411 /* MainTabBarController.m in Sources */,
 				A7650F501E3E34BF00BF30EB /* NewsImageTitleCellNode.m in Sources */,
 				A7CC0FBF1E4302EC0090CBB7 /* ZoneListHeaderView.m in Sources */,
