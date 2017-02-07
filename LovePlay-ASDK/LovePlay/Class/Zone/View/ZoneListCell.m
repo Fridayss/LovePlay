@@ -49,9 +49,7 @@
         return detailTextLabel;
     }];
     [self.contentView addSubnode:detailTextNode];
-    
-    //    titleTextNode.backgroundColor = [UIColor redColor];
-    //    detailTextNode.backgroundColor = [UIColor yellowColor];
+
 }
 
 - (void)setDiscussItem:(ZoneDiscussItem *)discussItem

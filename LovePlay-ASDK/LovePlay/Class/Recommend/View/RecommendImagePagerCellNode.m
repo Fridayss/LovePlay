@@ -13,6 +13,7 @@
 @interface RecommendImagePagerCellNode ()<ASPagerDelegate, ASPagerDataSource>
 @property (nonatomic, strong) NSArray *imageInfoDatas;
 @property (nonatomic, strong) ASPagerNode *pagerNode;
+@property (nonatomic, copy) imagePagerSelectedBlock selectedBlock;
 @end
 
 @implementation RecommendImagePagerCellNode
@@ -21,12 +22,17 @@
 {
     self = [super init];
     if (self) {
-        
+        self.backgroundColor = [UIColor yellowColor];
         _imageInfoDatas = imageInfoDatas;
         self.userInteractionEnabled = YES;
         [self addPagerNode];
     }
     return self;
+}
+
+- (void)recommendImagePagerSelectedBlock:(imagePagerSelectedBlock)selectedBlock
+{
+    _selectedBlock = selectedBlock;
 }
 
 - (void)addPagerNode
@@ -47,7 +53,9 @@
 - (void)didLoad
 {
     [super didLoad];
+    NSLog(@"enable -- %d, allow -- %d", _pagerNode.view.pagingEnabled, _pagerNode.view.allowsSelection);
     _pagerNode.view.pagingEnabled = NO;
+    _pagerNode.view.allowsSelection = YES;
 }
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
@@ -75,13 +83,16 @@
 #pragma mark - pagerNode delegate
 - (ASSizeRange)pagerNode:(ASPagerNode *)pagerNode constrainedSizeForNodeAtIndex:(NSInteger)index
 {
-     return ASSizeRangeMake(CGSizeMake(267, 100),CGSizeMake(267, 100));
+     return ASSizeRangeMake(CGSizeMake(267, self.view.height),CGSizeMake(267, self.view.height));
 }
 
 - (void)collectionNode:(ASCollectionNode *)collectionNode didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     RecommendImageInfoModel *imageInfoModel = _imageInfoDatas[indexPath.row];
     NSLog(@"title -- %@", imageInfoModel.title);
+    if (_selectedBlock) {
+        _selectedBlock(imageInfoModel);
+    }
 }
 
 @end

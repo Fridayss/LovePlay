@@ -14,6 +14,7 @@
 #import "RecommendTopicCellNode.h"
 #import "RecommendImagePagerCellNode.h"
 //C
+#import "NewsDetailViewController.h"
 #import "RecommendGameViewController.h"
 
 @interface RecommendViewController ()<ASCollectionDelegate, ASCollectionDataSource, UICollectionViewDelegateFlowLayout>
@@ -69,7 +70,7 @@
         _imageInfoDatas = [NSArray modelArrayWithClass:[RecommendImageInfoModel class] json:response[@"info"]];
         [_collectionNode reloadData];
     } failure:^(NSError *error) {
-        
+        NSLog(@"error -- %@", error);
     }];
 }
 
@@ -101,6 +102,11 @@
         {
             ASCellNode *(^cellNodeBlock)() = ^ASCellNode *(){
                 RecommendImagePagerCellNode *cellNode = [[RecommendImagePagerCellNode alloc] initWithImageInfoDatas:_imageInfoDatas];
+                [cellNode recommendImagePagerSelectedBlock:^(RecommendImageInfoModel *imageInfoModel) {
+                    NewsDetailViewController *newsDetailViewController = [[NewsDetailViewController alloc] init];
+                    newsDetailViewController.newsID = imageInfoModel.docid;
+                    [self.navigationController pushViewController:newsDetailViewController animated:YES];
+                }];
                 return cellNode;
             };
             return cellNodeBlock;

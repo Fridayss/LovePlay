@@ -10,4 +10,6 @@
 
 @interface NewsCommentViewController : ASViewController
 
+@property (nonatomic, copy) NSString *newsID;
+
 @end

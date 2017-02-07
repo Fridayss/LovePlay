@@ -16,11 +16,14 @@
 		A17544181E348AF200516411 /* ADLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A17544171E348AF200516411 /* ADLaunchView.m */; };
 		A175441B1E348B8300516411 /* ADLaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = A175441A1E348B8300516411 /* ADLaunchController.m */; };
 		A175441E1E348B9E00516411 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A175441D1E348B9E00516411 /* MainNavigationController.m */; };
+		A1A0D2C31E496610008DC3FF /* NewsDetailSectionTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0D2C21E496610008DC3FF /* NewsDetailSectionTitleHeaderView.m */; };
+		A1A0D2C61E496624008DC3FF /* NewsDetailSectionCommentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0D2C51E496624008DC3FF /* NewsDetailSectionCommentFooterView.m */; };
+		A1A0D2C91E49777D008DC3FF /* UrlConst.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0D2C71E49777D008DC3FF /* UrlConst.m */; };
+		A1A0D2CC1E49C3DD008DC3FF /* DiscussDetailWebCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0D2CB1E49C3DD008DC3FF /* DiscussDetailWebCell.m */; };
+		A1A0D2CF1E49C8E9008DC3FF /* DiscussDetailPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A0D2CE1E49C8E9008DC3FF /* DiscussDetailPostCell.m */; };
 		A1E9B7E91E486A93009C8883 /* NewsCommentReplyAreaNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E9B7E81E486A93009C8883 /* NewsCommentReplyAreaNode.m */; };
 		A1E9B7EC1E486AA5009C8883 /* NewsCommentReplyNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E9B7EB1E486AA5009C8883 /* NewsCommentReplyNode.m */; };
 		A701D9891E390A9E00756C97 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D9881E390A9E00756C97 /* HttpRequest.m */; };
-		A701D98C1E390B7B00756C97 /* UrlConst.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D98B1E390B7B00756C97 /* UrlConst.m */; };
-		A701D98F1E390D4B00756C97 /* RecommendOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D98E1E390D4B00756C97 /* RecommendOperation.m */; };
 		A701D9921E390E5A00756C97 /* RecommendTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D9911E390E5A00756C97 /* RecommendTopicModel.m */; };
 		A701D9981E390E9C00756C97 /* RecommendImageInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D9971E390E9C00756C97 /* RecommendImageInfoModel.m */; };
 		A701D99C1E39152F00756C97 /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D99B1E39152F00756C97 /* RecommendViewController.m */; };
@@ -72,16 +75,22 @@
 		A175441A1E348B8300516411 /* ADLaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADLaunchController.m; sourceTree = "<group>"; };
 		A175441C1E348B9E00516411 /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
 		A175441D1E348B9E00516411 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
+		A1A0D2C11E496610008DC3FF /* NewsDetailSectionTitleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailSectionTitleHeaderView.h; sourceTree = "<group>"; };
+		A1A0D2C21E496610008DC3FF /* NewsDetailSectionTitleHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailSectionTitleHeaderView.m; sourceTree = "<group>"; };
+		A1A0D2C41E496624008DC3FF /* NewsDetailSectionCommentFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailSectionCommentFooterView.h; sourceTree = "<group>"; };
+		A1A0D2C51E496624008DC3FF /* NewsDetailSectionCommentFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailSectionCommentFooterView.m; sourceTree = "<group>"; };
+		A1A0D2C71E49777D008DC3FF /* UrlConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlConst.m; sourceTree = "<group>"; };
+		A1A0D2C81E49777D008DC3FF /* UrlConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlConst.h; sourceTree = "<group>"; };
+		A1A0D2CA1E49C3DD008DC3FF /* DiscussDetailWebCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussDetailWebCell.h; sourceTree = "<group>"; };
+		A1A0D2CB1E49C3DD008DC3FF /* DiscussDetailWebCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscussDetailWebCell.m; sourceTree = "<group>"; };
+		A1A0D2CD1E49C8E9008DC3FF /* DiscussDetailPostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussDetailPostCell.h; sourceTree = "<group>"; };
+		A1A0D2CE1E49C8E9008DC3FF /* DiscussDetailPostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscussDetailPostCell.m; sourceTree = "<group>"; };
 		A1E9B7E71E486A93009C8883 /* NewsCommentReplyAreaNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentReplyAreaNode.h; sourceTree = "<group>"; };
 		A1E9B7E81E486A93009C8883 /* NewsCommentReplyAreaNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentReplyAreaNode.m; sourceTree = "<group>"; };
 		A1E9B7EA1E486AA5009C8883 /* NewsCommentReplyNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentReplyNode.h; sourceTree = "<group>"; };
 		A1E9B7EB1E486AA5009C8883 /* NewsCommentReplyNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentReplyNode.m; sourceTree = "<group>"; };
 		A701D9871E390A9E00756C97 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
 		A701D9881E390A9E00756C97 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
-		A701D98A1E390B7B00756C97 /* UrlConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlConst.h; sourceTree = "<group>"; };
-		A701D98B1E390B7B00756C97 /* UrlConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlConst.m; sourceTree = "<group>"; };
-		A701D98D1E390D4B00756C97 /* RecommendOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendOperation.h; sourceTree = "<group>"; };
-		A701D98E1E390D4B00756C97 /* RecommendOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendOperation.m; sourceTree = "<group>"; };
 		A701D9901E390E5A00756C97 /* RecommendTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendTopicModel.h; sourceTree = "<group>"; };
 		A701D9911E390E5A00756C97 /* RecommendTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendTopicModel.m; sourceTree = "<group>"; };
 		A701D9961E390E9C00756C97 /* RecommendImageInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendImageInfoModel.h; sourceTree = "<group>"; };
@@ -307,6 +316,10 @@
 				A1E9B7E81E486A93009C8883 /* NewsCommentReplyAreaNode.m */,
 				A1E9B7EA1E486AA5009C8883 /* NewsCommentReplyNode.h */,
 				A1E9B7EB1E486AA5009C8883 /* NewsCommentReplyNode.m */,
+				A1A0D2C11E496610008DC3FF /* NewsDetailSectionTitleHeaderView.h */,
+				A1A0D2C21E496610008DC3FF /* NewsDetailSectionTitleHeaderView.m */,
+				A1A0D2C41E496624008DC3FF /* NewsDetailSectionCommentFooterView.h */,
+				A1A0D2C51E496624008DC3FF /* NewsDetailSectionCommentFooterView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -407,6 +420,10 @@
 				A7FFE2161E44CDB0005D0FA0 /* DiscussListTopCell.m */,
 				A7FFE2121E44CD96005D0FA0 /* DiscussListHeaderView.h */,
 				A7FFE2131E44CD96005D0FA0 /* DiscussListHeaderView.m */,
+				A1A0D2CA1E49C3DD008DC3FF /* DiscussDetailWebCell.h */,
+				A1A0D2CB1E49C3DD008DC3FF /* DiscussDetailWebCell.m */,
+				A1A0D2CD1E49C8E9008DC3FF /* DiscussDetailPostCell.h */,
+				A1A0D2CE1E49C8E9008DC3FF /* DiscussDetailPostCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -423,8 +440,8 @@
 		A701D9851E390A3A00756C97 /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				A701D98D1E390D4B00756C97 /* RecommendOperation.h */,
-				A701D98E1E390D4B00756C97 /* RecommendOperation.m */,
+				A1A0D2C81E49777D008DC3FF /* UrlConst.h */,
+				A1A0D2C71E49777D008DC3FF /* UrlConst.m */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -432,8 +449,6 @@
 		A701D9861E390A3A00756C97 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				A701D98A1E390B7B00756C97 /* UrlConst.h */,
-				A701D98B1E390B7B00756C97 /* UrlConst.m */,
 				A701D9871E390A9E00756C97 /* HttpRequest.h */,
 				A701D9881E390A9E00756C97 /* HttpRequest.m */,
 			);
@@ -579,10 +594,13 @@
 				A7650F3E1E3D79DC00BF30EB /* RecommendImagePagerCellNode.m in Sources */,
 				A17544181E348AF200516411 /* ADLaunchView.m in Sources */,
 				A7FFE2171E44CDB0005D0FA0 /* DiscussListTopCell.m in Sources */,
+				A1A0D2CC1E49C3DD008DC3FF /* DiscussDetailWebCell.m in Sources */,
 				A701D9891E390A9E00756C97 /* HttpRequest.m in Sources */,
 				A7650F441E3D7A9800BF30EB /* RecommendGameViewController.m in Sources */,
+				A1A0D2C31E496610008DC3FF /* NewsDetailSectionTitleHeaderView.m in Sources */,
 				A7650F7A1E3F774B00BF30EB /* NewsCommentModel.m in Sources */,
 				A7CC0FB91E42F6E80090CBB7 /* ZoneListModel.m in Sources */,
+				A1A0D2C61E496624008DC3FF /* NewsDetailSectionCommentFooterView.m in Sources */,
 				A7FFE2111E44CA53005D0FA0 /* ZoneListCell.m in Sources */,
 				A701D9981E390E9C00756C97 /* RecommendImageInfoModel.m in Sources */,
 				A7FFE2081E44CA0B005D0FA0 /* DiscussListCell.m in Sources */,
@@ -593,6 +611,7 @@
 				A7650F6E1E3E425300BF30EB /* ZoneListViewController.m in Sources */,
 				A7DDF81A1E45960C005843FD /* NewsDetailWebCellNode.m in Sources */,
 				A701D99C1E39152F00756C97 /* RecommendViewController.m in Sources */,
+				A1A0D2CF1E49C8E9008DC3FF /* DiscussDetailPostCell.m in Sources */,
 				A7650F5C1E3E362D00BF30EB /* NewsListViewController.m in Sources */,
 				A175441E1E348B9E00516411 /* MainNavigationController.m in Sources */,
 				A7DDF8201E4596DA005843FD /* NewsCommentCellNode.m in Sources */,
@@ -608,11 +627,10 @@
 				A7650F501E3E34BF00BF30EB /* NewsImageTitleCellNode.m in Sources */,
 				A7CC0FBF1E4302EC0090CBB7 /* ZoneListHeaderView.m in Sources */,
 				A7650F741E3F772B00BF30EB /* NewsListInfoModel.m in Sources */,
+				A1A0D2C91E49777D008DC3FF /* UrlConst.m in Sources */,
 				A7650F681E3E36D600BF30EB /* DiscussListViewController.m in Sources */,
 				A7650F6B1E3E36EE00BF30EB /* DiscussDetailViewController.m in Sources */,
-				A701D98C1E390B7B00756C97 /* UrlConst.m in Sources */,
 				A701D9921E390E5A00756C97 /* RecommendTopicModel.m in Sources */,
-				A701D98F1E390D4B00756C97 /* RecommendOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

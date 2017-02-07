@@ -10,4 +10,6 @@
 
 @interface DiscussDetailViewController : UIViewController
 
+@property (nonatomic, copy) NSString *tid;
+
 @end

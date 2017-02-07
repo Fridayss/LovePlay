@@ -32,7 +32,6 @@
     ASNetworkImageNode *imageNode = [[ASNetworkImageNode alloc] init];
     imageNode.userInteractionEnabled = NO;
     imageNode.URL = [NSURL URLWithString:_imageInfoModel.imgUrl];
-//    [imageNode addTarget:self action:@selector(imageClick) forControlEvents:ASControlNodeEventTouchUpInside];
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     
@@ -46,14 +45,9 @@
     _titleTextNode = titleTextNode;
 }
 
-- (void)imageClick
-{
-    NSLog(@"tap click");
-}
-
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
-    _imageNode.style.preferredSize = CGSizeMake(267, 100);
+    _imageNode.style.preferredSize = CGSizeMake(267, constrainedSize.max.width);
     _titleTextNode.style.flexShrink = 1.0;
     ASStackLayoutSpec *verStackLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentEnd alignItems:ASStackLayoutAlignItemsStretch children:@[_titleTextNode]];
     ASOverlayLayoutSpec *overlayLayout = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:_imageNode overlay:verStackLayout];

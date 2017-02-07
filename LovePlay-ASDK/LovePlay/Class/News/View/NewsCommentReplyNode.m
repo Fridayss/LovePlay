@@ -47,7 +47,7 @@
     
     ASTextNode *contentTextNode = [[ASTextNode alloc] init];
     contentTextNode.maximumNumberOfLines = 0;
-    contentTextNode.attributedText = [[NSAttributedString alloc] initWithString:_commentItem.content];
+    contentTextNode.attributedText = [[NSAttributedString alloc] initWithString:_commentItem.content ? _commentItem.content : @"NULL"];
     [self addSubnode:contentTextNode];
     _contentTextNode = contentTextNode;
     

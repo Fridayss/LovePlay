@@ -11,6 +11,9 @@
 #import "NewsDetailWebCellNode.h"
 #import "NewsRelativeCellNode.h"
 #import "NewsCommentCellNode.h"
+#import "NewsDetailSectionTitleHeaderView.h"
+#import "NewsDetailSectionCommentFooterView.h"
+#import "NewsCommentViewController.h"
 
 @interface NewsDetailViewController ()<ASTableDelegate, ASTableDataSource>
 //UI
@@ -67,7 +70,7 @@
     }];
 }
 
-#pragma mark - tableView delegate
+#pragma mark - tableView dataSource
 - (NSInteger)numberOfSectionsInTableNode:(ASTableNode *)tableNode
 {
     return 3;
@@ -104,9 +107,6 @@
             case 1:
             {
                 NSArray *floors = _detailModel.tie.commentIds[indexPath.row];
-//                NSString *key = floors.firstObject;
-//                NewsCommentItem *commentItem = _detailModel.tie.comments[key];
-//                NewsCommentCellNode *cellNode = [[NewsCommentCellNode alloc] initWithcommentItem:commentItem];
                 NewsCommentCellNode *cellNode = [[NewsCommentCellNode alloc] initWithcommentItems:_detailModel.tie.comments commmentIds:floors];
                 return cellNode;
             }
@@ -124,10 +124,89 @@
         }
     };
     return cellNodeBlock;
-    
 }
 
-#pragma mark - tableView dataSource
+#pragma mark - tableView delegate
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NewsDetailSectionTitleHeaderView *headerView = [NewsDetailSectionTitleHeaderView sectionHeaderWithTableView:tableView];
+    switch (section) {
+        case 1:
+        {
+            if (_detailModel.tie.comments.count > 0) {
+                headerView.title = @"热门跟帖";
+            }else{
+                return nil;
+            }
+           
+        }
+            break;
+        case 2:
+        {
+            if (_detailModel.article.relative_sys.count > 0) {
+                headerView.title = @"猜你喜欢";
+            }else{
+                return nil;
+            }
+        }
+            break;
+        default:
+            return nil;
+            break;
+    }
+    return headerView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    NewsDetailSectionCommentFooterView *footerView = [NewsDetailSectionCommentFooterView sectionFooterWithTableView:tableView];
+    if (1 == section) {
+        if (_detailModel.tie.comments.count > 0) {
+            footerView.title = @"查看更多跟帖";
+            [footerView commentFooterViewTouchBlock:^{
+                NewsCommentViewController *commentViewController = [[NewsCommentViewController alloc] init];
+                commentViewController.newsID = _newsID;
+                [self.navigationController pushViewController:commentViewController animated:YES];
+            }];
+            return footerView;
+        }
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 1:
+        {
+            if (_detailModel.tie.comments.count > 0) {
+               return 30;
+            }
+        }
+            break;
+        case 2:
+        {
+            if (_detailModel.article.relative_sys.count > 0) {
+                return 30;
+            }
+        }
+            break;
+        default:
+            return CGFLOAT_MIN;
+            break;
+    }
+    return CGFLOAT_MIN;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (1 == section) {
+        if (_detailModel.tie.comments.count > 0) {
+            return 40;
+        }
+    }
+    return CGFLOAT_MIN;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

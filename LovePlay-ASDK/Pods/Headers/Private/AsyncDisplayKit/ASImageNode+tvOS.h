@@ -1,1 +1,1 @@
-../../../AsyncDisplayKit/AsyncDisplayKit/ASImageNode+tvOS.h
+../../../AsyncDisplayKit/AsyncDisplayKit/tvOS/ASImageNode+tvOS.h

@@ -9,8 +9,10 @@
 //
 
 #import "ASDimension.h"
-#import "ASAssert.h"
+
 #import "CoreGraphics+ASConvenience.h"
+
+#import "ASAssert.h"
 
 #pragma mark - ASDimension
 
@@ -58,6 +60,10 @@ ASLayoutSize const ASLayoutSizeAuto = {ASDimensionAuto, ASDimensionAuto};
 
 
 #pragma mark - ASSizeRange
+
+ASSizeRange const ASSizeRangeZero = {};
+
+ASSizeRange const ASSizeRangeUnconstrained = { {0, 0}, { INFINITY, INFINITY }};
 
 struct _Range {
   CGFloat min;

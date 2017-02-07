@@ -11,7 +11,7 @@
 #import "DiscussListModel.h"
 
 @interface DiscussListCell ()
-@property (nonatomic, strong) ASTextNode *titleTextNode;
+@property (nonatomic, strong) UILabel *titleTextNode;
 @end
 
 @implementation DiscussListCell

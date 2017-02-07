@@ -10,4 +10,24 @@
 
 @implementation DiscussDetailModel
 
++ (NSDictionary *)modelContainerPropertyGenericClass
+{
+    return @{@"postlist" : [DiscuzPost class]};
+}
+
+
+@end
+
+@implementation DiscuzThread
+
++ (NSDictionary *)modelCustomPropertyMapper
+{
+    return @{@"typeName" : @"typename"};
+}
+
+@end
+
+@implementation DiscuzPost
+
+
 @end

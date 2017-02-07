@@ -10,9 +10,11 @@
 
 #import "ASLayoutSpec.h"
 #import "ASLayoutSpecPrivate.h"
+
 #import "ASLayoutSpec+Subclasses.h"
-#import "ASLayoutElementStylePrivate.h"
 #import "ASLayoutSpec+Debug.h"
+
+#import "ASLayoutElementStylePrivate.h"
 
 #import <objc/runtime.h>
 #import <map>
@@ -31,7 +33,7 @@
 {
   [super initialize];
   if (self != [ASLayoutSpec class]) {
-    ASDisplayNodeAssert(!ASSubclassOverridesSelector([ASLayoutSpec class], self, @selector(measureWithSizeRange:)), @"Subclass %@ must not override measureWithSizeRange: method. Instead overwrite calculateLayoutThatFits:", NSStringFromClass(self));
+    ASDisplayNodeAssert(!ASSubclassOverridesSelector([ASLayoutSpec class], self, @selector(measureWithSizeRange:)), @"Subclass %@ must not override measureWithSizeRange: method. Instead override calculateLayoutThatFits:", NSStringFromClass(self));
   }
 }
 

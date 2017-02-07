@@ -10,12 +10,13 @@
 
 @interface DiscussImageModel : NSObject
 
-@property (nonatomic, strong) NSString *fid;
-@property (nonatomic, strong) NSString *icon;
-@property (nonatomic, strong) NSString *fup;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *threads;
-@property (nonatomic, strong) NSString *posts;
-@property (nonatomic, strong) NSString *todayposts;
+@property (nonatomic, strong) NSString *bannerUrl;
+@property (nonatomic, assign) NSInteger discuzModelTypeId;
+@property (nonatomic, assign) NSInteger fid;
+@property (nonatomic, strong) NSString *iconUrl;
+@property (nonatomic, strong) NSString *modelDesc;
+@property (nonatomic, strong) NSString *modelName;
+@property (nonatomic, strong) NSString *todayPosts;
+@property (nonatomic, assign) NSInteger weight;
 
 @end

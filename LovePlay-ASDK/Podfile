@@ -9,5 +9,5 @@ pod 'AsyncDisplayKit'
 
 pod 'MJRefresh'
 
-#pod 'MXParallaxHeader'
+pod 'MXParallaxHeader'
 end

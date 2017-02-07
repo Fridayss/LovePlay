@@ -12,10 +12,12 @@
 #import "DiscussListHeaderView.h"
 #import "DiscussListCell.h"
 #import "DiscussListTopCell.h"
+#import "DiscussDetailViewController.h"
 
 @interface DiscussListViewController ()<UITableViewDataSource, UITableViewDelegate>
 //UI
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) DiscussListHeaderView *headerView;
 //Data
 @property (nonatomic, strong) NSArray *discussListTopDatas;
 @property (nonatomic, strong) NSArray *discussListDatas;
@@ -27,9 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    NSLog(@"fid -- %@", _fid);
     [self initParams];
     [self addTableView];
+    [self addTableHeaderView];
     [self loadData];
 }
 
@@ -41,6 +43,11 @@
 - (void)addTableView
 {
     [self.view addSubview:self.tableView];
+}
+
+- (void)addTableHeaderView
+{
+    [self.view addSubview:self.headerView];
 }
 
 - (void)loadData
@@ -55,6 +62,7 @@
         NSLog(@"list-succ : %@", response);
         DiscussListModel *discussListModel = [DiscussListModel modelWithJSON:response[@"Variables"]];
         [self dealWithDiscussList:discussListModel.forum_threadlist];
+        
         [self loadDiscussImageData];
     } failure:^(NSError *error) {
         NSLog(@"list-fail : %@", error);
@@ -76,7 +84,9 @@
 
 - (void)dealWithDiscussHeaderViewWithDiscussImageModel:(DiscussImageModel *)imageModel
 {
-
+    
+    self.headerView.imageModel = imageModel;
+    self.tableView.tableHeaderView = self.headerView;
 }
 
 - (void)dealWithDiscussList:(NSArray *)discussList
@@ -150,6 +160,13 @@
     return 44;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ForumThread *forumThread = indexPath.section == 0 ? _discussListTopDatas[indexPath.row] : _discussListDatas[indexPath.row];
+    DiscussDetailViewController *detailViewController = [[DiscussDetailViewController alloc] init];
+    detailViewController.tid = forumThread.tid;
+    [self.navigationController pushViewController:detailViewController animated:YES];
+}
 
 #pragma mark - Getter / Setter
 - (UITableView *)tableView
@@ -161,6 +178,17 @@
         _tableView = tableView;
     }
     return _tableView;
+}
+
+- (DiscussListHeaderView *)headerView
+{
+    if (!_headerView) {
+        DiscussListHeaderView *headerView = [[DiscussListHeaderView alloc] init];
+        headerView.width = self.tableView.width;
+        headerView.height = 120;
+        _headerView = headerView;
+    }
+    return _headerView;
 }
 
 - (void)didReceiveMemoryWarning {

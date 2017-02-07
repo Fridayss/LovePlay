@@ -8,8 +8,14 @@
 
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 
+@class RecommendImageInfoModel;
+
+typedef void (^imagePagerSelectedBlock)(RecommendImageInfoModel *imageInfoModel);
+
 @interface RecommendImagePagerCellNode : ASCellNode
 
 - (instancetype)initWithImageInfoDatas:(NSArray *)imageInfoDatas;
+
+- (void)recommendImagePagerSelectedBlock:(imagePagerSelectedBlock)selectedBlock;
 
 @end

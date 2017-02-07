@@ -14,16 +14,17 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AsyncDisplayKit (2.0.2):
-    - AsyncDisplayKit/PINRemoteImage (= 2.0.2)
-  - AsyncDisplayKit/Core (2.0.2)
-  - AsyncDisplayKit/PINRemoteImage (2.0.2):
+  - AsyncDisplayKit (2.1):
+    - AsyncDisplayKit/PINRemoteImage (= 2.1)
+  - AsyncDisplayKit/Core (2.1)
+  - AsyncDisplayKit/PINRemoteImage (2.1):
     - AsyncDisplayKit/Core
     - PINRemoteImage/iOS (= 3.0.0-beta.7)
     - PINRemoteImage/PINCache
   - JPFPSStatus (0.1)
   - MBProgressHUD (1.0.0)
   - MJRefresh (3.1.12)
+  - MXParallaxHeader (0.6.0)
   - PINCache (3.0.1-beta.2):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.2)
     - PINCache/Core (= 3.0.1-beta.2)
@@ -46,18 +47,20 @@ DEPENDENCIES:
   - JPFPSStatus
   - MBProgressHUD
   - MJRefresh
+  - MXParallaxHeader
   - YYKit
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AsyncDisplayKit: 5c22daa1499c530fcc3e5589ddb201bf1176842b
+  AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
   JPFPSStatus: 4467a17488382e4c1700bd9d18c92ae581fd6305
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  MXParallaxHeader: 2997592b8349baf8557ae0e4346f6b17e141de39
   PINCache: 6d273a6e0754bd26e3f12a38a90dde73cc6a42b2
   PINRemoteImage: ff63baf185088530db6cfa41cb665e2b5126b5c3
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: e0bab83cbe6934c557e152fc1baf52bad3ba21f0
+PODFILE CHECKSUM: dde649e9ae13c8297baee5365f59b4d8f100d9ed
 
 COCOAPODS: 1.1.1
