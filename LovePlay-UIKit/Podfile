@@ -1,0 +1,10 @@
+platform :ios, '7.0'
+
+target 'LovePlay' do
+pod 'YYKit'
+pod 'JPFPSStatus'
+pod 'AFNetworking'
+pod 'MBProgressHUD'
+pod 'SDAutoLayout'
+pod 'MXParallaxHeader'
+end
