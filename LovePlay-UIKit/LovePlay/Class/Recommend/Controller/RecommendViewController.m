@@ -30,6 +30,7 @@
 
 static NSString * const imageCell = @"imageCell";
 static NSString * const topicCell = @"topicCell";
+static NSString * const footerSection = @"footerSection";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,7 +49,7 @@ static NSString * const topicCell = @"topicCell";
     collectionNode.dataSource = self;
     [collectionNode registerClass:[RecommendTopicCellNode class] forCellWithReuseIdentifier:topicCell];
     [collectionNode registerClass:[RecommendImagePagerCellNode class] forCellWithReuseIdentifier:imageCell];
-//    [collectionNode registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
+    [collectionNode registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerSection];
     [self.view addSubview:collectionNode];
     _collectionNode = collectionNode;
 }
@@ -107,6 +108,7 @@ static NSString * const topicCell = @"topicCell";
         case 0:
         {
             RecommendImagePagerCellNode *cellNode = [collectionView dequeueReusableCellWithReuseIdentifier:imageCell forIndexPath:indexPath];
+            [cellNode setupImageInfoDatas:_imageInfoDatas];
             [cellNode recommendImagePagerSelectedBlock:^(RecommendImageInfoModel *imageInfoModel) {
                 NewsDetailViewController *newsDetailViewController = [[NewsDetailViewController alloc] init];
                 newsDetailViewController.newsID = imageInfoModel.docid;
@@ -130,15 +132,15 @@ static NSString * const topicCell = @"topicCell";
 }
 
 #pragma mark + header and footer
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 0 && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
-//        UICollectionReusableView *cellNode = [[UICollectionReusableView alloc] init];
-//        cellNode.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.2];
-//        return cellNode;
-//    }
-//    return nil;
-//}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0 && [kind isEqualToString:UICollectionElementKindSectionFooter]) {
+        UICollectionReusableView *cellNode = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerSection forIndexPath:indexPath];
+        cellNode.backgroundColor = [UIColor colorWithWhite:0.8 alpha:0.2];
+        return cellNode;
+    }
+    return nil;
+}
 
 #pragma mark - colleciton delegate
 //设定区域内cell的尺寸
@@ -222,13 +224,13 @@ static NSString * const topicCell = @"topicCell";
 
 
 #pragma mark + header and footer
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-//{
-//    if (section == 0) {
-//        return CGSizeMake(self.view.frame.size.width, 6);
-//    }
-//    return CGSizeZero;
-//}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return CGSizeMake(self.view.frame.size.width, 6);
+    }
+    return CGSizeZero;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -11,6 +11,6 @@
 
 @interface RecommendImageInfoCellNode : UICollectionViewCell
 
-- (instancetype)initWithImageInfoModel:(RecommendImageInfoModel *)imageInfoModel;
+- (void)setupImageInfoModel:(RecommendImageInfoModel *)imageInfoModel;
 
 @end

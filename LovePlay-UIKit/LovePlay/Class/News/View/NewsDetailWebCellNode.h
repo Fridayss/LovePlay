@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^webViewFinishLoadBlock)();
+typedef void (^webViewFinishLoadBlock)(CGFloat webViewHeight);
 
 @interface NewsDetailWebCellNode : UITableViewCell
 

@@ -11,6 +11,8 @@
 @class NewsRelativeInfo;
 @interface NewsRelativeCellNode : UITableViewCell
 
-- (instancetype)initWithRelativeInfo:(NewsRelativeInfo *)relativeInfo;
++ (instancetype)cellWithTableView:(UITableView *)tableView;
+
+- (void)setupRelativeInfo:(NewsRelativeInfo *)relativeInfo;
 
 @end

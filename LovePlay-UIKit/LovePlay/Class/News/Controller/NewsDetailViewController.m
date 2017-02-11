@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UITableView *tableNode;
 //Data
 @property (nonatomic, strong) NewsDetailModel *detailModel;
+@property (nonatomic, assign) CGFloat webViewHeight;
 @end
 
 @implementation NewsDetailViewController
@@ -27,13 +28,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self initParams];
     [self addTableNode];
     [self loadData];
 }
 
+- (void)initParams
+{
+    _webViewHeight = 0;
+}
+
 - (void)addTableNode
 {
-    UITableView *tableNode = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    UITableView *tableNode = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tableNode.backgroundColor = [UIColor whiteColor];
     tableNode.delegate = self;
     tableNode.dataSource = self;
@@ -87,7 +94,13 @@
         case 0:
         {
             NewsDetailWebCellNode *cellNode = [NewsDetailWebCellNode cellWithTableView:tableView];
-            [cellNode setupHtmlBoby:_detailModel.article.body];
+            if (_webViewHeight <= 0) {
+                [cellNode setupHtmlBoby:_detailModel.article.body];
+                [cellNode webViewDidFinishLoadBlock:^(CGFloat webViewHeight) {
+                    _webViewHeight = webViewHeight;
+                    [_tableNode reloadData];
+                }];
+            }
             return cellNode;
         }
             break;
@@ -102,7 +115,8 @@
         case 2:
         {
             NewsRelativeInfo *relativeInfo = _detailModel.article.relative_sys[indexPath.row];
-            NewsRelativeCellNode *cellNode = [[NewsRelativeCellNode alloc] initWithRelativeInfo:relativeInfo];
+            NewsRelativeCellNode *cellNode = [NewsRelativeCellNode cellWithTableView:tableView];
+            [cellNode setupRelativeInfo:relativeInfo];
             return cellNode;
         }
             break;
@@ -113,6 +127,34 @@
 }
 
 #pragma mark - tableView delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 0:
+            return _webViewHeight;
+            break;
+        case 1:
+        {
+            return [_tableNode cellHeightForIndexPath:indexPath cellClass:[NewsCommentCellNode class] cellContentViewWidth:_tableNode.width cellDataSetting:^(UITableViewCell *cell) {
+                NSArray *floors = _detailModel.tie.commentIds[indexPath.row];
+                [(NewsCommentCellNode *)cell setupCommentItems:_detailModel.tie.comments commmentIds:floors];
+            }];
+        }
+            break;
+        case 2:
+        {
+            return [_tableNode cellHeightForIndexPath:indexPath cellClass:[NewsRelativeCellNode class] cellContentViewWidth:_tableNode.width cellDataSetting:^(UITableViewCell *cell) {
+                NewsRelativeInfo *relativeInfo = _detailModel.article.relative_sys[indexPath.row];
+                [(NewsRelativeCellNode *)cell setupRelativeInfo:relativeInfo];
+            }];
+        }
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NewsDetailSectionTitleHeaderView *headerView = [NewsDetailSectionTitleHeaderView sectionHeaderWithTableView:tableView];

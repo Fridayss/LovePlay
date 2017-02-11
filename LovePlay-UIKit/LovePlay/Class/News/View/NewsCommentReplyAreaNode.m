@@ -21,16 +21,35 @@
 
 @implementation NewsCommentReplyAreaNode
 
-- (instancetype)initWithcommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
-        _commentItemsDict = commentItems;
-        _floors = floors;
-        [self addSubnodes];
+        
     }
     return self;
+}
+
+- (void)setupCommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors
+{
+    _commentItemsDict = commentItems;
+    _floors = floors;
+    
+    [self removeAllSubviews];
+    
+    [self addSubnodes];
+    
+    [self sd_autoLayoutSubViews];
+    
+    if (floors.count > 1) {
+        self.fixedHeight = nil;
+        self.fixedWidth = nil;
+        
+    }else{
+        self.fixedHeight = @(0);
+        self.fixedWidth = @(0);
+    }
 }
 
 - (void)addSubnodes
@@ -49,13 +68,7 @@
 #pragma mark - layout
 - (void)sd_autoLayoutSubViews
 {
-    
+    [self setupAutoMarginFlowItems:_replyNodeArray withPerRowItemsCount:1 itemWidth:self.width verticalMargin:0 verticalEdgeInset:0 horizontalEdgeInset:0];
 }
-
-//- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
-//{
-//    ASStackLayoutSpec *verLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:_replyNodeArray];
-//    return verLayout;
-//}
 
 @end

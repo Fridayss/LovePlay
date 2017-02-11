@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UIWebView *webView;
 //Data
 @property (nonatomic, strong) NSString *htmlBody;
-@property (nonatomic, assign) CGFloat webViewHeight;
 @property (nonatomic, copy) webViewFinishLoadBlock finishLoadBlock;
 @end
 
@@ -68,28 +67,18 @@
 #pragma mark - webView delegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    _webViewHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
+    CGFloat webViewHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
     if (_finishLoadBlock) {
-        _finishLoadBlock();
+        _finishLoadBlock(webViewHeight);
     }
-    [self setNeedsLayout];
+    _webView.height = webViewHeight;
 }
 
 #pragma mark - layout
 - (void)sd_autoLayoutSubViews
 {
-    
+    _webView.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
 }
-//- (CGSize)calculateSizeThatFits:(CGSize)constrainedSize
-//{
-//    return CGSizeMake(constrainedSize.width, _webViewHeight);
-//}
-//
-//- (void)layout
-//{
-//    [super layout];
-//    _webView.frame = CGRectMake(0, 0, self.calculatedSize.width, _webViewHeight);
-//}
 
 - (void)dealloc
 {

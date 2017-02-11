@@ -10,6 +10,6 @@
 
 @interface NewsCommentReplyAreaNode : UIView
 
-- (instancetype)initWithcommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors;
+- (void)setupCommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors;
 
 @end

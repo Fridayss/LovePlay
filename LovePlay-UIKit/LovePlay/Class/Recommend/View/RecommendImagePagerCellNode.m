@@ -10,8 +10,7 @@
 #import "RecommendImageInfoModel.h"
 #import "RecommendImageInfoCellNode.h"
 
-@interface RecommendImagePagerCellNode ()
-//<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface RecommendImagePagerCellNode ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) NSArray *imageInfoDatas;
 @property (nonatomic, strong) UICollectionView *pagerNode;
 @property (nonatomic, copy) imagePagerSelectedBlock selectedBlock;
@@ -19,14 +18,14 @@
 
 @implementation RecommendImagePagerCellNode
 
+static NSString * const imageInfoCell = @"imageInfoCell";
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor yellowColor];
-        
-//        [self addPagerNode];
-//        [self sd_layoutSubviews];
+        [self addPagerNode];
+        [self sd_autoLayoutSubViews];
     }
     return self;
 }
@@ -41,13 +40,14 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
-    flowLayout.itemSize = CGSizeMake(267, self.height);
+    flowLayout.itemSize = CGSizeMake(267, self.contentView.height);
 
     UICollectionView *pagerNode = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
-    pagerNode.userInteractionEnabled = YES;
     pagerNode.delegate = self;
     pagerNode.dataSource = self;
     pagerNode.pagingEnabled = NO;
+    pagerNode.showsHorizontalScrollIndicator = NO;
+    [pagerNode registerClass:[RecommendImageInfoCellNode class] forCellWithReuseIdentifier:imageInfoCell];
     [self.contentView addSubview:pagerNode];
     _pagerNode = pagerNode;
 }
@@ -55,14 +55,14 @@
 - (void)setupImageInfoDatas:(NSArray *)imageInfoDatas
 {
     _imageInfoDatas = imageInfoDatas;
-
+    [_pagerNode reloadData];
 }
 
 #pragma mark - layout
-//- (void)sd_layoutSubviews
-//{
-//    _pagerNode.sd_layout.topEqualToView(self.contentView).leftEqualToView(self.contentView).bottomEqualToView(self.contentView).rightEqualToView(self.contentView);
-//}
+- (void)sd_autoLayoutSubViews
+{
+    _pagerNode.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
+}
 
 //- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 //{
@@ -72,27 +72,28 @@
 
 #pragma mark - pagerNode datasource
 
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-//{
-//    return _imageInfoDatas.count;
-//}
-//
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    RecommendImageInfoModel *imageInfoModel = _imageInfoDatas[indexPath.row];
-//    RecommendImageInfoCellNode *cellNode = [[RecommendImageInfoCellNode alloc] initWithImageInfoModel:imageInfoModel];
-//    return cellNode;
-//}
-//
-//#pragma mark - pagerNode delegate
-//
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    RecommendImageInfoModel *imageInfoModel = _imageInfoDatas[indexPath.row];
-//    NSLog(@"title -- %@", imageInfoModel.title);
-//    if (_selectedBlock) {
-//        _selectedBlock(imageInfoModel);
-//    }
-//}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return _imageInfoDatas.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    RecommendImageInfoModel *imageInfoModel = _imageInfoDatas[indexPath.row];
+    RecommendImageInfoCellNode *cellNode = [collectionView dequeueReusableCellWithReuseIdentifier:imageInfoCell forIndexPath:indexPath];
+    [cellNode setupImageInfoModel:imageInfoModel];
+    return cellNode;
+}
+
+#pragma mark - pagerNode delegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    RecommendImageInfoModel *imageInfoModel = _imageInfoDatas[indexPath.row];
+    NSLog(@"title -- %@", imageInfoModel.title);
+    if (_selectedBlock) {
+        _selectedBlock(imageInfoModel);
+    }
+}
 
 @end

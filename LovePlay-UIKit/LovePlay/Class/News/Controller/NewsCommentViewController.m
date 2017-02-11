@@ -106,6 +106,17 @@
 }
 
 #pragma mark - tableView delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [_tableNode cellHeightForIndexPath:indexPath cellClass:[NewsCommentCellNode class] cellContentViewWidth:_tableNode.width cellDataSetting:^(UITableViewCell *cell) {
+        if (0 == indexPath.section) {
+            [(NewsCommentCellNode *)cell setupCommentItems:_hotComments.comments commmentIds:_hotComments.commentIds[indexPath.row]];
+        }else{
+            [(NewsCommentCellNode *)cell setupCommentItems:_latestComments.comments commmentIds:_latestComments.commentIds[indexPath.row]];
+        }
+    }];
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NewsDetailSectionTitleHeaderView *headerView = [NewsDetailSectionTitleHeaderView sectionHeaderWithTableView:tableView];

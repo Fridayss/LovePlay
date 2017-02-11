@@ -17,12 +17,12 @@
 
 @implementation RecommendImageInfoCellNode
 
-- (instancetype)initWithImageInfoModel:(RecommendImageInfoModel *)imageInfoModel
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
-        _imageInfoModel = imageInfoModel;
         [self addSubnodes];
+        [self sd_autoLayoutSubViews];
     }
     return self;
 }
@@ -31,24 +31,35 @@
 {
     UIImageView *imageNode = [[UIImageView alloc] init];
     imageNode.userInteractionEnabled = NO;
-    imageNode.imageURL = [NSURL URLWithString:_imageInfoModel.imgUrl];
     [self.contentView addSubview:imageNode];
     _imageNode = imageNode;
     
     UILabel *titleTextNode = [[UILabel alloc] init];
     titleTextNode.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    [self.contentView addSubview:titleTextNode];
+    _titleTextNode = titleTextNode;
+}
+
+- (void)setupImageInfoModel:(RecommendImageInfoModel *)imageInfoModel
+{
+    _imageInfoModel = imageInfoModel;
+    _imageNode.imageURL = [NSURL URLWithString:_imageInfoModel.imgUrl];
     NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
     [paragraph setAlignment:NSTextAlignmentCenter];
     NSDictionary *attri = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSParagraphStyleAttributeName : paragraph};
-    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_imageInfoModel.title attributes:attri];
-    [self.contentView addSubview:titleTextNode];
-    _titleTextNode = titleTextNode;
+    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_imageInfoModel.title attributes:attri];
 }
 
 #pragma mark - layout
 - (void)sd_autoLayoutSubViews
 {
-    
+    _imageNode.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
+    _titleTextNode.sd_layout
+    .leftEqualToView(self.contentView)
+    .bottomEqualToView(self.contentView)
+    .rightEqualToView(self.contentView)
+    .autoHeightRatio(0);
+    [_titleTextNode setMaxNumberOfLinesToShow:1];
 }
 
 //- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize

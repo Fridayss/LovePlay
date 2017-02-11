@@ -43,7 +43,6 @@
 - (void)addSubnodes
 {
     UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.font = [UIFont systemFontOfSize:10];
     [self.contentView addSubview:titleTextNode];
     _titleTextNode = titleTextNode;
     
@@ -89,18 +88,5 @@
     
     [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
 }
-
-//- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
-//{
-//    _imageNode.style.preferredSize = CGSizeMake(constrainedSize.max.width - 20, 120);
-//    _underLineNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 0.5);
-//    
-//    ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStart children:@[_titleTextNode, _imageNode]];
-//    
-//    ASInsetLayoutSpec *insetContentLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:verContentLayout];
-//    
-//    ASStackLayoutSpec *verStachLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[insetContentLayout, _underLineNode]];
-//    return verStachLayout;
-//}
 
 @end

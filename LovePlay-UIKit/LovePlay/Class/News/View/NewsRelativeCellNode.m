@@ -21,11 +21,20 @@
 
 @implementation NewsRelativeCellNode
 
-- (instancetype)initWithRelativeInfo:(NewsRelativeInfo *)relativeInfo
++ (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    self = [super init];
+    static NSString *ID = @"NewsRelativeCellNode";
+    NewsRelativeCellNode *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[NewsRelativeCellNode alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    }
+    return cell;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _relativeInfo = relativeInfo;
         [self addSubnodes];
         [self sd_autoLayoutSubViews];
     }
@@ -35,17 +44,15 @@
 - (void)addSubnodes
 {
     UIImageView *imageNode = [[UIImageView alloc] init];
-    imageNode.imageURL = [NSURL URLWithString:_relativeInfo.imgsrc];
     [self.contentView addSubview:imageNode];
     _imageNode = imageNode;
     
     UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_relativeInfo.title];
     [self.contentView addSubview:titleTextNode];
     _titleTextNode = titleTextNode;
     
     UILabel *timeInfoTextNode = [[UILabel alloc] init];
-    timeInfoTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",_relativeInfo.source, _relativeInfo.ptime]];
+    timeInfoTextNode.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:timeInfoTextNode];
     _timeInfoTextNode = timeInfoTextNode;
     
@@ -56,10 +63,44 @@
     
 }
 
+- (void)setupRelativeInfo:(NewsRelativeInfo *)relativeInfo
+{
+    _relativeInfo = relativeInfo;
+    _imageNode.imageURL = [NSURL URLWithString:_relativeInfo.imgsrc];
+    _titleTextNode.text = _relativeInfo.title;
+    _timeInfoTextNode.text = [NSString stringWithFormat:@"%@ %@",_relativeInfo.source, _relativeInfo.ptime];
+}
+
 #pragma mark - layout
 - (void)sd_autoLayoutSubViews
 {
-
+    _imageNode.sd_layout
+    .widthIs(80)
+    .heightIs(80)
+    .topSpaceToView(self.contentView, 10)
+    .leftSpaceToView(self.contentView, 10);
+    
+    _titleTextNode.sd_layout
+    .topEqualToView(_imageNode)
+    .leftSpaceToView(_imageNode, 10)
+    .rightSpaceToView(self.contentView, 10)
+    .autoHeightRatio(0);
+    [_titleTextNode setMaxNumberOfLinesToShow:2];
+    
+    _timeInfoTextNode.sd_layout
+    .leftSpaceToView(_imageNode, 10)
+    .bottomEqualToView(_imageNode)
+    .rightSpaceToView(self.contentView, 10)
+    .autoHeightRatio(0);
+    [_timeInfoTextNode setMaxNumberOfLinesToShow:1];
+    
+    _underLineNode.sd_layout
+    .heightIs(0.5)
+    .topSpaceToView(_imageNode, 10)
+    .leftEqualToView(self.contentView)
+    .rightEqualToView(self.contentView);
+    
+    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
 }
 //- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 //{
