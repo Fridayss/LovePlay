@@ -24,6 +24,7 @@
     self = [super init];
     if (self) {
         [self addSubnodes];
+        [self sd_autoLayoutSubViews];
     }
     return self;
 }
@@ -31,6 +32,7 @@
 - (void)addSubnodes
 {
     UIImageView *imageNode = [[UIImageView alloc] init];
+    imageNode.contentMode = UIViewContentModeScaleAspectFill;
     [self addSubview:imageNode];
     _imageNode = imageNode;
     
@@ -55,13 +57,24 @@
     _descriptionTextLabel.text = [NSString stringWithFormat:@"今日：%@",imageModel.todayPosts];
 }
 
-- (void)layoutSubviews
+#pragma mark - layout
+- (void)sd_autoLayoutSubViews
 {
-    [super layoutSubviews];
+    _imageNode.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
     
-    _imageNode.frame = self.bounds;
-    _titleTextLabel.frame = CGRectMake(10, self.height - 60, self.width - 20, 30);
-    _descriptionTextLabel.frame = CGRectMake(10, self.height - 30, self.width - 20, 30);
+    _descriptionTextLabel.sd_layout
+    .leftSpaceToView(self, 10)
+    .bottomSpaceToView(self, 10)
+    .rightSpaceToView(self, 10)
+    .autoHeightRatio(0);
+    [_descriptionTextLabel setMaxNumberOfLinesToShow:1];
+    
+    _titleTextLabel.sd_layout
+    .leftEqualToView(_descriptionTextLabel)
+    .bottomSpaceToView(_descriptionTextLabel, 5)
+    .rightEqualToView(_descriptionTextLabel)
+    .autoHeightRatio(0);
+    [_titleTextLabel setMaxNumberOfLinesToShow:1];
 }
 
 @end

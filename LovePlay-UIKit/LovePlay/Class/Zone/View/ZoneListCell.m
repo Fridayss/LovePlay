@@ -23,6 +23,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubnodes];
+        [self sd_autoLayoutSubViews];
     }
     return self;
 }
@@ -34,12 +35,12 @@
     _imageNode = imageNode;
     
     UILabel *titleTextLabel = [[UILabel alloc] init];
-    titleTextLabel.font = [UIFont systemFontOfSize:13];
+    titleTextLabel.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:titleTextLabel];
     _titleTextLabel = titleTextLabel;
     
     UILabel *detailTextLabel = [[UILabel alloc] init];
-    detailTextLabel.font = [UIFont systemFontOfSize:13];
+    detailTextLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:detailTextLabel];
     _detailTextLabel = detailTextLabel;
 
@@ -56,36 +57,25 @@
 #pragma mark - layout
 - (void)sd_autoLayoutSubViews
 {
+    _imageNode.sd_layout
+    .widthIs(50)
+    .heightIs(50)
+    .leftSpaceToView(self.contentView, 10)
+    .centerYEqualToView(self.contentView);
     
+    _titleTextLabel.sd_layout
+    .topEqualToView(_imageNode).offset(2)
+    .leftSpaceToView(_imageNode, 5)
+    .rightSpaceToView(self.contentView, 10)
+    .autoHeightRatio(0);
+    [_titleTextLabel setMaxNumberOfLinesToShow:1];
+    
+    _detailTextLabel.sd_layout
+    .leftEqualToView(_titleTextLabel)
+    .bottomEqualToView(_imageNode).offset(- 2)
+    .rightEqualToView(_titleTextLabel)
+    .autoHeightRatio(0);
+    [_detailTextLabel setMaxNumberOfLinesToShow:1];
 }
-
-//- (void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//    
-//    CGFloat horEdge = 10;
-//    CGFloat imageNodeWH = 54;
-//    CGFloat imageNodeY = (self.frame.size.height - imageNodeWH) / 2;
-//    
-//    _imageNode.frame = CGRectMake(horEdge, imageNodeY, imageNodeWH, imageNodeWH);
-//    CGFloat textNodeW = self.frame.size.width - imageNodeWH - 3 * horEdge;
-//    CGFloat textNodeH = 20;
-//    _titleTextLabel.frame = CGRectMake(CGRectGetMaxX(_imageNode.frame) + horEdge, CGRectGetMinY(_imageNode.frame), textNodeW, textNodeH);
-//    _detailTextLabel.frame = CGRectMake(CGRectGetMinX(_titleTextLabel.frame), CGRectGetMaxY(_imageNode.frame) - textNodeH, textNodeW, textNodeH);
-//}
-
-//- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
-//{
-//    _imageNode.style.preferredSize = CGSizeMake(54, 54);
-//
-//    ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStart children:@[_titleTextNode, _detailTextNode]];
-//
-//    ASStackLayoutSpec *horContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[_imageNode, verContentLayout]];
-//
-//    ASInsetLayoutSpec *insetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:horContentLayout];
-//    return insetLayout;
-//}
-
-
 
 @end

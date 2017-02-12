@@ -19,7 +19,7 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *ID = @"webCell";
+    static NSString *ID = @"DiscussDetailWebCell";
     DiscussDetailWebCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
         cell = [[DiscussDetailWebCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
@@ -37,6 +37,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self addSubviews];
+        [self sd_autoLayoutSubViews];
     }
     return self;
 }
@@ -57,13 +58,14 @@
 
 - (void)setHtmlBody:(NSString *)htmlBody
 {
+    _htmlBody = htmlBody;
     [_webView loadHTMLString:htmlBody baseURL:nil];
 }
 
-- (void)layoutSubviews
+#pragma mark - layout
+- (void)sd_autoLayoutSubViews
 {
-    [super layoutSubviews];
-    _webView.frame = self.bounds;
+    _webView.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
 }
 
 #pragma mark - webView delegate

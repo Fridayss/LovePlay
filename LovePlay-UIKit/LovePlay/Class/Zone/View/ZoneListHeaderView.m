@@ -20,6 +20,7 @@
     if (self) {
         self.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
         [self addSubnodes];
+        [self sd_autoLayoutSubViews];
     }
     return self;
 }
@@ -27,7 +28,7 @@
 - (void)addSubnodes
 {
     UILabel *titleTextLabel = [[UILabel alloc] init];
-    titleTextLabel.font = [UIFont systemFontOfSize:13];
+    titleTextLabel.font = [UIFont systemFontOfSize:14];
     titleTextLabel.textColor = [UIColor whiteColor];
     [self addSubview:titleTextLabel];
     _titleTextLabel = titleTextLabel;
@@ -38,22 +39,13 @@
 {
     _titleName = titleName;
     _titleTextLabel.text = titleName;
-    //直接使用ASTextNode作为【原生view】的子控件，无法适应原生的布局
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    [paragraph setAlignment:NSTextAlignmentJustified];
-    NSDictionary *attri = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSParagraphStyleAttributeName : paragraph};
-    _titleTextLabel.attributedText = [[NSAttributedString alloc] initWithString:titleName attributes:attri];
     
 }
 
-- (void)layoutSubviews
+#pragma mark - layout
+- (void)sd_autoLayoutSubViews
 {
-    [super layoutSubviews];
-    _titleTextLabel.frame = CGRectMake(8, 0, 100, self.frame.size.height);
-    
-    //【可放开词句查看问题】直接使用ASTextNode作为【原生view】的子控件，无法适应原生的布局
-//    _titleTextNode.frame = CGRectMake(8, 0, 100, self.frame.size.height);
-
+    _titleTextLabel.sd_layout.spaceToSuperView(UIEdgeInsetsMake(0, 8, 0, 8));
 }
 
 @end

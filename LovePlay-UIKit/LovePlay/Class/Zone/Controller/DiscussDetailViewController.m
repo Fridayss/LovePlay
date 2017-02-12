@@ -66,11 +66,13 @@
     DiscuzPost *post = _discussPostDatas[indexPath.row];
     if (indexPath.row == 0) {
         DiscussDetailWebCell *cell = [DiscussDetailWebCell cellWithTableView:tableView];
-        cell.htmlBody = post.message;
-        [cell webViewDidFinishLoadBlock:^(CGFloat webViewHeight) {
-            _webViewHeight = webViewHeight;
-            [_tableView reloadData];
-        }];
+        if (_webViewHeight <= 0) {
+            cell.htmlBody = post.message;
+            [cell webViewDidFinishLoadBlock:^(CGFloat webViewHeight) {
+                _webViewHeight = webViewHeight;
+                [_tableView reloadData];
+            }];
+        }
         return cell;
     }else{
         DiscussDetailPostCell *cell = [DiscussDetailPostCell cellWithTableView:tableView];

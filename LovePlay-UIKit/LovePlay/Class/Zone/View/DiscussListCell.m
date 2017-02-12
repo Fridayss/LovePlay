@@ -11,13 +11,15 @@
 
 @interface DiscussListCell ()
 @property (nonatomic, strong) UILabel *titleTextNode;
+@property (nonatomic, strong) UILabel *descriptionTextNode;
+@property (nonatomic, strong) UIView *underLineNode;
 @end
 
 @implementation DiscussListCell
 
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *ID = @"listCell";
+    static NSString *ID = @"DiscussListCell";
     DiscussListCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
         cell = [[DiscussListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
@@ -29,20 +31,61 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        [self addSubNodes];
+        [self sd_autoLayoutSubViews];
     }
     return self;
 }
 
-- (void)setListModel:(DiscussListModel *)listModel
+- (void)addSubNodes
 {
-    _listModel = listModel;
+    UILabel *titleTextNode = [[UILabel alloc] init];
+    [self.contentView addSubview:titleTextNode];
+    _titleTextNode = titleTextNode;
+    
+    UILabel *descriptionTextNode = [[UILabel alloc] init];
+    descriptionTextNode.font = [UIFont systemFontOfSize:12];
+    descriptionTextNode.textColor = [UIColor lightGrayColor];
+    [self.contentView addSubview:descriptionTextNode];
+    _descriptionTextNode = descriptionTextNode;
+    
+    UIView *underLineNode = [[UIView alloc] init];
+    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    [self.contentView addSubview:underLineNode];
+    _underLineNode = underLineNode;
 }
 
-- (void)layoutSubviews
+- (void)setForumThread:(ForumThread *)forumThread
 {
-    [super layoutSubviews];
+    _forumThread = forumThread;
+    _titleTextNode.text = forumThread.subject;
+    _descriptionTextNode.text = [NSString stringWithFormat:@"%@回复   %@   %@",forumThread.replies, [forumThread.lastpost stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""], forumThread.lastposter];
+}
+
+#pragma mark - layout
+- (void)sd_autoLayoutSubViews
+{
+    _titleTextNode.sd_layout
+    .topSpaceToView(self.contentView, 10)
+    .leftSpaceToView(self.contentView, 10)
+    .rightSpaceToView(self.contentView, 10)
+    .autoHeightRatio(0);
+    [_titleTextNode setMaxNumberOfLinesToShow:0];
     
+    _descriptionTextNode.sd_layout
+    .topSpaceToView(_titleTextNode, 10)
+    .leftEqualToView(_titleTextNode)
+    .rightEqualToView(_titleTextNode)
+    .autoHeightRatio(0);
+    [_descriptionTextNode setMaxNumberOfLinesToShow:1];
+
+    _underLineNode.sd_layout
+    .heightIs(0.5)
+    .topSpaceToView(_descriptionTextNode, 10)
+    .leftEqualToView(self.contentView)
+    .rightEqualToView(self.contentView);
+    
+    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
 }
 
 
