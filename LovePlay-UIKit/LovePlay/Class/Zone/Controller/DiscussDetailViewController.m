@@ -34,7 +34,7 @@
 - (void)initParams
 {
     _pageIndex = 1;
-    _pageSize = 10;
+    _pageSize = 16;
     _webViewHeight = 0;
 }
 
@@ -76,7 +76,7 @@
         return cell;
     }else{
         DiscussDetailPostCell *cell = [DiscussDetailPostCell cellWithTableView:tableView];
-        cell.textLabel.text = post.message;
+        [cell setupPost:post floor:indexPath.row];
         return cell;
     }
 }
@@ -87,7 +87,10 @@
     if (indexPath.row == 0) {
         return _webViewHeight;
     }else{
-        return 44;
+        DiscuzPost *post = _discussPostDatas[indexPath.row];
+        return [_tableView cellHeightForIndexPath:indexPath cellClass:[DiscussDetailPostCell class] cellContentViewWidth:_tableView.width cellDataSetting:^(UITableViewCell *cell) {
+            [(DiscussDetailPostCell *)cell setupPost:post floor:indexPath.row];
+        }];
     }
 }
 
@@ -97,6 +100,7 @@
         UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
+        tableView.separatorStyle = UITableViewCellEditingStyleNone;
         _tableView = tableView;
     }
     return _tableView;
