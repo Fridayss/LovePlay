@@ -14,9 +14,9 @@
 #import "DiscussListTopCell.h"
 #import "DiscussDetailViewController.h"
 
-@interface DiscussListViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface DiscussListViewController ()<ASTableDelegate, ASTableDataSource>
 //UI
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) ASTableNode *tableNode;
 @property (nonatomic, strong) DiscussListHeaderView *headerView;
 //Data
 @property (nonatomic, strong) NSArray *discussListTopDatas;
@@ -31,7 +31,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self initParams];
     [self addTableView];
-    [self addTableHeaderView];
     [self loadData];
 }
 
@@ -42,12 +41,7 @@
 
 - (void)addTableView
 {
-    [self.view addSubview:self.tableView];
-}
-
-- (void)addTableHeaderView
-{
-    [self.view addSubview:self.headerView];
+    [self.view addSubnode:self.tableNode];
 }
 
 - (void)loadData
@@ -76,7 +70,7 @@
         NSLog(@"img-suc : %@", response);
         DiscussImageModel *discussImageModel = [DiscussImageModel modelWithJSON:response[@"info"]];
         [self dealWithDiscussHeaderViewWithDiscussImageModel:discussImageModel];
-        [_tableView reloadData];
+        [_tableNode reloadData];
     } failure:^(NSError *error) {
         NSLog(@"img-Err : %@", error);
     }];
@@ -84,9 +78,8 @@
 
 - (void)dealWithDiscussHeaderViewWithDiscussImageModel:(DiscussImageModel *)imageModel
 {
-    
     self.headerView.imageModel = imageModel;
-    self.tableView.tableHeaderView = self.headerView;
+    self.tableNode.view.tableHeaderView = self.headerView.view;
 }
 
 - (void)dealWithDiscussList:(NSArray *)discussList
@@ -106,12 +99,12 @@
 }
 
 #pragma mark - tableView dataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableNode:(ASTableNode *)tableNode
 {
     return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableNode:(ASTableNode *)tableNode numberOfRowsInSection:(NSInteger)section
 {
     switch (section) {
         case 0:
@@ -127,38 +120,34 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (ASCellNodeBlock)tableNode:(ASTableNode *)tableNode nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
-        case 0:
-        {
-            ForumThread *forumThread = _discussListTopDatas[indexPath.row];
-            DiscussListTopCell *cell = [DiscussListTopCell cellWithTableView:tableView];
-            cell.textLabel.text = forumThread.subject;
-            return cell;
+    ASCellNode * (^cellNodeBlock)() = ^ASCellNode *(){
+        switch (indexPath.section) {
+            case 0:
+            {
+                ForumThread *forumThread = _discussListTopDatas[indexPath.row];
+                DiscussListTopCell *cell = [[DiscussListTopCell alloc] initWithForumThread:forumThread];
+                return cell;
+            }
+                break;
+            case 1:
+            {
+                ForumThread *forumThread = _discussListDatas[indexPath.row];
+                DiscussListCell *cell = [[DiscussListCell alloc] initWithForumThread:forumThread];
+                return cell;
+            }
+                break;
+                
+            default:
+                return nil;
+                break;
         }
-            break;
-        case 1:
-        {
-            ForumThread *forumThread = _discussListDatas[indexPath.row];
-            DiscussListCell *cell = [DiscussListCell cellWithTableView:tableView];
-            cell.textLabel.text = forumThread.subject;
-            return cell;
-        }
-            break;
-        default:
-            return nil;
-            break;
-    }
+    };
+    return cellNodeBlock;
 }
-
-
 
 #pragma mark - tableView delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -169,23 +158,24 @@
 }
 
 #pragma mark - Getter / Setter
-- (UITableView *)tableView
+- (ASTableNode *)tableNode
 {
-    if (!_tableView) {
-        UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        _tableView = tableView;
+    if (!_tableNode) {
+        ASTableNode *tableNode = [[ASTableNode alloc] initWithStyle:UITableViewStylePlain];
+        tableNode.delegate = self;
+        tableNode.dataSource = self;
+        tableNode.frame = self.view.bounds;
+        tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableNode = tableNode;
     }
-    return _tableView;
+    return _tableNode;
 }
 
 - (DiscussListHeaderView *)headerView
 {
     if (!_headerView) {
         DiscussListHeaderView *headerView = [[DiscussListHeaderView alloc] init];
-        headerView.width = self.tableView.width;
-        headerView.height = 120;
+        headerView.view.size = CGSizeMake(self.tableNode.view.width, 150);
         _headerView = headerView;
     }
     return _headerView;

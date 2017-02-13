@@ -7,14 +7,13 @@
 //
 
 #import "DiscussListHeaderView.h"
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "DiscussImageModel.h"
 
 @interface DiscussListHeaderView ()
 
 @property (nonatomic, strong) ASNetworkImageNode *imageNode;
-@property (nonatomic, strong) UILabel *titleTextLabel;
-@property (nonatomic, strong) UILabel *descriptionTextLabel;
+@property (nonatomic, strong) ASTextNode *titleTextNode;
+@property (nonatomic, strong) ASTextNode *descriptionTextNode;
 
 @end
 
@@ -35,40 +34,36 @@
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     
-    ASDisplayNode *titleTextNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
-        UILabel *titleTextLabel = [[UILabel alloc] init];
-        titleTextLabel.font = [UIFont systemFontOfSize:18];
-        titleTextLabel.textColor = [UIColor whiteColor];
-        _titleTextLabel = titleTextLabel;
-        return titleTextLabel;
-    }];
+    ASTextNode *titleTextNode = [[ASTextNode alloc] init];
     [self addSubnode:titleTextNode];
+    _titleTextNode = titleTextNode;
     
-    ASDisplayNode *descriptionTextNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
-        UILabel *descriptionTextLabel = [[UILabel alloc] init];
-        descriptionTextLabel.font = [UIFont systemFontOfSize:12];
-        descriptionTextLabel.textColor = [UIColor whiteColor];
-        _descriptionTextLabel = descriptionTextLabel;
-        return descriptionTextLabel;
-    }];
+    ASTextNode *descriptionTextNode = [[ASTextNode alloc] init];
     [self addSubnode:descriptionTextNode];
+    _descriptionTextNode = descriptionTextNode;
 }
 
 - (void)setImageModel:(DiscussImageModel *)imageModel
 {
     _imageModel = imageModel;
     _imageNode.URL = [NSURL URLWithString:imageModel.bannerUrl];
-    _titleTextLabel.text = imageModel.modelName;
-    _descriptionTextLabel.text = [NSString stringWithFormat:@"今日：%@",imageModel.todayPosts];
+    NSDictionary *titleAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor whiteColor]};
+    NSDictionary *descriptionAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:14], NSForegroundColorAttributeName : [UIColor whiteColor]};
+    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:imageModel.modelName attributes:titleAttribute];
+    _descriptionTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"今日：%@",imageModel.todayPosts] attributes:descriptionAttribute];
 }
 
-- (void)layoutSubviews
+- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
-    [super layoutSubviews];
+    _imageNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 150);
     
-    _imageNode.frame = self.bounds;
-    _titleTextLabel.frame = CGRectMake(10, self.height - 60, self.width - 20, 30);
-    _descriptionTextLabel.frame = CGRectMake(10, self.height - 30, self.width - 20, 30);
+    ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentEnd alignItems:ASStackLayoutAlignItemsStart children:@[_titleTextNode, _descriptionTextNode]];
+    
+    ASInsetLayoutSpec *insetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(INFINITY, 10, 10, 10) child:verContentLayout];
+    
+    ASOverlayLayoutSpec *contentOverLayout = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:_imageNode overlay:insetLayout];
+    
+    return contentOverLayout;
 }
 
 @end

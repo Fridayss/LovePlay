@@ -498,7 +498,7 @@
 				TargetAttributes = {
 					A17543E41E3484F700516411 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = G565DM42HB;
+						DevelopmentTeam = 35NR6QVJRD;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -741,7 +741,7 @@
 			baseConfigurationReference = F4F8028B91D2546C7795303B /* Pods-LovePlay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = G565DM42HB;
+				DEVELOPMENT_TEAM = 35NR6QVJRD;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LovePlay/LovePlay-Prefix.pch";
 				INFOPLIST_FILE = LovePlay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -756,7 +756,7 @@
 			baseConfigurationReference = 3AFBA36CE2A1261665C01D8B /* Pods-LovePlay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = G565DM42HB;
+				DEVELOPMENT_TEAM = 35NR6QVJRD;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LovePlay/LovePlay-Prefix.pch";
 				INFOPLIST_FILE = LovePlay/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

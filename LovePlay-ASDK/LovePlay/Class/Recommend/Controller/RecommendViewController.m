@@ -20,7 +20,6 @@
 @interface RecommendViewController ()<ASCollectionDelegate, ASCollectionDataSource, UICollectionViewDelegateFlowLayout>
 //UI
 @property (nonatomic, strong) ASCollectionNode *collectionNode;
-
 //Data
 @property (nonatomic, strong) NSArray *topicDatas;
 @property (nonatomic, strong) NSArray *imageInfoDatas;

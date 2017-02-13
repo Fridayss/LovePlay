@@ -7,50 +7,64 @@
 //
 
 #import "DiscussListTopCell.h"
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "DiscussListModel.h"
 
 @interface DiscussListTopCell ()
-@property (nonatomic, strong) ASTextNode *topTextNode;
+//UI
+@property (nonatomic, strong) ASButtonNode *topBtnNode;
 @property (nonatomic, strong) ASTextNode *titleTextNode;
 @property (nonatomic, strong) ASDisplayNode *underLineNode;
+//Data
+@property (nonatomic, strong) ForumThread *forumThread;
 @end
 
 @implementation DiscussListTopCell
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView
+- (instancetype)initWithForumThread:(ForumThread *)forumThread
 {
-    static NSString *ID = @"listTopCell";
-    DiscussListTopCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[DiscussListTopCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
-    }
-    return cell;
-}
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super init];
     if (self) {
-        
+        _forumThread = forumThread;
+        [self addSubnodes];
     }
     return self;
 }
 
-- (void)addSubNodes
+- (void)addSubnodes
 {
-
+    ASButtonNode *topBtnNode = [[ASButtonNode alloc] init];
+    NSDictionary *topAttribute = @{NSForegroundColorAttributeName : [UIColor redColor], NSFontAttributeName : [UIFont systemFontOfSize:12]};
+    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:@" 置顶帖 " attributes:topAttribute];
+    [topBtnNode setAttributedTitle:attributeStr forState:ASControlStateNormal];
+    topBtnNode.cornerRadius = 5;
+    topBtnNode.clipsToBounds = YES;
+    topBtnNode.borderWidth = 1;
+    topBtnNode.borderColor = [UIColor redColor].CGColor;
+    [self addSubnode:topBtnNode];
+    _topBtnNode = topBtnNode;
+    
+    ASTextNode *titleTextNode = [[ASTextNode alloc] init];
+    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_forumThread.subject];
+    [self addSubnode:titleTextNode];
+    _titleTextNode = titleTextNode;
+    
+    ASDisplayNode *underLineNode = [[ASDisplayNode alloc] init];
+    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    [self addSubnode:underLineNode];
+    _underLineNode = underLineNode;
 }
 
-- (void)setListModel:(DiscussListModel *)listModel
+#pragma mark - layout
+- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
-    _listModel = listModel;
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
+    _topBtnNode.style.preferredSize = CGSizeMake(45, 20);
+    _underLineNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 0.5);
     
+    ASStackLayoutSpec *horContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsCenter children:@[_topBtnNode, _titleTextNode]];
     
+    ASInsetLayoutSpec *insetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:horContentLayout];
+    
+    ASStackLayoutSpec *verUnderLineLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[insetLayout, _underLineNode]];
+    return verUnderLineLayout;
 }
 @end

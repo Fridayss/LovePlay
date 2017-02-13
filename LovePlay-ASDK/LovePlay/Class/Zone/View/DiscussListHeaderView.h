@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class DiscussImageModel;
-@interface DiscussListHeaderView : UIView
+@interface DiscussListHeaderView : ASDisplayNode
 
 @property (nonatomic, strong) DiscussImageModel *imageModel;
 

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DiscussDetailPostCell : UITableViewCell
+@class DiscuzPost;
+@interface DiscussDetailPostCell : ASCellNode
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView;
+- (instancetype)initWithPost:(DiscuzPost *)post floor:(NSInteger)floor;
 
 @end

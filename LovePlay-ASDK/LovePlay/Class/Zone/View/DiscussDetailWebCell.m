@@ -12,19 +12,22 @@
 //UI
 @property (nonatomic, strong) UIWebView *webView;
 //Data
+@property (nonatomic, strong) NSString *htmlBody;
+@property (nonatomic, assign) CGFloat webViewHeight;
 @property (nonatomic, copy) webViewFinishLoadBlock finishLoadBlock;
 @end
 
 @implementation DiscussDetailWebCell
 
-+ (instancetype)cellWithTableView:(UITableView *)tableView
+- (instancetype)initWithHtmlBody:(NSString *)htmlBody
 {
-    static NSString *ID = @"webCell";
-    DiscussDetailWebCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[DiscussDetailWebCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    self = [super init];
+    if (self) {
+        _htmlBody = htmlBody;
+//        [self addSubnodes];
+//        [self loadWebHtml];
     }
-    return cell;
+    return self;
 }
 
 - (void)webViewDidFinishLoadBlock:(webViewFinishLoadBlock)finishLoadBlock
@@ -32,16 +35,7 @@
     _finishLoadBlock = finishLoadBlock;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        [self addSubviews];
-    }
-    return self;
-}
-
-- (void)addSubviews
+- (void)addSubnodes
 {
     UIWebView *webView = [[UIWebView alloc] init];
     webView.backgroundColor = [UIColor whiteColor];
@@ -51,19 +45,21 @@
     [webView setAutoresizingMask:UIViewAutoresizingNone];
     [webView.scrollView setScrollEnabled:NO];
     [webView.scrollView setScrollsToTop:NO];
-    [self.contentView addSubview:webView];
+    [self.view addSubview:webView];
     _webView = webView;
 }
 
-- (void)setHtmlBody:(NSString *)htmlBody
+- (void)loadWebHtml
 {
-    [_webView loadHTMLString:htmlBody baseURL:nil];
+    [_webView loadHTMLString:_htmlBody baseURL:nil];
 }
 
-- (void)layoutSubviews
+- (void)didLoad
 {
-    [super layoutSubviews];
-    _webView.frame = self.bounds;
+    [super didLoad];
+    
+    [self addSubnodes];
+    [self loadWebHtml];
 }
 
 #pragma mark - webView delegate
@@ -73,6 +69,20 @@
     if (_finishLoadBlock) {
         _finishLoadBlock(webViewHeight);
     }
+    _webViewHeight = webViewHeight;
+    [self setNeedsLayout];
+}
+
+#pragma mark - layout
+- (CGSize)calculateSizeThatFits:(CGSize)constrainedSize
+{
+    return CGSizeMake(constrainedSize.width, _webViewHeight);
+}
+
+- (void)layout
+{
+    [super layout];
+    _webView.frame = CGRectMake(0, 0, self.calculatedSize.width, _webViewHeight);
 }
 
 - (void)dealloc

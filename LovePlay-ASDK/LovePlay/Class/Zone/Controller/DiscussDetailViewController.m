@@ -11,14 +11,13 @@
 #import "DiscussDetailWebCell.h"
 #import "DiscussDetailPostCell.h"
 
-@interface DiscussDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface DiscussDetailViewController ()<ASTableDelegate, ASTableDataSource>
 //UI
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) ASTableNode *tableNode;
 //Data
 @property (nonatomic, strong) NSArray *discussPostDatas;
 @property (nonatomic, assign) NSInteger pageIndex;
 @property (nonatomic, assign) NSInteger pageSize;
-@property (nonatomic, assign) CGFloat webViewHeight;
 @end
 
 @implementation DiscussDetailViewController
@@ -35,12 +34,11 @@
 {
     _pageIndex = 1;
     _pageSize = 10;
-    _webViewHeight = 0;
 }
 
 - (void)addTableView
 {
-    [self.view addSubview:self.tableView];
+    [self.view addSubnode:self.tableNode];
 }
 
 - (void)loadData
@@ -50,54 +48,47 @@
         NSLog(@"list-succ : %@", response);
         DiscussDetailModel *detailModel = [DiscussDetailModel modelWithJSON:response[@"Variables"]];
         _discussPostDatas = detailModel.postlist;
-        [_tableView reloadData];
+        [_tableNode reloadData];
     } failure:^(NSError *error) {
         NSLog(@"list-fail : %@", error);
     }];
 }
 
 #pragma mark - tableView dataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableNode:(ASTableNode *)tableNode numberOfRowsInSection:(NSInteger)section
 {
     return _discussPostDatas.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (ASCellNodeBlock)tableNode:(ASTableNode *)tableNode nodeBlockForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     DiscuzPost *post = _discussPostDatas[indexPath.row];
-    if (indexPath.row == 0) {
-        DiscussDetailWebCell *cell = [DiscussDetailWebCell cellWithTableView:tableView];
-        cell.htmlBody = post.message;
-        [cell webViewDidFinishLoadBlock:^(CGFloat webViewHeight) {
-            _webViewHeight = webViewHeight;
-            [_tableView reloadData];
-        }];
-        return cell;
-    }else{
-        DiscussDetailPostCell *cell = [DiscussDetailPostCell cellWithTableView:tableView];
-        cell.textLabel.text = post.message;
-        return cell;
-    }
+    ASCellNode * (^cellNodeBlock)() = ^ASCellNode *(){
+        if (indexPath.row == 0) {
+            DiscussDetailWebCell *cellNode = [[DiscussDetailWebCell alloc] initWithHtmlBody:post.message];
+            return cellNode;
+        }else{
+            DiscussDetailPostCell *cellNode = [[DiscussDetailPostCell alloc] initWithPost:post floor:indexPath.row];
+            return cellNode;
+        }
+    };
+    return cellNodeBlock;
 }
 
 #pragma mark - tableView delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        return _webViewHeight;
-    }else{
-        return 44;
-    }
-}
 
-- (UITableView *)tableView
+
+- (ASTableNode *)tableNode
 {
-    if (!_tableView) {
-        UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        _tableView = tableView;
+    if (!_tableNode) {
+        ASTableNode *tableNode = [[ASTableNode alloc] initWithStyle:UITableViewStylePlain];
+        tableNode.delegate = self;
+        tableNode.dataSource = self;
+        tableNode.frame = self.view.bounds;
+        tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableNode = tableNode;
     }
-    return _tableView;
+    return _tableNode;
 }
 
 - (void)didReceiveMemoryWarning {

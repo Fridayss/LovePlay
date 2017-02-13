@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class DiscussListModel;
-@interface DiscussListTopCell : UITableViewCell
+@class ForumThread;
+@interface DiscussListTopCell : ASCellNode
 
-@property (nonatomic, strong) DiscussListModel *listModel;
-
-+ (instancetype)cellWithTableView:(UITableView *)tableView;
+- (instancetype)initWithForumThread:(ForumThread *)forumThread;
 
 @end
