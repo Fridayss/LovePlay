@@ -45,26 +45,30 @@
 - (void)addSubnodes
 {
     UIImageView *imageNode = [[UIImageView alloc] init];
-    
     [self.contentView addSubview:imageNode];
     _imageNode = imageNode;
     
     UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.font = [UIFont systemFontOfSize:14];
+    titleTextNode.font = [UIFont systemFontOfSize:16];
+    titleTextNode.textColor = RGB(36, 36, 36);
     [self.contentView addSubview:titleTextNode];
     _titleTextNode = titleTextNode;
     
     UIButton *replyBtnNode = [[UIButton alloc] init];
+    replyBtnNode.titleLabel.font = [UIFont systemFontOfSize:10];
+    [replyBtnNode setTitleColor:RGB(150, 150, 150) forState:UIControlStateNormal];
+    [replyBtnNode setImage:[UIImage imageNamed:@"common_chat_new"] forState:UIControlStateNormal];
+    [replyBtnNode setTitle:@"0" forState:UIControlStateNormal];
+    replyBtnNode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    replyBtnNode.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
+    replyBtnNode.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
     [self.contentView addSubview:replyBtnNode];
     _replyBtnNode = replyBtnNode;
     
     UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self.contentView addSubview:underLineNode];
     _underLineNode = underLineNode;
-    
-    _titleTextNode.backgroundColor = [UIColor orangeColor];
-    _replyBtnNode.backgroundColor = [UIColor cyanColor];
 }
 
 - (void)setListInfoModel:(NewsListInfoModel *)listInfoModel

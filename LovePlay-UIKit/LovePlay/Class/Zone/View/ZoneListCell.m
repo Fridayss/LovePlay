@@ -22,6 +22,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.contentView.backgroundColor = [UIColor whiteColor];
         [self addSubnodes];
         [self sd_autoLayoutSubViews];
     }
@@ -36,11 +37,13 @@
     
     UILabel *titleTextLabel = [[UILabel alloc] init];
     titleTextLabel.font = [UIFont systemFontOfSize:14];
+    titleTextLabel.textColor = RGB(36, 36, 36);
     [self.contentView addSubview:titleTextLabel];
     _titleTextLabel = titleTextLabel;
     
     UILabel *detailTextLabel = [[UILabel alloc] init];
     detailTextLabel.font = [UIFont systemFontOfSize:12];
+    detailTextLabel.textColor = RGB(150, 150, 150);
     [self.contentView addSubview:detailTextLabel];
     _detailTextLabel = detailTextLabel;
 
@@ -64,7 +67,7 @@
     .centerYEqualToView(self.contentView);
     
     _titleTextLabel.sd_layout
-    .topEqualToView(_imageNode).offset(2)
+    .topEqualToView(_imageNode).offset(3)
     .leftSpaceToView(_imageNode, 5)
     .rightSpaceToView(self.contentView, 10)
     .autoHeightRatio(0);
@@ -72,7 +75,7 @@
     
     _detailTextLabel.sd_layout
     .leftEqualToView(_titleTextLabel)
-    .bottomEqualToView(_imageNode).offset(- 2)
+    .bottomEqualToView(_imageNode).offset(- 3)
     .rightEqualToView(_titleTextLabel)
     .autoHeightRatio(0);
     [_detailTextLabel setMaxNumberOfLinesToShow:1];

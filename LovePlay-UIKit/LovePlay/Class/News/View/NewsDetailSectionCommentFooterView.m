@@ -38,7 +38,7 @@
 - (void)addSubnodes
 {
     UILabel *titleTextlabel = [[UILabel alloc] init];
-    titleTextlabel.textColor = [UIColor redColor];
+    titleTextlabel.textColor = RGB(218, 85, 107);
     titleTextlabel.font = [UIFont systemFontOfSize:14];
     titleTextlabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:titleTextlabel];

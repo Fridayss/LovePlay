@@ -31,6 +31,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubNodes];
         [self sd_autoLayoutSubViews];
     }
@@ -40,17 +41,19 @@
 - (void)addSubNodes
 {
     UILabel *titleTextNode = [[UILabel alloc] init];
+    titleTextNode.font = [UIFont systemFontOfSize:14];
+    titleTextNode.textColor = RGB(36, 36, 36);
     [self.contentView addSubview:titleTextNode];
     _titleTextNode = titleTextNode;
     
     UILabel *descriptionTextNode = [[UILabel alloc] init];
-    descriptionTextNode.font = [UIFont systemFontOfSize:12];
-    descriptionTextNode.textColor = [UIColor lightGrayColor];
+    descriptionTextNode.font = [UIFont systemFontOfSize:10];
+    descriptionTextNode.textColor = RGB(150, 150, 150);
     [self.contentView addSubview:descriptionTextNode];
     _descriptionTextNode = descriptionTextNode;
     
     UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self.contentView addSubview:underLineNode];
     _underLineNode = underLineNode;
 }

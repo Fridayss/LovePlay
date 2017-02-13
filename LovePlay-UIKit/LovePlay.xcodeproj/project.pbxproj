@@ -130,6 +130,7 @@
 		A7650F791E3F774B00BF30EB /* NewsCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentModel.m; sourceTree = "<group>"; };
 		A7650F7B1E3F7F9400BF30EB /* NewsNormalCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsNormalCellNode.h; sourceTree = "<group>"; };
 		A7650F7C1E3F7F9400BF30EB /* NewsNormalCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsNormalCellNode.m; sourceTree = "<group>"; };
+		A78C9AFF1E51F1EE0081E3E8 /* BaseMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMacros.h; sourceTree = "<group>"; };
 		A7CC0FB11E42F5020090CBB7 /* DiscussListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussListModel.h; sourceTree = "<group>"; };
 		A7CC0FB21E42F5020090CBB7 /* DiscussListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscussListModel.m; sourceTree = "<group>"; };
 		A7CC0FB41E42F51A0090CBB7 /* DiscussDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussDetailModel.h; sourceTree = "<group>"; };
@@ -221,6 +222,7 @@
 		A17543FF1E348A8F00516411 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				A78C9AFD1E51F1D40081E3E8 /* BaseModule */,
 				A701D9841E390A3A00756C97 /* Network */,
 				A17544001E348A8F00516411 /* Main */,
 				A17544071E348A9000516411 /* News */,
@@ -453,6 +455,22 @@
 				A701D9881E390A9E00756C97 /* HttpRequest.m */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		A78C9AFD1E51F1D40081E3E8 /* BaseModule */ = {
+			isa = PBXGroup;
+			children = (
+				A78C9AFE1E51F1D40081E3E8 /* Macros */,
+			);
+			path = BaseModule;
+			sourceTree = "<group>";
+		};
+		A78C9AFE1E51F1D40081E3E8 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				A78C9AFF1E51F1EE0081E3E8 /* BaseMacros.h */,
+			);
+			path = Macros;
 			sourceTree = "<group>";
 		};
 		C7890152BC9B3D2FEEA40033 /* Pods */ = {

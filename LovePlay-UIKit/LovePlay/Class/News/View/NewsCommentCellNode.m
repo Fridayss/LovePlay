@@ -43,6 +43,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
         [self sd_autoLayoutSubViews];
     }
@@ -57,15 +58,20 @@
     
     UILabel *nameTextNode = [[UILabel alloc] init];
     nameTextNode.font = [UIFont systemFontOfSize:14];
+    nameTextNode.textColor = RGB(186, 177, 161);
     [self.contentView addSubview:nameTextNode];
     _nameTextNode = nameTextNode;
     
     UILabel *locationTextNode = [[UILabel alloc] init];
     locationTextNode.font = [UIFont systemFontOfSize:12];
+    locationTextNode.textColor = RGB(163, 163, 163);
     [self.contentView addSubview:locationTextNode];
     _locationTextNode = locationTextNode;
     
     UIButton *voteBtnNode = [[UIButton alloc] init];
+    voteBtnNode.titleLabel.font = [UIFont systemFontOfSize:12];
+    [voteBtnNode setTitleColor:RGB(163, 163, 163) forState:UIControlStateNormal];
+    voteBtnNode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.contentView addSubview:voteBtnNode];
     _voteBtnNode = voteBtnNode;
 //    
@@ -77,20 +83,15 @@
     _commentReplyAreaNode = commentReplyAreaNode;
     
     UILabel *contentTextNode = [[UILabel alloc] init];
-    contentTextNode.numberOfLines = 0;
+    contentTextNode.font = [UIFont systemFontOfSize:14];
+    contentTextNode.textColor = RGB(50, 50, 50);
     [self.contentView addSubview:contentTextNode];
     _contentTextNode = contentTextNode;
     
     UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self.contentView addSubview:underLineNode];
     _underLineNode = underLineNode;
-    
-//    imageNode.backgroundColor = [UIColor orangeColor];
-//    nameTextNode.backgroundColor = [UIColor yellowColor];
-//    locationTextNode.backgroundColor = [UIColor blueColor];
-//    voteBtnNode.backgroundColor = [UIColor redColor];
-//    contentTextNode.backgroundColor = [UIColor cyanColor];
 }
 
 - (void)setupCommentItems:(NSDictionary *)commentItems commmentIds:(NSArray *)commmentIds
@@ -98,7 +99,8 @@
     _commentItemsDict = commentItems;
     _commentIdsArray = commmentIds;
     _commentItem = commentItems[commmentIds.lastObject];
-    _imageNode.imageURL = [NSURL URLWithString:_commentItem.user.avatar];
+
+    [_imageNode setImageWithURL:[NSURL URLWithString:_commentItem.user.avatar] placeholder:[UIImage imageNamed:@"defult_pho"]];
     _nameTextNode.text = _commentItem.user.nickname ? _commentItem.user.nickname : @"火星网友";
     _locationTextNode.text = _commentItem.user.location ? _commentItem.user.location : @"火星";
     [_voteBtnNode setTitle:[NSString stringWithFormat:@"%@顶",@(_commentItem.vote)] forState:UIControlStateNormal];

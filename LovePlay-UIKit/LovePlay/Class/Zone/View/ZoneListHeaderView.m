@@ -18,7 +18,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
         [self addSubnodes];
         [self sd_autoLayoutSubViews];
     }
@@ -29,7 +28,7 @@
 {
     UILabel *titleTextLabel = [[UILabel alloc] init];
     titleTextLabel.font = [UIFont systemFontOfSize:14];
-    titleTextLabel.textColor = [UIColor whiteColor];
+    titleTextLabel.textColor = RGB(36, 36, 36);
     [self addSubview:titleTextLabel];
     _titleTextLabel = titleTextLabel;
 }

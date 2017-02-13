@@ -29,7 +29,7 @@
 {
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = [UIColor lightGrayColor];
+        self.contentView.backgroundColor = RGB(235, 235, 235);
         [self addSubnodes];
     }
     return self;
@@ -38,12 +38,12 @@
 - (void)addSubnodes
 {
     UIView *leftLineView = [[UIView alloc] init];
-    leftLineView.backgroundColor = [UIColor orangeColor];
+    leftLineView.backgroundColor = RGB(218, 85, 107);
     [self.contentView addSubview:leftLineView];
     _leftLineView = leftLineView;
     
     UILabel *titleTextLabel = [[UILabel alloc] init];
-    titleTextLabel.backgroundColor = [UIColor lightGrayColor];
+    titleTextLabel.textColor = RGB(155, 155, 155);
     titleTextLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:titleTextLabel];
     _titleTextLabel = titleTextLabel;

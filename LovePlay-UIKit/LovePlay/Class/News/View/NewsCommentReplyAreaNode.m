@@ -25,8 +25,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
-        
+        self.backgroundColor = RGB(248, 249, 241);
+        self.layer.borderColor = RGB(218, 218, 218).CGColor;
+        self.layer.borderWidth = 0.5;
     }
     return self;
 }

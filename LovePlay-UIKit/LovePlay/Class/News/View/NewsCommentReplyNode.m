@@ -37,23 +37,28 @@
 - (void)addSubnodes
 {
     UILabel *nameTextNode = [[UILabel alloc] init];
+    nameTextNode.font = [UIFont systemFontOfSize:12];
+    nameTextNode.textColor = RGB(138, 138, 138);
     nameTextNode.text = [NSString stringWithFormat:@"%@ %@", _commentItem.user.nickname ? _commentItem.user.nickname : @"火星网友", _commentItem.user.location ? _commentItem.user.location : @"火星"];
     [self addSubview:nameTextNode];
     _nameTextNode = nameTextNode;
     
     UILabel *floorTextNode = [[UILabel alloc] init];
-    floorTextNode.text = @(_floor).stringValue;
+    floorTextNode.font = [UIFont systemFontOfSize:12];
+    floorTextNode.textColor = RGB(64, 64, 64);
+    floorTextNode.text = [NSString stringWithFormat:@"%@#", @(_floor).stringValue];
     [self addSubview:floorTextNode];
     _floorTextNode = floorTextNode;
     
     UILabel *contentTextNode = [[UILabel alloc] init];
-    contentTextNode.numberOfLines = 0;
+    contentTextNode.font = [UIFont systemFontOfSize:14];
+    contentTextNode.textColor = RGB(50, 50, 50);
     contentTextNode.text = _commentItem.content ? _commentItem.content : @"NULL";
     [self addSubview:contentTextNode];
     _contentTextNode = contentTextNode;
     
     UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self addSubview:underLineNode];
     _underLineNode = underLineNode;
 }

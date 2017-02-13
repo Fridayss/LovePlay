@@ -38,7 +38,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
         [self sd_autoLayoutSubViews];
     }
@@ -48,32 +48,37 @@
 - (void)addSubnodes
 {
     UIImageView *imageNode = [[UIImageView alloc] init];
-    imageNode.backgroundColor = [UIColor orangeColor];
+    imageNode.image = [UIImage imageNamed:@"defult_pho"];
     [self.contentView addSubview:imageNode];
     _imageNode = imageNode;
     
     UILabel *nameTextNode = [[UILabel alloc] init];
     nameTextNode.font = [UIFont systemFontOfSize:14];
+    nameTextNode.textColor = RGB(186, 177, 161);
     [self.contentView addSubview:nameTextNode];
     _nameTextNode = nameTextNode;
     
     UILabel *timeTextNode = [[UILabel alloc] init];
     timeTextNode.font = [UIFont systemFontOfSize:12];
-    timeTextNode.textColor = [UIColor lightGrayColor];
+    timeTextNode.textColor = RGB(163, 163, 163);
     [self.contentView addSubview:timeTextNode];
     _timeTextNode = timeTextNode;
     
     UILabel *floorTextNode = [[UILabel alloc] init];
+    floorTextNode.font = [UIFont systemFontOfSize:12];
+    floorTextNode.textColor = RGB(163, 163, 163);
     floorTextNode.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:floorTextNode];
     _floorTextNode = floorTextNode;
     
     UILabel *contentTextNode = [[UILabel alloc] init];
+    contentTextNode.font = [UIFont systemFontOfSize:14];
+    contentTextNode.textColor = RGB(50, 50, 50);
     [self.contentView addSubview:contentTextNode];
     _contentTextNode = contentTextNode;
     
     UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self.contentView addSubview:underLineNode];
     _underLineNode = underLineNode;
 }
@@ -84,11 +89,8 @@
     _floor = floor;
     _nameTextNode.text = post.author;
     _timeTextNode.text = [post.dateline stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
-    _floorTextNode.text = @(floor).stringValue;
+    _floorTextNode.text = [NSString stringWithFormat:@"%@#", @(floor).stringValue];
     _contentTextNode.text = post.message;
-    
-    _floorTextNode.backgroundColor = [UIColor orangeColor];
-    _nameTextNode.backgroundColor = [UIColor cyanColor];
 }
 
 #pragma mark - layout

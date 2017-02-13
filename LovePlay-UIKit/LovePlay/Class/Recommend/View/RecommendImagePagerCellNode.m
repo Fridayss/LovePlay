@@ -43,6 +43,7 @@ static NSString * const imageInfoCell = @"imageInfoCell";
     flowLayout.itemSize = CGSizeMake(267, self.contentView.height);
 
     UICollectionView *pagerNode = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
+    pagerNode.backgroundColor = [UIColor whiteColor];
     pagerNode.delegate = self;
     pagerNode.dataSource = self;
     pagerNode.pagingEnabled = NO;
@@ -63,12 +64,6 @@ static NSString * const imageInfoCell = @"imageInfoCell";
 {
     _pagerNode.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
 }
-
-//- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
-//{
-//    ASInsetLayoutSpec *insetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsZero child:_pagerNode];
-//    return insetLayout;
-//}
 
 #pragma mark - pagerNode datasource
 

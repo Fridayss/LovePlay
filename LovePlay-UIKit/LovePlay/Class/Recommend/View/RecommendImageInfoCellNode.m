@@ -35,7 +35,10 @@
     _imageNode = imageNode;
     
     UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    titleTextNode.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+    titleTextNode.font = [UIFont systemFontOfSize:14];
+    titleTextNode.textColor = [UIColor whiteColor];
+    titleTextNode.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:titleTextNode];
     _titleTextNode = titleTextNode;
 }
@@ -44,10 +47,7 @@
 {
     _imageInfoModel = imageInfoModel;
     _imageNode.imageURL = [NSURL URLWithString:_imageInfoModel.imgUrl];
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    [paragraph setAlignment:NSTextAlignmentCenter];
-    NSDictionary *attri = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSParagraphStyleAttributeName : paragraph};
-    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_imageInfoModel.title attributes:attri];
+    _titleTextNode.text = _imageInfoModel.title;
 }
 
 #pragma mark - layout
@@ -61,14 +61,5 @@
     .autoHeightRatio(0);
     [_titleTextNode setMaxNumberOfLinesToShow:1];
 }
-
-//- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
-//{
-//    _imageNode.style.preferredSize = CGSizeMake(267, constrainedSize.max.width);
-//    _titleTextNode.style.flexShrink = 1.0;
-//    ASStackLayoutSpec *verStackLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentEnd alignItems:ASStackLayoutAlignItemsStretch children:@[_titleTextNode]];
-//    ASOverlayLayoutSpec *overlayLayout = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:_imageNode overlay:verStackLayout];
-//    return overlayLayout;
-//}
 
 @end

@@ -21,7 +21,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.contentView.backgroundColor = [UIColor redColor];
         [self addSubnodes];
         [self sd_autoLayoutSubViews];
     }
@@ -36,12 +35,10 @@
     
     UILabel *titleTextNode = [[UILabel alloc] init];
     titleTextNode.font = [UIFont systemFontOfSize:12];
+    titleTextNode.textColor = RGB(36, 36, 36);
     titleTextNode.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:titleTextNode];
     _titleTextNode = titleTextNode;
-    
-    imageNode.backgroundColor = [UIColor orangeColor];
-    titleTextNode.backgroundColor = [UIColor cyanColor];
 }
 
 - (void)setupTopicModel:(RecommendTopicModel *)topicModel

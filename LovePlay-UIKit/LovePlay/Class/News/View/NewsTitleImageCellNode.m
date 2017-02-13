@@ -43,6 +43,8 @@
 - (void)addSubnodes
 {
     UILabel *titleTextNode = [[UILabel alloc] init];
+    titleTextNode.font = [UIFont systemFontOfSize:16];
+    titleTextNode.textColor = RGB(36, 36, 36);
     [self.contentView addSubview:titleTextNode];
     _titleTextNode = titleTextNode;
     
@@ -51,7 +53,7 @@
     _imageNode = imageNode;
     
     UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self.contentView addSubview:underLineNode];
     _underLineNode = underLineNode;
 
