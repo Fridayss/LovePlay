@@ -38,6 +38,7 @@
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     ASCollectionNode *collectionNode = [[ASCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
+    collectionNode.backgroundColor = [UIColor whiteColor];
     collectionNode.delegate = self;
     collectionNode.dataSource = self;
     collectionNode.frame = self.view.bounds;

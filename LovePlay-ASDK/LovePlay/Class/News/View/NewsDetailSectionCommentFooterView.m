@@ -40,7 +40,7 @@
 {
     ASDisplayNode *titleTextNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
         UILabel *titleTextlabel = [[UILabel alloc] init];
-        titleTextlabel.textColor = [UIColor redColor];
+        titleTextlabel.textColor = RGB(218, 85, 107);
         titleTextlabel.font = [UIFont systemFontOfSize:14];
         titleTextlabel.textAlignment = NSTextAlignmentCenter;
         _titleTextLabel = titleTextlabel;

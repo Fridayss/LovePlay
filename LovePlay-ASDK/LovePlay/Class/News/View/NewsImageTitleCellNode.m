@@ -27,6 +27,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         _listInfoModel = listInfoModel;
         [self addSubnodes];
+        [self loadData];
     }
     return self;
 }
@@ -35,27 +36,36 @@
 {
     ASTextNode *titleTextNode = [[ASTextNode alloc] init];
     titleTextNode.maximumNumberOfLines = 2;
-    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_listInfoModel.title];
     [self addSubnode:titleTextNode];
     _titleTextNode = titleTextNode;
     
     ASNetworkImageNode *imageNode = [[ASNetworkImageNode alloc] init];
-    imageNode.URL = [NSURL URLWithString:_listInfoModel.imgsrc.firstObject];
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     
     ASTextNode *timeTextNode = [[ASTextNode alloc] init];
-    NSString *ptime = _listInfoModel.ptime.length > 0 ? [_listInfoModel.ptime componentsSeparatedByString:@" "].firstObject : _listInfoModel.ptime;
-    timeTextNode.attributedText = [[NSAttributedString alloc] initWithString:ptime];
     [self addSubnode:timeTextNode];
     _timeTextNode = timeTextNode;
     
     ASButtonNode *replyBtnNode = [[ASButtonNode alloc] init];
-    replyBtnNode.titleNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", _listInfoModel.replyCount]];
     [self addSubnode:replyBtnNode];
     _replyBtnNode = replyBtnNode;
 
 }
+
+- (void)loadData
+{
+    _imageNode.URL = [NSURL URLWithString:_listInfoModel.imgsrc.firstObject];
+    NSDictionary *titleAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:16], NSForegroundColorAttributeName : RGB(36, 36, 36)};
+    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_listInfoModel.title attributes:titleAttribute];
+    [_replyBtnNode setTitle:@(_listInfoModel.replyCount).stringValue withFont:[UIFont systemFontOfSize:10] withColor:RGB(150, 150, 150) forState:ASControlStateNormal];
+    [_replyBtnNode setImage:[UIImage imageNamed:@"common_chat_new"] forState:ASControlStateNormal];
+    NSDictionary *timeAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:10], NSForegroundColorAttributeName : RGB(150, 150, 150)};
+    NSString *ptime = _listInfoModel.ptime.length > 0 ? [_listInfoModel.ptime componentsSeparatedByString:@" "].firstObject : _listInfoModel.ptime;
+    _timeTextNode.attributedText = [[NSAttributedString alloc] initWithString:ptime attributes:timeAttribute];
+}
+
+#pragma mark - layout
 
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {

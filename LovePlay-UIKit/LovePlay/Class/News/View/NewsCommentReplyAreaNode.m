@@ -37,20 +37,12 @@
     _commentItemsDict = commentItems;
     _floors = floors;
     
-    [self removeAllSubviews];
+//    [self removeAllSubviews];
     
     [self addSubnodes];
     
     [self sd_autoLayoutSubViews];
-    
-    if (floors.count > 1) {
-        self.fixedHeight = nil;
-        self.fixedWidth = nil;
-        
-    }else{
-        self.fixedHeight = @(0);
-        self.fixedWidth = @(0);
-    }
+
 }
 
 - (void)addSubnodes
@@ -63,13 +55,46 @@
         [self addSubview:commentReplyNode];
         [replyNodeArray addObject:commentReplyNode];
     }
+    
+    if (replyNodeArray.count > 0) {
+        [replyNodeArray enumerateObjectsUsingBlock:^(NewsCommentReplyNode *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj sd_clearAutoLayoutSettings];
+            obj.hidden = YES;
+        }];
+    }
     _replyNodeArray = [replyNodeArray copy];
+    
+    if (replyNodeArray.count > 0) {
+        self.fixedHeight = nil;
+        self.fixedWidth = nil;
+
+    }else{
+        self.fixedHeight = @(0);
+        self.fixedWidth = @(0);
+    }
+    
+    
 }
 
 #pragma mark - layout
 - (void)sd_autoLayoutSubViews
 {
-    [self setupAutoMarginFlowItems:_replyNodeArray withPerRowItemsCount:1 itemWidth:self.width verticalMargin:0 verticalEdgeInset:0 horizontalEdgeInset:0];
+    if (_replyNodeArray.count > 0) {
+        UIView *lastTopView = self;
+        for (NSInteger i = 0; i < _replyNodeArray.count; i ++) {
+            NewsCommentReplyNode *commentReplyNode = _replyNodeArray[i];
+            
+            commentReplyNode.sd_layout
+            .topSpaceToView(lastTopView, 0)
+            .leftEqualToView(self)
+            .rightEqualToView(self);
+            
+            lastTopView = commentReplyNode;
+        }
+        [self setupAutoHeightWithBottomView:lastTopView bottomMargin:10];
+    }
+    
+//    [self setupAutoMarginFlowItems:_replyNodeArray withPerRowItemsCount:1 itemWidth:self.width verticalMargin:0 verticalEdgeInset:0 horizontalEdgeInset:0];
 }
 
 @end

@@ -58,6 +58,7 @@
     tableNode.backgroundColor = [UIColor whiteColor];
     tableNode.delegate = self;
     tableNode.dataSource = self;
+    tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.node addSubnode:tableNode];
     _tableNode = tableNode;
 }

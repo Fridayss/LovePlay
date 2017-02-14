@@ -8,7 +8,8 @@
 
 #import "NewsCommentCellNode.h"
 #import "NewsCommentModel.h"
-#import "NewsCommentReplyAreaNode.h"
+//#import "NewsCommentReplyAreaNode.h"
+//#import "NewsCommentReplyView.h"
 
 @interface NewsCommentCellNode ()
 //UI
@@ -18,7 +19,8 @@
 @property (nonatomic, strong) UIButton *voteBtnNode;
 @property (nonatomic, strong) UILabel *contentTextNode;
 @property (nonatomic, strong) UIView *underLineNode;
-@property (nonatomic, strong) NewsCommentReplyAreaNode *commentReplyAreaNode;
+//@property (nonatomic, strong) NewsCommentReplyAreaNode *commentReplyAreaNode;
+//@property (nonatomic, strong) NewsCommentReplyView *commentReplyView;
 //Data
 @property (nonatomic, strong) NewsCommentItem *commentItem;
 
@@ -43,7 +45,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+//        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
         [self sd_autoLayoutSubViews];
     }
@@ -74,13 +76,14 @@
     voteBtnNode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.contentView addSubview:voteBtnNode];
     _voteBtnNode = voteBtnNode;
-//    
-//    if (_commentIdsArray.count > 1) {
-//        
-//    }
-    NewsCommentReplyAreaNode *commentReplyAreaNode = [[NewsCommentReplyAreaNode alloc] init];
-    [self.contentView addSubview:commentReplyAreaNode];
-    _commentReplyAreaNode = commentReplyAreaNode;
+
+//    NewsCommentReplyAreaNode *commentReplyAreaNode = [[NewsCommentReplyAreaNode alloc] init];
+//    [self.contentView addSubview:commentReplyAreaNode];
+//    _commentReplyAreaNode = commentReplyAreaNode;
+    
+//    NewsCommentReplyView *commentReplyView = [[NewsCommentReplyView alloc] init];
+//    [self.contentView addSubview:commentReplyView];
+//    _commentReplyView = commentReplyView;
     
     UILabel *contentTextNode = [[UILabel alloc] init];
     contentTextNode.font = [UIFont systemFontOfSize:14];
@@ -92,6 +95,7 @@
     underLineNode.backgroundColor = RGB(222, 222, 222);
     [self.contentView addSubview:underLineNode];
     _underLineNode = underLineNode;
+
 }
 
 - (void)setupCommentItems:(NSDictionary *)commentItems commmentIds:(NSArray *)commmentIds
@@ -106,7 +110,11 @@
     [_voteBtnNode setTitle:[NSString stringWithFormat:@"%@顶",@(_commentItem.vote)] forState:UIControlStateNormal];
     _contentTextNode.text = _commentItem.content;
     
-    [_commentReplyAreaNode setupCommentItems:_commentItemsDict floors:_commentIdsArray];
+//    [_commentReplyView setupCommentItems:_commentItemsDict floors:_commentIdsArray didReloadBlock:^(CGFloat contentSizeHeight) {
+//        _commentReplyView.sd_layout.heightIs(contentSizeHeight);
+//        [self updateLayout];
+//    }];
+//    [_commentReplyAreaNode setupCommentItems:_commentItemsDict floors:_commentIdsArray];
 }
 
 #pragma mark - layout
@@ -138,15 +146,20 @@
     .autoHeightRatio(0);
     [_locationTextNode setMaxNumberOfLinesToShow:1];
     
-    _commentReplyAreaNode.sd_layout
+//    _commentReplyAreaNode.sd_layout
+//    .topSpaceToView(_imageNode, 10)
+//    .leftEqualToView(_nameTextNode)
+//    .rightEqualToView(_voteBtnNode);
+    
+//    _commentReplyView.sd_layout
+//    .topSpaceToView(_imageNode, 10)
+//    .leftEqualToView(_nameTextNode)
+//    .rightSpaceToView(self.contentView, 10);
+
+    _contentTextNode.sd_layout
     .topSpaceToView(_imageNode, 10)
     .leftEqualToView(_nameTextNode)
-    .rightEqualToView(_voteBtnNode);
-    
-    _contentTextNode.sd_layout
-    .topSpaceToView(_commentReplyAreaNode, 10)
-    .leftEqualToView(_nameTextNode)
-    .rightEqualToView(_voteBtnNode)
+    .rightSpaceToView(self.contentView, 10)
     .autoHeightRatio(0);
     [_contentTextNode setMaxNumberOfLinesToShow:0];
 //    _contentTextNode.sd_layout

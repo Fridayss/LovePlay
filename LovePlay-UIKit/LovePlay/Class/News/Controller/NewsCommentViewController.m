@@ -44,6 +44,7 @@
     tableNode.backgroundColor = [UIColor whiteColor];
     tableNode.delegate = self;
     tableNode.dataSource = self;
+    tableNode.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableNode];
     _tableNode = tableNode;
 }
@@ -120,6 +121,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NewsDetailSectionTitleHeaderView *headerView = [NewsDetailSectionTitleHeaderView sectionHeaderWithTableView:tableView];
+
     switch (section) {
         case 0:
         {
@@ -169,6 +171,11 @@
             break;
     }
     return CGFLOAT_MIN;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

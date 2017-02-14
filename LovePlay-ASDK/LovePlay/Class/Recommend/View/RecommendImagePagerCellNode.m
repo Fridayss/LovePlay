@@ -22,7 +22,6 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor yellowColor];
         _imageInfoDatas = imageInfoDatas;
         self.userInteractionEnabled = YES;
         [self addPagerNode];
@@ -42,6 +41,7 @@
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
 
     ASPagerNode *pagerNode = [[ASPagerNode alloc] initWithCollectionViewLayout:flowLayout];
+    pagerNode.backgroundColor = [UIColor whiteColor];
     pagerNode.userInteractionEnabled = YES;
     pagerNode.delegate = self;
     pagerNode.dataSource = self;

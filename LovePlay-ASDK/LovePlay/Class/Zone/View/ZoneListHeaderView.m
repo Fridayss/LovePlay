@@ -21,7 +21,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
         [self addSubnodes];
     }
     return self;
@@ -33,8 +32,8 @@
 
     ASDisplayNode *textNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
         UILabel *titleTextLabel = [[UILabel alloc] init];
-        titleTextLabel.font = [UIFont systemFontOfSize:13];
-        titleTextLabel.textColor = [UIColor whiteColor];
+        titleTextLabel.font = [UIFont systemFontOfSize:14];
+        titleTextLabel.textColor = RGB(36, 36, 36);
         _titleTextLabel = titleTextLabel;
         return titleTextLabel;
     }];
@@ -54,7 +53,7 @@
     //直接使用ASTextNode作为【原生view】的子控件，无法适应原生的布局
     NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
     [paragraph setAlignment:NSTextAlignmentJustified];
-    NSDictionary *attri = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSParagraphStyleAttributeName : paragraph};
+    NSDictionary *attri = @{NSForegroundColorAttributeName : RGB(36, 36, 36), NSParagraphStyleAttributeName : paragraph, NSFontAttributeName : [UIFont systemFontOfSize:14]};
     _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:titleName attributes:attri];
     
 }

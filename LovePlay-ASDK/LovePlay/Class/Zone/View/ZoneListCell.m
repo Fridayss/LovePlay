@@ -23,6 +23,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.contentView.backgroundColor = [UIColor whiteColor];
         [self addSubnodes];
     }
     return self;
@@ -36,7 +37,8 @@
     
     ASDisplayNode *titleTextNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
         UILabel *titleTextLabel = [[UILabel alloc] init];
-        titleTextLabel.font = [UIFont systemFontOfSize:13];
+        titleTextLabel.font = [UIFont systemFontOfSize:14];
+        titleTextLabel.textColor = RGB(36, 36, 36);
         _titleTextLabel = titleTextLabel;
         return titleTextLabel;
     }];
@@ -44,7 +46,8 @@
     
     ASDisplayNode *detailTextNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
         UILabel *detailTextLabel = [[UILabel alloc] init];
-        detailTextLabel.font = [UIFont systemFontOfSize:13];
+        detailTextLabel.font = [UIFont systemFontOfSize:12];
+        detailTextLabel.textColor = RGB(150, 150, 150);
         _detailTextLabel = detailTextLabel;
         return detailTextLabel;
     }];
@@ -74,19 +77,5 @@
     _titleTextLabel.frame = CGRectMake(CGRectGetMaxX(_imageNode.frame) + horEdge, CGRectGetMinY(_imageNode.frame), textNodeW, textNodeH);
     _detailTextLabel.frame = CGRectMake(CGRectGetMinX(_titleTextLabel.frame), CGRectGetMaxY(_imageNode.frame) - textNodeH, textNodeW, textNodeH);
 }
-
-//- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
-//{
-//    _imageNode.style.preferredSize = CGSizeMake(54, 54);
-//
-//    ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStart children:@[_titleTextNode, _detailTextNode]];
-//
-//    ASStackLayoutSpec *horContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[_imageNode, verContentLayout]];
-//
-//    ASInsetLayoutSpec *insetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:horContentLayout];
-//    return insetLayout;
-//}
-
-
 
 @end

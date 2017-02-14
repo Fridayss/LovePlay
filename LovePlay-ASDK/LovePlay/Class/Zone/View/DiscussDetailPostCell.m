@@ -28,9 +28,11 @@
 {
     self = [super init];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _post = post;
         _floor = floor;
         [self addSubnodes];
+        [self loadData];
     }
     return self;
 }
@@ -38,38 +40,46 @@
 - (void)addSubnodes
 {
     ASNetworkImageNode *imageNode = [[ASNetworkImageNode alloc] init];
-//    imageNode.URL = [NSURL URLWithString:_post.];
-    imageNode.backgroundColor = [UIColor orangeColor];
+    imageNode.image = [UIImage imageNamed:@"defult_pho"];
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     
     ASTextNode *nameTextNode = [[ASTextNode alloc] init];
-    nameTextNode.attributedText = [[NSAttributedString alloc] initWithString:_post.author];
     [self addSubnode:nameTextNode];
     _nameTextNode = nameTextNode;
     
     ASTextNode *timeTextNode = [[ASTextNode alloc] init];
-    timeTextNode.attributedText = [[NSAttributedString alloc] initWithString:[_post.dateline stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""]];
     [self addSubnode:timeTextNode];
     _timeTextNode = timeTextNode;
     
     ASTextNode *floorTextNode = [[ASTextNode alloc] init];
-    floorTextNode.attributedText = [[NSAttributedString alloc] initWithString:@(_floor).stringValue];
     [self addSubnode:floorTextNode];
     _floorTextNode = floorTextNode;
     
     ASTextNode *contentTextNode = [[ASTextNode alloc] init];
     contentTextNode.maximumNumberOfLines = 0;
-    contentTextNode.attributedText = [[NSAttributedString alloc] initWithString:_post.message];
     [self addSubnode:contentTextNode];
     _contentTextNode = contentTextNode;
     
     ASDisplayNode *underLineNode = [[ASDisplayNode alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self addSubnode:underLineNode];
     _underLineNode = underLineNode;
 }
 
+- (void)loadData
+{
+    NSDictionary *nameAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14], NSForegroundColorAttributeName: RGB(186, 177, 161)};
+    _nameTextNode.attributedText = [[NSAttributedString alloc] initWithString:_post.author attributes:nameAttribute];
+    NSDictionary *timeAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12], NSForegroundColorAttributeName: RGB(163, 163, 163)};
+    _timeTextNode.attributedText = [[NSAttributedString alloc] initWithString:[_post.dateline stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""] attributes:timeAttribute];
+    NSDictionary *floorAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12], NSForegroundColorAttributeName: RGB(163, 163, 163)};
+    _floorTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@#", @(_floor).stringValue] attributes:floorAttribute];
+    NSDictionary *contentAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14], NSForegroundColorAttributeName: RGB(50, 50, 50)};
+    _contentTextNode.attributedText = [[NSAttributedString alloc] initWithString:_post.message attributes:contentAttribute];
+}
+
+#pragma mark - layout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
     _imageNode.style.preferredSize = CGSizeMake(30, 30);

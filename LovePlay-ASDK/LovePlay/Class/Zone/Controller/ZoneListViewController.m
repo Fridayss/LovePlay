@@ -107,7 +107,7 @@ static NSString *zoneListHeader = @"zoneListHeader";
         flowLayout.minimumLineSpacing = 1;
         flowLayout.minimumInteritemSpacing = 1;
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
-        collectionView.backgroundColor = [UIColor whiteColor];
+        collectionView.backgroundColor = RGB(245, 245, 245);
         collectionView.dataSource = self;
         collectionView.delegate = self;
         [collectionView registerClass:[ZoneListCell class] forCellWithReuseIdentifier:zoneListCell];

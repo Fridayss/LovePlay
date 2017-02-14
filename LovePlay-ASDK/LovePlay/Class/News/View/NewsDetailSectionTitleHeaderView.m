@@ -30,7 +30,7 @@
 {
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = [UIColor lightGrayColor];
+        self.contentView.backgroundColor = RGB(235, 235, 235);
         [self addSubnodes];
     }
     return self;
@@ -40,7 +40,7 @@
 {
     ASDisplayNode *leftLineNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
         UIView *leftLineView = [[UIView alloc] init];
-        leftLineView.backgroundColor = [UIColor orangeColor];
+        leftLineView.backgroundColor = RGB(218, 85, 107);
         _leftLineView = leftLineView;
         return leftLineView;
     }];
@@ -48,7 +48,8 @@
     
     ASDisplayNode *titleTextNode = [[ASDisplayNode alloc] initWithViewBlock:^UIView * _Nonnull{
         UILabel *titleTextLabel = [[UILabel alloc] init];
-        titleTextLabel.backgroundColor = [UIColor lightGrayColor];
+        titleTextLabel.backgroundColor = RGB(155, 155, 155);
+        titleTextLabel.backgroundColor = [UIColor clearColor];
         titleTextLabel.font = [UIFont systemFontOfSize:12];
         _titleTextLabel = titleTextLabel;
         return titleTextLabel;

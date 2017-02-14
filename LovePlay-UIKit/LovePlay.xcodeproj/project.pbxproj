@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		912A4669BDB0433289F468E2 /* libPods-LovePlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFC4242E32BB25C94880DB0 /* libPods-LovePlay.a */; };
+		A14F34571E52AF7700B4CCC6 /* NewsCommentReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A14F34561E52AF7700B4CCC6 /* NewsCommentReplyCell.m */; };
+		A14F345A1E52B30A00B4CCC6 /* NewsCommentReplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = A14F34591E52B30A00B4CCC6 /* NewsCommentReplyView.m */; };
 		A17543EA1E3484F800516411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A17543E91E3484F800516411 /* main.m */; };
 		A17543ED1E3484F800516411 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A17543EC1E3484F800516411 /* AppDelegate.m */; };
 		A17543F51E3484F800516411 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A17543F41E3484F800516411 /* Assets.xcassets */; };
@@ -60,6 +62,10 @@
 /* Begin PBXFileReference section */
 		3AFBA36CE2A1261665C01D8B /* Pods-LovePlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LovePlay.release.xcconfig"; path = "Pods/Target Support Files/Pods-LovePlay/Pods-LovePlay.release.xcconfig"; sourceTree = "<group>"; };
 		8CFC4242E32BB25C94880DB0 /* libPods-LovePlay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LovePlay.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A14F34551E52AF7700B4CCC6 /* NewsCommentReplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentReplyCell.h; sourceTree = "<group>"; };
+		A14F34561E52AF7700B4CCC6 /* NewsCommentReplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentReplyCell.m; sourceTree = "<group>"; };
+		A14F34581E52B30A00B4CCC6 /* NewsCommentReplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentReplyView.h; sourceTree = "<group>"; };
+		A14F34591E52B30A00B4CCC6 /* NewsCommentReplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentReplyView.m; sourceTree = "<group>"; };
 		A17543E51E3484F700516411 /* LovePlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LovePlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A17543E91E3484F800516411 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A17543EB1E3484F800516411 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -318,6 +324,10 @@
 				A1E9B7E81E486A93009C8883 /* NewsCommentReplyAreaNode.m */,
 				A1E9B7EA1E486AA5009C8883 /* NewsCommentReplyNode.h */,
 				A1E9B7EB1E486AA5009C8883 /* NewsCommentReplyNode.m */,
+				A14F34581E52B30A00B4CCC6 /* NewsCommentReplyView.h */,
+				A14F34591E52B30A00B4CCC6 /* NewsCommentReplyView.m */,
+				A14F34551E52AF7700B4CCC6 /* NewsCommentReplyCell.h */,
+				A14F34561E52AF7700B4CCC6 /* NewsCommentReplyCell.m */,
 				A1A0D2C11E496610008DC3FF /* NewsDetailSectionTitleHeaderView.h */,
 				A1A0D2C21E496610008DC3FF /* NewsDetailSectionTitleHeaderView.m */,
 				A1A0D2C41E496624008DC3FF /* NewsDetailSectionCommentFooterView.h */,
@@ -618,9 +628,11 @@
 				A1A0D2C31E496610008DC3FF /* NewsDetailSectionTitleHeaderView.m in Sources */,
 				A7650F7A1E3F774B00BF30EB /* NewsCommentModel.m in Sources */,
 				A7CC0FB91E42F6E80090CBB7 /* ZoneListModel.m in Sources */,
+				A14F345A1E52B30A00B4CCC6 /* NewsCommentReplyView.m in Sources */,
 				A1A0D2C61E496624008DC3FF /* NewsDetailSectionCommentFooterView.m in Sources */,
 				A7FFE2111E44CA53005D0FA0 /* ZoneListCell.m in Sources */,
 				A701D9981E390E9C00756C97 /* RecommendImageInfoModel.m in Sources */,
+				A14F34571E52AF7700B4CCC6 /* NewsCommentReplyCell.m in Sources */,
 				A7FFE2081E44CA0B005D0FA0 /* DiscussListCell.m in Sources */,
 				A175441B1E348B8300516411 /* ADLaunchController.m in Sources */,
 				A7FFE2051E44C425005D0FA0 /* DiscussImageModel.m in Sources */,

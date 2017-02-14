@@ -48,11 +48,12 @@
     _imageModel = imageModel;
     _imageNode.URL = [NSURL URLWithString:imageModel.bannerUrl];
     NSDictionary *titleAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:18], NSForegroundColorAttributeName : [UIColor whiteColor]};
-    NSDictionary *descriptionAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:14], NSForegroundColorAttributeName : [UIColor whiteColor]};
+    NSDictionary *descriptionAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:12], NSForegroundColorAttributeName : [UIColor whiteColor]};
     _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:imageModel.modelName attributes:titleAttribute];
     _descriptionTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"今日：%@",imageModel.todayPosts] attributes:descriptionAttribute];
 }
 
+#pragma mark - layout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
     _imageNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 150);

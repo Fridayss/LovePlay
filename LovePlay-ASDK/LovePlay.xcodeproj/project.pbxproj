@@ -60,6 +60,7 @@
 /* Begin PBXFileReference section */
 		3AFBA36CE2A1261665C01D8B /* Pods-LovePlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LovePlay.release.xcconfig"; path = "Pods/Target Support Files/Pods-LovePlay/Pods-LovePlay.release.xcconfig"; sourceTree = "<group>"; };
 		8CFC4242E32BB25C94880DB0 /* libPods-LovePlay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LovePlay.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A14F345D1E52F17200B4CCC6 /* BaseMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMacros.h; sourceTree = "<group>"; };
 		A17543E51E3484F700516411 /* LovePlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LovePlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A17543E91E3484F800516411 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A17543EB1E3484F800516411 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -177,6 +178,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A14F345B1E52F17200B4CCC6 /* BaseModule */ = {
+			isa = PBXGroup;
+			children = (
+				A14F345C1E52F17200B4CCC6 /* Macros */,
+			);
+			path = BaseModule;
+			sourceTree = "<group>";
+		};
+		A14F345C1E52F17200B4CCC6 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				A14F345D1E52F17200B4CCC6 /* BaseMacros.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
 		A17543DC1E3484F700516411 = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +238,7 @@
 		A17543FF1E348A8F00516411 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				A14F345B1E52F17200B4CCC6 /* BaseModule */,
 				A701D9841E390A3A00756C97 /* Network */,
 				A17544001E348A8F00516411 /* Main */,
 				A17544071E348A9000516411 /* News */,

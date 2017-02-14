@@ -23,6 +23,7 @@
     if (self) {
         _imageInfoModel = imageInfoModel;
         [self addSubnodes];
+        [self loadData];
     }
     return self;
 }
@@ -30,25 +31,30 @@
 - (void)addSubnodes
 {
     ASNetworkImageNode *imageNode = [[ASNetworkImageNode alloc] init];
-    imageNode.userInteractionEnabled = NO;
-    imageNode.URL = [NSURL URLWithString:_imageInfoModel.imgUrl];
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     
     ASTextNode *titleTextNode = [[ASTextNode alloc] init];
-    titleTextNode.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    [paragraph setAlignment:NSTextAlignmentCenter];
-    NSDictionary *attri = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSParagraphStyleAttributeName : paragraph};
-    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_imageInfoModel.title attributes:attri];
+    titleTextNode.maximumNumberOfLines = 1;
+    titleTextNode.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     [self addSubnode:titleTextNode];
     _titleTextNode = titleTextNode;
 }
 
+- (void)loadData
+{
+    _imageNode.URL = [NSURL URLWithString:_imageInfoModel.imgUrl];
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    [paragraph setAlignment:NSTextAlignmentCenter];
+    NSDictionary *titleAttribute = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSParagraphStyleAttributeName : paragraph, NSFontAttributeName : [UIFont systemFontOfSize:14]};
+    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_imageInfoModel.title attributes:titleAttribute];
+}
+
+#pragma mark - layout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
-    _imageNode.style.preferredSize = CGSizeMake(267, constrainedSize.max.width);
-    _titleTextNode.style.flexShrink = 1.0;
+    _imageNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, constrainedSize.max.height);
+    
     ASStackLayoutSpec *verStackLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentEnd alignItems:ASStackLayoutAlignItemsStretch children:@[_titleTextNode]];
     ASOverlayLayoutSpec *overlayLayout = [ASOverlayLayoutSpec overlayLayoutSpecWithChild:_imageNode overlay:verStackLayout];
     return overlayLayout;

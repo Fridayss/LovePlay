@@ -25,6 +25,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         _listInfoModel = listInfoModel;
         [self addSubnodes];
+        [self loadData];
     }
     return self;
 }
@@ -33,22 +34,28 @@
 {
     ASTextNode *titleTextNode = [[ASTextNode alloc] init];
     titleTextNode.maximumNumberOfLines = 2;
-    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_listInfoModel.title];
     [self addSubnode:titleTextNode];
     _titleTextNode = titleTextNode;
     
     ASNetworkImageNode *imageNode = [[ASNetworkImageNode alloc] init];
-    imageNode.URL = [NSURL URLWithString:_listInfoModel.imgsrc.firstObject];
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     
     ASDisplayNode *underLineNode = [[ASDisplayNode alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self addSubnode:underLineNode];
     _underLineNode = underLineNode;
 
 }
 
+- (void)loadData
+{
+    _imageNode.URL = [NSURL URLWithString:_listInfoModel.imgsrc.firstObject];
+    NSDictionary *titleAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:16], NSForegroundColorAttributeName : RGB(36, 36, 36)};
+    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_listInfoModel.title attributes:titleAttribute];
+}
+
+#pragma mark - layout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
     _imageNode.style.preferredSize = CGSizeMake(constrainedSize.max.width - 20, 120);

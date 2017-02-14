@@ -26,6 +26,7 @@
     if (self) {
         _forumThread = forumThread;
         [self addSubnodes];
+        [self loadData];
     }
     return self;
 }
@@ -33,31 +34,34 @@
 - (void)addSubnodes
 {
     ASButtonNode *topBtnNode = [[ASButtonNode alloc] init];
-    NSDictionary *topAttribute = @{NSForegroundColorAttributeName : [UIColor redColor], NSFontAttributeName : [UIFont systemFontOfSize:12]};
-    NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:@" 置顶帖 " attributes:topAttribute];
-    [topBtnNode setAttributedTitle:attributeStr forState:ASControlStateNormal];
     topBtnNode.cornerRadius = 5;
     topBtnNode.clipsToBounds = YES;
     topBtnNode.borderWidth = 1;
-    topBtnNode.borderColor = [UIColor redColor].CGColor;
+    topBtnNode.borderColor = RGB(236, 126, 150).CGColor;
     [self addSubnode:topBtnNode];
     _topBtnNode = topBtnNode;
     
     ASTextNode *titleTextNode = [[ASTextNode alloc] init];
-    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_forumThread.subject];
     [self addSubnode:titleTextNode];
     _titleTextNode = titleTextNode;
     
     ASDisplayNode *underLineNode = [[ASDisplayNode alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self addSubnode:underLineNode];
     _underLineNode = underLineNode;
+}
+
+- (void)loadData
+{
+    [_topBtnNode setTitle:@"置顶帖" withFont:[UIFont systemFontOfSize:12] withColor:RGB(236, 126, 150) forState:ASControlStateNormal];
+    NSDictionary *titleAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:16], NSForegroundColorAttributeName : RGB(36, 36, 36)};
+    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_forumThread.subject attributes:titleAttribute];
 }
 
 #pragma mark - layout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
-    _topBtnNode.style.preferredSize = CGSizeMake(45, 20);
+    _topBtnNode.style.preferredSize = CGSizeMake(45, 25);
     _underLineNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 0.5);
     
     ASStackLayoutSpec *horContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsCenter children:@[_topBtnNode, _titleTextNode]];

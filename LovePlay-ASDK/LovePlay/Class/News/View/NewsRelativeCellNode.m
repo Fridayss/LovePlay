@@ -25,8 +25,10 @@
 {
     self = [super init];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _relativeInfo = relativeInfo;
         [self addSubnodes];
+        [self loadData];
     }
     return self;
 }
@@ -34,25 +36,32 @@
 - (void)addSubnodes
 {
     ASNetworkImageNode *imageNode = [[ASNetworkImageNode alloc] init];
-    imageNode.URL = [NSURL URLWithString:_relativeInfo.imgsrc];
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     
     ASTextNode *titleTextNode = [[ASTextNode alloc] init];
-    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_relativeInfo.title];
+    titleTextNode.maximumNumberOfLines = 2;
     [self addSubnode:titleTextNode];
     _titleTextNode = titleTextNode;
     
     ASTextNode *timeInfoTextNode = [[ASTextNode alloc] init];
-    timeInfoTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",_relativeInfo.source, _relativeInfo.ptime]];
     [self addSubnode:timeInfoTextNode];
     _timeInfoTextNode = timeInfoTextNode;
     
     ASDisplayNode *underLineNode = [[ASDisplayNode alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self addSubnode:underLineNode];
     _underLineNode = underLineNode;
-    
+}
+
+- (void)loadData
+{
+    _imageNode.URL = [NSURL URLWithString:_relativeInfo.imgsrc];
+    NSDictionary *titleAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:16], NSForegroundColorAttributeName : RGB(36, 36, 36)};
+    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_relativeInfo.title attributes:titleAttribute];
+
+    NSDictionary *timeAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:10], NSForegroundColorAttributeName : RGB(150, 150, 150)};
+    _timeInfoTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",_relativeInfo.source, _relativeInfo.ptime] attributes:timeAttribute];
 }
 
 #pragma mark - layout
@@ -62,6 +71,7 @@
     _underLineNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 0.5);
     
     ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStart children:@[_titleTextNode, _timeInfoTextNode]];
+    verContentLayout.style.flexShrink = YES;
     
     ASStackLayoutSpec *horContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[_imageNode, verContentLayout]];
     

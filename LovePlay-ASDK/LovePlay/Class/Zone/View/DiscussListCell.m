@@ -26,6 +26,7 @@
     if (self) {
         _forumThread = forumThread;
         [self addSubnodes];
+        [self loadData];
     }
     return self;
 }
@@ -34,19 +35,25 @@
 {
     ASTextNode *titleTextNode = [[ASTextNode alloc] init];
     titleTextNode.maximumNumberOfLines = 2;
-    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_forumThread.subject];
     [self addSubnode:titleTextNode];
     _titleTextNode = titleTextNode;
     
     ASTextNode *descriptionTextNode = [[ASTextNode alloc] init];
-    descriptionTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@回复   %@   %@",_forumThread.replies, [_forumThread.lastpost stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""], _forumThread.lastposter]];
     [self addSubnode:descriptionTextNode];
     _descriptionTextNode = descriptionTextNode;
     
     ASDisplayNode *underLineNode = [[ASDisplayNode alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self addSubnode:underLineNode];
     _underLineNode = underLineNode;
+}
+
+- (void)loadData
+{
+    NSDictionary *titleAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:16], NSForegroundColorAttributeName : RGB(36, 36, 36)};
+    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_forumThread.subject attributes:titleAttribute];
+    NSDictionary *descriptionAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:10], NSForegroundColorAttributeName : RGB(150, 150, 150)};
+    _descriptionTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@回复   %@   %@",_forumThread.replies, [_forumThread.lastpost stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""], _forumThread.lastposter] attributes:descriptionAttribute];
 }
 
 #pragma mark - layout

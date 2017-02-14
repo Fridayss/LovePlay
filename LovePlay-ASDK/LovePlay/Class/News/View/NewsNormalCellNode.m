@@ -28,6 +28,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         _listInfoModel = listInfoModel;
         [self addSubnodes];
+        [self loadData];
     }
     return self;
 }
@@ -35,49 +36,51 @@
 - (void)addSubnodes
 {
     ASNetworkImageNode *imageNode = [[ASNetworkImageNode alloc] init];
-    imageNode.URL = [NSURL URLWithString:_listInfoModel.imgsrc.firstObject];
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     
     ASTextNode *titleTextNode = [[ASTextNode alloc] init];
     titleTextNode.maximumNumberOfLines = 2;
-    titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_listInfoModel.title];
     [self addSubnode:titleTextNode];
     _titleTextNode = titleTextNode;
     
     ASButtonNode *replyBtnNode = [[ASButtonNode alloc] init];
-    replyBtnNode.titleNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", _listInfoModel.replyCount]];
+    replyBtnNode.contentHorizontalAlignment = ASHorizontalAlignmentLeft;
     [self addSubnode:replyBtnNode];
     _replyBtnNode = replyBtnNode;
     
     ASDisplayNode *underLineNode = [[ASDisplayNode alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self addSubnode:underLineNode];
     _underLineNode = underLineNode;
-
 }
 
+- (void)loadData
+{
+    _imageNode.URL = [NSURL URLWithString:_listInfoModel.imgsrc.firstObject];
+    NSDictionary *titleAttribute = @{NSFontAttributeName : [UIFont systemFontOfSize:16], NSForegroundColorAttributeName : RGB(36, 36, 36)};
+    _titleTextNode.attributedText = [[NSAttributedString alloc] initWithString:_listInfoModel.title attributes:titleAttribute];
+    [_replyBtnNode setTitle:@(_listInfoModel.replyCount).stringValue withFont:[UIFont systemFontOfSize:10] withColor:RGB(150, 150, 150) forState:ASControlStateNormal];
+    [_replyBtnNode setImage:[UIImage imageNamed:@"common_chat_new"] forState:ASControlStateNormal];
+}
+
+#pragma mark - layout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
     _imageNode.style.preferredSize = CGSizeMake(80, 80);
-    
     _replyBtnNode.style.preferredSize = CGSizeMake(50, 20);
     _underLineNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 0.5);
     
     ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStart children:@[_titleTextNode, _replyBtnNode]];
+    verContentLayout.style.flexShrink = YES;
     
     ASStackLayoutSpec *horContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[_imageNode, verContentLayout]];
     
     ASInsetLayoutSpec *insetContentLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:horContentLayout];
     
-    ASStackLayoutSpec *horUnderLineLayout = [ASStackLayoutSpec horizontalStackLayoutSpec];
-    horUnderLineLayout.children = @[_underLineNode];
+    ASStackLayoutSpec *verUnderLineLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[insetContentLayout, _underLineNode]];
     
-    
-    ASStackLayoutSpec *verLayout = [ASStackLayoutSpec verticalStackLayoutSpec];
-    verLayout.children = @[insetContentLayout, horUnderLineLayout];
-    
-    return verLayout;
+    return verUnderLineLayout;
 }
 
 @end

@@ -32,6 +32,7 @@
 {
     self = [super init];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _commentItem = commentItem;
         [self addSubnodes];
     }
@@ -46,6 +47,7 @@
         _commentIdsArray = commmentIds;
         _commentItem = commentItems[commmentIds.lastObject];
         [self addSubnodes];
+        [self loadData];
     }
     return self;
 }
@@ -53,24 +55,18 @@
 - (void)addSubnodes
 {
     ASNetworkImageNode *imageNode = [[ASNetworkImageNode alloc] init];
-    imageNode.URL = [NSURL URLWithString:_commentItem.user.avatar];
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     
     ASTextNode *nameTextNode = [[ASTextNode alloc] init];
-    nameTextNode.maximumNumberOfLines = 1;
-    nameTextNode.attributedText = [[NSAttributedString alloc] initWithString:_commentItem.user.nickname ? _commentItem.user.nickname : @"火星网友"];
     [self addSubnode:nameTextNode];
     _nameTextNode = nameTextNode;
     
     ASTextNode *loctionTextNode = [[ASTextNode alloc] init];
-    loctionTextNode.maximumNumberOfLines = 1;
-    loctionTextNode.attributedText = [[NSAttributedString alloc] initWithString:_commentItem.user.location ? _commentItem.user.location : @"火星"];
     [self addSubnode:loctionTextNode];
     _loctionTextNode = loctionTextNode;
     
     ASButtonNode *voteBtnNode = [[ASButtonNode alloc] init];
-    voteBtnNode.titleNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@顶",@(_commentItem.vote)]];
     [self addSubnode:voteBtnNode];
     _voteBtnNode = voteBtnNode;
     
@@ -82,22 +78,28 @@
     
     ASTextNode *contentTextNode = [[ASTextNode alloc] init];
     contentTextNode.maximumNumberOfLines = 0;
-    contentTextNode.attributedText = [[NSAttributedString alloc] initWithString:_commentItem.content];
     [self addSubnode:contentTextNode];
     _contentTextNode = contentTextNode;
     
     ASDisplayNode *underLineNode = [[ASDisplayNode alloc] init];
-    underLineNode.backgroundColor = [UIColor lightGrayColor];
+    underLineNode.backgroundColor = RGB(222, 222, 222);
     [self addSubnode:underLineNode];
     _underLineNode = underLineNode;
-    
-    imageNode.backgroundColor = [UIColor orangeColor];
-    nameTextNode.backgroundColor = [UIColor yellowColor];
-    loctionTextNode.backgroundColor = [UIColor blueColor];
-    voteBtnNode.backgroundColor = [UIColor redColor];
-    contentTextNode.backgroundColor = [UIColor cyanColor];
 }
 
+- (void)loadData
+{
+    _imageNode.URL = [NSURL URLWithString:_commentItem.user.avatar];
+    NSDictionary *nameAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14], NSForegroundColorAttributeName: RGB(186, 177, 161)};
+    _nameTextNode.attributedText = [[NSAttributedString alloc] initWithString:_commentItem.user.nickname ? _commentItem.user.nickname : @"火星网友" attributes:nameAttribute];
+    NSDictionary *locationAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12], NSForegroundColorAttributeName: RGB(163, 163, 163)};
+    _loctionTextNode.attributedText = [[NSAttributedString alloc] initWithString:_commentItem.user.location ? _commentItem.user.location : @"火星" attributes:locationAttribute];
+    [_voteBtnNode setTitle:[NSString stringWithFormat:@"%@顶",@(_commentItem.vote)] withFont:[UIFont systemFontOfSize:12] withColor:RGB(163, 163, 163) forState:ASControlStateNormal];
+    NSDictionary *contentAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14], NSForegroundColorAttributeName: RGB(50, 50, 50)};
+    _contentTextNode.attributedText = [[NSAttributedString alloc] initWithString:_commentItem.content attributes:contentAttribute];
+}
+
+#pragma mark - layout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
     _imageNode.style.preferredSize = CGSizeMake(40, 40);

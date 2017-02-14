@@ -23,6 +23,7 @@
 {
     self = [super init];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _htmlBody = htmlBody;
     }
     return self;
