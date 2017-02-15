@@ -1,7 +1,7 @@
 # LovePlay
 ## 2017-02-15 更新：
 
-* 前两天，才夸了为什么使用SDAutoLayout，主要是轻量、易上手、自动计算cell的高度等。今天就 piapia～ 打脸了，第一个cell高度显示不全，也有开发者遇到了同样的问题https://github.com/gsdios/SDAutoLayout/issues/116，希望作者有时间解决下，以下是我的问题截图：[SDAutoLayout第一个cell高度显示不全](https://github.com/YunsChou/YsResource/blob/master/SDAutoLayout第一个cell高度显示不全.gif)
+* 前两天，才夸了为什么使用SDAutoLayout，主要是轻量、易上手、自动计算cell的高度等。今天就 piapia～ 打脸了，第一个cell高度显示不全，也有开发者遇到了同样的问题[https://github.com/gsdios/SDAutoLayout/issues/116](https://github.com/gsdios/SDAutoLayout/issues/116)，希望作者有时间解决下，以下是我的问题截图：[SDAutoLayout第一个cell高度显示不全](https://github.com/YunsChou/YsResource/blob/master/SDAutoLayout第一个cell高度显示不全.gif)
 * 还有一个问题是：当评论下还有子评论时，也就是盖楼，这个布局本身就稍微复杂，使用ASDK去实现真的是爽到爆，但用SDAutoLayout感觉不太好实现（UIKit-SDAutoLayout版目前都还没有实现），可能是我不懂它的高级用法。当然子评论的布局也可以用frame自己手写，但子评论与父评论的控件（使用SDAutoLayout）又如何添加约束和更新呢？可能作者提供了方法，我还不会用吧。
 * 既然SDAutoLayout没办法解决这些问题，我又轻微代码洁癖（功能跟ASDK版保持一致），只能寻找其他布局框架了，还是用回Masonry吧
 * 拷贝一份**UIKit-SDAutoLayout版**代码，当使用Masonry替换SDAutoLayout时（pod引入），报错真是惨不忍睹。没办法，只能同时引入两个布局框架，一步一步替换。
