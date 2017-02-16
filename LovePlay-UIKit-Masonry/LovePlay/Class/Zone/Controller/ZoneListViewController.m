@@ -34,6 +34,10 @@ static NSString *zoneListHeader = @"zoneListHeader";
 - (void)addCollectionView
 {
     [self.view addSubview:self.colletionView];
+    //使用masonry刷新横竖屏切换布局
+    [_colletionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.view);
+    }];
 }
 
 - (void)loadData

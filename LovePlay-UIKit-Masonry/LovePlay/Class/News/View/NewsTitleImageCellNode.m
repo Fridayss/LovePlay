@@ -35,7 +35,8 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+//        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -43,6 +44,7 @@
 - (void)addSubnodes
 {
     UILabel *titleTextNode = [[UILabel alloc] init];
+    titleTextNode.numberOfLines = 2;
     titleTextNode.font = [UIFont systemFontOfSize:16];
     titleTextNode.textColor = RGB(36, 36, 36);
     [self.contentView addSubview:titleTextNode];
@@ -67,28 +69,28 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
+- (void)mas_autoLayoutSubViews
 {
-    _titleTextNode.sd_layout
-    .topSpaceToView(self.contentView, 10)
-    .leftSpaceToView(self.contentView, 10)
-    .rightSpaceToView(self.contentView, 10)
-    .autoHeightRatio(0);
-    [_titleTextNode setMaxNumberOfLinesToShow:2];
+    [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
+        make.right.equalTo(self.contentView).offset(-10);
+    }];
     
-    _imageNode.sd_layout
-    .heightIs(120)
-    .topSpaceToView(_titleTextNode, 10)
-    .leftSpaceToView(self.contentView, 10)
-    .rightSpaceToView(self.contentView, 10);
+    [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(120);
+        make.top.mas_equalTo(_titleTextNode.mas_bottom).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
+        make.right.equalTo(self.contentView).offset(-10);
+    }];
     
-    _underLineNode.sd_layout
-    .heightIs(0.5)
-    .topSpaceToView(_imageNode, 10)
-    .leftEqualToView(self.contentView)
-    .rightEqualToView(self.contentView);
-    
-    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
+    [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0.5);
+        make.top.mas_equalTo(_imageNode.mas_bottom).offset(10);
+        make.left.right.equalTo(self.contentView);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom);
+    }];
 }
+
 
 @end

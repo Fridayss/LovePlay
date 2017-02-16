@@ -31,6 +31,7 @@
     [self initParams];
     [self addTableNode];
     [self loadData];
+    
 }
 
 - (void)initParams
@@ -40,13 +41,11 @@
 
 - (void)addTableNode
 {
-    UITableView *tableNode = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-    tableNode.backgroundColor = [UIColor whiteColor];
-    tableNode.delegate = self;
-    tableNode.dataSource = self;
-    tableNode.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:tableNode];
-    _tableNode = tableNode;
+    [self.view addSubview:self.tableNode];
+    //使用masonry刷新横竖屏切换布局
+    [_tableNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.view);
+    }];
 }
 
 
@@ -99,6 +98,7 @@
                 [cellNode webViewDidFinishLoadBlock:^(CGFloat webViewHeight) {
                     _webViewHeight = webViewHeight;
                     [_tableNode reloadData];
+//                    [_tableNode reloadSection:indexPath.section withRowAnimation:UITableViewRowAnimationNone];
                 }];
             }
             return cellNode;
@@ -129,31 +129,19 @@
 #pragma mark - tableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
-        case 0:
-            return _webViewHeight;
-            break;
-        case 1:
-        {
-            return [_tableNode cellHeightForIndexPath:indexPath cellClass:[NewsCommentCellNode class] cellContentViewWidth:_tableNode.width cellDataSetting:^(UITableViewCell *cell) {
-                NSArray *floors = _detailModel.tie.commentIds[indexPath.row];
-                [(NewsCommentCellNode *)cell setupCommentItems:_detailModel.tie.comments commmentIds:floors];
-            }];
-        }
-            break;
-        case 2:
-        {
-            return [_tableNode cellHeightForIndexPath:indexPath cellClass:[NewsRelativeCellNode class] cellContentViewWidth:_tableNode.width cellDataSetting:^(UITableViewCell *cell) {
-                NewsRelativeInfo *relativeInfo = _detailModel.article.relative_sys[indexPath.row];
-                [(NewsRelativeCellNode *)cell setupRelativeInfo:relativeInfo];
-            }];
-        }
-            break;
-        default:
-            return 0;
-            break;
+    if (indexPath.section == 0) {
+        return _webViewHeight;
     }
+    return UITableViewAutomaticDimension;
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (indexPath.section == 0) {
+//        return _webViewHeight;
+//    }
+//    return UITableViewAutomaticDimension;
+//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -166,7 +154,6 @@
             }else{
                 return nil;
             }
-           
         }
             break;
         case 2:
@@ -234,6 +221,22 @@
         }
     }
     return CGFLOAT_MIN;
+}
+
+#pragma mark -  setter / getter
+- (UITableView *)tableNode
+{
+    if (!_tableNode) {
+        UITableView *tableNode = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        tableNode.backgroundColor = [UIColor whiteColor];
+        tableNode.delegate = self;
+        tableNode.dataSource = self;
+        tableNode.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableNode.rowHeight = UITableViewAutomaticDimension;
+        tableNode.estimatedRowHeight = 100;
+        _tableNode = tableNode;
+    }
+    return _tableNode;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -37,7 +37,7 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -45,6 +45,7 @@
 - (void)addSubnodes
 {
     UILabel *titleTextNode = [[UILabel alloc] init];
+    titleTextNode.numberOfLines = 2;
     titleTextNode.font = [UIFont systemFontOfSize:16];
     titleTextNode.textColor = RGB(36, 36, 36);
     [self.contentView addSubview:titleTextNode];
@@ -84,36 +85,32 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
+- (void)mas_autoLayoutSubViews
 {
-    _imageNode.sd_layout
-    .heightIs(120)
-    .topEqualToView(self.contentView)
-    .leftEqualToView(self.contentView)
-    .rightEqualToView(self.contentView);
+    [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(120);
+        make.top.left.right.equalTo(self.contentView);
+    }];
     
-    _titleTextNode.sd_layout
-    .topSpaceToView(_imageNode, 10)
-    .leftSpaceToView(self.contentView, 10)
-    .rightSpaceToView(self.contentView, 10)
-    .autoHeightRatio(0);
-    [_titleTextNode setMaxNumberOfLinesToShow:2];
+    [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_imageNode.mas_bottom).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
+        make.right.equalTo(self.contentView).offset(-10);
+    }];
     
-    _replyBtnNode.sd_layout
-    .widthIs(50)
-    .heightIs(20)
-    .topSpaceToView(_titleTextNode, 10)
-    .leftSpaceToView(_timeTextNode, 10)
-    .rightEqualToView(_titleTextNode);
+    [_replyBtnNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(50);
+        make.height.mas_equalTo(20);
+        make.top.mas_equalTo(_titleTextNode.mas_bottom).offset(10);
+        make.right.equalTo(_titleTextNode);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-10);
+    }];
     
-    _timeTextNode.sd_layout
-    .leftEqualToView(_titleTextNode)
-    .rightSpaceToView(_replyBtnNode, 10)
-    .centerYEqualToView(_replyBtnNode)
-    .autoHeightRatio(0);
-    [_timeTextNode setMaxNumberOfLinesToShow:1];
-    
-    [self setupAutoHeightWithBottomView:_replyBtnNode bottomMargin:10];
+    [_timeTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_titleTextNode);
+        make.right.mas_equalTo(_replyBtnNode.mas_left).offset(-10);
+        make.centerY.equalTo(_replyBtnNode);
+    }];
 }
 
 @end

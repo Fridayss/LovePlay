@@ -40,13 +40,11 @@
 
 - (void)addTableNode
 {
-    UITableView *tableNode = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    tableNode.backgroundColor = [UIColor whiteColor];
-    tableNode.delegate = self;
-    tableNode.dataSource = self;
-    tableNode.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:tableNode];
-    _tableNode = tableNode;
+    [self.view addSubview:self.tableNode];
+    //使用masonry刷新横竖屏切换布局
+    [_tableNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.view);
+    }];
 }
 
 - (void)loadData
@@ -107,16 +105,16 @@
 }
 
 #pragma mark - tableView delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [_tableNode cellHeightForIndexPath:indexPath cellClass:[NewsCommentCellNode class] cellContentViewWidth:_tableNode.width cellDataSetting:^(UITableViewCell *cell) {
-        if (0 == indexPath.section) {
-            [(NewsCommentCellNode *)cell setupCommentItems:_hotComments.comments commmentIds:_hotComments.commentIds[indexPath.row]];
-        }else{
-            [(NewsCommentCellNode *)cell setupCommentItems:_latestComments.comments commmentIds:_latestComments.commentIds[indexPath.row]];
-        }
-    }];
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return [_tableNode cellHeightForIndexPath:indexPath cellClass:[NewsCommentCellNode class] cellContentViewWidth:_tableNode.width cellDataSetting:^(UITableViewCell *cell) {
+//        if (0 == indexPath.section) {
+//            [(NewsCommentCellNode *)cell setupCommentItems:_hotComments.comments commmentIds:_hotComments.commentIds[indexPath.row]];
+//        }else{
+//            [(NewsCommentCellNode *)cell setupCommentItems:_latestComments.comments commmentIds:_latestComments.commentIds[indexPath.row]];
+//        }
+//    }];
+//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -181,6 +179,22 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return CGFLOAT_MIN;
+}
+
+#pragma mark -  setter / getter
+- (UITableView *)tableNode
+{
+    if (!_tableNode) {
+        UITableView *tableNode = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        tableNode.backgroundColor = [UIColor whiteColor];
+        tableNode.delegate = self;
+        tableNode.dataSource = self;
+        tableNode.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableNode.rowHeight = UITableViewAutomaticDimension;
+        tableNode.estimatedRowHeight = 100;
+        _tableNode = tableNode;
+    }
+    return _tableNode;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -38,20 +38,17 @@ static NSString * const footerSection = @"footerSection";
     [self addCollectionNode];
     [self loadData];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeRotate:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
 }
 
 - (void)addCollectionNode
 {
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    UICollectionView *collectionNode = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
-    collectionNode.backgroundColor = [UIColor whiteColor];
-    collectionNode.delegate = self;
-    collectionNode.dataSource = self;
-    [collectionNode registerClass:[RecommendTopicCellNode class] forCellWithReuseIdentifier:topicCell];
-    [collectionNode registerClass:[RecommendImagePagerCellNode class] forCellWithReuseIdentifier:imageCell];
-    [collectionNode registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerSection];
-    [self.view addSubview:collectionNode];
-    _collectionNode = collectionNode;
+    [self.view addSubview:self.collectionNode];
+    
+    //使用masonry刷新横竖屏切换布局
+    [_collectionNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.view);
+    }];
 }
 
 - (void)loadData
@@ -148,7 +145,7 @@ static NSString * const footerSection = @"footerSection";
 {
     switch (indexPath.section) {
         case 0:
-            return CGSizeMake(self.collectionNode.width, 112);
+            return CGSizeMake(self.view.width, 112);
             break;
         case 1:
             return CGSizeMake(80, 106);
@@ -230,6 +227,29 @@ static NSString * const footerSection = @"footerSection";
         return CGSizeMake(self.view.frame.size.width, 6);
     }
     return CGSizeZero;
+}
+
+#pragma mark - notifi
+- (void)changeRotate:(NSNotification*)noti {
+    
+    [_collectionNode reloadSections:[NSIndexSet indexSetWithIndex:0]];
+}
+
+#pragma mark - setter / getter
+- (UICollectionView *)collectionNode
+{
+    if (!_collectionNode) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        UICollectionView *collectionNode = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
+        collectionNode.backgroundColor = [UIColor whiteColor];
+        collectionNode.delegate = self;
+        collectionNode.dataSource = self;
+        [collectionNode registerClass:[RecommendTopicCellNode class] forCellWithReuseIdentifier:topicCell];
+        [collectionNode registerClass:[RecommendImagePagerCellNode class] forCellWithReuseIdentifier:imageCell];
+        [collectionNode registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerSection];
+        _collectionNode = collectionNode;
+    }
+    return _collectionNode;
 }
 
 - (void)didReceiveMemoryWarning {

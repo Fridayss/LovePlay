@@ -52,13 +52,11 @@
 
 - (void)addTableNode
 {
-    UITableView *tableNode = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    tableNode.backgroundColor = [UIColor whiteColor];
-    tableNode.delegate = self;
-    tableNode.dataSource = self;
-    tableNode.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:tableNode];
-    _tableNode = tableNode;
+    [self.view addSubview:self.tableNode];
+    //使用masonry刷新横竖屏切换布局
+    [_tableNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.view);
+    }];
 }
 
 - (void)loadData
@@ -112,32 +110,29 @@
 }
 
 #pragma mark - tableView delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NewsListInfoModel *listInfoModel = _newsListDatas[indexPath.row];
-    Class currentClass = [NewsNormalCellNode class];
-    if (_sourceType == 0) {
-        currentClass = [NewsImageTitleCellNode class];
-    }else{
-        switch (listInfoModel.showType) {
-            case 2:
-                currentClass = [NewsTitleImageCellNode class];
-                break;
-            default:
-                currentClass = [NewsNormalCellNode class];
-                break;
-        }
-    }
-    
-    return [self.tableNode cellHeightForIndexPath:indexPath model:listInfoModel keyPath:@"listInfoModel" cellClass:currentClass contentViewWidth:self.tableNode.width];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NewsListInfoModel *listInfoModel = _newsListDatas[indexPath.row];
     NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] init];
     detailViewController.newsID = listInfoModel.docid;
     [self.navigationController pushViewController:detailViewController animated:YES];
+}
+
+#pragma mark - setter / getter
+- (UITableView *)tableNode
+{
+    if (!_tableNode) {
+        UITableView *tableNode = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        tableNode.backgroundColor = [UIColor whiteColor];
+        tableNode.delegate = self;
+        tableNode.dataSource = self;
+        tableNode.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableNode.rowHeight = UITableViewAutomaticDimension;
+        tableNode.estimatedRowHeight = 100;
+        _tableNode = tableNode;
+        
+    }
+    return _tableNode;
 }
 
 - (void)didReceiveMemoryWarning {

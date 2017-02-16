@@ -25,7 +25,8 @@ static NSString * const imageInfoCell = @"imageInfoCell";
     self = [super initWithFrame:frame];
     if (self) {
         [self addPagerNode];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
+
     }
     return self;
 }
@@ -42,7 +43,7 @@ static NSString * const imageInfoCell = @"imageInfoCell";
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
     flowLayout.itemSize = CGSizeMake(267, self.contentView.height);
 
-    UICollectionView *pagerNode = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
+    UICollectionView *pagerNode = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:flowLayout];
     pagerNode.backgroundColor = [UIColor whiteColor];
     pagerNode.delegate = self;
     pagerNode.dataSource = self;
@@ -51,25 +52,6 @@ static NSString * const imageInfoCell = @"imageInfoCell";
     [pagerNode registerClass:[RecommendImageInfoCellNode class] forCellWithReuseIdentifier:imageInfoCell];
     [self.contentView addSubview:pagerNode];
     _pagerNode = pagerNode;
-}
-
-- (void)setupImageInfoDatas:(NSArray *)imageInfoDatas
-{
-    _imageInfoDatas = imageInfoDatas;
-    [_pagerNode reloadData];
-}
-
-#pragma mark - layout
-//- (void)sd_autoLayoutSubViews
-//{
-//    _pagerNode.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
-//}
-
-- (void)mas_autoLayoutSubViews
-{
-    [_pagerNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.
-    }];
 }
 
 #pragma mark - pagerNode datasource
@@ -96,6 +78,20 @@ static NSString * const imageInfoCell = @"imageInfoCell";
     if (_selectedBlock) {
         _selectedBlock(imageInfoModel);
     }
+}
+
+- (void)setupImageInfoDatas:(NSArray *)imageInfoDatas
+{
+    _imageInfoDatas = imageInfoDatas;
+    [_pagerNode reloadData];
+}
+
+#pragma mark - layout
+- (void)mas_autoLayoutSubViews
+{
+    [_pagerNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.contentView);
+    }];
 }
 
 @end

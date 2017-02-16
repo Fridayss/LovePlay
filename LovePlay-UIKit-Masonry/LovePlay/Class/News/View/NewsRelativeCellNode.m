@@ -37,7 +37,7 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -49,6 +49,7 @@
     _imageNode = imageNode;
     
     UILabel *titleTextNode = [[UILabel alloc] init];
+    titleTextNode.numberOfLines = 2;
     titleTextNode.font = [UIFont systemFontOfSize:16];
     titleTextNode.textColor = RGB(36, 36, 36);
     [self.contentView addSubview:titleTextNode];
@@ -76,50 +77,62 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
-{
-    _imageNode.sd_layout
-    .widthIs(80)
-    .heightIs(80)
-    .topSpaceToView(self.contentView, 10)
-    .leftSpaceToView(self.contentView, 10);
-    
-    _titleTextNode.sd_layout
-    .topEqualToView(_imageNode)
-    .leftSpaceToView(_imageNode, 10)
-    .rightSpaceToView(self.contentView, 10)
-    .autoHeightRatio(0);
-    [_titleTextNode setMaxNumberOfLinesToShow:2];
-    
-    _timeInfoTextNode.sd_layout
-    .leftSpaceToView(_imageNode, 10)
-    .bottomEqualToView(_imageNode)
-    .rightSpaceToView(self.contentView, 10)
-    .autoHeightRatio(0);
-    [_timeInfoTextNode setMaxNumberOfLinesToShow:1];
-    
-    _underLineNode.sd_layout
-    .heightIs(0.5)
-    .topSpaceToView(_imageNode, 10)
-    .leftEqualToView(self.contentView)
-    .rightEqualToView(self.contentView);
-    
-    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
-}
-//- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
+//- (void)sd_autoLayoutSubViews
 //{
-//    _imageNode.style.preferredSize = CGSizeMake(80, 80);
-//    _underLineNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 0.5);
+//    _imageNode.sd_layout
+//    .widthIs(80)
+//    .heightIs(80)
+//    .topSpaceToView(self.contentView, 10)
+//    .leftSpaceToView(self.contentView, 10);
 //    
-//    ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStart children:@[_titleTextNode, _timeInfoTextNode]];
+//    _titleTextNode.sd_layout
+//    .topEqualToView(_imageNode)
+//    .leftSpaceToView(_imageNode, 10)
+//    .rightSpaceToView(self.contentView, 10)
+//    .autoHeightRatio(0);
+//    [_titleTextNode setMaxNumberOfLinesToShow:2];
 //    
-//    ASStackLayoutSpec *horContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[_imageNode, verContentLayout]];
+//    _timeInfoTextNode.sd_layout
+//    .leftSpaceToView(_imageNode, 10)
+//    .bottomEqualToView(_imageNode)
+//    .rightSpaceToView(self.contentView, 10)
+//    .autoHeightRatio(0);
+//    [_timeInfoTextNode setMaxNumberOfLinesToShow:1];
 //    
-//    ASInsetLayoutSpec *insetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:horContentLayout];
+//    _underLineNode.sd_layout
+//    .heightIs(0.5)
+//    .topSpaceToView(_imageNode, 10)
+//    .leftEqualToView(self.contentView)
+//    .rightEqualToView(self.contentView);
 //    
-//    ASStackLayoutSpec *verUnderLineLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[insetLayout, _underLineNode]];
-//    
-//    return verUnderLineLayout;
+//    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
 //}
+
+- (void)mas_autoLayoutSubViews
+{
+    [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.and.height.mas_equalTo(80);
+        make.top.equalTo(self.contentView).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
+    }];
+    
+    [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_imageNode);
+        make.left.mas_equalTo(_imageNode.mas_right).offset(10);
+        make.right.equalTo(self.contentView).offset(-10);
+    }];
+    
+    [_timeInfoTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(_titleTextNode);
+        make.bottom.mas_equalTo(_imageNode.mas_bottom);
+    }];
+    
+    [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0.5);
+        make.top.mas_equalTo(_imageNode.mas_bottom).offset(10);
+        make.left.right.equalTo(self.contentView);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom);
+    }];
+}
 
 @end

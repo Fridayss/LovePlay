@@ -45,9 +45,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-//        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -86,6 +86,7 @@
 //    _commentReplyView = commentReplyView;
     
     UILabel *contentTextNode = [[UILabel alloc] init];
+    contentTextNode.numberOfLines = 0;
     contentTextNode.font = [UIFont systemFontOfSize:14];
     contentTextNode.textColor = RGB(50, 50, 50);
     [self.contentView addSubview:contentTextNode];
@@ -118,64 +119,44 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
-{
-    _imageNode.sd_layout
-    .widthIs(40)
-    .heightIs(40)
-    .topSpaceToView(self.contentView, 10)
-    .leftSpaceToView(self.contentView, 10);
-    
-    _voteBtnNode.sd_layout
-    .widthIs(50)
-    .heightIs(20)
-    .topEqualToView(_imageNode)
-    .rightSpaceToView(self.contentView, 10);
-    
-    _nameTextNode.sd_layout
-    .topEqualToView(_imageNode)
-    .leftSpaceToView(_imageNode, 5)
-    .rightSpaceToView(_voteBtnNode, 10)
-    .autoHeightRatio(0);
-    [_nameTextNode setMaxNumberOfLinesToShow:1];
-    
-    _locationTextNode.sd_layout
-    .leftEqualToView(_nameTextNode)
-    .bottomEqualToView(_imageNode)
-    .rightEqualToView(_nameTextNode)
-    .autoHeightRatio(0);
-    [_locationTextNode setMaxNumberOfLinesToShow:1];
-    
-//    _commentReplyAreaNode.sd_layout
-//    .topSpaceToView(_imageNode, 10)
-//    .leftEqualToView(_nameTextNode)
-//    .rightEqualToView(_voteBtnNode);
-    
-//    _commentReplyView.sd_layout
-//    .topSpaceToView(_imageNode, 10)
-//    .leftEqualToView(_nameTextNode)
-//    .rightSpaceToView(self.contentView, 10);
 
-    _contentTextNode.sd_layout
-    .topSpaceToView(_imageNode, 10)
-    .leftEqualToView(_nameTextNode)
-    .rightSpaceToView(self.contentView, 10)
-    .autoHeightRatio(0);
-    [_contentTextNode setMaxNumberOfLinesToShow:0];
-//    _contentTextNode.sd_layout
-//    .topSpaceToView(_imageNode, 10)
-//    .leftEqualToView(_nameTextNode)
-//    .rightEqualToView(_voteBtnNode)
-//    .autoHeightRatio(0);
-//    [_contentTextNode setMaxNumberOfLinesToShow:0];
+- (void)mas_autoLayoutSubViews
+{
+    [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(40);
+        make.top.equalTo(self.contentView).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
+    }];
     
-    _underLineNode.sd_layout
-    .heightIs(0.5)
-    .topSpaceToView(_contentTextNode, 10)
-    .leftEqualToView(self.contentView)
-    .rightEqualToView(self.contentView);
+    [_voteBtnNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(50);
+        make.height.mas_equalTo(20);
+        make.top.equalTo(_imageNode);
+        make.right.equalTo(self.contentView).offset(-10);
+    }];
     
-    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
+    [_nameTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_imageNode);
+        make.left.mas_equalTo(_imageNode.mas_right).offset(10);
+        make.right.mas_equalTo(_voteBtnNode.mas_left).offset(-10);
+    }];
+    
+    [_locationTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(_nameTextNode);
+        make.bottom.mas_equalTo(_imageNode.mas_bottom);
+    }];
+    
+    [_contentTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_imageNode.mas_bottom).offset(10);
+        make.left.equalTo(_nameTextNode);
+        make.right.equalTo(_voteBtnNode);
+    }];
+    
+    [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0.5);
+        make.top.mas_equalTo(_contentTextNode.mas_bottom).offset(10);
+        make.left.right.bottom.equalTo(self.contentView);
+    }];
 }
 
 @end
