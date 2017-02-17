@@ -19,12 +19,12 @@
 
 @implementation DiscussListHeaderView
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -59,23 +59,22 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
+- (void)mas_autoLayoutSubViews
 {
-    _imageNode.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
+    [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
+    }];
     
-    _descriptionTextLabel.sd_layout
-    .leftSpaceToView(self, 10)
-    .bottomSpaceToView(self, 10)
-    .rightSpaceToView(self, 10)
-    .autoHeightRatio(0);
-    [_descriptionTextLabel setMaxNumberOfLinesToShow:1];
+    [_descriptionTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(10);
+        make.bottom.equalTo(self).offset(-10);
+        make.right.equalTo(self).offset(-10);
+    }];
     
-    _titleTextLabel.sd_layout
-    .leftEqualToView(_descriptionTextLabel)
-    .bottomSpaceToView(_descriptionTextLabel, 5)
-    .rightEqualToView(_descriptionTextLabel)
-    .autoHeightRatio(0);
-    [_titleTextLabel setMaxNumberOfLinesToShow:1];
+    [_titleTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(_descriptionTextLabel);
+        make.bottom.equalTo(_descriptionTextLabel.mas_top).offset(-5);
+    }];
 }
 
 @end

@@ -79,16 +79,15 @@
     
     [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(120);
-        make.top.mas_equalTo(_titleTextNode.mas_bottom).offset(10);
+        make.top.equalTo(_titleTextNode.mas_bottom).offset(10);
         make.left.equalTo(self.contentView).offset(10);
         make.right.equalTo(self.contentView).offset(-10);
     }];
     
     [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(0.5);
-        make.top.mas_equalTo(_imageNode.mas_bottom).offset(10);
-        make.left.right.equalTo(self.contentView);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom);
+        make.top.equalTo(_imageNode.mas_bottom).offset(10);
+        make.left.bottom.right.equalTo(self.contentView);
     }];
 }
 

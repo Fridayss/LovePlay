@@ -11,6 +11,8 @@
 typedef void (^replyTableViewDidReload)(CGFloat contentSizeHeight);
 @interface NewsCommentReplyView : UIView
 
+- (void)setupCommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors;
+
 - (void)setupCommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors didReloadBlock:(replyTableViewDidReload)reloadBlock;
 
 @end

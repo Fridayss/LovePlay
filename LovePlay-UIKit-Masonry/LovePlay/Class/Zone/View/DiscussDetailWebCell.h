@@ -12,9 +12,9 @@ typedef void (^webViewFinishLoadBlock)(CGFloat webViewHeight);
 
 @interface DiscussDetailWebCell : UITableViewCell
 
-@property (nonatomic, strong) NSString *htmlBody;
-
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+
+- (void)setupHtmlBoby:(NSString *)htmlBody;
 
 - (void)webViewDidFinishLoadBlock:(webViewFinishLoadBlock)finishLoadBlock;
 

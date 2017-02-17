@@ -106,20 +106,6 @@
     
     [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
 }
-//- (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
-//{
-//    _imageNode.style.preferredSize = CGSizeMake(80, 80);
-//    _underLineNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 0.5);
-//    
-//    ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStart children:@[_titleTextNode, _timeInfoTextNode]];
-//    
-//    ASStackLayoutSpec *horContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[_imageNode, verContentLayout]];
-//    
-//    ASInsetLayoutSpec *insetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:horContentLayout];
-//    
-//    ASStackLayoutSpec *verUnderLineLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[insetLayout, _underLineNode]];
-//    
-//    return verUnderLineLayout;
-//}
+
 
 @end

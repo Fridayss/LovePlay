@@ -8,8 +8,8 @@
 
 #import "NewsCommentCellNode.h"
 #import "NewsCommentModel.h"
-//#import "NewsCommentReplyAreaNode.h"
-//#import "NewsCommentReplyView.h"
+#import "NewsCommentReplyAreaNode.h"
+#import "NewsCommentReplyView.h"
 
 @interface NewsCommentCellNode ()
 //UI
@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UIButton *voteBtnNode;
 @property (nonatomic, strong) UILabel *contentTextNode;
 @property (nonatomic, strong) UIView *underLineNode;
-//@property (nonatomic, strong) NewsCommentReplyAreaNode *commentReplyAreaNode;
+@property (nonatomic, strong) NewsCommentReplyAreaNode *commentReplyAreaNode;
 //@property (nonatomic, strong) NewsCommentReplyView *commentReplyView;
 //Data
 @property (nonatomic, strong) NewsCommentItem *commentItem;
@@ -77,9 +77,9 @@
     [self.contentView addSubview:voteBtnNode];
     _voteBtnNode = voteBtnNode;
 
-//    NewsCommentReplyAreaNode *commentReplyAreaNode = [[NewsCommentReplyAreaNode alloc] init];
-//    [self.contentView addSubview:commentReplyAreaNode];
-//    _commentReplyAreaNode = commentReplyAreaNode;
+    NewsCommentReplyAreaNode *commentReplyAreaNode = [[NewsCommentReplyAreaNode alloc] init];
+    [self.contentView addSubview:commentReplyAreaNode];
+    _commentReplyAreaNode = commentReplyAreaNode;
     
 //    NewsCommentReplyView *commentReplyView = [[NewsCommentReplyView alloc] init];
 //    [self.contentView addSubview:commentReplyView];
@@ -111,11 +111,8 @@
     [_voteBtnNode setTitle:[NSString stringWithFormat:@"%@顶",@(_commentItem.vote)] forState:UIControlStateNormal];
     _contentTextNode.text = _commentItem.content;
     
-//    [_commentReplyView setupCommentItems:_commentItemsDict floors:_commentIdsArray didReloadBlock:^(CGFloat contentSizeHeight) {
-//        _commentReplyView.sd_layout.heightIs(contentSizeHeight);
-//        [self updateLayout];
-//    }];
-//    [_commentReplyAreaNode setupCommentItems:_commentItemsDict floors:_commentIdsArray];
+    [_commentReplyAreaNode setupCommentItems:_commentItemsDict floors:_commentIdsArray];
+    
 }
 
 #pragma mark - layout
@@ -137,24 +134,31 @@
     
     [_nameTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_imageNode);
-        make.left.mas_equalTo(_imageNode.mas_right).offset(10);
-        make.right.mas_equalTo(_voteBtnNode.mas_left).offset(-10);
+        make.left.equalTo(_imageNode.mas_right).offset(10);
+        make.right.equalTo(_voteBtnNode.mas_left).offset(-10);
     }];
     
     [_locationTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(_nameTextNode);
-        make.bottom.mas_equalTo(_imageNode.mas_bottom);
+        make.bottom.equalTo(_imageNode.mas_bottom);
+    }];
+    
+    [_commentReplyAreaNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(100);
+        make.top.equalTo(_imageNode.mas_bottom).offset(10);
+        make.left.equalTo(_nameTextNode);
+        make.right.equalTo(_voteBtnNode);
     }];
     
     [_contentTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_imageNode.mas_bottom).offset(10);
+        make.top.equalTo(_commentReplyAreaNode.mas_bottom).offset(10);
         make.left.equalTo(_nameTextNode);
         make.right.equalTo(_voteBtnNode);
     }];
     
     [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(0.5);
-        make.top.mas_equalTo(_contentTextNode.mas_bottom).offset(10);
+        make.top.equalTo(_contentTextNode.mas_bottom).offset(10);
         make.left.right.bottom.equalTo(self.contentView);
     }];
 }

@@ -39,7 +39,7 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -60,6 +60,7 @@
     _floorTextNode = floorTextNode;
     
     UILabel *contentTextNode = [[UILabel alloc] init];
+    contentTextNode.numberOfLines = 0;
     contentTextNode.font = [UIFont systemFontOfSize:14];
     contentTextNode.textColor = RGB(50, 50, 50);
     [self.contentView addSubview:contentTextNode];
@@ -81,37 +82,30 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
-{
-    _floorTextNode.sd_layout
-    .topSpaceToView(self.contentView, 4)
-    .rightSpaceToView(self.contentView, 4)
-    .autoHeightRatio(0);
-    [_floorTextNode setMaxNumberOfLinesToShow:1];
-    [_floorTextNode setSingleLineAutoResizeWithMaxWidth:50];
-    
-    _nameTextNode.sd_layout
-    .topSpaceToView(self.contentView, 4)
-    .leftSpaceToView(self.contentView, 4)
-    .rightSpaceToView(_floorTextNode, 5)
-    .autoHeightRatio(0);
-    [_nameTextNode setMaxNumberOfLinesToShow:1];
-    
-    _contentTextNode.sd_layout
-    .topSpaceToView(_nameTextNode, 6)
-    .leftEqualToView(_nameTextNode)
-    .rightEqualToView(_floorTextNode)
-    .autoHeightRatio(0);
-    [_contentTextNode setMaxNumberOfLinesToShow:0];
-    
-    _underLineNode.sd_layout
-    .heightIs(0.5)
-    .topSpaceToView(_contentTextNode, 10)
-    .leftEqualToView(self.contentView)
-    .rightEqualToView(self.contentView);
-    
-    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
-}
 
+- (void)mas_autoLayoutSubViews
+{
+    [_floorTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).offset(4);
+        make.right.equalTo(self.contentView).offset(-4);
+    }];
+    
+    [_nameTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).offset(4);
+        make.left.equalTo(self.contentView).offset(4);
+        make.right.equalTo(_floorTextNode.mas_left).offset(-10).priorityLow();
+    }];
+    
+    [_contentTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_nameTextNode.mas_bottom).offset(5);
+        make.left.equalTo(self.contentView).offset(4);
+        make.right.equalTo(self.contentView).offset(-4);
+    }];
+    
+    [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0.5);
+        make.left.bottom.right.equalTo(self.contentView);
+    }];
+}
 
 @end

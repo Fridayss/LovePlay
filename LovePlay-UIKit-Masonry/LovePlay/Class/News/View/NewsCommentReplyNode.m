@@ -29,7 +29,7 @@
         _commentItem = commentItem;
         _floor = floor;
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -39,22 +39,20 @@
     UILabel *nameTextNode = [[UILabel alloc] init];
     nameTextNode.font = [UIFont systemFontOfSize:12];
     nameTextNode.textColor = RGB(138, 138, 138);
-    nameTextNode.text = [NSString stringWithFormat:@"%@ %@", _commentItem.user.nickname ? _commentItem.user.nickname : @"火星网友", _commentItem.user.location ? _commentItem.user.location : @"火星"];
     [self addSubview:nameTextNode];
     _nameTextNode = nameTextNode;
     
     UILabel *floorTextNode = [[UILabel alloc] init];
     floorTextNode.font = [UIFont systemFontOfSize:12];
     floorTextNode.textColor = RGB(64, 64, 64);
-    floorTextNode.text = [NSString stringWithFormat:@"%@#", @(_floor).stringValue];
     floorTextNode.textAlignment = NSTextAlignmentRight;
     [self addSubview:floorTextNode];
     _floorTextNode = floorTextNode;
     
     UILabel *contentTextNode = [[UILabel alloc] init];
+    contentTextNode.numberOfLines = 0;
     contentTextNode.font = [UIFont systemFontOfSize:14];
     contentTextNode.textColor = RGB(50, 50, 50);
-    contentTextNode.text = _commentItem.content ? _commentItem.content : @"NULL";
     [self addSubview:contentTextNode];
     _contentTextNode = contentTextNode;
     
@@ -64,37 +62,37 @@
     _underLineNode = underLineNode;
 }
 
-#pragma mark - layout
-- (void)sd_autoLayoutSubViews
+- (void)loadData
 {
-    _floorTextNode.sd_layout
-    .topSpaceToView(self, 4)
-    .rightSpaceToView(self, 4)
-    .autoHeightRatio(0);
-    [_floorTextNode setMaxNumberOfLinesToShow:1];
-    [_floorTextNode setSingleLineAutoResizeWithMaxWidth:50];
+    _nameTextNode.text = [NSString stringWithFormat:@"%@ %@", _commentItem.user.nickname ? _commentItem.user.nickname : @"火星网友", _commentItem.user.location ? _commentItem.user.location : @"火星"];
+    _floorTextNode.text = [NSString stringWithFormat:@"%@#", @(_floor).stringValue];
+    _contentTextNode.text = _commentItem.content ? _commentItem.content : @"NULL";
+}
+
+#pragma mark - layout
+- (void)mas_autoLayoutSubViews
+{
+    [_floorTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(4);
+        make.right.equalTo(self).offset(-4);
+    }];
     
-    _nameTextNode.sd_layout
-    .topSpaceToView(self, 4)
-    .leftSpaceToView(self, 4)
-    .rightSpaceToView(_floorTextNode, 5)
-    .autoHeightRatio(0);
-    [_nameTextNode setMaxNumberOfLinesToShow:1];
+    [_nameTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(4);
+        make.left.equalTo(self).offset(4);
+        make.right.equalTo(_floorTextNode.mas_left).offset(-10).priorityLow();
+    }];
     
-    _contentTextNode.sd_layout
-    .topSpaceToView(_nameTextNode, 6)
-    .leftEqualToView(_nameTextNode)
-    .rightEqualToView(_floorTextNode)
-    .autoHeightRatio(0);
-    [_contentTextNode setMaxNumberOfLinesToShow:0];
+    [_contentTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_nameTextNode.mas_bottom).offset(5);
+        make.left.equalTo(self).offset(4);
+        make.right.equalTo(self).offset(-4);
+    }];
     
-    _underLineNode.sd_layout
-    .heightIs(0.5)
-    .topSpaceToView(_contentTextNode, 10)
-    .leftEqualToView(self)
-    .rightEqualToView(self);
-    
-    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
+    [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0.5);
+        make.left.bottom.right.equalTo(self);
+    }];
 }
 
 @end

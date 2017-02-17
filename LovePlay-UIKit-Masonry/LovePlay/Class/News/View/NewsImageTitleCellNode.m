@@ -93,7 +93,7 @@
     }];
     
     [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_imageNode.mas_bottom).offset(10);
+        make.top.equalTo(_imageNode.mas_bottom).offset(10);
         make.left.equalTo(self.contentView).offset(10);
         make.right.equalTo(self.contentView).offset(-10);
     }];
@@ -101,14 +101,14 @@
     [_replyBtnNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(50);
         make.height.mas_equalTo(20);
-        make.top.mas_equalTo(_titleTextNode.mas_bottom).offset(10);
+        make.top.equalTo(_titleTextNode.mas_bottom).offset(10);
         make.right.equalTo(_titleTextNode);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-10);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
     }];
     
     [_timeTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_titleTextNode);
-        make.right.mas_equalTo(_replyBtnNode.mas_left).offset(-10);
+        make.right.equalTo(_replyBtnNode.mas_left).offset(-10);
         make.centerY.equalTo(_replyBtnNode);
     }];
 }

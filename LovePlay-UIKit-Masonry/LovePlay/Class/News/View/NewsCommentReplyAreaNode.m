@@ -38,15 +38,16 @@
     _floors = floors;
     
 //    [self removeAllSubviews];
-    
+
     [self addSubnodes];
     
-    [self sd_autoLayoutSubViews];
+    [self mas_autoLayoutSubViews];
 
 }
 
 - (void)addSubnodes
 {
+    UIView *lastTopView = nil;
     NSMutableArray *replyNodeArray = [NSMutableArray array];
     for (NSInteger i = 0; i < _floors.count - 1; i ++) {
         NSString *floor = _floors[i];
@@ -54,47 +55,28 @@
         NewsCommentReplyNode *commentReplyNode = [[NewsCommentReplyNode alloc] initWithcommentItem:commentItem floor:i + 1];
         [self addSubview:commentReplyNode];
         [replyNodeArray addObject:commentReplyNode];
+        
+        if (0 == i) {
+            [commentReplyNode mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self);
+                make.left.right.equalTo(self);
+            }];
+        }else{
+            [commentReplyNode mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(lastTopView.mas_bottom);
+                make.left.right.equalTo(self);
+            }];
+        }
+        lastTopView = commentReplyNode;
     }
     
-    if (replyNodeArray.count > 0) {
-        [replyNodeArray enumerateObjectsUsingBlock:^(NewsCommentReplyNode *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj sd_clearAutoLayoutSettings];
-            obj.hidden = YES;
-        }];
-    }
     _replyNodeArray = [replyNodeArray copy];
-    
-    if (replyNodeArray.count > 0) {
-        self.fixedHeight = nil;
-        self.fixedWidth = nil;
-
-    }else{
-        self.fixedHeight = @(0);
-        self.fixedWidth = @(0);
-    }
-    
-    
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
+- (void)mas_autoLayoutSubViews
 {
-    if (_replyNodeArray.count > 0) {
-        UIView *lastTopView = self;
-        for (NSInteger i = 0; i < _replyNodeArray.count; i ++) {
-            NewsCommentReplyNode *commentReplyNode = _replyNodeArray[i];
-            
-            commentReplyNode.sd_layout
-            .topSpaceToView(lastTopView, 0)
-            .leftEqualToView(self)
-            .rightEqualToView(self);
-            
-            lastTopView = commentReplyNode;
-        }
-        [self setupAutoHeightWithBottomView:lastTopView bottomMargin:10];
-    }
-    
-//    [self setupAutoMarginFlowItems:_replyNodeArray withPerRowItemsCount:1 itemWidth:self.width verticalMargin:0 verticalEdgeInset:0 horizontalEdgeInset:0];
+
 }
 
 @end

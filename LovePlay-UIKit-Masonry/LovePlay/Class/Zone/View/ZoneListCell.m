@@ -24,7 +24,7 @@
     if (self) {
         self.contentView.backgroundColor = [UIColor whiteColor];
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -58,27 +58,25 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
+
+- (void)mas_autoLayoutSubViews
 {
-    _imageNode.sd_layout
-    .widthIs(50)
-    .heightIs(50)
-    .leftSpaceToView(self.contentView, 10)
-    .centerYEqualToView(self.contentView);
+    [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(50);
+        make.left.equalTo(self.contentView).offset(10);
+        make.centerY.equalTo(self.contentView);
+    }];
     
-    _titleTextLabel.sd_layout
-    .topEqualToView(_imageNode).offset(3)
-    .leftSpaceToView(_imageNode, 5)
-    .rightSpaceToView(self.contentView, 10)
-    .autoHeightRatio(0);
-    [_titleTextLabel setMaxNumberOfLinesToShow:1];
+    [_titleTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_imageNode).offset(3);
+        make.left.equalTo(_imageNode.mas_right).offset(5);
+        make.right.equalTo(self.contentView).offset(-10);
+    }];
     
-    _detailTextLabel.sd_layout
-    .leftEqualToView(_titleTextLabel)
-    .bottomEqualToView(_imageNode).offset(- 3)
-    .rightEqualToView(_titleTextLabel)
-    .autoHeightRatio(0);
-    [_detailTextLabel setMaxNumberOfLinesToShow:1];
+    [_detailTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(_titleTextLabel);
+        make.bottom.equalTo(_imageNode.mas_bottom).offset(-3);
+    }];
 }
 
 @end

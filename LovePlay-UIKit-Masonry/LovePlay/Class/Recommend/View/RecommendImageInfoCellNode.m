@@ -22,7 +22,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -51,15 +51,15 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
+- (void)mas_autoLayoutSubViews
 {
-    _imageNode.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
-    _titleTextNode.sd_layout
-    .leftEqualToView(self.contentView)
-    .bottomEqualToView(self.contentView)
-    .rightEqualToView(self.contentView)
-    .autoHeightRatio(0);
-    [_titleTextNode setMaxNumberOfLinesToShow:1];
+    [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
+    
+    [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(self.contentView);
+    }];
 }
 
 @end

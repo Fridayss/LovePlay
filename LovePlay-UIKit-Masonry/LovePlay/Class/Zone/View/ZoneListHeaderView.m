@@ -19,7 +19,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -42,9 +42,11 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
+- (void)mas_autoLayoutSubViews
 {
-    _titleTextLabel.sd_layout.spaceToSuperView(UIEdgeInsetsMake(0, 8, 0, 8));
+    [_titleTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self).insets(UIEdgeInsetsMake(0, 8, 0, 8));
+    }];
 }
 
 @end

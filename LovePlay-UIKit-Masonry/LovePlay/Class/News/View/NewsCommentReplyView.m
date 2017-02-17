@@ -36,6 +36,12 @@
 {
     [super layoutSubviews];
     self.tableView.width = self.width;
+    self.tableView.height = self.height;
+}
+
+- (void)setupCommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors
+{
+    [self setupCommentItems:commentItems floors:floors didReloadBlock:nil];
 }
 
 - (void)setupCommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors didReloadBlock:(replyTableViewDidReload)reloadBlock
@@ -46,7 +52,8 @@
     NSLog(@"tableHeight -- %@", NSStringFromCGRect(_tableView.frame));
 //    self.sd_layout.maxHeightIs(_tableView.height);
     NSLog(@"contentSize.height -- %@",NSStringFromCGSize(_tableView.contentSize));
-    self.height = _tableView.contentSize.height;
+//    self.height = _tableView.contentSize.height;
+//    _tableView.height = _tableView.contentSize.height;
     if (reloadBlock) {
         reloadBlock(_tableView.contentSize.height);
     }
@@ -66,21 +73,21 @@
     return cell;
 }
 #pragma mark - tableView dataSource
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *floor = _floors[indexPath.row];
-    NewsCommentItem *commentItem = _commentItemsDict[floor];
-    return [_tableView cellHeightForIndexPath:indexPath cellClass:[NewsCommentReplyCell class] cellContentViewWidth:_tableView.width cellDataSetting:^(UITableViewCell *cell) {
-        [(NewsCommentReplyCell *)cell setupCommentItem:commentItem floor:indexPath.row];
-    }];
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSString *floor = _floors[indexPath.row];
+//    NewsCommentItem *commentItem = _commentItemsDict[floor];
+//    return [_tableView cellHeightForIndexPath:indexPath cellClass:[NewsCommentReplyCell class] cellContentViewWidth:_tableView.width cellDataSetting:^(UITableViewCell *cell) {
+//        [(NewsCommentReplyCell *)cell setupCommentItem:commentItem floor:indexPath.row];
+//    }];
+//}
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
-{
-//    [self setupAutoHeightWithBottomView:_tableView bottomMargin:0];
-    _tableView.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
-}
+//- (void)sd_autoLayoutSubViews
+//{
+////    [self setupAutoHeightWithBottomView:_tableView bottomMargin:0];
+//    _tableView.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
+//}
 
 #pragma mark - getter / setter
 - (UITableView *)tableView
@@ -90,6 +97,8 @@
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.rowHeight = UITableViewAutomaticDimension;
+        tableView.estimatedRowHeight = 2;
         _tableView = tableView;
     }
     return _tableView;

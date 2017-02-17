@@ -77,36 +77,6 @@
 }
 
 #pragma mark - layout
-//- (void)sd_autoLayoutSubViews
-//{
-//    _imageNode.sd_layout
-//    .widthIs(80)
-//    .heightIs(80)
-//    .topSpaceToView(self.contentView, 10)
-//    .leftSpaceToView(self.contentView, 10);
-//    
-//    _titleTextNode.sd_layout
-//    .topEqualToView(_imageNode)
-//    .leftSpaceToView(_imageNode, 10)
-//    .rightSpaceToView(self.contentView, 10)
-//    .autoHeightRatio(0);
-//    [_titleTextNode setMaxNumberOfLinesToShow:2];
-//    
-//    _timeInfoTextNode.sd_layout
-//    .leftSpaceToView(_imageNode, 10)
-//    .bottomEqualToView(_imageNode)
-//    .rightSpaceToView(self.contentView, 10)
-//    .autoHeightRatio(0);
-//    [_timeInfoTextNode setMaxNumberOfLinesToShow:1];
-//    
-//    _underLineNode.sd_layout
-//    .heightIs(0.5)
-//    .topSpaceToView(_imageNode, 10)
-//    .leftEqualToView(self.contentView)
-//    .rightEqualToView(self.contentView);
-//    
-//    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
-//}
 
 - (void)mas_autoLayoutSubViews
 {
@@ -118,20 +88,19 @@
     
     [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_imageNode);
-        make.left.mas_equalTo(_imageNode.mas_right).offset(10);
+        make.left.equalTo(_imageNode.mas_right).offset(10);
         make.right.equalTo(self.contentView).offset(-10);
     }];
     
     [_timeInfoTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(_titleTextNode);
-        make.bottom.mas_equalTo(_imageNode.mas_bottom);
+        make.bottom.equalTo(_imageNode.mas_bottom);
     }];
     
     [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(0.5);
-        make.top.mas_equalTo(_imageNode.mas_bottom).offset(10);
-        make.left.right.equalTo(self.contentView);
-        make.bottom.mas_equalTo(self.contentView.mas_bottom);
+        make.top.equalTo(_imageNode.mas_bottom).offset(10);
+        make.left.bottom.right.equalTo(self.contentView);
     }];
 }
 

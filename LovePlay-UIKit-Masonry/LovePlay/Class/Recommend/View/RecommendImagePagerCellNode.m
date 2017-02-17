@@ -90,7 +90,7 @@ static NSString * const imageInfoCell = @"imageInfoCell";
 - (void)mas_autoLayoutSubViews
 {
     [_pagerNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.contentView);
+        make.edges.equalTo(self.contentView);
     }];
 }
 

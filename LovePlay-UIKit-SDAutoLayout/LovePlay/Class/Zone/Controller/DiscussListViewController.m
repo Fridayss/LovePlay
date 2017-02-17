@@ -31,7 +31,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self initParams];
     [self addTableView];
-    [self addTableHeaderView];
     [self loadData];
 }
 
@@ -43,11 +42,6 @@
 - (void)addTableView
 {
     [self.view addSubview:self.tableView];
-}
-
-- (void)addTableHeaderView
-{
-    [self.view addSubview:self.headerView];
 }
 
 - (void)loadData

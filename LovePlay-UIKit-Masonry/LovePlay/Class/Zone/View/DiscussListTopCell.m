@@ -33,7 +33,7 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubNodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -72,26 +72,26 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
+
+- (void)mas_autoLayoutSubViews
 {
-    _topTextNode.sd_layout
-    .widthIs(45)
-    .heightIs(25)
-    .topSpaceToView(self.contentView, 10)
-    .leftSpaceToView(self.contentView, 10);
+    [_topTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(45);
+        make.height.mas_equalTo(25);
+        make.top.equalTo(self.contentView).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
+    }];
     
-    _titleTextNode.sd_layout
-    .heightIs(30)
-    .leftSpaceToView(_topTextNode, 10)
-    .rightSpaceToView(self.contentView, 10)
-    .centerYEqualToView(_topTextNode);
+    [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_topTextNode.mas_right).offset(10);
+        make.right.equalTo(self.contentView).offset(-10);
+        make.centerY.equalTo(_topTextNode);
+    }];
     
-    _underLineNode.sd_layout
-    .heightIs(0.5)
-    .topSpaceToView(_topTextNode, 10)
-    .leftEqualToView(self.contentView)
-    .rightEqualToView(self.contentView);
-    
-    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
+    [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0.5);
+        make.top.equalTo(_topTextNode.mas_bottom).offset(10);
+        make.left.bottom.right.equalTo(self.contentView);
+    }];
 }
 @end

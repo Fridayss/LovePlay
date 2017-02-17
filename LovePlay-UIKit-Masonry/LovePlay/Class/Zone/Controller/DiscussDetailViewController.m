@@ -41,6 +41,10 @@
 - (void)addTableView
 {
     [self.view addSubview:self.tableView];
+    //使用masonry刷新横竖屏切换布局
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)loadData
@@ -67,7 +71,7 @@
     if (indexPath.row == 0) {
         DiscussDetailWebCell *cell = [DiscussDetailWebCell cellWithTableView:tableView];
         if (_webViewHeight <= 0) {
-            cell.htmlBody = post.message;
+            [cell setupHtmlBoby:post.message];
             [cell webViewDidFinishLoadBlock:^(CGFloat webViewHeight) {
                 _webViewHeight = webViewHeight;
                 [_tableView reloadData];
@@ -86,12 +90,8 @@
 {
     if (indexPath.row == 0) {
         return _webViewHeight;
-    }else{
-        DiscuzPost *post = _discussPostDatas[indexPath.row];
-        return [_tableView cellHeightForIndexPath:indexPath cellClass:[DiscussDetailPostCell class] cellContentViewWidth:_tableView.width cellDataSetting:^(UITableViewCell *cell) {
-            [(DiscussDetailPostCell *)cell setupPost:post floor:indexPath.row];
-        }];
     }
+    return UITableViewAutomaticDimension;
 }
 
 - (UITableView *)tableView
@@ -101,6 +101,8 @@
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.separatorStyle = UITableViewCellEditingStyleNone;
+        tableView.rowHeight = UITableViewAutomaticDimension;
+        tableView.estimatedRowHeight = 100;
         _tableView = tableView;
     }
     return _tableView;

@@ -40,7 +40,7 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-        [self sd_autoLayoutSubViews];
+        [self mas_autoLayoutSubViews];
     }
     return self;
 }
@@ -72,6 +72,7 @@
     _floorTextNode = floorTextNode;
     
     UILabel *contentTextNode = [[UILabel alloc] init];
+    contentTextNode.numberOfLines = 0;
     contentTextNode.font = [UIFont systemFontOfSize:14];
     contentTextNode.textColor = RGB(50, 50, 50);
     [self.contentView addSubview:contentTextNode];
@@ -81,6 +82,10 @@
     underLineNode.backgroundColor = RGB(222, 222, 222);
     [self.contentView addSubview:underLineNode];
     _underLineNode = underLineNode;
+    
+//    nameTextNode.backgroundColor = RandomRGB;
+//    timeTextNode.backgroundColor = RandomRGB;
+//    floorTextNode.backgroundColor = RandomRGB;
 }
 
 - (void)setupPost:(DiscuzPost *)post floor:(NSInteger)floor
@@ -94,51 +99,41 @@
 }
 
 #pragma mark - layout
-- (void)sd_autoLayoutSubViews
+- (void)mas_autoLayoutSubViews
 {
-    _imageNode.sd_layout
-    .widthIs(30)
-    .heightIs(30)
-    .topSpaceToView(self.contentView, 10)
-    .leftSpaceToView(self.contentView, 10);
+    [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(30);
+        make.top.left.equalTo(self.contentView).offset(10);
+    }];
     
-    _floorTextNode.sd_layout
-//    .widthIs(30) //可以使用setSingleLineAutoResizeWithMaxWidth，代替label写死的宽度
-    .rightSpaceToView(self.contentView, 10)
-    .centerYEqualToView(_imageNode)
-    .autoHeightRatio(0);
-    [_floorTextNode setMaxNumberOfLinesToShow:1];
-    [_floorTextNode setSingleLineAutoResizeWithMaxWidth:50];
-    
-    _nameTextNode.sd_layout
-    .leftSpaceToView(_imageNode, 10)
-//    .rightSpaceToView(_timeTextNode, 10)
-    .centerYEqualToView(_imageNode) //想要centerY生效，必须调用autoHeightRatio获取label高度
-    .autoHeightRatio(0);
-    [_nameTextNode setMaxNumberOfLinesToShow:1];
-    [_nameTextNode setSingleLineAutoResizeWithMaxWidth:180];
+    [_floorTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView).offset(-10);
+        make.centerY.equalTo(_imageNode);
+    }];
 
-    _timeTextNode.sd_layout
-    .leftSpaceToView(_nameTextNode, 10)
-    .rightSpaceToView(_floorTextNode, 10)
-    .centerYEqualToView(_imageNode)
-    .autoHeightRatio(0);
-    [_timeTextNode setMaxNumberOfLinesToShow:1];
-
-    _contentTextNode.sd_layout
-    .topSpaceToView(_imageNode, 10)
-    .leftSpaceToView(self.contentView , 10)
-    .rightSpaceToView(self.contentView, 10)
-    .autoHeightRatio(0);
-    [_contentTextNode setMaxNumberOfLinesToShow:0];
+    [_nameTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_imageNode.mas_right).offset(10);
+        make.centerY.equalTo(_imageNode);
+    }];
     
-    _underLineNode.sd_layout
-    .heightIs(0.5)
-    .topSpaceToView(_contentTextNode, 10)
-    .leftEqualToView(self.contentView)
-    .rightEqualToView(self.contentView);
+    //放在name和floor之间，设置左右位置，并控制优先级
+    [_timeTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_nameTextNode.mas_right).offset(10).priorityMedium();
+        make.right.equalTo(_floorTextNode.mas_left).offset(-10).priorityLow();
+        make.centerY.equalTo(_imageNode);
+    }];
     
-    [self setupAutoHeightWithBottomView:_underLineNode bottomMargin:0];
+    [_contentTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_imageNode.mas_bottom).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
+        make.right.equalTo(self.contentView).offset(-10);
+    }];
+    
+    [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(0.5);
+        make.top.equalTo(_contentTextNode.mas_bottom).offset(10);
+        make.left.bottom.right.equalTo(self.contentView);
+    }];
 }
 
 @end

@@ -37,7 +37,7 @@ static NSString * const footerSection = @"footerSection";
     self.view.backgroundColor = [UIColor whiteColor];
     [self addCollectionNode];
     [self loadData];
-    
+    //添加横竖屏通知，刷新顶部子view布局
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeRotate:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
 }
 
@@ -47,7 +47,7 @@ static NSString * const footerSection = @"footerSection";
     
     //使用masonry刷新横竖屏切换布局
     [_collectionNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.view);
+        make.edges.equalTo(self.view);
     }];
 }
 

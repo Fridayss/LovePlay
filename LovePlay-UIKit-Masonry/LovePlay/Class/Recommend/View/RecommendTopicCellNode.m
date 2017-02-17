@@ -59,7 +59,7 @@
     }];
     
     [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_imageNode.mas_bottom).offset(8);
+        make.top.equalTo(_imageNode.mas_bottom).offset(8);
         make.left.and.right.equalTo(self.contentView);
     }];
 }

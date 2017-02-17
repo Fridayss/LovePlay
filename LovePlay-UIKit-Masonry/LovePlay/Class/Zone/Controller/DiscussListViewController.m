@@ -31,7 +31,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self initParams];
     [self addTableView];
-    [self addTableHeaderView];
     [self loadData];
 }
 
@@ -43,11 +42,10 @@
 - (void)addTableView
 {
     [self.view addSubview:self.tableView];
-}
-
-- (void)addTableHeaderView
-{
-    [self.view addSubview:self.headerView];
+    //使用masonry刷新横竖屏切换布局
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 }
 
 - (void)loadData
@@ -155,27 +153,27 @@
 
 
 #pragma mark - tableView delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    switch (indexPath.section) {
-        case 0:
-        {
-            ForumThread *forumThread = _discussListTopDatas[indexPath.row];
-            return [_tableView cellHeightForIndexPath:indexPath model:forumThread keyPath:@"forumThread" cellClass:[DiscussListTopCell class] contentViewWidth:_tableView.width];
-        }
-            break;
-        case 1:
-        {
-            ForumThread *forumThread = _discussListDatas[indexPath.row];
-            return [_tableView cellHeightForIndexPath:indexPath model:forumThread keyPath:@"forumThread" cellClass:[DiscussListCell class] contentViewWidth:_tableView.width];
-        }
-            break;
-        default:
-            return CGFLOAT_MIN;
-            break;
-    }
-
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    switch (indexPath.section) {
+//        case 0:
+//        {
+//            ForumThread *forumThread = _discussListTopDatas[indexPath.row];
+//            return [_tableView cellHeightForIndexPath:indexPath model:forumThread keyPath:@"forumThread" cellClass:[DiscussListTopCell class] contentViewWidth:_tableView.width];
+//        }
+//            break;
+//        case 1:
+//        {
+//            ForumThread *forumThread = _discussListDatas[indexPath.row];
+//            return [_tableView cellHeightForIndexPath:indexPath model:forumThread keyPath:@"forumThread" cellClass:[DiscussListCell class] contentViewWidth:_tableView.width];
+//        }
+//            break;
+//        default:
+//            return CGFLOAT_MIN;
+//            break;
+//    }
+//
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -190,9 +188,11 @@
 {
     if (!_tableView) {
         UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         tableView.delegate = self;
         tableView.dataSource = self;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.rowHeight = UITableViewAutomaticDimension;
+        tableView.estimatedRowHeight = 100;
         _tableView = tableView;
     }
     return _tableView;
@@ -201,9 +201,7 @@
 - (DiscussListHeaderView *)headerView
 {
     if (!_headerView) {
-        DiscussListHeaderView *headerView = [[DiscussListHeaderView alloc] init];
-        headerView.width = self.tableView.width;
-        headerView.height = 150;
+        DiscussListHeaderView *headerView = [[DiscussListHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 150)];
         _headerView = headerView;
     }
     return _headerView;

@@ -44,7 +44,7 @@
     [self.view addSubview:self.tableNode];
     //使用masonry刷新横竖屏切换布局
     [_tableNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.view);
+        make.edges.equalTo(self.view);
     }];
 }
 

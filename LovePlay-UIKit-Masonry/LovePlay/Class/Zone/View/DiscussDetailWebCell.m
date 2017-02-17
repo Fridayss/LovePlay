@@ -12,6 +12,8 @@
 //UI
 @property (nonatomic, strong) UIWebView *webView;
 //Data
+@property (nonatomic, strong) NSString *htmlBody;
+@property (nonatomic, assign) NSInteger webViewHeight;
 @property (nonatomic, copy) webViewFinishLoadBlock finishLoadBlock;
 @end
 
@@ -38,14 +40,13 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubviews];
-        [self sd_autoLayoutSubViews];
     }
     return self;
 }
 
 - (void)addSubviews
 {
-    UIWebView *webView = [[UIWebView alloc] init];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.width, 1)];
     webView.backgroundColor = [UIColor whiteColor];
     webView.scalesPageToFit = NO;
     webView.delegate = self;
@@ -57,24 +58,30 @@
     _webView = webView;
 }
 
-- (void)setHtmlBody:(NSString *)htmlBody
+- (void)setupHtmlBoby:(NSString *)htmlBody
 {
     _htmlBody = htmlBody;
     [_webView loadHTMLString:htmlBody baseURL:nil];
-}
-
-#pragma mark - layout
-- (void)sd_autoLayoutSubViews
-{
-    _webView.sd_layout.spaceToSuperView(UIEdgeInsetsZero);
 }
 
 #pragma mark - webView delegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     CGFloat webViewHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue] + 10;
+    _webViewHeight = webViewHeight;
+    
     if (_finishLoadBlock) {
         _finishLoadBlock(webViewHeight);
+    }
+}
+
+#pragma mark - layout
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (_webViewHeight > 0) {
+        _webView.height = _webViewHeight;
     }
 }
 
