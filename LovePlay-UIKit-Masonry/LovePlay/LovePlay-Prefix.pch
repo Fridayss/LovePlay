@@ -15,6 +15,6 @@
 #import "UrlConst.h"
 #import "HttpRequest.h"
 #import "Masonry.h"
-#import "SDAutoLayout.h"
+//#import "SDAutoLayout.h"
 
 #endif /* LovePlay_Prefix_pch */

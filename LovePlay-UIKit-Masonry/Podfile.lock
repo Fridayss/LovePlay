@@ -16,7 +16,6 @@ PODS:
     - AFNetworking/NSURLSession
   - JPFPSStatus (0.1)
   - Masonry (1.0.2)
-  - SDAutoLayout (2.1.7)
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
@@ -25,16 +24,14 @@ DEPENDENCIES:
   - AFNetworking
   - JPFPSStatus
   - Masonry
-  - SDAutoLayout
   - YYKit
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   JPFPSStatus: 4467a17488382e4c1700bd9d18c92ae581fd6305
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
-  SDAutoLayout: e9b36d04b8c0b504762a04d76fbbe5108944297a
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 428ac5f7140af4d3463484c53b37c8ed45901549
+PODFILE CHECKSUM: cdf152179407901ea24a3d38927fa8b4befe30b3
 
 COCOAPODS: 1.1.1

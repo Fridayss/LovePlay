@@ -5,5 +5,5 @@ pod 'YYKit'
 pod 'JPFPSStatus'
 pod 'AFNetworking'
 pod 'Masonry'
-pod 'SDAutoLayout'
+#pod 'SDAutoLayout'
 end
