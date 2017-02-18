@@ -29,10 +29,18 @@
         _commentItem = commentItem;
         _floor = floor;
         [self addSubnodes];
+        [self loadData];
         [self mas_autoLayoutSubViews];
     }
     return self;
 }
+
+//- (void)layoutSubviews
+//{
+//    [super layoutSubviews];
+////    NSLog(@"layout-frame -- %@", NSStringFromCGRect(self.frame));
+//    [self mas_autoLayoutSubViews];
+//}
 
 - (void)addSubnodes
 {
@@ -91,6 +99,7 @@
     
     [_underLineNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(0.5);
+        make.top.equalTo(_contentTextNode.mas_bottom).offset(4);
         make.left.bottom.right.equalTo(self);
     }];
 }
