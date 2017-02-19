@@ -6,19 +6,19 @@
 - 为什么又会有ASDK版本以外的版本？
 
 ```
-1. 网易爱玩 是个非常有代表性的项目，不管是模块划分，还是控件布局，中规中矩，没有太多酷炫的功能（精仿酷炫的APP，UI上会浪费太多太多时间和精力，很多情况下这，这都偏离了我们的目的），符合我们日常开发中的大部分情况，实在是练手最佳APP之一！！！
-2. 同时，通过  LovePlayNews 中的API可以看到，网易提供的接口和数据非常清晰，也没有对开发者做过多限制（安全、验证、加密等），不但可以更方便地用于开发，也可以学习大厂API的优点。
-3. 正是基于 网易爱玩 以上特点，极大地节约了对接口理解、模块划分等花费的时间，使我们有更多精力投入到功能开发和学习当中。
-4. 对于 RAC、组件化 等框架或思想层面的学习，有时需要做一个比较完整的项目（也可以说：业务or需求），才能有效提升我们更进一步的理解。
-5. 所以在练习完ASDK项目后，我觉得有必要把自己学习 RAC、组件化 的知识融于项目，再次复习加深理解。
-6. 解析下个人需要 UIKit版 的原因，ASDK毕竟是一个比较重量级的框架，项目对其依赖度较大。在开发 RAC版、组件化版 等版本时，不想造成太多干扰、增加不必要的学习成本，看官各取所需就好。 
+1. 网易爱玩 是个非常有代表性的项目，不管是模块划分，还是控件布局，中规中矩，没有太多酷炫的功能（精仿酷炫的APP，UI上会花费过多时间和精力），符合我们日常开发中的大部分情况，实在是练手最佳APP之一！
+2. 同时，通过 LovePlayNews 中的API可以看到，网易提供的接口和数据非常清晰，也没有对开发者做过多限制（安全、验证、加密等），不但可以更方便地用于开发，也可以学习大厂API的优点。
+3. 正是基于 网易爱玩 以上特点，极大地节约了对接口理解、模块划分等花费的时间，使我们有更多精力投入到功能开发和练习当中。
+4. 对于RAC、组件化等框架或思想层面的学习，有时需要经过一个比较完整的项目（业务or需求），才能更有地效提升我们的理解。
+5. 所以在练习完ASDK项目后，我觉得有必要把自己学习 RAC、组件化 等知识再次融于项目，反复练习以加深理解。
+6. 解析下这里需要 UIKit版 的原因，ASDK毕竟是一个比较重量级的框架，项目对其依赖度较大。在开发 RAC版、组件化版 等版本时，不想因为引入ASDK造成一些干扰，增加不必要的学习成本，读者各取所需就好。 
 ```
 
 ## 建议：
 
-- ~~UIKit-SDAutoLayout版~~**UIKit-Masonry版** 和 **ASDK版** 任意完成一个版本，另一个版本，copy一份代码修改起来是非常快的。如果目标不是学习 **ASDK**，直接基于 **UIKit-Masonry版** 进行其它的练习更好。
+- ~~UIKit-SDAutoLayout版~~**UIKit-Masonry版** 和 **ASDK版** 任意完成一个版本，另一个版本，copy一份代码修改起来是非常快的。如果目标不是学习 **ASDK**，直接基于 **UIKit-Masonry版** 进行练习更好。
 - 当前项目中，我只取了 **LovePlayNews** 部分界面练习，减少练手项目不必要的时间浪费，但又保留了相对的完整性。比如：**精选** 模块中就需要依赖 **资讯** 模块的 **新闻列表和新闻详情**。这是实施 **组件化** 过程中会经常遇到的问题，我们加以练习。
-- 当然，看官也可根据实际情况进行增删。比如：去掉 **社区** 模块。
+- 当然，读者也可根据实际情况进行增删。比如：去掉项目中的 **社区** 模块。
 
 ## 规划：
 
@@ -28,7 +28,7 @@
 
 #### ASDK版：基于Facebook开源的ASyncDisplayKit框架
 
-- SDK：[**AsyncDisplayKit**](https://github.com/facebook/AsyncDisplayKit)
+- ASDK：[**AsyncDisplayKit**](https://github.com/facebook/AsyncDisplayKit)
 - 关于ASDK文章：[新大陆：AsyncDisplayKit](https://segmentfault.com/a/1190000007991853)
 
 #### UIKit-Masonry版：原生控件
@@ -77,6 +77,8 @@ http://casatwy.com
 
 
 
+
+
 ## 2017-02-19 更新：
 
 * 周末两天，使用Masonry重写了 **UIKit-SDAutoLayout版** 中的布局，并补上了 **UIKit-SDAutoLayout版** 未能完成的 **评论+子评论** 布局
@@ -88,7 +90,7 @@ http://casatwy.com
   tableView.estimatedRowHeight = 100;
   ```
 
-  注意点：当存在webView这种异步加载，获取高度后需要返回固定高度的情况。用到的代理方法和处理方式如下：
+  注意点：当cell中存在webView这种异步加载，获取高度后需要返回固定高度的情况。用到的代理方法和处理方式如下：
 
   ```
   #pragma mark - tableView delegate
@@ -107,9 +109,9 @@ http://casatwy.com
 
 * 前两天，才夸了为什么使用SDAutoLayout，主要是轻量、易上手、自动计算cell的高度等，今天就 piapia～ 打脸了
 * 第一个问题是：第一个cell高度显示不全，也有开发者遇到了同样的问题[https://github.com/gsdios/SDAutoLayout/issues/116](https://github.com/gsdios/SDAutoLayout/issues/116)，希望作者有时间解决下，以下是我的问题截图：[SDAutoLayout第一个cell高度显示不全](https://github.com/YunsChou/YsResource/blob/master/SDAutoLayout第一个cell高度显示不全.gif)
-* 还有一个问题是：当评论下还有子评论时（也就是盖楼），这个布局本身就稍微复杂，使用ASDK去实现真的是爽到爆，但用SDAutoLayout感觉不太好实现（项目中的 **UIKit-SDAutoLayout版** 目前都还没有实现），可能是我不懂它的高级用法。当然，子评论的布局也可以用frame自己手写，但（使用SDAutoLayout）父评论中的控件和子评论之间又如何添加和更新约束呢？可能作者提供了方法，我还不会用吧。
-* 既然开始了，就把它做好，SDAutoLayout没办法轻松解决这些问题，我又想要功能和界面得跟ASDK版保持一致，只能使用其他布局框架替换了，还是用回Masonry吧。
-* 拷贝一份 **UIKit-SDAutoLayout版** 代码，当使用Masonry替换SDAutoLayout时（pod引入），报错真是惨不忍睹。没办法，只能同时引入两个布局框架，再使用Masonry一步一步替换。
+* 还有一个问题是：当评论下还有子评论时（也就是盖楼），这个布局本身就稍微复杂，使用ASDK去实现真的是爽到爆，但用SDAutoLayout感觉不太好实现（项目中的 **UIKit-SDAutoLayout版** 目前还没有实现）。当然，子评论的布局也可以用frame手写，但（使用SDAutoLayout）父评论中的控件和子评论之间又如何添加和更新约束呢？可能作者提供了一些方法，匆忙上手的我还没用熟悉吧。
+* 既然开始了，就要把它做好，SDAutoLayout没办法轻松解决以上问题，我又极力想要功能和界面得跟ASDK版保持一致，只能另选布局框架替换，还是用回Masonry吧。
+* 拷贝一份 **UIKit-SDAutoLayout版** 代码修改为 **UIKit-Masonry版**，当使用Masonry替换SDAutoLayout时（pod引入），报错真是惨不忍睹。没办法，只能同时引入两个布局框架，再使用Masonry一步一步替换。
 
 
 
