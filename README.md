@@ -1,20 +1,9 @@
 # LovePlay
-## 2017-02-15 更新：
-
-* 前两天，才夸了为什么使用SDAutoLayout，主要是轻量、易上手、自动计算cell的高度等。今天就 piapia～ 打脸了，第一个cell高度显示不全，也有开发者遇到了同样的问题[https://github.com/gsdios/SDAutoLayout/issues/116](https://github.com/gsdios/SDAutoLayout/issues/116)，希望作者有时间解决下，以下是我的问题截图：[SDAutoLayout第一个cell高度显示不全](https://github.com/YunsChou/YsResource/blob/master/SDAutoLayout第一个cell高度显示不全.gif)
-* 还有一个问题是：当评论下还有子评论时，也就是盖楼，这个布局本身就稍微复杂，使用ASDK去实现真的是爽到爆，但用SDAutoLayout感觉不太好实现（UIKit-SDAutoLayout版目前都还没有实现），可能是我不懂它的高级用法。当然子评论的布局也可以用frame自己手写，但子评论与父评论的控件（使用SDAutoLayout）又如何添加约束和更新呢？可能作者提供了方法，我还不会用吧。
-* 既然SDAutoLayout没办法解决这些问题，我又轻微代码洁癖（功能跟ASDK版保持一致），只能寻找其他布局框架了，还是用回Masonry吧
-* 拷贝一份**UIKit-SDAutoLayout版**代码，当使用Masonry替换SDAutoLayout时（pod引入），报错真是惨不忍睹。没办法，只能同时引入两个布局框架，一步一步替换。
-
-
-
-
-
 ## 背景：
 
-* 为了对APP性能优化，想要学习使用ASyncDisplayKit，这也是最初建立这个项目的源头和动力。
-* 国内对于ASDK进行讲解分析的文章不少，但是真正用于项目，或比较完整的开源项目还是不多。于是在网上四处寻觅，终于找到了 [**LovePlayNews**](https://github.com/12207480/LovePlayNews)，作者是个牛人，精仿 **网易爱玩** APP，项目结构清晰，用于学习是个非常不错的选择。
-* 为什么又会有ASDK版本以外的版本？
+- 为了对APP性能优化，想要学习使用ASyncDisplayKit，这也是最初建立这个项目的源头和动力。
+- 国内对于ASDK进行讲解分析的文章不少，但是真正用于项目，或比较完整的开源项目还是不多。于是在网上四处寻觅，终于找到了 [**LovePlayNews**](https://github.com/12207480/LovePlayNews)，作者是个牛人，精仿 **网易爱玩** APP，项目结构清晰，用于学习是个非常不错的选择。
+- 为什么又会有ASDK版本以外的版本？
 
 ```
 1. 网易爱玩 是个非常有代表性的项目，不管是模块划分，还是控件布局，中规中矩，没有太多酷炫的功能（精仿酷炫的APP，UI上会浪费太多太多时间和精力，很多情况下这，这都偏离了我们的目的），符合我们日常开发中的大部分情况，实在是练手最佳APP之一！！！
@@ -27,42 +16,42 @@
 
 ## 建议：
 
-* ~~UIKit-SDAutoLayout版~~**UIKit-Masonry版** 和 **ASDK版** 任意完成一个版本，另一个版本，copy一份代码修改起来是非常快的。如果目标不是学习 **ASDK**，直接基于 **UIKit-Masonry版** 进行其它的练习更好。
-* 当前项目中，我只取了 **LovePlayNews** 部分界面练习，减少练手项目不必要的时间浪费，但又保留了相对的完整性。比如：**精选** 模块中就需要依赖 **资讯** 模块的 **新闻列表和新闻详情**。这是实施 **组件化** 过程中会经常遇到的问题，我们加以练习。
-* 当然，看官也可根据实际情况进行增删。比如：去掉 **社区** 模块。
+- ~~UIKit-SDAutoLayout版~~**UIKit-Masonry版** 和 **ASDK版** 任意完成一个版本，另一个版本，copy一份代码修改起来是非常快的。如果目标不是学习 **ASDK**，直接基于 **UIKit-Masonry版** 进行其它的练习更好。
+- 当前项目中，我只取了 **LovePlayNews** 部分界面练习，减少练手项目不必要的时间浪费，但又保留了相对的完整性。比如：**精选** 模块中就需要依赖 **资讯** 模块的 **新闻列表和新闻详情**。这是实施 **组件化** 过程中会经常遇到的问题，我们加以练习。
+- 当然，看官也可根据实际情况进行增删。比如：去掉 **社区** 模块。
 
 ## 规划：
 
 该项目是在工作之余进行，所以更新不定期，但会尽量抓紧时间完成。
 
-将会有如下几个（OC）版本：
+将会有如下几个（OC）版本：支持iOS8+
 
 #### ASDK版：基于Facebook开源的ASyncDisplayKit框架
 
-* SDK：[**AsyncDisplayKit**](https://github.com/facebook/AsyncDisplayKit)
-* 关于ASDK文章：[新大陆：AsyncDisplayKit](https://segmentfault.com/a/1190000007991853)
+- SDK：[**AsyncDisplayKit**](https://github.com/facebook/AsyncDisplayKit)
+- 关于ASDK文章：[新大陆：AsyncDisplayKit](https://segmentfault.com/a/1190000007991853)
 
 #### UIKit-Masonry版：原生控件
 
 - 自动布局： [**Masonry**](https://github.com/SnapKit/Masonry/issues)
 
-#### UIKit-SDAutoLayout版：原生控件~~
+#### ~~UIKit-SDAutoLayout版：原生控件~~
 
-* ~~自动布局： [**SDAutoLayout**](https://github.com/gsdios/SDAutoLayout)~~
+- ~~自动布局： [**SDAutoLayout**](https://github.com/gsdios/SDAutoLayout)~~
 
 
-* ~~为什么选择 **SDAutoLayout** ？~~
+- ~~为什么选择 **SDAutoLayout** ？~~
 
 1. ~~因为其他自动布局框架解决cell自适应高度过于麻烦（比如：Masonry + UITableView-FDTemplateLayoutCell），尤其是在尝到 ASDK 布局带来的便利后，让我转向了一直关注但没有机会使用的 SDAutoLayout，实际使用过程中，SDAutoLayout 的语法使用易读、易懂、易维护、易上手，提供了非常简单（一句话）的方法，解决cell自适应高度问题。~~
 2. ~~轻量级，对比masonry真的是非常非常轻量级。我选择第三方库的要求：能解决问题 + 易用、易维护 + 轻量级，功能如此强大却如此简洁，完全满足了我对第三方库的所有幻想。~~
 
-#### RAC版：使用 [**ReactiveCocoa**](https://github.com/ReactiveCocoa/ReactiveCocoa) 
+#### RAC版：使用 [**ReactiveCocoa**](https://github.com/ReactiveCocoa/ReactiveCocoa)
 
-* RAC V2.5：[V2.5](https://github.com/ReactiveCocoa/ReactiveCocoa/releases/tag/v2.5)
+- RAC V2.5：[V2.5](https://github.com/ReactiveCocoa/ReactiveCocoa/releases/tag/v2.5)
 
 #### 组件化版：基于casa大神的组件化方案
 
-* casa大神组件化方案文章：[iOS应用架构谈 组件化方案](http://casatwy.com/iOS-Modulization.html) + [在现有工程中实施基于CTMediator的组件化方案](http://casatwy.com/modulization_in_action.html)
+- casa大神组件化方案文章：[iOS应用架构谈 组件化方案](http://casatwy.com/iOS-Modulization.html) + [在现有工程中实施基于CTMediator的组件化方案](http://casatwy.com/modulization_in_action.html)
 
 #### …...
 
@@ -83,3 +72,45 @@
 [**ReactiveCocoa**](https://github.com/ReactiveCocoa/ReactiveCocoa)
 
 http://casatwy.com
+
+---
+
+
+
+## 2017-02-19 更新：
+
+* 周末两天，使用Masonry重写了 **UIKit-SDAutoLayout版** 中的布局，并补上了 **UIKit-SDAutoLayout版** 未能完成的 **评论+子评论** 布局
+
+* 使用Masonry重写布局并没有花多少时间，比预计的时间要少，尤其是cell高度计算这部分的代码，这完全得归功于 iOS8+ 对cell动态高度的处理（前提是你必须正确地设置好约束）
+
+  ```
+  tableView.rowHeight = UITableViewAutomaticDimension;
+  tableView.estimatedRowHeight = 100;
+  ```
+
+  注意点：当存在webView这种异步加载，获取高度后需要返回固定高度的情况。用到的代理方法和处理方式如下：
+
+  ```
+  #pragma mark - tableView delegate
+  - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+  {
+      if (indexPath.row == 0) {
+          return _webViewHeight;
+      }
+      return UITableViewAutomaticDimension;
+  }
+  ```
+
+  ​
+
+## 2017-02-15 更新：
+
+* 前两天，才夸了为什么使用SDAutoLayout，主要是轻量、易上手、自动计算cell的高度等，今天就 piapia～ 打脸了
+* 第一个问题是：第一个cell高度显示不全，也有开发者遇到了同样的问题[https://github.com/gsdios/SDAutoLayout/issues/116](https://github.com/gsdios/SDAutoLayout/issues/116)，希望作者有时间解决下，以下是我的问题截图：[SDAutoLayout第一个cell高度显示不全](https://github.com/YunsChou/YsResource/blob/master/SDAutoLayout第一个cell高度显示不全.gif)
+* 还有一个问题是：当评论下还有子评论时（也就是盖楼），这个布局本身就稍微复杂，使用ASDK去实现真的是爽到爆，但用SDAutoLayout感觉不太好实现（项目中的 **UIKit-SDAutoLayout版** 目前都还没有实现），可能是我不懂它的高级用法。当然，子评论的布局也可以用frame自己手写，但（使用SDAutoLayout）父评论中的控件和子评论之间又如何添加和更新约束呢？可能作者提供了方法，我还不会用吧。
+* 既然开始了，就把它做好，SDAutoLayout没办法轻松解决这些问题，我又想要功能和界面得跟ASDK版保持一致，只能使用其他布局框架替换了，还是用回Masonry吧。
+* 拷贝一份 **UIKit-SDAutoLayout版** 代码，当使用Masonry替换SDAutoLayout时（pod引入），报错真是惨不忍睹。没办法，只能同时引入两个布局框架，再使用Masonry一步一步替换。
+
+
+
+
