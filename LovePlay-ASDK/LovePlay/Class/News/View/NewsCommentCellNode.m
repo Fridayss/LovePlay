@@ -43,6 +43,7 @@
 {
     self = [super init];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _commentItemsDict = commentItems;
         _commentIdsArray = commmentIds;
         _commentItem = commentItems[commmentIds.lastObject];
@@ -102,24 +103,33 @@
 #pragma mark - layout
 - (ASLayoutSpec *)layoutSpecThatFits:(ASSizeRange)constrainedSize
 {
-    _imageNode.style.preferredSize = CGSizeMake(40, 40);
+    CGFloat imageWH = 40;
+    CGFloat imageToNameMargin = 5;
+    _imageNode.style.preferredSize = CGSizeMake(imageWH, imageWH);
     _voteBtnNode.style.preferredSize = CGSizeMake(50, 20);
     _underLineNode.style.preferredSize = CGSizeMake(constrainedSize.max.width, 0.5);
     
-    ASStackLayoutSpec *verTopLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:2 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[_nameTextNode, _loctionTextNode]];
+    //顶部（用户）信息布局
+    ASStackLayoutSpec *verUserLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:2 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStart children:@[_nameTextNode, _loctionTextNode]];
     
-    ASStackLayoutSpec *horTopLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStart children:@[verTopLayout, _voteBtnNode]];
-    horTopLayout.style.flexGrow = YES;
+    ASStackLayoutSpec *horUserLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:10 justifyContent:ASStackLayoutJustifyContentSpaceBetween alignItems:ASStackLayoutAlignItemsStretch children:@[verUserLayout, _voteBtnNode]];
+    horUserLayout.style.flexGrow = YES;
     
-    NSArray *contentNodeArray = _commentIdsArray.count > 1 ? @[horTopLayout, _commentReplyAreaNode, _contentTextNode] : @[horTopLayout, _contentTextNode];
+    ASStackLayoutSpec *horTopLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:imageToNameMargin justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[_imageNode, horUserLayout]];
     
-    ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:contentNodeArray];
+    //评论模块布局
+    NSArray *commentNodeArray = _commentIdsArray.count > 1 ? @[_commentReplyAreaNode, _contentTextNode] : @[_contentTextNode];
+    
+    ASStackLayoutSpec *verCommentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:commentNodeArray];
+    
+    ASInsetLayoutSpec *insetCommentLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(0, imageWH + imageToNameMargin, 0, 0) child:verCommentLayout];
+    
+    //整体内容布局
+    ASStackLayoutSpec *verContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:10 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[horTopLayout, insetCommentLayout]];
     verContentLayout.style.flexGrow = YES;//等分多余的空间
     verContentLayout.style.flexShrink = YES;//空间（宽度）不够，等比例缩小（触发换行）
     
-    ASStackLayoutSpec *horContentLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionHorizontal spacing:5 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStart children:@[_imageNode, verContentLayout]];
-    
-    ASInsetLayoutSpec *insetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:horContentLayout];
+    ASInsetLayoutSpec *insetLayout = [ASInsetLayoutSpec insetLayoutSpecWithInsets:UIEdgeInsetsMake(10, 10, 10, 10) child:verContentLayout];
     
     ASStackLayoutSpec *verUnderLineLayout = [ASStackLayoutSpec stackLayoutSpecWithDirection:ASStackLayoutDirectionVertical spacing:0 justifyContent:ASStackLayoutJustifyContentStart alignItems:ASStackLayoutAlignItemsStretch children:@[insetLayout, _underLineNode]];
     

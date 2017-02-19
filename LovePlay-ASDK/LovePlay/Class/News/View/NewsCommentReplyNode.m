@@ -60,7 +60,7 @@
     NSDictionary *nameAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12], NSForegroundColorAttributeName: RGB(138, 138, 138)};
     _nameTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@", _commentItem.user.nickname ? _commentItem.user.nickname : @"火星网友", _commentItem.user.location ? _commentItem.user.location : @"火星"] attributes:nameAttribute];
     NSDictionary *floorAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12], NSForegroundColorAttributeName: RGB(64, 64, 64)};
-    _floorTextNode.attributedText = [[NSAttributedString alloc] initWithString:@(_floor).stringValue attributes:floorAttribute];
+    _floorTextNode.attributedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@#", @(_floor).stringValue] attributes:floorAttribute];
 
     NSDictionary *contentAttribute = @{NSFontAttributeName: [UIFont systemFontOfSize:14], NSForegroundColorAttributeName: RGB(50, 50, 50)};
     _contentTextNode.attributedText = [[NSAttributedString alloc] initWithString:_commentItem.content ? _commentItem.content : @"NULL" attributes:contentAttribute];

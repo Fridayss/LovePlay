@@ -35,13 +35,6 @@
     return self;
 }
 
-//- (void)layoutSubviews
-//{
-//    [super layoutSubviews];
-////    NSLog(@"layout-frame -- %@", NSStringFromCGRect(self.frame));
-//    [self mas_autoLayoutSubViews];
-//}
-
 - (void)addSubnodes
 {
     UILabel *nameTextNode = [[UILabel alloc] init];

@@ -105,10 +105,21 @@
     [_voteBtnNode setTitle:[NSString stringWithFormat:@"%@顶",@(_commentItem.vote)] forState:UIControlStateNormal];
     _contentTextNode.text = _commentItem.content;
     
+    //根据是否有子评论，修改布局
+    if (_commentIdsArray.count > 1) {
+        [_contentTextNode mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_commentReplyAreaNode.mas_bottom).offset(10);
+            make.left.equalTo(_nameTextNode);
+            make.right.equalTo(_voteBtnNode);
+        }];
+    }else{
+        [_contentTextNode mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_imageNode.mas_bottom).offset(10);
+            make.left.equalTo(_nameTextNode);
+            make.right.equalTo(_voteBtnNode);
+        }];
+    }
     [_commentReplyAreaNode setupCommentItems:_commentItemsDict floors:_commentIdsArray];
-    
-//    [self setNeedsLayout];
-    
 }
 
 #pragma mark - layout
@@ -140,7 +151,6 @@
     }];
     
     [_commentReplyAreaNode mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.height.mas_equalTo(100);
         make.top.equalTo(_imageNode.mas_bottom).offset(10);
         make.left.equalTo(_nameTextNode);
         make.right.equalTo(_voteBtnNode);
