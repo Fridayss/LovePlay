@@ -11,6 +11,7 @@
 
 @interface NewsNormalCellNode : ASCellNode
 
+#pragma mark - interface
 - (instancetype)initWithListInfoModel:(NewsListInfoModel *)listInfoModel;
 
 

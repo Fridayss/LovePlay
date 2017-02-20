@@ -26,6 +26,16 @@
 
 @implementation NewsListViewController
 
+#pragma mark - life cycle
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self addTableNode];
+    [self loadData];
+}
+
+#pragma mark - init
 - (instancetype)init
 {
     self = [super init];
@@ -33,14 +43,6 @@
         [self initParams];
     }
     return self;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self addTableNode];
-    [self loadData];
 }
 
 - (void)initParams
@@ -75,7 +77,7 @@
     }];
 }
 
-#pragma mark - tableView datasource
+#pragma mark - tableView dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _newsListDatas.count;
@@ -86,14 +88,14 @@
     NewsListInfoModel *listInfoModel = _newsListDatas[indexPath.row];
     if (_sourceType == 0) {
         NewsImageTitleCellNode *cellNode = [NewsImageTitleCellNode cellWithTableView:tableView];
-        cellNode.listInfoModel = listInfoModel;
+        [cellNode setupListInfoModel:listInfoModel];
         return cellNode;
     }else{
         switch (listInfoModel.showType) {
             case 2:
             {
                 NewsTitleImageCellNode *cellNode = [NewsTitleImageCellNode cellWithTableView:tableView];
-                cellNode.listInfoModel = listInfoModel;
+                [cellNode setupListInfoModel:listInfoModel];
                 return cellNode;
             }
                 break;
@@ -101,7 +103,7 @@
             default:
             {
                 NewsNormalCellNode *cellNode = [NewsNormalCellNode cellWithTableView:tableView];
-                cellNode.listInfoModel = listInfoModel;
+                [cellNode setupListInfoModel:listInfoModel];
                 return cellNode;
             }
                 break;
@@ -135,6 +137,7 @@
     return _tableNode;
 }
 
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

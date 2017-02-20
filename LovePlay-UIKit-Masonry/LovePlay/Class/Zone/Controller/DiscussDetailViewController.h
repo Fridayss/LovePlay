@@ -10,6 +10,7 @@
 
 @interface DiscussDetailViewController : UIViewController
 
+#pragma mark - params
 @property (nonatomic, copy) NSString *tid;
 
 @end

@@ -7,13 +7,17 @@
 //
 
 #import "NewsDetailViewController.h"
+//M
 #import "NewsDetailModel.h"
+//V
 #import "NewsDetailWebCellNode.h"
 #import "NewsRelativeCellNode.h"
 #import "NewsCommentCellNode.h"
 #import "NewsDetailSectionTitleHeaderView.h"
 #import "NewsDetailSectionCommentFooterView.h"
+//C
 #import "NewsCommentViewController.h"
+#import "NewsDetailViewController.h"
 
 @interface NewsDetailViewController ()<ASTableDelegate, ASTableDataSource>
 //UI
@@ -24,6 +28,20 @@
 
 @implementation NewsDetailViewController
 
+#pragma mark - life cycle
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    _tableNode.frame = self.node.bounds;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = RGB(245, 245, 245);
+    [self loadData];
+}
+
+#pragma mark - init
 - (instancetype)init
 {
     self = [super initWithNode:[ASDisplayNode new]];
@@ -35,25 +53,7 @@
 
 - (void)addTableNode
 {
-    ASTableNode *tableNode = [[ASTableNode alloc] initWithStyle:UITableViewStyleGrouped];
-    tableNode.backgroundColor = [UIColor whiteColor];
-    tableNode.delegate = self;
-    tableNode.dataSource = self;
-    tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.node addSubnode:tableNode];
-    _tableNode = tableNode;
-}
-
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    _tableNode.frame = self.node.bounds;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor = RGB(245, 245, 245);
-    [self loadData];
+    [self.node addSubnode:self.tableNode];
 }
 
 - (void)loadData
@@ -127,6 +127,17 @@
 }
 
 #pragma mark - tableView delegate
+- (void)tableNode:(ASTableNode *)tableNode didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        NewsRelativeInfo *relativeInfo = _detailModel.article.relative_sys[indexPath.row];
+        NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] init];
+        detailViewController.newsID = relativeInfo.docID;
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+}
+
+#pragma mark + header and footer
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NewsDetailSectionTitleHeaderView *headerView = [NewsDetailSectionTitleHeaderView sectionHeaderWithTableView:tableView];
@@ -138,7 +149,6 @@
             }else{
                 return nil;
             }
-           
         }
             break;
         case 2:
@@ -208,6 +218,22 @@
     return CGFLOAT_MIN;
 }
 
+#pragma mark - setter / getter
+- (ASTableNode *)tableNode
+{
+    if (!_tableNode) {
+        ASTableNode *tableNode = [[ASTableNode alloc] initWithStyle:UITableViewStyleGrouped];
+        tableNode.backgroundColor = [UIColor whiteColor];
+        tableNode.delegate = self;
+        tableNode.dataSource = self;
+        tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+        _tableNode = tableNode;
+    }
+    return _tableNode;
+}
+
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

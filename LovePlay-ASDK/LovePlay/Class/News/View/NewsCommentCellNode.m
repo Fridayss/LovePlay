@@ -56,6 +56,7 @@
 - (void)addSubnodes
 {
     ASNetworkImageNode *imageNode = [[ASNetworkImageNode alloc] init];
+    imageNode.defaultImage = [UIImage imageNamed:@"defult_pho"];
     [self addSubnode:imageNode];
     _imageNode = imageNode;
     

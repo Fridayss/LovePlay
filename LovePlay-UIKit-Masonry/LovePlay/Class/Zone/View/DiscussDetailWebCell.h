@@ -12,6 +12,7 @@ typedef void (^webViewFinishLoadBlock)(CGFloat webViewHeight);
 
 @interface DiscussDetailWebCell : UITableViewCell
 
+#pragma mark - interface
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 - (void)setupHtmlBoby:(NSString *)htmlBody;

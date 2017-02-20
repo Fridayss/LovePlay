@@ -11,6 +11,7 @@
 @class DiscuzPost;
 @interface DiscussDetailPostCell : ASCellNode
 
+#pragma mark - interface
 - (instancetype)initWithPost:(DiscuzPost *)post floor:(NSInteger)floor;
 
 @end

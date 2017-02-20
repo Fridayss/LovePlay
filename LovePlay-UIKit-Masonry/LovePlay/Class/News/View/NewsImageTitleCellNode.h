@@ -12,8 +12,8 @@
 
 @interface NewsImageTitleCellNode : UITableViewCell
 
-@property (nonatomic, strong) NewsListInfoModel *listInfoModel;
-
+#pragma mark - interface
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
+- (void)setupListInfoModel:(NewsListInfoModel *)listInfoModel;
 @end

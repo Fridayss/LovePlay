@@ -15,7 +15,8 @@
 @property (nonatomic, strong) UILabel *titleTextNode;
 @property (nonatomic, strong) UIButton *replyBtnNode;
 @property (nonatomic, strong) UIView *underLineNode;
-
+//Data
+@property (nonatomic, strong) NewsListInfoModel *listInfoModel;
 @end
 
 @implementation NewsNormalCellNode
@@ -74,7 +75,7 @@
     _underLineNode = underLineNode;
 }
 
-- (void)setListInfoModel:(NewsListInfoModel *)listInfoModel
+- (void)setupListInfoModel:(NewsListInfoModel *)listInfoModel
 {
     _listInfoModel = listInfoModel;
     _imageNode.imageURL = [NSURL URLWithString:listInfoModel.imgsrc.firstObject];

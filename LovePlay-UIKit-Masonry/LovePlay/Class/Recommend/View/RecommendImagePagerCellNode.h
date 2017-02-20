@@ -14,6 +14,7 @@ typedef void (^imagePagerSelectedBlock)(RecommendImageInfoModel *imageInfoModel)
 
 @interface RecommendImagePagerCellNode : UICollectionViewCell
 
+#pragma mark - interface
 - (void)setupImageInfoDatas:(NSArray *)imageInfoDatas;
 
 - (void)recommendImagePagerSelectedBlock:(imagePagerSelectedBlock)selectedBlock;

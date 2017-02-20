@@ -12,6 +12,7 @@
 
 @interface RecommendTopicCellNode : UICollectionViewCell
 
+#pragma mark - interface
 - (void)setupTopicModel:(RecommendTopicModel *)topicModel;
 
 @end

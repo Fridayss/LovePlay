@@ -10,10 +10,12 @@
 #import "NewsListInfoModel.h"
 
 @interface NewsTitleImageCellNode ()
-@property (nonatomic, strong) NewsListInfoModel *listInfoModel;
+//UI
 @property (nonatomic, strong) ASTextNode *titleTextNode;
 @property (nonatomic, strong) ASNetworkImageNode *imageNode;
 @property (nonatomic, strong) ASDisplayNode *underLineNode;
+//Data
+@property (nonatomic, strong) NewsListInfoModel *listInfoModel;
 @end
 
 @implementation NewsTitleImageCellNode

@@ -11,6 +11,7 @@
 @class ZoneDiscussItem;
 @interface ZoneListCell : UICollectionViewCell
 
-@property (nonatomic, strong) ZoneDiscussItem *discussItem;
+#pragma mark - interface
+- (void)setupDiscussItem:(ZoneDiscussItem *)discussItem;
 
 @end

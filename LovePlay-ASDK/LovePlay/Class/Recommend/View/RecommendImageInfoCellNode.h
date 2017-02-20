@@ -11,6 +11,7 @@
 
 @interface RecommendImageInfoCellNode : ASCellNode
 
+#pragma mark - interface
 - (instancetype)initWithImageInfoModel:(RecommendImageInfoModel *)imageInfoModel;
 
 @end

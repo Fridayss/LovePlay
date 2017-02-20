@@ -11,6 +11,7 @@
 @class NewsCommentItem;
 @interface NewsCommentReplyNode : ASDisplayNode
 
+#pragma mark - interface
 - (instancetype)initWithcommentItem:(NewsCommentItem *)commentItem floor:(NSInteger)floor;
 
 @end

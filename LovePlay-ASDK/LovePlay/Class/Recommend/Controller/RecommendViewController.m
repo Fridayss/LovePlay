@@ -27,24 +27,17 @@
 
 @implementation RecommendViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addCollectionNode];
     [self loadData];
-    
 }
 
+#pragma mark - init
 - (void)addCollectionNode
 {
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    ASCollectionNode *collectionNode = [[ASCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
-    collectionNode.backgroundColor = [UIColor whiteColor];
-    collectionNode.delegate = self;
-    collectionNode.dataSource = self;
-    collectionNode.frame = self.view.bounds;
-    [collectionNode registerSupplementaryNodeOfKind:UICollectionElementKindSectionFooter];
-    [self.view addSubnode:collectionNode];
-    _collectionNode = collectionNode;
+    [self.view addSubnode:self.collectionNode];
 }
 
 - (void)loadData
@@ -61,7 +54,6 @@
     } failure:^(NSError *error) {
         NSLog(@"error -- %@", error);
     }];
-
 }
 
 - (void)loadImageInfoData
@@ -74,7 +66,7 @@
     }];
 }
 
-#pragma mark - collection datasource
+#pragma mark - collection dataSource
 - (NSInteger)numberOfSectionsInCollectionNode:(ASCollectionNode *)collectionNode
 {
     return 2;
@@ -228,6 +220,24 @@
     return CGSizeZero;
 }
 
+#pragma mark - setter / getter
+- (ASCollectionNode *)collectionNode
+{
+    if (!_collectionNode) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        ASCollectionNode *collectionNode = [[ASCollectionNode alloc] initWithCollectionViewLayout:flowLayout];
+        collectionNode.backgroundColor = [UIColor whiteColor];
+        collectionNode.delegate = self;
+        collectionNode.dataSource = self;
+        collectionNode.frame = self.view.bounds;
+        [collectionNode registerSupplementaryNodeOfKind:UICollectionElementKindSectionFooter];
+
+        _collectionNode = collectionNode;
+    }
+    return _collectionNode;
+}
+
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -11,6 +11,7 @@
 @class DiscussImageModel;
 @interface DiscussListHeaderView : ASDisplayNode
 
+#pragma mark - params
 @property (nonatomic, strong) DiscussImageModel *imageModel;
 
 @end

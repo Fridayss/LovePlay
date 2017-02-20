@@ -32,6 +32,7 @@ static NSString * const imageCell = @"imageCell";
 static NSString * const topicCell = @"topicCell";
 static NSString * const footerSection = @"footerSection";
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -41,6 +42,7 @@ static NSString * const footerSection = @"footerSection";
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeRotate:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
 }
 
+#pragma mark - init
 - (void)addCollectionNode
 {
     [self.view addSubview:self.collectionNode];
@@ -78,7 +80,7 @@ static NSString * const footerSection = @"footerSection";
     }];
 }
 
-#pragma mark - collection datasource
+#pragma mark - collection dataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 2;
@@ -252,6 +254,7 @@ static NSString * const footerSection = @"footerSection";
     return _collectionNode;
 }
 
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

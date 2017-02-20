@@ -7,7 +7,9 @@
 //
 
 #import "NewsCommentViewController.h"
+//M
 #import "NewsCommentModel.h"
+//V
 #import "NewsCommentCellNode.h"
 #import "NewsDetailSectionTitleHeaderView.h"
 
@@ -23,6 +25,7 @@
 
 @implementation NewsCommentViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -31,12 +34,12 @@
     [self loadData];
 }
 
+#pragma mark - init
 - (void)initParams
 {
     _pageIndex = 0;
     _pageSize = 10;
 }
-
 
 - (void)addTableNode
 {
@@ -105,17 +108,6 @@
 }
 
 #pragma mark - tableView delegate
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return [_tableNode cellHeightForIndexPath:indexPath cellClass:[NewsCommentCellNode class] cellContentViewWidth:_tableNode.width cellDataSetting:^(UITableViewCell *cell) {
-//        if (0 == indexPath.section) {
-//            [(NewsCommentCellNode *)cell setupCommentItems:_hotComments.comments commmentIds:_hotComments.commentIds[indexPath.row]];
-//        }else{
-//            [(NewsCommentCellNode *)cell setupCommentItems:_latestComments.comments commmentIds:_latestComments.commentIds[indexPath.row]];
-//        }
-//    }];
-//}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NewsDetailSectionTitleHeaderView *headerView = [NewsDetailSectionTitleHeaderView sectionHeaderWithTableView:tableView];
@@ -197,6 +189,7 @@
     return _tableNode;
 }
 
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

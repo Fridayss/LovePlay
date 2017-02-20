@@ -10,9 +10,11 @@
 #import "RecommendTopicModel.h"
 
 @interface RecommendTopicCellNode ()
-@property (nonatomic, strong) RecommendTopicModel *topicModel;
+//UI
 @property (nonatomic, strong) UIImageView *imageNode;
 @property (nonatomic, strong) UILabel *titleTextNode;
+//Data
+@property (nonatomic, strong) RecommendTopicModel *topicModel;
 @end
 
 @implementation RecommendTopicCellNode

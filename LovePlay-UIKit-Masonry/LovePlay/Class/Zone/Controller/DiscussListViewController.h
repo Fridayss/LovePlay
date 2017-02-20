@@ -10,6 +10,7 @@
 
 @interface DiscussListViewController : UIViewController
 
+#pragma mark - params
 @property (nonatomic, copy) NSString *fid;
 
 @end

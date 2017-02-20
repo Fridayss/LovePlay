@@ -10,9 +10,12 @@
 #import "DiscussListModel.h"
 
 @interface DiscussListTopCell ()
+//UI
 @property (nonatomic, strong) UILabel *topTextNode;
 @property (nonatomic, strong) UILabel *titleTextNode;
 @property (nonatomic, strong) UIView *underLineNode;
+//Data
+@property (nonatomic, strong) ForumThread *forumThread;
 @end
 
 @implementation DiscussListTopCell
@@ -65,7 +68,7 @@
 
 }
 
-- (void)setForumThread:(ForumThread *)forumThread
+- (void)setupForumThread:(ForumThread *)forumThread
 {
     _forumThread = forumThread;
     _titleTextNode.text = forumThread.subject;

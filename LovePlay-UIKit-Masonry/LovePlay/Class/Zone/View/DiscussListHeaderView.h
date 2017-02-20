@@ -11,6 +11,7 @@
 @class DiscussImageModel;
 @interface DiscussListHeaderView : UIView
 
-@property (nonatomic, strong) DiscussImageModel *imageModel;
+#pragma mark - interface
+- (void)setupImageModel:(DiscussImageModel *)imageModel;
 
 @end

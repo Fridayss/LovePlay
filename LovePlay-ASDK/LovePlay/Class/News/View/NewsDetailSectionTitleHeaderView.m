@@ -10,6 +10,7 @@
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 
 @interface NewsDetailSectionTitleHeaderView ()
+//UI
 @property (nonatomic, strong) UIView *leftLineView;
 @property (nonatomic, strong) UILabel *titleTextLabel;
 @end
@@ -64,6 +65,7 @@
     _titleTextLabel.text = title;
 }
 
+#pragma mark - layout
 - (void)layoutSubviews
 {
     [super layoutSubviews];

@@ -11,6 +11,7 @@
 @class ForumThread;
 @interface DiscussListTopCell : ASCellNode
 
+#pragma mark - interface
 - (instancetype)initWithForumThread:(ForumThread *)forumThread;
 
 @end

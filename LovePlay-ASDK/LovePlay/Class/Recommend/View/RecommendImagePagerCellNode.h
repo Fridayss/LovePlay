@@ -14,6 +14,7 @@ typedef void (^imagePagerSelectedBlock)(RecommendImageInfoModel *imageInfoModel)
 
 @interface RecommendImagePagerCellNode : ASCellNode
 
+#pragma mark - interface
 - (instancetype)initWithImageInfoDatas:(NSArray *)imageInfoDatas;
 
 - (void)recommendImagePagerSelectedBlock:(imagePagerSelectedBlock)selectedBlock;

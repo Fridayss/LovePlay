@@ -12,6 +12,7 @@ typedef void (^webViewFinishLoadBlock)(CGFloat webViewHeight);
 
 @interface DiscussDetailWebCell : ASCellNode
 
+#pragma mark - interface
 - (instancetype)initWithHtmlBody:(NSString *)htmlBody;
 
 - (void)webViewDidFinishLoadBlock:(webViewFinishLoadBlock)finishLoadBlock;

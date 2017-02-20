@@ -10,6 +10,7 @@
 
 @interface ZoneListHeaderView : UICollectionReusableView
 
+#pragma mark - params
 @property (nonatomic, copy) NSString *titleName;
 
 @end

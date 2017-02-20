@@ -10,8 +10,10 @@
 
 @interface NewsDetailSectionTitleHeaderView : UITableViewHeaderFooterView
 
+#pragma mark - params
 @property (nonatomic, copy) NSString *title;
 
+#pragma mark - interface
 + (instancetype)sectionHeaderWithTableView:(UITableView *)tableView;
 
 @end

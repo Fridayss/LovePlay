@@ -11,6 +11,7 @@
 @class NewsRelativeInfo;
 @interface NewsRelativeCellNode : UITableViewCell
 
+#pragma mark - interface
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 - (void)setupRelativeInfo:(NewsRelativeInfo *)relativeInfo;

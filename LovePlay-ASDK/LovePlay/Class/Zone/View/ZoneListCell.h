@@ -11,6 +11,7 @@
 @class ZoneDiscussItem;
 @interface ZoneListCell : UICollectionViewCell
 
+#pragma mark - params
 @property (nonatomic, strong) ZoneDiscussItem *discussItem;
 
 @end

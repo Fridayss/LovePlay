@@ -7,6 +7,7 @@
 //
 
 #import "RecommendGameViewController.h"
+//C
 #import "NewsListViewController.h"
 
 @interface RecommendGameViewController ()
@@ -15,12 +16,14 @@
 
 @implementation RecommendGameViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self addNewsListController];
 }
 
+#pragma mark - init
 - (void)addNewsListController
 {
     NewsListViewController *listViewController = [[NewsListViewController alloc] init];
@@ -30,6 +33,7 @@
     [self.view addSubview:listViewController.view];
 }
 
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

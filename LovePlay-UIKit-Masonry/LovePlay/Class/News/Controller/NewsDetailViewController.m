@@ -7,13 +7,17 @@
 //
 
 #import "NewsDetailViewController.h"
+//M
 #import "NewsDetailModel.h"
+//V
 #import "NewsDetailWebCellNode.h"
 #import "NewsRelativeCellNode.h"
 #import "NewsCommentCellNode.h"
 #import "NewsDetailSectionTitleHeaderView.h"
 #import "NewsDetailSectionCommentFooterView.h"
+//C
 #import "NewsCommentViewController.h"
+#import "NewsDetailViewController.h"
 
 @interface NewsDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 //UI
@@ -25,6 +29,7 @@
 
 @implementation NewsDetailViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = RGB(245, 245, 245);
@@ -33,6 +38,7 @@
     [self loadData];
 }
 
+#pragma mark - init
 - (void)initParams
 {
     _webViewHeight = 0;
@@ -126,6 +132,17 @@
 }
 
 #pragma mark - tableView delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        NewsRelativeInfo *relativeInfo = _detailModel.article.relative_sys[indexPath.row];
+        NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] init];
+        detailViewController.newsID = relativeInfo.docID;
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+}
+
+#pragma mark + header and footer
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {

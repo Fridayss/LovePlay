@@ -9,7 +9,9 @@
 #import "NewsDetailSectionCommentFooterView.h"
 
 @interface NewsDetailSectionCommentFooterView ()
+//UI
 @property (nonatomic, strong) UILabel *titleTextLabel;
+//Data
 @property (nonatomic, copy) commentFooterTouchBlock touchBlock;
 @end
 
@@ -64,6 +66,7 @@
     }
 }
 
+#pragma mark - layout
 - (void)layoutSubviews
 {
     [super layoutSubviews];

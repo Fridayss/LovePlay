@@ -7,9 +7,12 @@
 //
 
 #import "ZoneListViewController.h"
+//M
 #import "ZoneListModel.h"
+//V
 #import "ZoneListCell.h"
 #import "ZoneListHeaderView.h"
+//C
 #import "DiscussListViewController.h"
 
 static NSString *zoneListCell = @"zoneListCell";
@@ -24,6 +27,7 @@ static NSString *zoneListHeader = @"zoneListHeader";
 
 @implementation ZoneListViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -31,6 +35,7 @@ static NSString *zoneListHeader = @"zoneListHeader";
     [self loadData];
 }
 
+#pragma mark - init
 - (void)addCollectionView
 {
     [self.view addSubview:self.colletionView];
@@ -97,7 +102,7 @@ static NSString *zoneListHeader = @"zoneListHeader";
     return CGSizeMake(self.view.bounds.size.width, 30);
 }
 
-#pragma mark - lazy loading
+#pragma mark - setter / getter
 - (UICollectionView *)colletionView
 {
     if (!_colletionView) {
@@ -117,6 +122,7 @@ static NSString *zoneListHeader = @"zoneListHeader";
     return _colletionView;
 }
 
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

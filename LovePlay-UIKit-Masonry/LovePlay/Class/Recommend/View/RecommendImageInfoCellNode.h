@@ -11,6 +11,7 @@
 
 @interface RecommendImageInfoCellNode : UICollectionViewCell
 
+#pragma mark - interface
 - (void)setupImageInfoModel:(RecommendImageInfoModel *)imageInfoModel;
 
 @end

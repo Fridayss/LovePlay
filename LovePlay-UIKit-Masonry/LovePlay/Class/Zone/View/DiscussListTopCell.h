@@ -11,8 +11,8 @@
 @class ForumThread;
 @interface DiscussListTopCell : UITableViewCell
 
-@property (nonatomic, strong) ForumThread *forumThread;
-
+#pragma mark - interface
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
+- (void)setupForumThread:(ForumThread *)forumThread;
 @end

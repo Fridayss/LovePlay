@@ -20,9 +20,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configureTabBar];
     [self addNewsViewController];
     [self addRecommendViewController];
     [self addZoneViewController];
+}
+
+- (void)configureTabBar
+{
+    [[UITabBarItem appearanceWhenContainedIn:[self class], nil] setTitleTextAttributes:@{NSForegroundColorAttributeName :[UIColor colorWithRed:113/255.0 green:113/255.0 blue:113/255.0 alpha:1.0] } forState:UIControlStateNormal];
+    
+    [[UITabBarItem appearanceWhenContainedIn:[self class], nil] setTitleTextAttributes:@{NSForegroundColorAttributeName :[UIColor colorWithRed:218/255.0 green:85/255.0 blue:107/255.0 alpha:1.0] } forState:UIControlStateSelected];
 }
 
 - (void)addNewsViewController

@@ -7,11 +7,14 @@
 //
 
 #import "DiscussListViewController.h"
+//M
 #import "DiscussListModel.h"
 #import "DiscussImageModel.h"
+//V
 #import "DiscussListHeaderView.h"
 #import "DiscussListCell.h"
 #import "DiscussListTopCell.h"
+//C
 #import "DiscussDetailViewController.h"
 
 @interface DiscussListViewController ()<ASTableDelegate, ASTableDataSource>
@@ -26,6 +29,7 @@
 
 @implementation DiscussListViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -34,6 +38,7 @@
     [self loadData];
 }
 
+#pragma mark - init
 - (void)initParams
 {
     _pageIndex = 1;
@@ -76,6 +81,7 @@
     }];
 }
 
+#pragma mark - private
 - (void)dealWithDiscussHeaderViewWithDiscussImageModel:(DiscussImageModel *)imageModel
 {
     self.headerView.imageModel = imageModel;
@@ -148,7 +154,6 @@
 }
 
 #pragma mark - tableView delegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ForumThread *forumThread = indexPath.section == 0 ? _discussListTopDatas[indexPath.row] : _discussListDatas[indexPath.row];
@@ -157,7 +162,7 @@
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
-#pragma mark - Getter / Setter
+#pragma mark - setter / getter
 - (ASTableNode *)tableNode
 {
     if (!_tableNode) {
@@ -181,6 +186,7 @@
     return _headerView;
 }
 
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -29,7 +29,6 @@
     return cell;
 }
 
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -97,8 +96,6 @@
         _finishLoadBlock(webViewHeight);
     }
 }
-
-
 
 #pragma mark - layout
 - (void)layoutSubviews

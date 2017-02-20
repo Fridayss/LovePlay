@@ -10,6 +10,7 @@
 
 @interface RecommendGameViewController : UIViewController
 
+#pragma mark - params
 @property (nonatomic, assign) NSInteger sourceType;
 @property (nonatomic, copy) NSString *topicID;
 

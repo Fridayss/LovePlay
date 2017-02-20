@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UILabel *titleTextLabel;
 @property (nonatomic, strong) UILabel *detailTextLabel;
 @property (nonatomic, strong) UIImageView *imageNode;
+//Data
+@property (nonatomic, strong) ZoneDiscussItem *discussItem;
 @end
 
 @implementation ZoneListCell
@@ -49,7 +51,7 @@
 
 }
 
-- (void)setDiscussItem:(ZoneDiscussItem *)discussItem
+- (void)setupDiscussItem:(ZoneDiscussItem *)discussItem
 {
     _discussItem = discussItem;
     _imageNode.imageURL = [NSURL URLWithString:_discussItem.iconUrl];

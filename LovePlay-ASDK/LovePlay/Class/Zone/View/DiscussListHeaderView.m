@@ -10,7 +10,7 @@
 #import "DiscussImageModel.h"
 
 @interface DiscussListHeaderView ()
-
+//UI
 @property (nonatomic, strong) ASNetworkImageNode *imageNode;
 @property (nonatomic, strong) ASTextNode *titleTextNode;
 @property (nonatomic, strong) ASTextNode *descriptionTextNode;

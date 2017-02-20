@@ -7,7 +7,9 @@
 //
 
 #import "NewsCommentViewController.h"
+//M
 #import "NewsCommentModel.h"
+//V
 #import "NewsCommentCellNode.h"
 #import "NewsDetailSectionTitleHeaderView.h"
 
@@ -23,15 +25,7 @@
 
 @implementation NewsCommentViewController
 
-- (instancetype)init
-{
-    self = [super initWithNode:[ASDisplayNode new]];
-    if (self) {
-        [self addTableNode];
-    }
-    return self;
-}
-
+#pragma mark - life cycle
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
@@ -41,8 +35,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self initParams];
     [self loadData];
+}
+
+#pragma mark - init
+- (instancetype)init
+{
+    self = [super initWithNode:[ASDisplayNode new]];
+    if (self) {
+        [self initParams];
+        [self addTableNode];
+    }
+    return self;
 }
 
 - (void)initParams
@@ -51,16 +55,9 @@
     _pageSize = 10;
 }
 
-
 - (void)addTableNode
 {
-    ASTableNode *tableNode = [[ASTableNode alloc] initWithStyle:UITableViewStylePlain];
-    tableNode.backgroundColor = [UIColor whiteColor];
-    tableNode.delegate = self;
-    tableNode.dataSource = self;
-    tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.node addSubnode:tableNode];
-    _tableNode = tableNode;
+    [self.node addSubnode:self.tableNode];
 }
 
 - (void)loadData
@@ -183,6 +180,22 @@
     return CGFLOAT_MIN;
 }
 
+#pragma mark - setter / getter
+- (ASTableNode *)tableNode
+{
+    if (!_tableNode) {
+        ASTableNode *tableNode = [[ASTableNode alloc] initWithStyle:UITableViewStylePlain];
+        tableNode.backgroundColor = [UIColor whiteColor];
+        tableNode.delegate = self;
+        tableNode.dataSource = self;
+        tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+        _tableNode = tableNode;
+    }
+    return _tableNode;
+}
+
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

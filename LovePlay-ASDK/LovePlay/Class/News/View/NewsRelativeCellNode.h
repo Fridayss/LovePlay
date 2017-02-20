@@ -11,6 +11,7 @@
 @class NewsRelativeInfo;
 @interface NewsRelativeCellNode : ASCellNode
 
+#pragma mark - interface
 - (instancetype)initWithRelativeInfo:(NewsRelativeInfo *)relativeInfo;
 
 @end

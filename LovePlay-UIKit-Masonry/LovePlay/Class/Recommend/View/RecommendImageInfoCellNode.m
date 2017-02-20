@@ -10,9 +10,11 @@
 #import "RecommendImageInfoModel.h"
 
 @interface RecommendImageInfoCellNode ()
-@property (nonatomic, strong) RecommendImageInfoModel *imageInfoModel;
+//UI
 @property (nonatomic, strong) UIImageView *imageNode;
 @property (nonatomic, strong) UILabel *titleTextNode;
+//Data
+@property (nonatomic, strong) RecommendImageInfoModel *imageInfoModel;
 @end
 
 @implementation RecommendImageInfoCellNode

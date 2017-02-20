@@ -12,6 +12,7 @@ typedef void (^webViewFinishLoadBlock)();
 
 @interface NewsDetailWebCellNode : ASCellNode
 
+#pragma mark - interface
 - (instancetype)initWithHtmlBoby:(NSString *)htmlBody;
 
 - (void)webViewDidFinishLoadBlock:(webViewFinishLoadBlock)finishLoadBlock;

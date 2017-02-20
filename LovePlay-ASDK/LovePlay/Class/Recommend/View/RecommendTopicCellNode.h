@@ -11,6 +11,7 @@
 
 @interface RecommendTopicCellNode : ASCellNode
 
+#pragma mark - interface
 - (instancetype)initWithTopicModel:(RecommendTopicModel *)topicModel;
 
 @end

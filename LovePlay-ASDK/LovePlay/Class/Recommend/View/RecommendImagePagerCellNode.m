@@ -11,8 +11,10 @@
 #import "RecommendImageInfoCellNode.h"
 
 @interface RecommendImagePagerCellNode ()<ASPagerDelegate, ASPagerDataSource>
-@property (nonatomic, strong) NSArray *imageInfoDatas;
+//UI
 @property (nonatomic, strong) ASPagerNode *pagerNode;
+//Data
+@property (nonatomic, strong) NSArray *imageInfoDatas;
 @property (nonatomic, copy) imagePagerSelectedBlock selectedBlock;
 @end
 

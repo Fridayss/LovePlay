@@ -11,6 +11,7 @@
 @class NewsCommentItem;
 @interface NewsCommentCellNode : UITableViewCell
 
+#pragma mark - interface
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 - (void)setupCommentItems:(NSDictionary *)commentItems commmentIds:(NSArray *)commmentIds;

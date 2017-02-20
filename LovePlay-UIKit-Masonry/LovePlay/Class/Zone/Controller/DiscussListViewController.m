@@ -7,11 +7,14 @@
 //
 
 #import "DiscussListViewController.h"
+//M
 #import "DiscussListModel.h"
 #import "DiscussImageModel.h"
+//V
 #import "DiscussListHeaderView.h"
 #import "DiscussListCell.h"
 #import "DiscussListTopCell.h"
+//C
 #import "DiscussDetailViewController.h"
 
 @interface DiscussListViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -26,6 +29,7 @@
 
 @implementation DiscussListViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -34,6 +38,7 @@
     [self loadData];
 }
 
+#pragma mark - init
 - (void)initParams
 {
     _pageIndex = 1;
@@ -80,10 +85,10 @@
     }];
 }
 
+#pragma mark - private
 - (void)dealWithDiscussHeaderViewWithDiscussImageModel:(DiscussImageModel *)imageModel
 {
-    
-    self.headerView.imageModel = imageModel;
+    [self.headerView setupImageModel:imageModel];
     self.tableView.tableHeaderView = self.headerView;
 }
 
@@ -132,7 +137,7 @@
         {
             ForumThread *forumThread = _discussListTopDatas[indexPath.row];
             DiscussListTopCell *cell = [DiscussListTopCell cellWithTableView:tableView];
-            cell.forumThread = forumThread;
+            [cell setupForumThread:forumThread];
             return cell;
         }
             break;
@@ -140,7 +145,7 @@
         {
             ForumThread *forumThread = _discussListDatas[indexPath.row];
             DiscussListCell *cell = [DiscussListCell cellWithTableView:tableView];
-            cell.forumThread = forumThread;
+            [cell setupForumThread:forumThread];
             return cell;
         }
             break;
@@ -151,30 +156,7 @@
 }
 
 
-
 #pragma mark - tableView delegate
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    switch (indexPath.section) {
-//        case 0:
-//        {
-//            ForumThread *forumThread = _discussListTopDatas[indexPath.row];
-//            return [_tableView cellHeightForIndexPath:indexPath model:forumThread keyPath:@"forumThread" cellClass:[DiscussListTopCell class] contentViewWidth:_tableView.width];
-//        }
-//            break;
-//        case 1:
-//        {
-//            ForumThread *forumThread = _discussListDatas[indexPath.row];
-//            return [_tableView cellHeightForIndexPath:indexPath model:forumThread keyPath:@"forumThread" cellClass:[DiscussListCell class] contentViewWidth:_tableView.width];
-//        }
-//            break;
-//        default:
-//            return CGFLOAT_MIN;
-//            break;
-//    }
-//
-//}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ForumThread *forumThread = indexPath.section == 0 ? _discussListTopDatas[indexPath.row] : _discussListDatas[indexPath.row];
@@ -183,7 +165,7 @@
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
-#pragma mark - Getter / Setter
+#pragma mark - setter / getter
 - (UITableView *)tableView
 {
     if (!_tableView) {
@@ -207,6 +189,7 @@
     return _headerView;
 }
 
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

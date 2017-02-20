@@ -10,6 +10,7 @@
 
 @interface NewsDetailViewController : ASViewController
 
+#pragma mark - params
 @property (nonatomic, copy) NSString *newsID;
 
 @end

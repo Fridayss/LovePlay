@@ -26,6 +26,20 @@
 
 @implementation NewsListViewController
 
+#pragma mark - life cycle
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    _tableNode.frame = self.node.bounds;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self loadData];
+}
+
+#pragma mark - init
 - (instancetype)init
 {
     self = [super initWithNode:[ASDisplayNode new]];
@@ -36,19 +50,6 @@
     return self;
 }
 
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    _tableNode.frame = self.node.bounds;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-//    [self setupParams];
-    [self loadData];
-}
-
 - (void)initParams
 {
     _pageIndex = 0;
@@ -57,15 +58,7 @@
 
 - (void)addTableNode
 {
-    ASTableNode *tableNode = [[ASTableNode alloc] initWithStyle:UITableViewStylePlain];
-//    tableNode.frame = self.view.bounds;
-    tableNode.backgroundColor = [UIColor whiteColor];
-    tableNode.delegate = self;
-    tableNode.dataSource = self;
-    tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [self.node addSubnode:tableNode];
-    _tableNode = tableNode;
+    [self.node addSubnode:self.tableNode];
 }
 
 - (void)loadData
@@ -84,7 +77,7 @@
     }];
 }
 
-#pragma mark - tableView datasource
+#pragma mark - tableView dataSource
 - (NSInteger)tableNode:(ASTableNode *)tableNode numberOfRowsInSection:(NSInteger)section
 {
     return _newsListDatas.count;
@@ -108,13 +101,13 @@
                     
                     break;
             }
-//            cellNode = [[NewsNormalCellNode alloc] initWithListInfoModel:listInfoModel];
         }
         
         return cellNode;
     };
     return cellNodeBlock;
 }
+
 #pragma mark - tableView delegate
 - (void)tableNode:(ASTableNode *)tableNode didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -124,6 +117,22 @@
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
+#pragma mark - setter / getter
+- (ASTableNode *)tableNode
+{
+    if (!_tableNode) {
+        ASTableNode *tableNode = [[ASTableNode alloc] initWithStyle:UITableViewStylePlain];
+        //    tableNode.frame = self.view.bounds;
+        tableNode.backgroundColor = [UIColor whiteColor];
+        tableNode.delegate = self;
+        tableNode.dataSource = self;
+        tableNode.view.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableNode = tableNode;
+    }
+    return _tableNode;
+}
+
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

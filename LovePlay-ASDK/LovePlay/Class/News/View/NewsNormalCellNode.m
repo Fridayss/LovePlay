@@ -7,16 +7,16 @@
 //
 
 #import "NewsNormalCellNode.h"
-
 #import "NewsListInfoModel.h"
 
 @interface NewsNormalCellNode ()
-
-@property (nonatomic, strong) NewsListInfoModel *listInfoModel;
+//UI
 @property (nonatomic, strong) ASNetworkImageNode *imageNode;
 @property (nonatomic, strong) ASTextNode *titleTextNode;
 @property (nonatomic, strong) ASButtonNode *replyBtnNode;
 @property (nonatomic, strong) ASDisplayNode *underLineNode;
+//Data
+@property (nonatomic, strong) NewsListInfoModel *listInfoModel;
 @end
 
 @implementation NewsNormalCellNode

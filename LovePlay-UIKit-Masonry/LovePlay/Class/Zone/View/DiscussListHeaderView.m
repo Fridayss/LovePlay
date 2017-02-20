@@ -10,11 +10,12 @@
 #import "DiscussImageModel.h"
 
 @interface DiscussListHeaderView ()
-
+//UI
 @property (nonatomic, strong) UIImageView *imageNode;
 @property (nonatomic, strong) UILabel *titleTextLabel;
 @property (nonatomic, strong) UILabel *descriptionTextLabel;
-
+//Data
+@property (nonatomic, strong) DiscussImageModel *imageModel;
 @end
 
 @implementation DiscussListHeaderView
@@ -50,7 +51,7 @@
     _descriptionTextLabel = descriptionTextLabel;
 }
 
-- (void)setImageModel:(DiscussImageModel *)imageModel
+- (void)setupImageModel:(DiscussImageModel *)imageModel
 {
     _imageModel = imageModel;
     _imageNode.imageURL = [NSURL URLWithString:imageModel.bannerUrl];

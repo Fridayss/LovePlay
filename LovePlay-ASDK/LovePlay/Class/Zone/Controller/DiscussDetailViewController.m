@@ -7,7 +7,9 @@
 //
 
 #import "DiscussDetailViewController.h"
+//M
 #import "DiscussDetailModel.h"
+//V
 #import "DiscussDetailWebCell.h"
 #import "DiscussDetailPostCell.h"
 
@@ -22,6 +24,7 @@
 
 @implementation DiscussDetailViewController
 
+#pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -30,6 +33,7 @@
     [self loadData];
 }
 
+#pragma mark - init
 - (void)initParams
 {
     _pageIndex = 1;
@@ -77,7 +81,7 @@
 
 #pragma mark - tableView delegate
 
-
+#pragma mark - setter / getter
 - (ASTableNode *)tableNode
 {
     if (!_tableNode) {
@@ -91,6 +95,7 @@
     return _tableNode;
 }
 
+#pragma mark - other
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

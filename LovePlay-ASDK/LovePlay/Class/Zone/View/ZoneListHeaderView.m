@@ -58,12 +58,13 @@
     
 }
 
+#pragma mark - layout
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     _titleTextLabel.frame = CGRectMake(8, 0, 100, self.frame.size.height);
     
-    //【可放开词句查看问题】直接使用ASTextNode作为【原生view】的子控件，无法适应原生的布局
+    //【可放开此句查看问题】直接使用ASTextNode作为【原生view】的子控件，无法适应原生的布局
 //    _titleTextNode.frame = CGRectMake(8, 0, 100, self.frame.size.height);
 
 }

@@ -15,7 +15,8 @@
 @property (nonatomic, strong) UIImageView *imageNode;
 @property (nonatomic, strong) UILabel *timeTextNode;
 @property (nonatomic, strong) UIButton *replyBtnNode;
-
+//Data
+@property (nonatomic, strong) NewsListInfoModel *listInfoModel;
 @end
 
 @implementation NewsImageTitleCellNode
@@ -29,7 +30,6 @@
     }
     return cell;
 }
-
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -74,7 +74,7 @@
     
 }
 
-- (void)setListInfoModel:(NewsListInfoModel *)listInfoModel
+- (void)setupListInfoModel:(NewsListInfoModel *)listInfoModel
 {
     _listInfoModel = listInfoModel;
     _imageNode.imageURL = [NSURL URLWithString:listInfoModel.imgsrc.firstObject];

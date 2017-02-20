@@ -11,6 +11,7 @@
 @class DiscuzPost;
 @interface DiscussDetailPostCell : UITableViewCell
 
+#pragma mark - interface
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 - (void)setupPost:(DiscuzPost *)post floor:(NSInteger)floor;

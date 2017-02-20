@@ -10,6 +10,7 @@
 
 @interface NewsCommentReplyAreaNode : ASDisplayNode
 
+#pragma mark - interface
 - (instancetype)initWithcommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors;
 
 @end
