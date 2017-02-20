@@ -21,10 +21,10 @@ PODS:
   - YYKit/no-arc (1.0.9)
 
 DEPENDENCIES:
-  - AFNetworking
-  - JPFPSStatus
-  - SDAutoLayout
-  - YYKit
+  - AFNetworking (~> 3.1.0)
+  - JPFPSStatus (~> 0.1)
+  - SDAutoLayout (~> 2.1.7)
+  - YYKit (~> 1.0.9)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -32,6 +32,6 @@ SPEC CHECKSUMS:
   SDAutoLayout: e9b36d04b8c0b504762a04d76fbbe5108944297a
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 426e6255a095ed69d087c02effdead3edadba4ea
+PODFILE CHECKSUM: 4c0cbfc9f8a8ca25d742ca958c542a15d2348898
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

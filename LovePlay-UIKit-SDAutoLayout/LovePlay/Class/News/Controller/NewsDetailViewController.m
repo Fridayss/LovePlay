@@ -127,6 +127,16 @@
 }
 
 #pragma mark - tableView delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        NewsRelativeInfo *relativeInfo = _detailModel.article.relative_sys[indexPath.row];
+        NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] init];
+        detailViewController.newsID = relativeInfo.docID;
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {

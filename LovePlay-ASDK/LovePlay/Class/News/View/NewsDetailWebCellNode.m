@@ -86,7 +86,7 @@
 #pragma mark - webView delegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    _webViewHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
+    _webViewHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue] + 10;
     if (_finishLoadBlock) {
         _finishLoadBlock();
     }

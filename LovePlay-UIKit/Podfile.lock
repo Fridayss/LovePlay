@@ -21,10 +21,10 @@ PODS:
   - YYKit/no-arc (1.0.9)
 
 DEPENDENCIES:
-  - AFNetworking
-  - JPFPSStatus
-  - Masonry
-  - YYKit
+  - AFNetworking (~> 3.1.0)
+  - JPFPSStatus (~> 0.1)
+  - Masonry (~> 1.0.2)
+  - YYKit (~> 1.0.9)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -32,6 +32,6 @@ SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: cdf152179407901ea24a3d38927fa8b4befe30b3
+PODFILE CHECKSUM: e9e22e1f04b95b87cae2e02d47028ca552a75a50
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0
