@@ -31,7 +31,6 @@
     [self initParams];
     [self addTableNode];
     [self loadData];
-    
 }
 
 - (void)initParams

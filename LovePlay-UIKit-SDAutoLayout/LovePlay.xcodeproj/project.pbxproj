@@ -10,6 +10,7 @@
 		912A4669BDB0433289F468E2 /* libPods-LovePlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFC4242E32BB25C94880DB0 /* libPods-LovePlay.a */; };
 		A14F34571E52AF7700B4CCC6 /* NewsCommentReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A14F34561E52AF7700B4CCC6 /* NewsCommentReplyCell.m */; };
 		A14F345A1E52B30A00B4CCC6 /* NewsCommentReplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = A14F34591E52B30A00B4CCC6 /* NewsCommentReplyView.m */; };
+		A158DC461E5AA021003F842F /* News.css in Resources */ = {isa = PBXBuildFile; fileRef = A158DC451E5AA021003F842F /* News.css */; };
 		A17543EA1E3484F800516411 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A17543E91E3484F800516411 /* main.m */; };
 		A17543ED1E3484F800516411 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A17543EC1E3484F800516411 /* AppDelegate.m */; };
 		A17543F51E3484F800516411 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A17543F41E3484F800516411 /* Assets.xcassets */; };
@@ -64,6 +65,7 @@
 		A14F34561E52AF7700B4CCC6 /* NewsCommentReplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentReplyCell.m; sourceTree = "<group>"; };
 		A14F34581E52B30A00B4CCC6 /* NewsCommentReplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentReplyView.h; sourceTree = "<group>"; };
 		A14F34591E52B30A00B4CCC6 /* NewsCommentReplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentReplyView.m; sourceTree = "<group>"; };
+		A158DC451E5AA021003F842F /* News.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = News.css; sourceTree = "<group>"; };
 		A17543E51E3484F700516411 /* LovePlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LovePlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A17543E91E3484F800516411 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A17543EB1E3484F800516411 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -178,6 +180,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A158DC441E5AA021003F842F /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A158DC451E5AA021003F842F /* News.css */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		A17543DC1E3484F700516411 = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +232,7 @@
 		A17543FF1E348A8F00516411 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				A158DC441E5AA021003F842F /* Resource */,
 				A78C9AFD1E51F1D40081E3E8 /* BaseModule */,
 				A701D9841E390A3A00756C97 /* Network */,
 				A17544001E348A8F00516411 /* Main */,
@@ -536,6 +547,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A158DC461E5AA021003F842F /* News.css in Resources */,
 				A17543F81E3484F800516411 /* LaunchScreen.storyboard in Resources */,
 				A17543F51E3484F800516411 /* Assets.xcassets in Resources */,
 			);

@@ -61,6 +61,7 @@
     underLineNode.backgroundColor = RGB(222, 222, 222);
     [self addSubview:underLineNode];
     _underLineNode = underLineNode;
+
 }
 
 - (void)loadData
@@ -74,6 +75,7 @@
 - (void)mas_autoLayoutSubViews
 {
     [_floorTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(30).priorityLow();
         make.top.equalTo(self).offset(4);
         make.right.equalTo(self).offset(-4);
     }];
@@ -81,7 +83,7 @@
     [_nameTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(4);
         make.left.equalTo(self).offset(4);
-        make.right.equalTo(_floorTextNode.mas_left).offset(-10).priorityLow();
+        make.right.equalTo(_floorTextNode.mas_left).offset(-10);
     }];
     
     [_contentTextNode mas_makeConstraints:^(MASConstraintMaker *make) {

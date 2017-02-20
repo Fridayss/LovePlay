@@ -47,6 +47,7 @@
 
 - (void)addSubviews
 {
+    NSLog(@"width -- %f, %f", self.contentView.width, kScreenWidth);
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
     webView.backgroundColor = [UIColor whiteColor];
     webView.scalesPageToFit = NO;
@@ -62,7 +63,28 @@
 - (void)setupHtmlBoby:(NSString *)htmlBody
 {
     _htmlBody = htmlBody;
-    [_webView loadHTMLString:_htmlBody baseURL:nil];
+    if (htmlBody.length > 0) {
+        NSURL *cssURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"News" ofType:@"css"]];
+        [_webView loadHTMLString:[self handleWithHtmlBody:htmlBody] baseURL:cssURL];
+    }
+}
+
+#pragma mark - private
+- (NSString *)handleWithHtmlBody:(NSString *)htmlBody
+{
+    NSString *html = [htmlBody stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    NSString *cssName = @"News.css";
+    NSMutableString *htmlString =[[NSMutableString alloc]initWithString:@"<html>"];
+    [htmlString appendString:@"<head><meta charset=\"UTF-8\">"];
+    [htmlString appendString:@"<link rel =\"stylesheet\" href = \""];
+    [htmlString appendString:cssName];
+    [htmlString appendString:@"\" type=\"text/css\" />"];
+    [htmlString appendString:@"</head>"];
+    [htmlString appendString:@"<body>"];
+    [htmlString appendString:html];
+    [htmlString appendString:@"</body>"];
+    [htmlString appendString:@"</html>"];
+    return htmlString;
 }
 
 #pragma mark - webView delegate
@@ -75,6 +97,7 @@
         _finishLoadBlock(webViewHeight);
     }
 }
+
 
 
 #pragma mark - layout
