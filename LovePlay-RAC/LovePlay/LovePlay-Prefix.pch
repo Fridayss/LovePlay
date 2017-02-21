@@ -1,0 +1,20 @@
+//
+//  LovePlay-Prefix.pch
+//  LovePlay
+//
+//  Created by Yuns on 2017/1/26.
+//  Copyright © 2017年 Yuns. All rights reserved.
+//
+
+#ifndef LovePlay_Prefix_pch
+#define LovePlay_Prefix_pch
+
+#import "BaseMacros.h"
+
+#import "YYKit.h"
+#import "UrlConst.h"
+#import "HttpRequest.h"
+#import "Masonry.h"
+//#import "SDAutoLayout.h"
+
+#endif /* LovePlay_Prefix_pch */
