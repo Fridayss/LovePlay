@@ -1,0 +1,13 @@
+//
+//  NewsListViewModel.m
+//  LovePlay
+//
+//  Created by Yuns on 2017/2/21.
+//  Copyright © 2017年 Yuns. All rights reserved.
+//
+
+#import "NewsListViewModel.h"
+
+@implementation NewsListViewModel
+
+@end

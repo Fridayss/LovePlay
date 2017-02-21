@@ -26,6 +26,13 @@
 		A701D9921E390E5A00756C97 /* RecommendTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D9911E390E5A00756C97 /* RecommendTopicModel.m */; };
 		A701D9981E390E9C00756C97 /* RecommendImageInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D9971E390E9C00756C97 /* RecommendImageInfoModel.m */; };
 		A701D99C1E39152F00756C97 /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A701D99B1E39152F00756C97 /* RecommendViewController.m */; };
+		A72968CE1E5C88210076B08F /* NewsListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72968CD1E5C88210076B08F /* NewsListViewModel.m */; };
+		A72968D11E5C882F0076B08F /* NewsDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72968D01E5C882F0076B08F /* NewsDetailViewModel.m */; };
+		A72968D41E5C88390076B08F /* NewsCommentViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72968D31E5C88390076B08F /* NewsCommentViewModel.m */; };
+		A72968DA1E5C888C0076B08F /* RecommendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72968D91E5C888C0076B08F /* RecommendViewModel.m */; };
+		A72968DD1E5C889C0076B08F /* ZoneListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72968DC1E5C889C0076B08F /* ZoneListViewModel.m */; };
+		A72968E01E5C88A80076B08F /* DiscussListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72968DF1E5C88A80076B08F /* DiscussListViewModel.m */; };
+		A72968E31E5C88B50076B08F /* DiscussDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72968E21E5C88B50076B08F /* DiscussDetailViewModel.m */; };
 		A7650F3B1E3D79C700BF30EB /* RecommendTopicCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A7650F3A1E3D79C700BF30EB /* RecommendTopicCellNode.m */; };
 		A7650F3E1E3D79DC00BF30EB /* RecommendImagePagerCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A7650F3D1E3D79DC00BF30EB /* RecommendImagePagerCellNode.m */; };
 		A7650F411E3D79F500BF30EB /* RecommendImageInfoCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A7650F401E3D79F500BF30EB /* RecommendImageInfoCellNode.m */; };
@@ -95,6 +102,20 @@
 		A701D9991E390F3000756C97 /* LovePlay-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LovePlay-Prefix.pch"; sourceTree = "<group>"; };
 		A701D99A1E39152F00756C97 /* RecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendViewController.h; sourceTree = "<group>"; };
 		A701D99B1E39152F00756C97 /* RecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
+		A72968CC1E5C88210076B08F /* NewsListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListViewModel.h; sourceTree = "<group>"; };
+		A72968CD1E5C88210076B08F /* NewsListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListViewModel.m; sourceTree = "<group>"; };
+		A72968CF1E5C882F0076B08F /* NewsDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewModel.h; sourceTree = "<group>"; };
+		A72968D01E5C882F0076B08F /* NewsDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailViewModel.m; sourceTree = "<group>"; };
+		A72968D21E5C88390076B08F /* NewsCommentViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentViewModel.h; sourceTree = "<group>"; };
+		A72968D31E5C88390076B08F /* NewsCommentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentViewModel.m; sourceTree = "<group>"; };
+		A72968D81E5C888C0076B08F /* RecommendViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendViewModel.h; sourceTree = "<group>"; };
+		A72968D91E5C888C0076B08F /* RecommendViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendViewModel.m; sourceTree = "<group>"; };
+		A72968DB1E5C889C0076B08F /* ZoneListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoneListViewModel.h; sourceTree = "<group>"; };
+		A72968DC1E5C889C0076B08F /* ZoneListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoneListViewModel.m; sourceTree = "<group>"; };
+		A72968DE1E5C88A80076B08F /* DiscussListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussListViewModel.h; sourceTree = "<group>"; };
+		A72968DF1E5C88A80076B08F /* DiscussListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscussListViewModel.m; sourceTree = "<group>"; };
+		A72968E11E5C88B50076B08F /* DiscussDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscussDetailViewModel.h; sourceTree = "<group>"; };
+		A72968E21E5C88B50076B08F /* DiscussDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscussDetailViewModel.m; sourceTree = "<group>"; };
 		A7650F391E3D79C700BF30EB /* RecommendTopicCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendTopicCellNode.h; sourceTree = "<group>"; };
 		A7650F3A1E3D79C700BF30EB /* RecommendTopicCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendTopicCellNode.m; sourceTree = "<group>"; };
 		A7650F3C1E3D79DC00BF30EB /* RecommendImagePagerCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendImagePagerCellNode.h; sourceTree = "<group>"; };
@@ -286,6 +307,7 @@
 		A17544071E348A9000516411 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				A72968C91E5C86FD0076B08F /* ViewModel */,
 				A17544081E348A9000516411 /* Controller */,
 				A17544091E348A9000516411 /* Model */,
 				A175440A1E348A9000516411 /* View */,
@@ -349,6 +371,7 @@
 		A175440B1E348A9000516411 /* Recommend */ = {
 			isa = PBXGroup;
 			children = (
+				A72968CA1E5C87050076B08F /* ViewModel */,
 				A175440C1E348A9000516411 /* Controller */,
 				A175440D1E348A9000516411 /* Model */,
 				A175440E1E348A9000516411 /* View */,
@@ -394,6 +417,7 @@
 		A175440F1E348A9000516411 /* Zone */ = {
 			isa = PBXGroup;
 			children = (
+				A72968CB1E5C870A0076B08F /* ViewModel */,
 				A17544101E348A9000516411 /* Controller */,
 				A17544111E348A9000516411 /* Model */,
 				A17544121E348A9000516411 /* View */,
@@ -448,6 +472,41 @@
 				A1A0D2CE1E49C8E9008DC3FF /* DiscussDetailPostCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A72968C91E5C86FD0076B08F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A72968CC1E5C88210076B08F /* NewsListViewModel.h */,
+				A72968CD1E5C88210076B08F /* NewsListViewModel.m */,
+				A72968CF1E5C882F0076B08F /* NewsDetailViewModel.h */,
+				A72968D01E5C882F0076B08F /* NewsDetailViewModel.m */,
+				A72968D21E5C88390076B08F /* NewsCommentViewModel.h */,
+				A72968D31E5C88390076B08F /* NewsCommentViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A72968CA1E5C87050076B08F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A72968D81E5C888C0076B08F /* RecommendViewModel.h */,
+				A72968D91E5C888C0076B08F /* RecommendViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A72968CB1E5C870A0076B08F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A72968DB1E5C889C0076B08F /* ZoneListViewModel.h */,
+				A72968DC1E5C889C0076B08F /* ZoneListViewModel.m */,
+				A72968DE1E5C88A80076B08F /* DiscussListViewModel.h */,
+				A72968DF1E5C88A80076B08F /* DiscussListViewModel.m */,
+				A72968E11E5C88B50076B08F /* DiscussDetailViewModel.h */,
+				A72968E21E5C88B50076B08F /* DiscussDetailViewModel.m */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		C7890152BC9B3D2FEEA40033 /* Pods */ = {
@@ -584,6 +643,7 @@
 			files = (
 				A7DDF8231E4596F5005843FD /* NewsRelativeCellNode.m in Sources */,
 				A1E9B7EC1E486AA5009C8883 /* NewsCommentReplyNode.m in Sources */,
+				A72968DD1E5C889C0076B08F /* ZoneListViewModel.m in Sources */,
 				A7650F561E3E350900BF30EB /* NewsCommentViewController.m in Sources */,
 				A7650F771E3F773C00BF30EB /* NewsDetailModel.m in Sources */,
 				A7FFE2141E44CD96005D0FA0 /* DiscussListHeaderView.m in Sources */,
@@ -601,11 +661,14 @@
 				A7FFE2051E44C425005D0FA0 /* DiscussImageModel.m in Sources */,
 				A7650F4D1E3E34AE00BF30EB /* NewsTitleImageCellNode.m in Sources */,
 				A7650F411E3D79F500BF30EB /* RecommendImageInfoCellNode.m in Sources */,
+				A72968CE1E5C88210076B08F /* NewsListViewModel.m in Sources */,
 				A7650F6E1E3E425300BF30EB /* ZoneListViewController.m in Sources */,
+				A72968DA1E5C888C0076B08F /* RecommendViewModel.m in Sources */,
 				A7DDF81A1E45960C005843FD /* NewsDetailWebCellNode.m in Sources */,
 				A701D99C1E39152F00756C97 /* RecommendViewController.m in Sources */,
 				A1A0D2CF1E49C8E9008DC3FF /* DiscussDetailPostCell.m in Sources */,
 				A7650F5C1E3E362D00BF30EB /* NewsListViewController.m in Sources */,
+				A72968D41E5C88390076B08F /* NewsCommentViewModel.m in Sources */,
 				A175441E1E348B9E00516411 /* MainNavigationController.m in Sources */,
 				A158DC5F1E5ACBEF003F842F /* HttpRequest.m in Sources */,
 				A7DDF8201E4596DA005843FD /* NewsCommentCellNode.m in Sources */,
@@ -622,9 +685,12 @@
 				A7CC0FBF1E4302EC0090CBB7 /* ZoneListHeaderView.m in Sources */,
 				A7650F741E3F772B00BF30EB /* NewsListInfoModel.m in Sources */,
 				A158DC601E5ACBEF003F842F /* UrlConst.m in Sources */,
+				A72968E31E5C88B50076B08F /* DiscussDetailViewModel.m in Sources */,
 				A7650F681E3E36D600BF30EB /* DiscussListViewController.m in Sources */,
 				A7650F6B1E3E36EE00BF30EB /* DiscussDetailViewController.m in Sources */,
+				A72968D11E5C882F0076B08F /* NewsDetailViewModel.m in Sources */,
 				A701D9921E390E5A00756C97 /* RecommendTopicModel.m in Sources */,
+				A72968E01E5C88A80076B08F /* DiscussListViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
