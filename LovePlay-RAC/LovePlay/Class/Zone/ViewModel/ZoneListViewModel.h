@@ -10,4 +10,8 @@
 
 @interface ZoneListViewModel : NSObject
 
+@property (nonatomic, strong, readonly) NSArray *listModels;
+
+@property (nonatomic, strong) RACCommand *fetchZoneListCommand;
+
 @end

@@ -12,8 +12,10 @@
 //V
 #import "ZoneListCell.h"
 #import "ZoneListHeaderView.h"
-//C
+//V(C)
 #import "DiscussListViewController.h"
+//MV
+#import "ZoneListViewModel.h"
 
 static NSString *zoneListCell = @"zoneListCell";
 static NSString *zoneListHeader = @"zoneListHeader";
@@ -22,7 +24,8 @@ static NSString *zoneListHeader = @"zoneListHeader";
 //UI
 @property (nonatomic, strong) UICollectionView *colletionView;
 //Data
-@property (nonatomic, strong) NSArray *zoneDatas;
+//@property (nonatomic, strong) NSArray *zoneDatas;
+@property (nonatomic, strong) ZoneListViewModel *listViewModel;
 @end
 
 @implementation ZoneListViewController
@@ -47,31 +50,28 @@ static NSString *zoneListHeader = @"zoneListHeader";
 
 - (void)loadData
 {
-    [[HttpRequest sharedInstance] GET:ZoneDiscussURL parameters:nil success:^(id response) {
-        NSLog(@"list-succ : %@", response);
-        ZoneListModel *listModel = [ZoneListModel modelWithJSON:response[@"info"]];
-        _zoneDatas = listModel.discuzList;
+    [[self.listViewModel.fetchZoneListCommand execute:nil] subscribeNext:^(id x) {
         [_colletionView reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"list-fail : %@", error);
+    } error:^(NSError *error) {
+        
     }];
 }
 
 #pragma mark - collectionView dataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return _zoneDatas.count;
+    return self.listViewModel.listModels.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    ZoneDiscussDetail *discussDetail = _zoneDatas[section];
+    ZoneDiscussDetail *discussDetail = self.listViewModel.listModels[section];
     return discussDetail.detailList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ZoneDiscussDetail *discussDetail = _zoneDatas[indexPath.section];
+    ZoneDiscussDetail *discussDetail = self.listViewModel.listModels[indexPath.section];
     ZoneDiscussItem *discussItem = discussDetail.detailList[indexPath.row];
     ZoneListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:zoneListCell forIndexPath:indexPath];
     [cell setupDiscussItem:discussItem];
@@ -81,7 +81,7 @@ static NSString *zoneListHeader = @"zoneListHeader";
 #pragma mark + header and footer
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    ZoneDiscussDetail *discussDetail = _zoneDatas[indexPath.section];
+    ZoneDiscussDetail *discussDetail = self.listViewModel.listModels[indexPath.section];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         ZoneListHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:zoneListHeader forIndexPath:indexPath];
         headerView.titleName = discussDetail.type.typeName;
@@ -93,7 +93,7 @@ static NSString *zoneListHeader = @"zoneListHeader";
 #pragma mark - collectionView delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ZoneDiscussDetail *discussDetail = _zoneDatas[indexPath.section];
+    ZoneDiscussDetail *discussDetail = self.listViewModel.listModels[indexPath.section];
     ZoneDiscussItem *discussItem = discussDetail.detailList[indexPath.row];
     DiscussListViewController *discussListViewController = [[DiscussListViewController alloc] init];
     discussListViewController.fid = @(discussItem.fid).stringValue;
@@ -124,6 +124,15 @@ static NSString *zoneListHeader = @"zoneListHeader";
         _colletionView = collectionView;
     }
     return _colletionView;
+}
+
+- (ZoneListViewModel *)listViewModel
+{
+    if (!_listViewModel) {
+        ZoneListViewModel *listViewModel = [[ZoneListViewModel alloc] init];
+        _listViewModel = listViewModel;
+    }
+    return _listViewModel;
 }
 
 #pragma mark - other
