@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NewsDetailModel.h"
 
 @interface NewsDetailViewModel : NSObject
 
+@property (nonatomic, strong, readonly) NewsDetailModel *detailModel;
 
+@property (nonatomic, strong) RACCommand *fetchNewsDetailCommand;
 @end

@@ -13,15 +13,16 @@
 #import "NewsNormalCellNode.h"
 #import "NewsTitleImageCellNode.h"
 #import "NewsImageTitleCellNode.h"
-//C
+//V(C)
 #import "NewsDetailViewController.h"
+//VM
+#import "NewsListViewModel.h"
 
 @interface NewsListViewController ()<UITableViewDelegate, UITableViewDataSource>
 //UI
 @property (nonatomic, strong) UITableView *tableNode;
 //Data
-@property (nonatomic, strong) NSArray *newsListDatas;
-@property (nonatomic, assign) NSInteger pageIndex;
+@property (nonatomic, strong) NewsListViewModel *listViewModel;
 @end
 
 @implementation NewsListViewController
@@ -47,7 +48,6 @@
 
 - (void)initParams
 {
-    _pageIndex = 0;
     //这个数据初始化不能放在viewDidLoad中
     _sourceType = 1;
 }
@@ -63,29 +63,22 @@
 
 - (void)loadData
 {
-    NSInteger pageCount = 30;
-    NSString *urlString = [NSString stringWithFormat:@"%@/%ld/%ld", NewsListURL, _pageIndex * pageCount, pageCount];
-    if (_topicID != nil) {
-        urlString = [NSString stringWithFormat:@"%@/%@/%ld/%ld", NewsListURL, _topicID, _pageIndex * pageCount, pageCount];
-    }
-    [[HttpRequest sharedInstance] GET:urlString parameters:nil success:^(id response) {
-        NSLog(@"response -- %@", response);
-        _newsListDatas = [NSArray modelArrayWithClass:[NewsListInfoModel class] json:response[@"info"]];
+    [[self.listViewModel.fetchNewsListCommand execute:_topicID] subscribeNext:^(id x) {
         [_tableNode reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"error -- %@", error);
+    } error:^(NSError *error) {
+        
     }];
 }
 
 #pragma mark - tableView dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _newsListDatas.count;
+    return self.listViewModel.listModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewsListInfoModel *listInfoModel = _newsListDatas[indexPath.row];
+    NewsListInfoModel *listInfoModel = self.listViewModel.listModels[indexPath.row];
     if (_sourceType == 0) {
         NewsImageTitleCellNode *cellNode = [NewsImageTitleCellNode cellWithTableView:tableView];
         [cellNode setupListInfoModel:listInfoModel];
@@ -114,7 +107,7 @@
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewsListInfoModel *listInfoModel = _newsListDatas[indexPath.row];
+    NewsListInfoModel *listInfoModel = self.listViewModel.listModels[indexPath.row];
     NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] init];
     detailViewController.newsID = listInfoModel.docid;
     [self.navigationController pushViewController:detailViewController animated:YES];
@@ -135,6 +128,15 @@
         
     }
     return _tableNode;
+}
+
+- (NewsListViewModel *)listViewModel
+{
+    if (!_listViewModel) {
+        NewsListViewModel *listViewModel = [[NewsListViewModel alloc] init];
+        _listViewModel = listViewModel;
+    }
+    return _listViewModel;
 }
 
 #pragma mark - other

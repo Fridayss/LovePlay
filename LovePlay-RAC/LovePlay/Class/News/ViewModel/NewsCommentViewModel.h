@@ -7,8 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NewsCommentModel.h"
 
 @interface NewsCommentViewModel : NSObject
 
+@property (nonatomic, strong, readonly) NewsCommentModel *hotCommentModel;
+
+@property (nonatomic, strong, readonly) NewsCommentModel *latestCommentModel;
+
+@property (nonatomic, strong) RACCommand *fetchNewsCommentCommand;
 
 @end

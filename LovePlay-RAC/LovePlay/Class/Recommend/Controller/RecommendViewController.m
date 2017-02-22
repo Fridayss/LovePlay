@@ -39,7 +39,9 @@ static NSString * const footerSection = @"footerSection";
     [self addCollectionNode];
     [self loadData];
     //添加横竖屏通知，刷新顶部子view布局
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeRotate:) name:UIApplicationDidChangeStatusBarFrameNotification object:nil];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIApplicationDidChangeStatusBarFrameNotification object:nil] subscribeNext:^(id x) {
+        [_collectionNode reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    }];
 }
 
 #pragma mark - init
@@ -229,12 +231,6 @@ static NSString * const footerSection = @"footerSection";
         return CGSizeMake(self.view.frame.size.width, 6);
     }
     return CGSizeZero;
-}
-
-#pragma mark - notifi
-- (void)changeRotate:(NSNotification*)noti {
-    
-    [_collectionNode reloadSections:[NSIndexSet indexSetWithIndex:0]];
 }
 
 #pragma mark - setter / getter

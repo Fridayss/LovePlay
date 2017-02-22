@@ -10,5 +10,8 @@
 
 @interface NewsListViewModel : NSObject
 
+@property (nonatomic, strong, readonly) NSArray *listModels;
+
+@property (nonatomic, strong) RACCommand *fetchNewsListCommand;
 
 @end

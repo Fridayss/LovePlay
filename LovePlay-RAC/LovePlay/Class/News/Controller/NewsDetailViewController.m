@@ -15,16 +15,18 @@
 #import "NewsCommentCellNode.h"
 #import "NewsDetailSectionTitleHeaderView.h"
 #import "NewsDetailSectionCommentFooterView.h"
-//C
+//V(C)
 #import "NewsCommentViewController.h"
 #import "NewsDetailViewController.h"
+//VM
+#import "NewsDetailViewModel.h"
 
 @interface NewsDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 //UI
 @property (nonatomic, strong) UITableView *tableNode;
 //Data
-@property (nonatomic, strong) NewsDetailModel *detailModel;
 @property (nonatomic, assign) CGFloat webViewHeight;
+@property (nonatomic, strong) NewsDetailViewModel *detailViewModel;
 @end
 
 @implementation NewsDetailViewController
@@ -56,15 +58,10 @@
 
 - (void)loadData
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",  NewsDetailURL, _newsID];
-    NSDictionary *params = @{@"tieVersion":@"v2",@"platform":@"ios",@"width":@(kScreenWidth*2),@"height":@(kScreenHeight*2),@"decimal":@"75"};
-    [[HttpRequest sharedInstance] GET:urlString parameters:params success:^(id response) {
-        NSLog(@"list-succ : %@", response);
-        NewsDetailModel *detailModel = [NewsDetailModel modelWithJSON:response[@"info"]];
-        _detailModel = detailModel;
+    [[self.detailViewModel.fetchNewsDetailCommand execute:_newsID] subscribeNext:^(id x) {
         [_tableNode reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"list-fail : %@", error);
+    } error:^(NSError *error) {
+        
     }];
 }
 
@@ -81,10 +78,10 @@
             return 1;
             break;
         case 1:
-            return _detailModel.tie.commentIds.count;
+            return self.detailViewModel.detailModel.tie.commentIds.count;
             break;
         case 2:
-            return _detailModel.article.relative_sys.count;
+            return self.detailViewModel.detailModel.article.relative_sys.count;
             break;
         default:
             return 0;
@@ -99,7 +96,7 @@
         {
             NewsDetailWebCellNode *cellNode = [NewsDetailWebCellNode cellWithTableView:tableView];
             if (_webViewHeight <= 0) {
-                [cellNode setupHtmlBoby:_detailModel.article.body];
+                [cellNode setupHtmlBoby:self.detailViewModel.detailModel.article.body];
                 [cellNode webViewDidFinishLoadBlock:^(CGFloat webViewHeight) {
                     _webViewHeight = webViewHeight;
                     [_tableNode reloadData];
@@ -111,15 +108,15 @@
             break;
         case 1:
         {
-            NSArray *floors = _detailModel.tie.commentIds[indexPath.row];
+            NSArray *floors = self.detailViewModel.detailModel.tie.commentIds[indexPath.row];
             NewsCommentCellNode *cellNode = [NewsCommentCellNode cellWithTableView:tableView];
-            [cellNode setupCommentItems:_detailModel.tie.comments commmentIds:floors];
+            [cellNode setupCommentItems:self.detailViewModel.detailModel.tie.comments commmentIds:floors];
             return cellNode;
         }
             break;
         case 2:
         {
-            NewsRelativeInfo *relativeInfo = _detailModel.article.relative_sys[indexPath.row];
+            NewsRelativeInfo *relativeInfo = self.detailViewModel.detailModel.article.relative_sys[indexPath.row];
             NewsRelativeCellNode *cellNode = [NewsRelativeCellNode cellWithTableView:tableView];
             [cellNode setupRelativeInfo:relativeInfo];
             return cellNode;
@@ -135,7 +132,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 2) {
-        NewsRelativeInfo *relativeInfo = _detailModel.article.relative_sys[indexPath.row];
+        NewsRelativeInfo *relativeInfo = self.detailViewModel.detailModel.article.relative_sys[indexPath.row];
         NewsDetailViewController *detailViewController = [[NewsDetailViewController alloc] init];
         detailViewController.newsID = relativeInfo.docID;
         [self.navigationController pushViewController:detailViewController animated:YES];
@@ -151,21 +148,13 @@
     return UITableViewAutomaticDimension;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 0) {
-//        return _webViewHeight;
-//    }
-//    return UITableViewAutomaticDimension;
-//}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NewsDetailSectionTitleHeaderView *headerView = [NewsDetailSectionTitleHeaderView sectionHeaderWithTableView:tableView];
     switch (section) {
         case 1:
         {
-            if (_detailModel.tie.comments.count > 0) {
+            if (self.detailViewModel.detailModel.tie.comments.count > 0) {
                 headerView.title = @"热门跟帖";
             }else{
                 return nil;
@@ -174,7 +163,7 @@
             break;
         case 2:
         {
-            if (_detailModel.article.relative_sys.count > 0) {
+            if (self.detailViewModel.detailModel.article.relative_sys.count > 0) {
                 headerView.title = @"猜你喜欢";
             }else{
                 return nil;
@@ -192,7 +181,7 @@
 {
     NewsDetailSectionCommentFooterView *footerView = [NewsDetailSectionCommentFooterView sectionFooterWithTableView:tableView];
     if (1 == section) {
-        if (_detailModel.tie.comments.count > 0) {
+        if (self.detailViewModel.detailModel.tie.comments.count > 0) {
             footerView.title = @"查看更多跟帖";
             [footerView commentFooterViewTouchBlock:^{
                 NewsCommentViewController *commentViewController = [[NewsCommentViewController alloc] init];
@@ -210,14 +199,14 @@
     switch (section) {
         case 1:
         {
-            if (_detailModel.tie.comments.count > 0) {
+            if (self.detailViewModel.detailModel.tie.comments.count > 0) {
                return 30;
             }
         }
             break;
         case 2:
         {
-            if (_detailModel.article.relative_sys.count > 0) {
+            if (self.detailViewModel.detailModel.article.relative_sys.count > 0) {
                 return 30;
             }
         }
@@ -232,7 +221,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (1 == section) {
-        if (_detailModel.tie.comments.count > 0) {
+        if (self.detailViewModel.detailModel.tie.comments.count > 0) {
             return 40;
         }
     }
@@ -253,6 +242,15 @@
         _tableNode = tableNode;
     }
     return _tableNode;
+}
+
+- (NewsDetailViewModel *)detailViewModel
+{
+    if (!_detailViewModel) {
+        NewsDetailViewModel *detailViewModel = [[NewsDetailViewModel alloc] init];
+        _detailViewModel = detailViewModel;
+    }
+    return _detailViewModel;
 }
 
 - (void)didReceiveMemoryWarning {
