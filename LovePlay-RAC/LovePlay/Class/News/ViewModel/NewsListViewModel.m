@@ -59,12 +59,14 @@
         urlString = [NSString stringWithFormat:@"%@/%@/%ld/%ld", NewsListURL, topicID, _pageIndex * pageCount, pageCount];
     }
     [[HttpRequest sharedInstance] GET:urlString parameters:nil success:^(id response) {
-        NSLog(@"response -- %@", response);
+//        NSLog(@"response -- %@", response);
+        DLog(@"response -- %@", response);
         if (success) {
             success(response);
         }
     } failure:^(NSError *error) {
         NSLog(@"error -- %@", error);
+        
         if (failure) {
             failure(error);
         }
