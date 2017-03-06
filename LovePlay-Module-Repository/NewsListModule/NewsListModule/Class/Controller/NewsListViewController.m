@@ -14,7 +14,7 @@
 #import "NewsTitleImageCellNode.h"
 #import "NewsImageTitleCellNode.h"
 //C
-#import "NewsDetailViewController.h"
+//#import "NewsDetailViewController.h"
 
 @interface NewsListViewController ()<UITableViewDelegate, UITableViewDataSource>
 //UI

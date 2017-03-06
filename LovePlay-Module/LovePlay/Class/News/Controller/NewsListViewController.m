@@ -30,25 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    [self initParams];
     [self addTableNode];
     [self loadData];
 }
 
 #pragma mark - init
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self initParams];
-    }
-    return self;
-}
-
 - (void)initParams
 {
     _pageIndex = 0;
-    //这个数据初始化不能放在viewDidLoad中
     _sourceType = 1;
 }
 

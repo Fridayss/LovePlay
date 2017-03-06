@@ -17,7 +17,6 @@
 		A13A8AEC1E6D1561001C764E /* NewsListInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A13A8AE11E6D1561001C764E /* NewsListInfoModel.m */; };
 		A13A8AED1E6D1561001C764E /* NewsImageTitleCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A13A8AE41E6D1561001C764E /* NewsImageTitleCellNode.m */; };
 		A13A8AEE1E6D1561001C764E /* NewsNormalCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A13A8AE61E6D1561001C764E /* NewsNormalCellNode.m */; };
-		A13A8AEF1E6D1561001C764E /* NewsRelativeCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A13A8AE81E6D1561001C764E /* NewsRelativeCellNode.m */; };
 		A13A8AF01E6D1561001C764E /* NewsTitleImageCellNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A13A8AEA1E6D1561001C764E /* NewsTitleImageCellNode.m */; };
 /* End PBXBuildFile section */
 
@@ -40,8 +39,6 @@
 		A13A8AE41E6D1561001C764E /* NewsImageTitleCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsImageTitleCellNode.m; sourceTree = "<group>"; };
 		A13A8AE51E6D1561001C764E /* NewsNormalCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsNormalCellNode.h; sourceTree = "<group>"; };
 		A13A8AE61E6D1561001C764E /* NewsNormalCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsNormalCellNode.m; sourceTree = "<group>"; };
-		A13A8AE71E6D1561001C764E /* NewsRelativeCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsRelativeCellNode.h; sourceTree = "<group>"; };
-		A13A8AE81E6D1561001C764E /* NewsRelativeCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsRelativeCellNode.m; sourceTree = "<group>"; };
 		A13A8AE91E6D1561001C764E /* NewsTitleImageCellNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTitleImageCellNode.h; sourceTree = "<group>"; };
 		A13A8AEA1E6D1561001C764E /* NewsTitleImageCellNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTitleImageCellNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,8 +130,6 @@
 				A13A8AE41E6D1561001C764E /* NewsImageTitleCellNode.m */,
 				A13A8AE51E6D1561001C764E /* NewsNormalCellNode.h */,
 				A13A8AE61E6D1561001C764E /* NewsNormalCellNode.m */,
-				A13A8AE71E6D1561001C764E /* NewsRelativeCellNode.h */,
-				A13A8AE81E6D1561001C764E /* NewsRelativeCellNode.m */,
 				A13A8AE91E6D1561001C764E /* NewsTitleImageCellNode.h */,
 				A13A8AEA1E6D1561001C764E /* NewsTitleImageCellNode.m */,
 			);
@@ -212,7 +207,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A13A8AEF1E6D1561001C764E /* NewsRelativeCellNode.m in Sources */,
 				A13A8AEE1E6D1561001C764E /* NewsNormalCellNode.m in Sources */,
 				A13A8ACC1E6D153F001C764E /* ViewController.m in Sources */,
 				A13A8AF01E6D1561001C764E /* NewsTitleImageCellNode.m in Sources */,
@@ -375,6 +369,7 @@
 				A13A8ADA1E6D153F001C764E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
