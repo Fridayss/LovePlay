@@ -1,0 +1,6 @@
+framework module Pods_LovePlay {
+  umbrella header "Pods-LovePlay-umbrella.h"
+
+  export *
+  module * { export * }
+}

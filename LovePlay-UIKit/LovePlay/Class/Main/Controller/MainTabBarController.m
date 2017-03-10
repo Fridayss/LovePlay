@@ -51,6 +51,7 @@
     [self addChildViewController:zoneViewController title:@"社区" imageName:@"icon_sq_nomal_pgall" selectImageName:@"icon_sq_pressed_pgall"];
 }
 
+
 - (void)addChildViewController:(UIViewController *)childController title:(NSString *)title imageName:(NSString *)imageName selectImageName:(NSString *)selectImageName
 {
     childController.title = title;
