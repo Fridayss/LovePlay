@@ -20,9 +20,7 @@ class MainTabBarController: UITabBarController {
 
     func configureTabBar() {
         
-        let tabBarAppear = UITabBarItem.appearance()
-//        tabBarAppear.setTitleTextAttributes(<#T##attributes: [String : Any]?##[String : Any]?#>, for: <#T##UIControlState#>)
-//        tabBarAppear.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor(red: 113/255.0, green: 113/255.0, blue: 113/255.0, alpha: 1.0) ], for: UIControlStateNormal)
+        
         
     }
     

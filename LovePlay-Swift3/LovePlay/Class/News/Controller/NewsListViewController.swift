@@ -7,13 +7,21 @@
 //
 
 import UIKit
+import Alamofire
 
 class NewsListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.loadData()
+    }
+    
+    func loadData() {
+        
+        Alamofire.request("https://i.play.163.com/user/article/list/0/10").responseJSON { (response) in
+            print(response.result.value as Any)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +30,5 @@ class NewsListViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
