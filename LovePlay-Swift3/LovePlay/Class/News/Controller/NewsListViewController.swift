@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class NewsListViewController: UIViewController {
 
@@ -19,8 +20,17 @@ class NewsListViewController: UIViewController {
     
     func loadData() {
         
-        Alamofire.request("https://i.play.163.com/user/article/list/0/10").responseJSON { (response) in
-            print(response.result.value as Any)
+        Alamofire.request("https://i.play.163.com/user/article/list/0/10").responseJSON { response in
+//            print(response.result)
+            switch response.result.isSuccess{
+            case true:
+                if let value = response.result.value{
+                    let json = JSON(value)
+                    print(json)
+                }
+            case false:
+                print(response.result.error)
+            }
         }
     }
 

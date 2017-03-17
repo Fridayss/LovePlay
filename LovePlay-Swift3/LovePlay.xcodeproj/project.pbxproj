@@ -17,6 +17,9 @@
 		A11866C61E72994800AE884A /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11866C51E72994800AE884A /* MainTabBarController.swift */; };
 		A11866C81E729BF800AE884A /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11866C71E729BF800AE884A /* MainNavigationController.swift */; };
 		A11D95571E7637890010BD11 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D95561E7637890010BD11 /* HttpRequest.swift */; };
+		A132D0861E7A7035005C39BA /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132D0851E7A7035005C39BA /* NewsDetailModel.swift */; };
+		A132D0881E7A704C005C39BA /* NewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132D0871E7A704C005C39BA /* NewsListModel.swift */; };
+		A132D08A1E7A705A005C39BA /* NewsCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132D0891E7A705A005C39BA /* NewsCommentModel.swift */; };
 		A1B047641E77929300D5E0F7 /* UrlConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B047631E77929300D5E0F7 /* UrlConst.swift */; };
 		E58FF56262C0892D8E5D61B9 /* Pods_LovePlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683CF1A050185F6490B9BED3 /* Pods_LovePlay.framework */; };
 /* End PBXBuildFile section */
@@ -38,6 +41,9 @@
 		A11D95541E7637350010BD11 /* BaseMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMacros.h; sourceTree = "<group>"; };
 		A11D95551E76374C0010BD11 /* LovePlay-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LovePlay-Prefix.pch"; sourceTree = "<group>"; };
 		A11D95561E7637890010BD11 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
+		A132D0851E7A7035005C39BA /* NewsDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
+		A132D0871E7A704C005C39BA /* NewsListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListModel.swift; sourceTree = "<group>"; };
+		A132D0891E7A705A005C39BA /* NewsCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCommentModel.swift; sourceTree = "<group>"; };
 		A1B047631E77929300D5E0F7 /* UrlConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlConst.swift; sourceTree = "<group>"; };
 		A1DBD312FAB4052228EA311F /* Pods-LovePlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LovePlay.release.xcconfig"; path = "Pods/Target Support Files/Pods-LovePlay/Pods-LovePlay.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +184,9 @@
 		A11866B21E72951000AE884A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A132D0871E7A704C005C39BA /* NewsListModel.swift */,
+				A132D0851E7A7035005C39BA /* NewsDetailModel.swift */,
+				A132D0891E7A705A005C39BA /* NewsCommentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -391,7 +400,10 @@
 				A11866C81E729BF800AE884A /* MainNavigationController.swift in Sources */,
 				A11D95571E7637890010BD11 /* HttpRequest.swift in Sources */,
 				A11866C01E72951000AE884A /* ZoneListViewController.swift in Sources */,
+				A132D0881E7A704C005C39BA /* NewsListModel.swift in Sources */,
+				A132D0861E7A7035005C39BA /* NewsDetailModel.swift in Sources */,
 				A11866971E7294EF00AE884A /* AppDelegate.swift in Sources */,
+				A132D08A1E7A705A005C39BA /* NewsCommentModel.swift in Sources */,
 				A1B047641E77929300D5E0F7 /* UrlConst.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
