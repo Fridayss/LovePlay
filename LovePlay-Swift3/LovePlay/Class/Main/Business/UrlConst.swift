@@ -6,12 +6,11 @@
 //  Copyright © 2017年 yuns. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-let BaseURL = "http://i.play.163.com"
-let NewsListURL = "/user/article/list"
-let NewsDetailURL = "/news/appDetail"
-
-class UrlConst: NSObject {
-
+struct URLs {
+    static let BaseURL = "http://i.play.163.com"
+    static let NewsListURL = "/user/article/list"
+    static let NewsDetailURL = "/news/appDetail"
 }
+

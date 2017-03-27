@@ -21,7 +21,6 @@ class NewsListViewController: UIViewController {
     func loadData() {
         
         Alamofire.request("https://i.play.163.com/user/article/list/0/10").responseJSON { response in
-//            print(response.result)
             switch response.result.isSuccess{
             case true:
                 if let value = response.result.value{
@@ -29,7 +28,7 @@ class NewsListViewController: UIViewController {
                     print(json)
                 }
             case false:
-                print(response.result.error)
+                print(response.result.error as Any)
             }
         }
     }
