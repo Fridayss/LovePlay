@@ -32,6 +32,8 @@ class NewsListViewController: UIViewController {
             }
         }
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

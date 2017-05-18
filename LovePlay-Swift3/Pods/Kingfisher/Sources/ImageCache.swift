@@ -303,7 +303,6 @@ open class ImageCache {
                                         cacheSerializer: options.cacheSerializer,
                                         toDisk: false,
                                         completionHandler: nil)
-                            
                             options.callbackDispatchQueue.safeAsync {
                                 completionHandler(result, .memory)
                                 sSelf = nil
@@ -481,42 +480,38 @@ open class ImageCache {
         var cachedFiles = [URL: URLResourceValues]()
         var urlsToDelete = [URL]()
         var diskCacheSize: UInt = 0
-        
-        if let fileEnumerator = self.fileManager.enumerator(at: diskCacheURL, includingPropertiesForKeys: Array(resourceKeys), options: FileManager.DirectoryEnumerationOptions.skipsHiddenFiles, errorHandler: nil),
-           let urls = fileEnumerator.allObjects as? [URL]
-        {
-            for fileUrl in urls {
-                
-                do {
-                    let resourceValues = try fileUrl.resourceValues(forKeys: resourceKeys)
-                    // If it is a Directory. Continue to next file URL.
-                    if resourceValues.isDirectory == true {
-                        continue
-                    }
-                    
-                    // If this file is expired, add it to URLsToDelete
-                    if !onlyForCacheSize,
-                       let expiredDate = expiredDate,
-                       let lastAccessData = resourceValues.contentAccessDate,
-                       (lastAccessData as NSDate).laterDate(expiredDate) == expiredDate
-                    {
-                        urlsToDelete.append(fileUrl)
-                        continue
-                    }
 
-                    if let fileSize = resourceValues.totalFileAllocatedSize {
-                        diskCacheSize += UInt(fileSize)
-                        if !onlyForCacheSize {
-                            cachedFiles[fileUrl] = resourceValues
-                        }
+        for fileUrl in (try? fileManager.contentsOfDirectory(at: diskCacheURL, includingPropertiesForKeys: Array(resourceKeys), options: .skipsHiddenFiles)) ?? [] {
+
+            do {
+                let resourceValues = try fileUrl.resourceValues(forKeys: resourceKeys)
+                // If it is a Directory. Continue to next file URL.
+                if resourceValues.isDirectory == true {
+                    continue
+                }
+
+                // If this file is expired, add it to URLsToDelete
+                if !onlyForCacheSize,
+                    let expiredDate = expiredDate,
+                    let lastAccessData = resourceValues.contentAccessDate,
+                    (lastAccessData as NSDate).laterDate(expiredDate) == expiredDate
+                {
+                    urlsToDelete.append(fileUrl)
+                    continue
+                }
+
+                if let fileSize = resourceValues.totalFileAllocatedSize {
+                    diskCacheSize += UInt(fileSize)
+                    if !onlyForCacheSize {
+                        cachedFiles[fileUrl] = resourceValues
                     }
-                } catch _ { }
-            }
+                }
+            } catch _ { }
         }
-        
+
         return (urlsToDelete, diskCacheSize, cachedFiles)
     }
-    
+
 #if !os(macOS) && !os(watchOS)
     /**
     Clean expired disk cache when app in background. This is an async operation.
