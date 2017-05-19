@@ -20,6 +20,12 @@
 		A132D0861E7A7035005C39BA /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132D0851E7A7035005C39BA /* NewsDetailModel.swift */; };
 		A132D0881E7A704C005C39BA /* NewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132D0871E7A704C005C39BA /* NewsListModel.swift */; };
 		A132D08A1E7A705A005C39BA /* NewsCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132D0891E7A705A005C39BA /* NewsCommentModel.swift */; };
+		A18651061ECED43100F3E3F0 /* NewsNormalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18651051ECED43100F3E3F0 /* NewsNormalCell.swift */; };
+		A18651081ECEFCE100F3E3F0 /* LovePlayPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18651071ECEFCE100F3E3F0 /* LovePlayPrefix.swift */; };
+		A186510A1ECF021700F3E3F0 /* NewsCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18651091ECF021700F3E3F0 /* NewsCommentViewController.swift */; };
+		A186510C1ECF022100F3E3F0 /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A186510B1ECF022100F3E3F0 /* NewsDetailViewController.swift */; };
+		A186510E1ECF04A600F3E3F0 /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A186510D1ECF04A600F3E3F0 /* NewsDetailModel.swift */; };
+		A18651101ECF04B100F3E3F0 /* NewsCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A186510F1ECF04B100F3E3F0 /* NewsCommentModel.swift */; };
 		A1B047641E77929300D5E0F7 /* UrlConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B047631E77929300D5E0F7 /* UrlConst.swift */; };
 		E58FF56262C0892D8E5D61B9 /* Pods_LovePlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683CF1A050185F6490B9BED3 /* Pods_LovePlay.framework */; };
 /* End PBXBuildFile section */
@@ -39,11 +45,16 @@
 		A11866C51E72994800AE884A /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A11866C71E729BF800AE884A /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		A11D95541E7637350010BD11 /* BaseMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMacros.h; sourceTree = "<group>"; };
-		A11D95551E76374C0010BD11 /* LovePlay-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LovePlay-Prefix.pch"; sourceTree = "<group>"; };
 		A11D95561E7637890010BD11 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		A132D0851E7A7035005C39BA /* NewsDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
 		A132D0871E7A704C005C39BA /* NewsListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListModel.swift; sourceTree = "<group>"; };
 		A132D0891E7A705A005C39BA /* NewsCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCommentModel.swift; sourceTree = "<group>"; };
+		A18651051ECED43100F3E3F0 /* NewsNormalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsNormalCell.swift; sourceTree = "<group>"; };
+		A18651071ECEFCE100F3E3F0 /* LovePlayPrefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LovePlayPrefix.swift; sourceTree = "<group>"; };
+		A18651091ECF021700F3E3F0 /* NewsCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCommentViewController.swift; sourceTree = "<group>"; };
+		A186510B1ECF022100F3E3F0 /* NewsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
+		A186510D1ECF04A600F3E3F0 /* NewsDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
+		A186510F1ECF04B100F3E3F0 /* NewsCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCommentModel.swift; sourceTree = "<group>"; };
 		A1B047631E77929300D5E0F7 /* UrlConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlConst.swift; sourceTree = "<group>"; };
 		A1DBD312FAB4052228EA311F /* Pods-LovePlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LovePlay.release.xcconfig"; path = "Pods/Target Support Files/Pods-LovePlay/Pods-LovePlay.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,7 +106,7 @@
 				A118669D1E7294EF00AE884A /* Assets.xcassets */,
 				A118669F1E7294EF00AE884A /* LaunchScreen.storyboard */,
 				A11866A21E7294EF00AE884A /* Info.plist */,
-				A11D95551E76374C0010BD11 /* LovePlay-Prefix.pch */,
+				A18651071ECEFCE100F3E3F0 /* LovePlayPrefix.swift */,
 			);
 			path = LovePlay;
 			sourceTree = "<group>";
@@ -177,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				A11866B11E72951000AE884A /* NewsListViewController.swift */,
+				A186510B1ECF022100F3E3F0 /* NewsDetailViewController.swift */,
+				A18651091ECF021700F3E3F0 /* NewsCommentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -194,6 +207,9 @@
 		A11866B31E72951000AE884A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A18651051ECED43100F3E3F0 /* NewsNormalCell.swift */,
+				A186510D1ECF04A600F3E3F0 /* NewsDetailModel.swift */,
+				A186510F1ECF04B100F3E3F0 /* NewsCommentModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -396,13 +412,19 @@
 				A11866BE1E72951000AE884A /* NewsListViewController.swift in Sources */,
 				A11866BF1E72951000AE884A /* RecommendViewController.swift in Sources */,
 				A11866C61E72994800AE884A /* MainTabBarController.swift in Sources */,
+				A186510A1ECF021700F3E3F0 /* NewsCommentViewController.swift in Sources */,
+				A18651081ECEFCE100F3E3F0 /* LovePlayPrefix.swift in Sources */,
 				A11866991E7294EF00AE884A /* ViewController.swift in Sources */,
+				A186510E1ECF04A600F3E3F0 /* NewsDetailModel.swift in Sources */,
 				A11866C81E729BF800AE884A /* MainNavigationController.swift in Sources */,
 				A11D95571E7637890010BD11 /* HttpRequest.swift in Sources */,
+				A186510C1ECF022100F3E3F0 /* NewsDetailViewController.swift in Sources */,
+				A18651101ECF04B100F3E3F0 /* NewsCommentModel.swift in Sources */,
 				A11866C01E72951000AE884A /* ZoneListViewController.swift in Sources */,
 				A132D0881E7A704C005C39BA /* NewsListModel.swift in Sources */,
 				A132D0861E7A7035005C39BA /* NewsDetailModel.swift in Sources */,
 				A11866971E7294EF00AE884A /* AppDelegate.swift in Sources */,
+				A18651061ECED43100F3E3F0 /* NewsNormalCell.swift in Sources */,
 				A132D08A1E7A705A005C39BA /* NewsCommentModel.swift in Sources */,
 				A1B047641E77929300D5E0F7 /* UrlConst.swift in Sources */,
 			);
@@ -518,7 +540,7 @@
 			baseConfigurationReference = 7904FD0E4D3C9A6AFC018779 /* Pods-LovePlay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/LovePlay/LovePlay-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = LovePlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuns.LovePlay;
@@ -532,7 +554,7 @@
 			baseConfigurationReference = A1DBD312FAB4052228EA311F /* Pods-LovePlay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/LovePlay/LovePlay-Prefix.pch";
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = LovePlay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuns.LovePlay;
