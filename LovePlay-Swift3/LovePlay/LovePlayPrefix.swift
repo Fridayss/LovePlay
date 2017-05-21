@@ -6,7 +6,11 @@
 //  Copyright © 2017年 yuns. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 import SnapKit
+//import Alamofire
 import Kingfisher
+
+
+

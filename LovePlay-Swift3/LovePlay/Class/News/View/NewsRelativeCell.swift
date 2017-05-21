@@ -1,24 +1,25 @@
 //
-//  NewsNormalCell.swift
+//  NewsRelativeCell.swift
 //  LovePlay
 //
-//  Created by weiying on 2017/5/19.
+//  Created by Yuns on 2017/5/21.
 //  Copyright © 2017年 yuns. All rights reserved.
 //
 
 import UIKit
 
-class NewsNormalCell: UITableViewCell {
-    
-    class func cellWithTableView(tableView : UITableView) -> NewsNormalCell {
-        let ID = "NewsNormalCell"
-        var cell : NewsNormalCell? = tableView.dequeueReusableCell(withIdentifier: ID) as? NewsNormalCell
+class NewsRelativeCell: UITableViewCell {
+
+    class func cellWithTableView(tableView : UITableView) -> NewsRelativeCell {
+        let ID = "NewsRelativeCell"
+        
+        var cell : NewsRelativeCell? = tableView.dequeueReusableCell(withIdentifier: ID) as? NewsRelativeCell
         if cell == nil {
-            cell = NewsNormalCell(style: .default, reuseIdentifier: ID)
+            cell = NewsRelativeCell(style: .default, reuseIdentifier: ID)
         }
         return cell!
     }
-
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
@@ -29,13 +30,12 @@ class NewsNormalCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
     // MARK: - private
     private func addSubViews() {
         self.contentView.addSubview(imgView)
         self.contentView.addSubview(titleTextLabel)
-        self.contentView.addSubview(replyButton)
+        self.contentView.addSubview(timeTextLabel)
         self.contentView.addSubview(underLineView)
     }
     
@@ -52,10 +52,8 @@ class NewsNormalCell: UITableViewCell {
             make.right.equalToSuperview().offset(-10);
         }
         
-        replyButton.snp.makeConstraints { (make) in
-            make.width.equalTo(50);
-            make.height.equalTo(20);
-            make.left.equalTo(titleTextLabel.snp.left);
+        timeTextLabel.snp.makeConstraints { (make) in
+            make.left.right.equalTo(titleTextLabel);
             make.bottom.equalTo(imgView.snp.bottom);
         }
         
@@ -66,22 +64,22 @@ class NewsNormalCell: UITableViewCell {
         }
     }
     
-    fileprivate var _listModel : NewsListModel?
+    fileprivate var _relativeModel : DetailRelativeModel?
     // MARK: - public
-    var listModel : NewsListModel? {
+    var relativeModel : DetailRelativeModel? {
         set {
-            _listModel = newValue
+            _relativeModel = newValue
             
-            let imgSrc = (newValue?.imgsrc.first)!
+            let imgSrc = (newValue?.imgsrc)!
             let imgURL = URL(string: imgSrc)
             imgView.kf.setImage(with: imgURL)
             
             titleTextLabel.text = newValue?.title
-            replyButton .setTitle(newValue?.replyCount.stringValue, for: .normal)
+            timeTextLabel.text = (newValue?.source)! + " " + (newValue?.ptime)!
         }
         
         get {
-            return _listModel
+            return _relativeModel
         }
     }
     
@@ -100,10 +98,9 @@ class NewsNormalCell: UITableViewCell {
         return titleTextLabel
     }()
     
-    lazy var replyButton : UIButton = {
-        let replyButton : UIButton = UIButton()
-        replyButton.setTitleColor(UIColor.black, for: .normal)
-        return replyButton
+    lazy var timeTextLabel : UILabel = {
+        let timeTextLabel : UILabel = UILabel()
+        return timeTextLabel
     }()
     
     lazy var underLineView : UIView = {

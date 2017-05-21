@@ -4,6 +4,7 @@ use_frameworks!
 target 'LovePlay' do
     pod 'Alamofire'
     pod 'SwiftyJSON'
+    pod 'HandyJSON'
     pod 'Kingfisher'
     pod 'SnapKit'
 end
