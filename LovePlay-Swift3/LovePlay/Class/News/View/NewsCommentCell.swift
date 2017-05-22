@@ -10,6 +10,10 @@ import UIKit
 
 class NewsCommentCell: UITableViewCell {
 
+    var _commentItems : NSDictionary?
+    var _commmentIds : NSArray?
+    
+    // MARK: - init
     class func cellWithTableView(tableView : UITableView) -> NewsCommentCell {
         let ID = "NewsCommentCell"
         var cell : NewsCommentCell? = tableView.dequeueReusableCell(withIdentifier: ID) as? NewsCommentCell
@@ -66,7 +70,9 @@ class NewsCommentCell: UITableViewCell {
         }
         
         contentTextLabel.snp.makeConstraints { (make) in
-            
+            make.top.equalTo(avartImgView.snp.bottom).offset(10)
+            make.left.equalTo(nameTextLabel)
+            make.right.equalTo(voteButton)
         }
         
         underLineView.snp.makeConstraints { (make) in
@@ -76,6 +82,22 @@ class NewsCommentCell: UITableViewCell {
         }
     }
     
+    // MARK: - public
+    public func setupComment(commentItems : NSDictionary, commmentIds : NSArray) {
+        _commentItems = commentItems
+        _commmentIds = commmentIds
+        let itemModel : CommentItemModel = commentItems[commmentIds.lastObject!] as! CommentItemModel
+        
+        let imgSrc = itemModel.user?.avatar
+        let imgURL = URL(string: imgSrc!)
+        avartImgView.kf.setImage(with: imgURL)
+        
+        nameTextLabel.text = itemModel.user?.nickname
+        loctionTextLabel.text = itemModel.user?.location
+        voteButton.setTitle((itemModel.vote!).description, for: .normal)
+        contentTextLabel.text = itemModel.content
+        
+    }
     
     
     // MARK: - lazy load
@@ -105,7 +127,7 @@ class NewsCommentCell: UITableViewCell {
     
     lazy var contentTextLabel : UILabel = {
         let contentTextLabel = UILabel()
-        
+        contentTextLabel.numberOfLines = 0
         return contentTextLabel
     }()
     

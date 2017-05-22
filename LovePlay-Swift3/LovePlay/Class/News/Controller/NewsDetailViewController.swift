@@ -129,11 +129,40 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 2:
+            return 30
+        default:
+            return 1
+        }
         return 1
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 1:
+            return 40
+        default:
+            return 1
+        }
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = NewsSectionHeaderView.sectionHeaderWithTableView(tableView: tableView)
+        switch section {
+        case 2:
+            return header
+        default:
+            return nil
+        }
+        
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = NewsCommentFooterView.sectionHeaderWithTableView(tableView: tableView)
+        return footer
     }
     
     // MARK: - lazy load

@@ -70,8 +70,8 @@ class NewsSectionHeaderView: UITableViewHeaderFooterView {
     }()
     
     lazy var titleTextlabel : UILabel = {
-       let titleTextLabel = UILabel()
-        
+        let titleTextLabel = UILabel()
+        titleTextLabel.text = "header"
         return titleTextLabel
     }()
 }

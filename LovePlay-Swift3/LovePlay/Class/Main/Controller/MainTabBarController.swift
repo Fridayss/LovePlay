@@ -31,7 +31,7 @@ class MainTabBarController: UITabBarController {
     }
     
     func addRecommendViewController(){
-        let newsVC = NewsListViewController()
+        let newsVC = RecommendViewController()
         
         self.addChildIntoTabBarController(childController: newsVC, title: "精选", imageName: "icon_jx_nomal_pgall", selectImageName: "icon_jx_pressed_pgall")
     }

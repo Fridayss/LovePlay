@@ -8,28 +8,61 @@
 
 import UIKit
 
-class RecommendViewController: UIViewController {
+class RecommendViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.lightGray
+        self.addSubViews()
+        self.loadData()
     }
+    
+    private func addSubViews() {
+        self.view.addSubview(collectionView)
+    }
+    
+    private func loadData() {
+        
+    }
+    
+    // MARK: - collectionView dataSource
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let ID = "collectionViewCell"
+        var cell : UICollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: ID, for: indexPath)
+        if cell == nil {
+            cell = UICollectionViewCell()
+        }
+        cell?.contentView.backgroundColor = UIColor.red
+        return cell!
+    }
+    
+    
+    // MARK: - collectionView delegate
 
+    // MARK: - lazy load
+    lazy var collectionView : UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: 100, height: 100)
+        let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: flowLayout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
+    }()
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

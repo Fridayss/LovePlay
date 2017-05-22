@@ -56,7 +56,7 @@ class NewsCommentFooterView: UITableViewHeaderFooterView {
     // MARK: - lazy load
     lazy var titleButton : UIButton = {
         let titleButton = UIButton()
-        
+        titleButton .setTitle("footer", for: .normal)
         return titleButton
     }()
 

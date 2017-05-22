@@ -24,7 +24,39 @@ struct CommentItemModel : HandyJSON {
 }
 
 class NewsCommentModel: HandyJSON {
-    var commentIds : [String]?
-    var comments : CommentItemModel?
+    var commentIds : NSArray?
+//    var commentIds : NSArray? {
+//        set {
+//            _commentIds = newValue
+//        }
+//        
+//        get {
+//            let commentIdsArr = NSArray()
+//            if _commentIds?.count != 0 {
+//                for floor in _commentIds! {
+//                    let floors : Array = (floor as AnyObject).components(separatedBy: ",")
+//                    commentIdsArr.adding(floors)
+//                }
+//            }
+//            
+//            return commentIdsArr
+//        }
+//    }
+    
+    var comments : NSDictionary?
+//    var comments : NSDictionary? {
+//        set {
+//            self.comments = newValue
+//        }
+//        
+//        get {
+//            let commentsDict = NSDictionary()
+//            _comments?.enumerateKeysAndObjects({ (key, obj, stop) in
+//                let commentItemModel : CommentItemModel = CommentItemModel.deserialize(from: obj)
+//                commentsDict.setValue(commentItemModel, forKey: key)
+//            })
+//            return self.comments
+//        }
+//    }
     required init(){}
 }

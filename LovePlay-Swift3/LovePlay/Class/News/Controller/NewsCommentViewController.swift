@@ -106,23 +106,31 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let ID = "CEll"
-        var cell = tableView.dequeueReusableCell(withIdentifier: ID)
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: ID)
+        let cell = NewsCommentCell.cellWithTableView(tableView: tableView)
+        
+        if 0 == indexPath.section {
+//            cell.setupComment(commentItems: hotCommentData?.comments, commmentIds: hotCommentData?.commentIds[indexPath.row])
+        }else{
+        
         }
-        cell?.textLabel?.text = "hhhhh"
-        return cell!
+        
+        return cell
     }
     
     // MARK: - tableView delegate
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
+        return 30
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = NewsSectionHeaderView.sectionHeaderWithTableView(tableView: tableView)
+        return header
+    }
+    
     
     // MARK: - lazy load
     lazy var tableView : UITableView = {
