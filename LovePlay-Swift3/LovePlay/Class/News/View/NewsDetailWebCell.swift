@@ -16,7 +16,7 @@ class NewsDetailWebCell: UITableViewCell, UIWebViewDelegate {
     var finishBlock : webViewDidFinishLoadBlock?
     
     class func cellWithTableView(tableView : UITableView) -> NewsDetailWebCell {
-        let ID = "NewsDetailWebCell"
+        let ID = NSStringFromClass(self)
         var cell : NewsDetailWebCell? = tableView.dequeueReusableCell(withIdentifier: ID) as? NewsDetailWebCell
         if cell == nil {
             cell = NewsDetailWebCell(style: .default, reuseIdentifier: ID)

@@ -15,7 +15,7 @@ class NewsCommentCell: UITableViewCell {
     
     // MARK: - init
     class func cellWithTableView(tableView : UITableView) -> NewsCommentCell {
-        let ID = "NewsCommentCell"
+        let ID = NSStringFromClass(self)
         var cell : NewsCommentCell? = tableView.dequeueReusableCell(withIdentifier: ID) as? NewsCommentCell
         if cell == nil {
             cell = NewsCommentCell(style: .default, reuseIdentifier: ID)

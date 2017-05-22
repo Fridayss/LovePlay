@@ -11,7 +11,7 @@ import UIKit
 class NewsNormalCell: UITableViewCell {
     
     class func cellWithTableView(tableView : UITableView) -> NewsNormalCell {
-        let ID = "NewsNormalCell"
+        let ID = NSStringFromClass(self)
         var cell : NewsNormalCell? = tableView.dequeueReusableCell(withIdentifier: ID) as? NewsNormalCell
         if cell == nil {
             cell = NewsNormalCell(style: .default, reuseIdentifier: ID)

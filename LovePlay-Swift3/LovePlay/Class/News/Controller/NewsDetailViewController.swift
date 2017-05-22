@@ -135,7 +135,6 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         default:
             return 1
         }
-        return 1
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -145,7 +144,6 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         default:
             return 1
         }
-        return 1
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -156,8 +154,6 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         default:
             return nil
         }
-        
-        return header
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

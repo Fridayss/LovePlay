@@ -11,7 +11,7 @@ import UIKit
 class NewsSectionHeaderView: UITableViewHeaderFooterView {
     
     class func sectionHeaderWithTableView(tableView : UITableView) -> NewsSectionHeaderView {
-        let ID = "NewsSectionHeaderView"
+        let ID = NSStringFromClass(self)
         var sectionHeader : NewsSectionHeaderView? = tableView.dequeueReusableHeaderFooterView(withIdentifier: ID) as? NewsSectionHeaderView
         if sectionHeader == nil {
             sectionHeader = NewsSectionHeaderView(reuseIdentifier: ID)

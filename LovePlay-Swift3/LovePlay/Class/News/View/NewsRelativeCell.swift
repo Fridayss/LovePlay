@@ -11,8 +11,7 @@ import UIKit
 class NewsRelativeCell: UITableViewCell {
 
     class func cellWithTableView(tableView : UITableView) -> NewsRelativeCell {
-        let ID = "NewsRelativeCell"
-        
+        let ID = NSStringFromClass(self)
         var cell : NewsRelativeCell? = tableView.dequeueReusableCell(withIdentifier: ID) as? NewsRelativeCell
         if cell == nil {
             cell = NewsRelativeCell(style: .default, reuseIdentifier: ID)
