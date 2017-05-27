@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A10A4B741ED91C4B0041378F /* RecommendTopicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10A4B731ED91C4B0041378F /* RecommendTopicModel.swift */; };
+		A10A4B761ED91C600041378F /* RecommendImageInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10A4B751ED91C600041378F /* RecommendImageInfoModel.swift */; };
 		A11866971E7294EF00AE884A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11866961E7294EF00AE884A /* AppDelegate.swift */; };
 		A11866991E7294EF00AE884A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11866981E7294EF00AE884A /* ViewController.swift */; };
 		A118669E1E7294EF00AE884A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A118669D1E7294EF00AE884A /* Assets.xcassets */; };
@@ -41,6 +43,8 @@
 /* Begin PBXFileReference section */
 		683CF1A050185F6490B9BED3 /* Pods_LovePlay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LovePlay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7904FD0E4D3C9A6AFC018779 /* Pods-LovePlay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LovePlay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LovePlay/Pods-LovePlay.debug.xcconfig"; sourceTree = "<group>"; };
+		A10A4B731ED91C4B0041378F /* RecommendTopicModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendTopicModel.swift; sourceTree = "<group>"; };
+		A10A4B751ED91C600041378F /* RecommendImageInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendImageInfoModel.swift; sourceTree = "<group>"; };
 		A11866931E7294EF00AE884A /* LovePlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LovePlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11866961E7294EF00AE884A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A11866981E7294EF00AE884A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 		A11866B71E72951000AE884A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A10A4B731ED91C4B0041378F /* RecommendTopicModel.swift */,
+				A10A4B751ED91C600041378F /* RecommendImageInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -462,6 +468,8 @@
 				A186510C1ECF022100F3E3F0 /* NewsDetailViewController.swift in Sources */,
 				A11866C01E72951000AE884A /* ZoneListViewController.swift in Sources */,
 				A7050D411ED0209700D5D51B /* UIView+Extension.swift in Sources */,
+				A10A4B761ED91C600041378F /* RecommendImageInfoModel.swift in Sources */,
+				A10A4B741ED91C4B0041378F /* RecommendTopicModel.swift in Sources */,
 				A132D0881E7A704C005C39BA /* NewsListModel.swift in Sources */,
 				A79E0F221ED324EB00BCD31A /* RecommendPagerCell.swift in Sources */,
 				A11866971E7294EF00AE884A /* AppDelegate.swift in Sources */,

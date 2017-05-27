@@ -11,6 +11,8 @@ import Alamofire
 
 class RecommendViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+//    var topicDatas
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGray
@@ -24,19 +26,32 @@ class RecommendViewController: UIViewController, UICollectionViewDelegate, UICol
     
     private func loadData() {
         self.loadTopicData()
+//        self.loadImageInfoData()
     }
     
     private func loadTopicData() {
         let urlStr = BaseURL + RecommendTopicURL
-        Alamofire.request(urlStr).response { (response) in
-            
+        Alamofire.request(urlStr).responseJSON{ (response) in
+            print("topic -- response -- %@", response)
+            switch response.result.isSuccess {
+            case true :
+                if let value = response.result.value as? NSDictionary {
+                    let info = value["info"] as? NSArray
+//                    let arr = [RecommendTopicModel].deserialize(from: info);
+                    print("arr -- %@", info)
+                }
+            case false:
+                print(response.result.error as Any)
+            }
         }
+        
+        
     }
     
     private func loadImageInfoData() {
         let urlStr = BaseURL + RecommendImageInfosURL
-        Alamofire.request(urlStr).response { (response) in
-            
+        Alamofire.request(urlStr).responseJSON { (response) in
+            print("imgInfo -- response -- %@", response)
         }
     }
     
