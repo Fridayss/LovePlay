@@ -34,7 +34,7 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     // MAR: - private
     private func addSubViews() {
         
-        self.view.addSubview(tableView)
+        self.view.addSubview(self.tableView)
     }
     
     private func loadData() {

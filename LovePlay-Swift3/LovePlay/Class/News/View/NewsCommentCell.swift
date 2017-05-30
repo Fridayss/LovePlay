@@ -36,46 +36,46 @@ class NewsCommentCell: UITableViewCell {
 
     // MARK: - private
     private func addSubViews() {
-        self.addSubview(avartImgView)
-        self.addSubview(voteButton)
-        self.addSubview(nameTextLabel)
-        self.addSubview(loctionTextLabel)
-        self.addSubview(contentTextLabel)
-        self.addSubview(underLineView)
+        self.addSubview(self.avartImgView)
+        self.addSubview(self.voteButton)
+        self.addSubview(self.nameTextLabel)
+        self.addSubview(self.loctionTextLabel)
+        self.addSubview(self.contentTextLabel)
+        self.addSubview(self.underLineView)
     }
     
     private func snp_subViews() {
-        avartImgView.snp.makeConstraints { (make) in
+        self.avartImgView.snp.makeConstraints { (make) in
             make.width.height.equalTo(40)
             make.top.equalToSuperview().offset(10)
             make.left.equalToSuperview().offset(10)
         }
         
-        voteButton.snp.makeConstraints { (make) in
+        self.voteButton.snp.makeConstraints { (make) in
             make.width.equalTo(50)
             make.height.equalTo(20)
             make.top.equalTo(avartImgView)
             make.right.equalToSuperview().offset(-10);
         }
         
-        nameTextLabel.snp.makeConstraints { (make) in
+        self.nameTextLabel.snp.makeConstraints { (make) in
             make.top.equalTo(avartImgView)
             make.left.equalTo(avartImgView.snp.right).offset(10)
             make.right.equalTo(voteButton.snp.left).offset(-10)
         }
         
-        loctionTextLabel.snp.makeConstraints { (make) in
+        self.loctionTextLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(nameTextLabel)
             make.bottom.equalTo(avartImgView.snp.bottom)
         }
         
-        contentTextLabel.snp.makeConstraints { (make) in
+        self.contentTextLabel.snp.makeConstraints { (make) in
             make.top.equalTo(avartImgView.snp.bottom).offset(10)
             make.left.equalTo(nameTextLabel)
             make.right.equalTo(voteButton)
         }
         
-        underLineView.snp.makeConstraints { (make) in
+        self.underLineView.snp.makeConstraints { (make) in
             make.height.equalTo(0.5)
             make.top.equalTo(contentTextLabel.snp.bottom).offset(10)
             make.left.right.bottom.equalToSuperview()
@@ -90,12 +90,12 @@ class NewsCommentCell: UITableViewCell {
         
         let imgSrc = itemModel.user?.avatar
         let imgURL = URL(string: imgSrc!)
-        avartImgView.kf.setImage(with: imgURL)
+        self.avartImgView.kf.setImage(with: imgURL)
         
-        nameTextLabel.text = itemModel.user?.nickname
-        loctionTextLabel.text = itemModel.user?.location
-        voteButton.setTitle((itemModel.vote!).description, for: .normal)
-        contentTextLabel.text = itemModel.content
+        self.nameTextLabel.text = itemModel.user?.nickname
+        self.loctionTextLabel.text = itemModel.user?.location
+        self.voteButton.setTitle((itemModel.vote!).description, for: .normal)
+        self.contentTextLabel.text = itemModel.content
         
     }
     

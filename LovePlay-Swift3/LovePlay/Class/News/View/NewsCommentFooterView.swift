@@ -44,11 +44,11 @@ class NewsCommentFooterView: UITableViewHeaderFooterView {
     
     // MARK: - private
     private func addSubViews() {
-        self.addSubview(titleButton)
+        self.addSubview(self.titleButton)
     }
     
     private func snp_subViews() {
-        titleButton.snp.makeConstraints { (make) in
+        self.titleButton.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }

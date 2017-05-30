@@ -33,33 +33,33 @@ class NewsNormalCell: UITableViewCell {
     
     // MARK: - private
     private func addSubViews() {
-        self.contentView.addSubview(imgView)
-        self.contentView.addSubview(titleTextLabel)
-        self.contentView.addSubview(replyButton)
-        self.contentView.addSubview(underLineView)
+        self.contentView.addSubview(self.imgView)
+        self.contentView.addSubview(self.titleTextLabel)
+        self.contentView.addSubview(self.replyButton)
+        self.contentView.addSubview(self.underLineView)
     }
     
     private func snp_subViews() {
-        imgView.snp.makeConstraints { (make) in
+        self.imgView.snp.makeConstraints { (make) in
             make.width.height.equalTo(80)
             make.top.equalToSuperview().offset(10)
             make.left.equalToSuperview().offset(10)
         }
         
-        titleTextLabel.snp.makeConstraints { (make) in
+        self.titleTextLabel.snp.makeConstraints { (make) in
             make.top.equalTo(imgView);
             make.left.equalTo(imgView.snp.right).offset(10);
             make.right.equalToSuperview().offset(-10);
         }
         
-        replyButton.snp.makeConstraints { (make) in
+        self.replyButton.snp.makeConstraints { (make) in
             make.width.equalTo(50);
             make.height.equalTo(20);
             make.left.equalTo(titleTextLabel.snp.left);
             make.bottom.equalTo(imgView.snp.bottom);
         }
         
-        underLineView.snp.makeConstraints { (make) in
+        self.underLineView.snp.makeConstraints { (make) in
             make.height.equalTo(0.5);
             make.top.equalTo(imgView.snp.bottom).offset(10);
             make.left.bottom.right.equalToSuperview();
@@ -74,10 +74,10 @@ class NewsNormalCell: UITableViewCell {
             
             let imgSrc = (newValue?.imgsrc.first)!
             let imgURL = URL(string: imgSrc)
-            imgView.kf.setImage(with: imgURL)
+            self.imgView.kf.setImage(with: imgURL)
             
-            titleTextLabel.text = newValue?.title
-            replyButton .setTitle(newValue?.replyCount.stringValue, for: .normal)
+            self.titleTextLabel.text = newValue?.title
+            self.replyButton .setTitle(newValue?.replyCount.stringValue, for: .normal)
         }
         
         get {

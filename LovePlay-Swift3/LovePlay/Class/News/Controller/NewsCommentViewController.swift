@@ -35,7 +35,7 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: - private
     private func addSubViews() {
         
-        self.view.addSubview(tableView)
+        self.view.addSubview(self.tableView)
     }
     
     private func loadData() {

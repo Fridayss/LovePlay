@@ -32,31 +32,31 @@ class NewsRelativeCell: UITableViewCell {
 
     // MARK: - private
     private func addSubViews() {
-        self.contentView.addSubview(imgView)
-        self.contentView.addSubview(titleTextLabel)
-        self.contentView.addSubview(timeTextLabel)
-        self.contentView.addSubview(underLineView)
+        self.contentView.addSubview(self.imgView)
+        self.contentView.addSubview(self.titleTextLabel)
+        self.contentView.addSubview(self.timeTextLabel)
+        self.contentView.addSubview(self.underLineView)
     }
     
     private func snp_subViews() {
-        imgView.snp.makeConstraints { (make) in
+        self.imgView.snp.makeConstraints { (make) in
             make.width.height.equalTo(80)
             make.top.equalToSuperview().offset(10)
             make.left.equalToSuperview().offset(10)
         }
         
-        titleTextLabel.snp.makeConstraints { (make) in
+        self.titleTextLabel.snp.makeConstraints { (make) in
             make.top.equalTo(imgView);
             make.left.equalTo(imgView.snp.right).offset(10);
             make.right.equalToSuperview().offset(-10);
         }
         
-        timeTextLabel.snp.makeConstraints { (make) in
+        self.timeTextLabel.snp.makeConstraints { (make) in
             make.left.right.equalTo(titleTextLabel);
             make.bottom.equalTo(imgView.snp.bottom);
         }
         
-        underLineView.snp.makeConstraints { (make) in
+        self.underLineView.snp.makeConstraints { (make) in
             make.height.equalTo(0.5);
             make.top.equalTo(imgView.snp.bottom).offset(10);
             make.left.bottom.right.equalToSuperview();
@@ -71,10 +71,10 @@ class NewsRelativeCell: UITableViewCell {
             
             let imgSrc = (newValue?.imgsrc)!
             let imgURL = URL(string: imgSrc)
-            imgView.kf.setImage(with: imgURL)
+            self.imgView.kf.setImage(with: imgURL)
             
-            titleTextLabel.text = newValue?.title
-            timeTextLabel.text = (newValue?.source)! + " " + (newValue?.ptime)!
+            self.titleTextLabel.text = newValue?.title
+            self.timeTextLabel.text = (newValue?.source)! + " " + (newValue?.ptime)!
         }
         
         get {

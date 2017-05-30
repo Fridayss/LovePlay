@@ -8,12 +8,12 @@
 
 import UIKit
 
-typealias webViewDidFinishLoadBlock = (_ webHeight : CGFloat) -> ()
+typealias WebViewDidFinishLoadBlock = (_ webHeight : CGFloat) -> ()
 
 class NewsDetailWebCell: UITableViewCell, UIWebViewDelegate {
     
     var webHeight : CGFloat?
-    var finishBlock : webViewDidFinishLoadBlock?
+    var finishBlock : WebViewDidFinishLoadBlock?
     
     class func cellWithTableView(tableView : UITableView) -> NewsDetailWebCell {
         let ID = NSStringFromClass(self)
@@ -74,7 +74,7 @@ class NewsDetailWebCell: UITableViewCell, UIWebViewDelegate {
     }
     
     // MARK: - public
-    func webViewDidFinishLoadBlock(finishLoadBlock : @escaping webViewDidFinishLoadBlock) {
+    func webViewDidFinishLoadBlock(finishLoadBlock : @escaping WebViewDidFinishLoadBlock) {
         self.finishBlock = finishLoadBlock
     }
     

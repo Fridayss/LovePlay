@@ -14,6 +14,13 @@ class NewsListViewController: UIViewController, UITableViewDataSource, UITableVi
 
     var listDatas : [NewsListModel] = [NewsListModel]()
     
+    var _topicID : String?
+    var _sourceType : Int?
+    func newsListParams(topicID : String, sourceType : Int){
+        _topicID = topicID
+        _sourceType = sourceType
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addSubViews()
@@ -22,11 +29,14 @@ class NewsListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     private func addSubViews() {
         
-        self.view.addSubview(tableView)
+        self.view.addSubview(self.tableView)
     }
     
     private func loadData() {
-        let urlStr = BaseURL + NewsListURL + "/\(0)/\(10)"
+        var urlStr : String = BaseURL + NewsListURL + "/\(0)/\(10)"
+        if _topicID != nil {
+            urlStr = BaseURL + NewsListURL + "/\(_topicID!)" + "/\(0)/\(10)"
+        }
         Alamofire.request(urlStr).responseJSON { response in
             switch response.result.isSuccess{
             case true:

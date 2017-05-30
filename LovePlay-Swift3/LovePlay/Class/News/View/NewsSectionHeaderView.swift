@@ -34,7 +34,7 @@ class NewsSectionHeaderView: UITableViewHeaderFooterView {
     var titleText : String? {
         set {
             _titleText = newValue
-            titleTextlabel.text = newValue
+            self.titleTextlabel.text = newValue
         }
         
         get {
@@ -44,19 +44,19 @@ class NewsSectionHeaderView: UITableViewHeaderFooterView {
     
     // MARK: - private
     private func addSubViews() {
-        self.addSubview(leftLineView)
-        self.addSubview(titleTextlabel)
+        self.addSubview(self.leftLineView)
+        self.addSubview(self.titleTextlabel)
     }
     
     private func snp_subViews() {
-        leftLineView.snp.makeConstraints { (make) in
+        self.leftLineView.snp.makeConstraints { (make) in
             make.width.equalTo(3)
             make.top.equalToSuperview().offset(5)
             make.left.equalToSuperview().offset(12)
             make.bottom.equalToSuperview().offset(-5)
         }
         
-        titleTextlabel.snp.makeConstraints { (make) in
+        self.titleTextlabel.snp.makeConstraints { (make) in
             make.top.bottom.right.equalToSuperview()
             make.left.equalTo(leftLineView.snp.right).offset(8)
         }
