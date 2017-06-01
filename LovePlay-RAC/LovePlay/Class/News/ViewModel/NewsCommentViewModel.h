@@ -11,9 +11,9 @@
 
 @interface NewsCommentViewModel : NSObject
 
-@property (nonatomic, strong, readonly) NewsCommentModel *hotCommentModel;
+@property (nonatomic, strong, readonly) NewsCommentModel *hotComments;
 
-@property (nonatomic, strong, readonly) NewsCommentModel *latestCommentModel;
+@property (nonatomic, strong, readonly) NewsCommentModel *latestComments;
 
 @property (nonatomic, strong) RACCommand *fetchNewsCommentCommand;
 
