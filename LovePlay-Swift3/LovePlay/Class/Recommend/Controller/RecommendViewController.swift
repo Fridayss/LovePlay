@@ -11,9 +11,13 @@ import Alamofire
 
 class RecommendViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+<<<<<<< HEAD
     var topicDatas : [RecommendTopicModel] = [RecommendTopicModel]()
     var imgInfoDatas : [RecommendImageInfoModel] = [RecommendImageInfoModel]()
     
+=======
+//    var topicDatas
+>>>>>>> 1875739c6fa8c4890ae7b045ac14824f393cd618
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +32,16 @@ class RecommendViewController: UIViewController, UICollectionViewDelegate, UICol
     
     private func loadData() {
         self.loadTopicData()
+<<<<<<< HEAD
         self.loadImageInfoData()
+=======
+//        self.loadImageInfoData()
+>>>>>>> 1875739c6fa8c4890ae7b045ac14824f393cd618
     }
     
     private func loadTopicData() {
         let urlStr = BaseURL + RecommendTopicURL
+<<<<<<< HEAD
         Alamofire.request(urlStr).responseJSON { (response) in
 //            print(response)
             switch response.result.isSuccess {
@@ -45,16 +54,29 @@ class RecommendViewController: UIViewController, UICollectionViewDelegate, UICol
                     }
                     
                     self.collectionView.reloadData()
+=======
+        Alamofire.request(urlStr).responseJSON{ (response) in
+            print("topic -- response -- %@", response)
+            switch response.result.isSuccess {
+            case true :
+                if let value = response.result.value as? NSDictionary {
+                    let info = value["info"] as? NSArray
+//                    let arr = [RecommendTopicModel].deserialize(from: info);
+                    print("arr -- %@", info)
+>>>>>>> 1875739c6fa8c4890ae7b045ac14824f393cd618
                 }
             case false:
                 print(response.result.error as Any)
             }
         }
+        
+        
     }
     
     private func loadImageInfoData() {
         let urlStr = BaseURL + RecommendImageInfosURL
         Alamofire.request(urlStr).responseJSON { (response) in
+<<<<<<< HEAD
             print(response)
             switch response.result.isSuccess {
             case true:
@@ -70,6 +92,9 @@ class RecommendViewController: UIViewController, UICollectionViewDelegate, UICol
             case false:
                 print(response.result.error as Any)
             }
+=======
+            print("imgInfo -- response -- %@", response)
+>>>>>>> 1875739c6fa8c4890ae7b045ac14824f393cd618
         }
     }
     
