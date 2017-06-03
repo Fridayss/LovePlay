@@ -12,15 +12,14 @@
 //V
 #import "NewsCommentCellNode.h"
 #import "NewsDetailSectionTitleHeaderView.h"
+//VM
+#import "NewsCommentViewModel.h"
 
 @interface NewsCommentViewController ()<UITableViewDelegate, UITableViewDataSource>
 //UI
 @property (nonatomic, strong) UITableView *tableNode;
 //Data
-@property (nonatomic, strong) NewsCommentModel *hotComments;
-@property (nonatomic, strong) NewsCommentModel *latestComments;
-@property (nonatomic, assign) NSInteger pageIndex;
-@property (nonatomic, assign) NSInteger pageSize;
+@property (nonatomic, strong) NewsCommentViewModel *commentViewModel;
 @end
 
 @implementation NewsCommentViewController
@@ -29,17 +28,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self initParams];
     [self addTableNode];
     [self loadData];
 }
 
 #pragma mark - init
-- (void)initParams
-{
-    _pageIndex = 0;
-    _pageSize = 10;
-}
 
 - (void)addTableNode
 {
@@ -52,32 +45,10 @@
 
 - (void)loadData
 {
-    [self loadHotCommentData];
-}
-
-- (void)loadHotCommentData
-{
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/0/10/11/2/2",NewsHotCommentURL, _newsID];
-    [[HttpRequest sharedInstance] GET:urlString parameters:nil success:^(id response) {
-        NSLog(@"list-succ : %@", response);
-        NewsCommentModel *commentModel = [NewsCommentModel modelWithJSON:response];
-        _hotComments = commentModel;
-        [self loadLatestCommentData];
-    } failure:^(NSError *error) {
-        NSLog(@"list-fail : %@", error);
-    }];
-}
-
-- (void)loadLatestCommentData
-{
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%ld/%ld/6/2/2",NewsLatestCommentURL, _newsID, _pageIndex * _pageSize, _pageSize];
-    [[HttpRequest sharedInstance] GET:urlString parameters:nil success:^(id response) {
-        NSLog(@"list-succ : %@", response);
-        NewsCommentModel *commentModel = [NewsCommentModel modelWithJSON:response];
-        _latestComments = commentModel;
+    [[self.commentViewModel.fetchNewsCommentCommand execute:_newsID] subscribeNext:^(id x) {
         [_tableNode reloadData];
-    } failure:^(NSError *error) {
-        NSLog(@"list-fail : %@", error);
+    } error:^(NSError *error) {
+        
     }];
 }
 
@@ -90,9 +61,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (0 == section) {
-        return _hotComments.commentIds.count;
+        return self.commentViewModel.hotComments.commentIds.count;
     }else{
-        return _latestComments.commentIds.count;
+        return self.commentViewModel.latestComments.commentIds.count;
     }
 }
 
@@ -100,9 +71,9 @@
 {
     NewsCommentCellNode *cell = [NewsCommentCellNode cellWithTableView:tableView];
     if (0 == indexPath.section) {
-        [cell setupCommentItems:_hotComments.comments commmentIds:_hotComments.commentIds[indexPath.row]];
+        [cell setupCommentItems:self.commentViewModel.hotComments.comments commmentIds:self.commentViewModel.hotComments.commentIds[indexPath.row]];
     }else{
-        [cell setupCommentItems:_latestComments.comments commmentIds:_latestComments.commentIds[indexPath.row]];
+        [cell setupCommentItems:self.commentViewModel.latestComments.comments commmentIds:self.commentViewModel.latestComments.commentIds[indexPath.row]];
     }
     return cell;
 }
@@ -115,7 +86,7 @@
     switch (section) {
         case 0:
         {
-            if (_hotComments.comments.count > 0) {
+            if (self.commentViewModel.hotComments.comments.count > 0) {
                 headerView.title = @"热门跟帖";
             }else{
                 return nil;
@@ -125,7 +96,7 @@
             break;
         case 1:
         {
-            if (_latestComments.comments.count > 0) {
+            if (self.commentViewModel.latestComments.comments.count > 0) {
                 headerView.title = @"最新跟帖";
             }else{
                 return nil;
@@ -144,14 +115,14 @@
     switch (section) {
         case 0:
         {
-            if (_hotComments.comments.count > 0) {
+            if (self.commentViewModel.hotComments.comments.count > 0) {
                 return 30;
             }
         }
             break;
         case 1:
         {
-            if (_latestComments.comments.count > 0) {
+            if (self.commentViewModel.latestComments.comments.count > 0) {
                 return 30;
             }
         }
@@ -187,6 +158,15 @@
         _tableNode = tableNode;
     }
     return _tableNode;
+}
+
+- (NewsCommentViewModel *)commentViewModel
+{
+    if (!_commentViewModel) {
+        NewsCommentViewModel *commentViewModel = [[NewsCommentViewModel alloc] init];
+        _commentViewModel = commentViewModel;
+    }
+    return _commentViewModel;
 }
 
 #pragma mark - other
