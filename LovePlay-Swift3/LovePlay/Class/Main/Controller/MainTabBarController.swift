@@ -37,7 +37,7 @@ class MainTabBarController: UITabBarController {
     }
     
     func addZoneViewController(){
-        let newsVC = NewsListViewController()
+        let newsVC = ZoneListViewController()
         
         self.addChildIntoTabBarController(childController: newsVC, title: "社区", imageName: "icon_sq_nomal_pgall", selectImageName: "icon_sq_pressed_pgall")
     }
