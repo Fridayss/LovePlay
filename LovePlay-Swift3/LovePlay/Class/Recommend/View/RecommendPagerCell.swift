@@ -9,6 +9,7 @@
 import UIKit
 
 class RecommendPagerCell: UICollectionViewCell {
+    
     class func cellWithCollectionView(collectionView : UICollectionView, indexPath: IndexPath) -> RecommendPagerCell {
         
         let ID = NSStringFromClass(self)

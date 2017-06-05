@@ -51,8 +51,6 @@ class RecommendViewController: UIViewController, UICollectionViewDelegate, UICol
                 print(response.result.error as Any)
             }
         }
-        
-        
     }
     
     private func loadImageInfoData() {

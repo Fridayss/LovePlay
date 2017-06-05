@@ -56,20 +56,35 @@ class ZoneListViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let discussItem = self.zoneDatas?[section].detailList {
-            return discussItem.count
+        if let detailList = self.zoneDatas?[section].detailList {
+            return detailList.count
         }
         return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(UICollectionViewCell.self), for: indexPath)
-        cell.backgroundColor = UIColor.cyan
+        let cell = ZoneListCell.cellWithCollectionView(collectionView: collectionView, indexPath: indexPath)
+        let detailList = self.zoneDatas?[indexPath.section].detailList
+        let discussItem = detailList?[indexPath.row]
+        cell.listModel = discussItem
         return cell
     }
     
     // MARK: - collectionView delegate
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if kind == UICollectionElementKindSectionHeader {
+            let listModel = self.zoneDatas?[indexPath.section]
+            let sectionHeader : ZoneListSectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: NSStringFromClass(ZoneListSectionHeader.self), for: indexPath) as! ZoneListSectionHeader
+            sectionHeader.titleTextLabel.text = listModel?.type?.typeName
+            return sectionHeader
+        }
+        return UICollectionReusableView()
+    }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: self.view.bounds.size.width, height: 30)
+    }
     
     // MARK: - setter / getter
     lazy var colletionView : UICollectionView = {
@@ -82,7 +97,8 @@ class ZoneListViewController: UIViewController, UICollectionViewDelegate, UIColl
         colletionView.delegate = self
         colletionView.dataSource = self
         colletionView.alwaysBounceVertical = true
-        colletionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: NSStringFromClass(UICollectionViewCell.self))
+        colletionView.register(ZoneListCell.self, forCellWithReuseIdentifier: NSStringFromClass(ZoneListCell.self))
+        colletionView.register(ZoneListSectionHeader.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(ZoneListSectionHeader.self))
         return colletionView
     }()
     
