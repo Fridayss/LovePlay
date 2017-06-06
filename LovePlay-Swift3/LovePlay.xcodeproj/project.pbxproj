@@ -18,6 +18,11 @@
 		A11866C81E729BF800AE884A /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11866C71E729BF800AE884A /* MainNavigationController.swift */; };
 		A11D95571E7637890010BD11 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11D95561E7637890010BD11 /* HttpRequest.swift */; };
 		A132D0881E7A704C005C39BA /* NewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A132D0871E7A704C005C39BA /* NewsListModel.swift */; };
+		A17ED60B1EE67EF8003D8503 /* DiscussListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17ED60A1EE67EF8003D8503 /* DiscussListViewController.swift */; };
+		A17ED60D1EE6816A003D8503 /* DiscussListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17ED60C1EE6816A003D8503 /* DiscussListCell.swift */; };
+		A17ED6111EE6853C003D8503 /* DiscussListTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17ED6101EE6853C003D8503 /* DiscussListTopCell.swift */; };
+		A17ED6131EE6856E003D8503 /* DiscussListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17ED6121EE6856D003D8503 /* DiscussListHeaderView.swift */; };
+		A17ED6151EE68F4C003D8503 /* DiscussListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17ED6141EE68F4C003D8503 /* DiscussListModel.swift */; };
 		A18651061ECED43100F3E3F0 /* NewsNormalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18651051ECED43100F3E3F0 /* NewsNormalCell.swift */; };
 		A18651081ECEFCE100F3E3F0 /* LovePlayPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18651071ECEFCE100F3E3F0 /* LovePlayPrefix.swift */; };
 		A186510A1ECF021700F3E3F0 /* NewsCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18651091ECF021700F3E3F0 /* NewsCommentViewController.swift */; };
@@ -63,6 +68,11 @@
 		A11866C71E729BF800AE884A /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		A11D95561E7637890010BD11 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		A132D0871E7A704C005C39BA /* NewsListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListModel.swift; sourceTree = "<group>"; };
+		A17ED60A1EE67EF8003D8503 /* DiscussListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussListViewController.swift; sourceTree = "<group>"; };
+		A17ED60C1EE6816A003D8503 /* DiscussListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussListCell.swift; sourceTree = "<group>"; };
+		A17ED6101EE6853C003D8503 /* DiscussListTopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussListTopCell.swift; sourceTree = "<group>"; };
+		A17ED6121EE6856D003D8503 /* DiscussListHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussListHeaderView.swift; sourceTree = "<group>"; };
+		A17ED6141EE68F4C003D8503 /* DiscussListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussListModel.swift; sourceTree = "<group>"; };
 		A18651051ECED43100F3E3F0 /* NewsNormalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsNormalCell.swift; sourceTree = "<group>"; };
 		A18651071ECEFCE100F3E3F0 /* LovePlayPrefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LovePlayPrefix.swift; sourceTree = "<group>"; };
 		A18651091ECF021700F3E3F0 /* NewsCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCommentViewController.swift; sourceTree = "<group>"; };
@@ -279,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				A11866BB1E72951000AE884A /* ZoneListViewController.swift */,
+				A17ED60A1EE67EF8003D8503 /* DiscussListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -322,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				A78307FD1EE43433000D1FB8 /* ZoneListModel.swift */,
+				A17ED6141EE68F4C003D8503 /* DiscussListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -331,6 +343,9 @@
 			children = (
 				A78307FF1EE43BAB000D1FB8 /* ZoneListCell.swift */,
 				A1C7E4B61EE5336200B15F96 /* ZoneListSectionHeader.swift */,
+				A17ED60C1EE6816A003D8503 /* DiscussListCell.swift */,
+				A17ED6101EE6853C003D8503 /* DiscussListTopCell.swift */,
+				A17ED6121EE6856D003D8503 /* DiscussListHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -469,6 +484,7 @@
 			files = (
 				A11866BE1E72951000AE884A /* NewsListViewController.swift in Sources */,
 				A7050D331ECF4B1D00D5D51B /* NewsDetailModel.swift in Sources */,
+				A17ED6111EE6853C003D8503 /* DiscussListTopCell.swift in Sources */,
 				A7050D351ECF4BAA00D5D51B /* NewsCommentModel.swift in Sources */,
 				A11866BF1E72951000AE884A /* RecommendViewController.swift in Sources */,
 				A78307F61EE2B351000D1FB8 /* RecommendTopicCell.swift in Sources */,
@@ -479,7 +495,9 @@
 				A78308001EE43BAB000D1FB8 /* ZoneListCell.swift in Sources */,
 				A71DC8331EDDB16000A3F581 /* NewsImageTitleCell.swift in Sources */,
 				A78307F41EE2B351000D1FB8 /* RecommendPagerCell.swift in Sources */,
+				A17ED60B1EE67EF8003D8503 /* DiscussListViewController.swift in Sources */,
 				A78307F51EE2B351000D1FB8 /* RecommendScrollCell.swift in Sources */,
+				A17ED6151EE68F4C003D8503 /* DiscussListModel.swift in Sources */,
 				A18651081ECEFCE100F3E3F0 /* LovePlayPrefix.swift in Sources */,
 				A76A86B41ED1DC2C00FE0396 /* UrlConst.swift in Sources */,
 				A78307FA1EE2B361000D1FB8 /* RecommendTopicModel.swift in Sources */,
@@ -488,8 +506,10 @@
 				A11866991E7294EF00AE884A /* ViewController.swift in Sources */,
 				A11866C81E729BF800AE884A /* MainNavigationController.swift in Sources */,
 				A7846D131EDD3913001ACC4B /* RecommendDetailViewController.swift in Sources */,
+				A17ED60D1EE6816A003D8503 /* DiscussListCell.swift in Sources */,
 				A11D95571E7637890010BD11 /* HttpRequest.swift in Sources */,
 				A71DC8311EDDB15300A3F581 /* NewsTitleImageCell.swift in Sources */,
+				A17ED6131EE6856E003D8503 /* DiscussListHeaderView.swift in Sources */,
 				A76A86B81ED1EAC400FE0396 /* NewsCommentFooterView.swift in Sources */,
 				A76A86B01ED1C2CE00FE0396 /* NewsRelativeCell.swift in Sources */,
 				A78307FE1EE43433000D1FB8 /* ZoneListModel.swift in Sources */,

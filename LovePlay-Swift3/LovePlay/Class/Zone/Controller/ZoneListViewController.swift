@@ -86,6 +86,14 @@ class ZoneListViewController: UIViewController, UICollectionViewDelegate, UIColl
         return CGSize(width: self.view.bounds.size.width, height: 30)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailList = self.zoneDatas?[indexPath.section].detailList
+        let discussItem = detailList?[indexPath.row]
+        let listViewController : DiscussListViewController = DiscussListViewController()
+        listViewController.fid = discussItem?.fid
+        self.navigationController?.pushViewController(listViewController, animated: true)
+    }
+    
     // MARK: - setter / getter
     lazy var colletionView : UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
