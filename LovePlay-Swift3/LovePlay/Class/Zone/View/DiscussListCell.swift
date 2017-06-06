@@ -61,6 +61,8 @@ class DiscussListCell: UITableViewCell {
     var listModel : DiscussListModel? {
         set {
             _listModel = newValue
+            self.titleTextLabel.text = newValue?.subject
+            self.descTextLabel.text = "回复  " + "\((newValue?.replies)!)" + "\((newValue?.lastpost)!.replacingOccurrences(of: "&nbsp;", with: ""))" + "\((newValue?.lastposter)!)"
         }
         
         get {

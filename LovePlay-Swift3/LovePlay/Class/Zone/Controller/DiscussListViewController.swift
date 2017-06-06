@@ -33,15 +33,16 @@ class DiscussListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     //MARK: - private
-    func addSubViews() {
+    private func addSubViews() {
         self.view.addSubview(self.tableView)
     }
     
-    func loadData() {
+    private func loadData() {
         self.loadListData()
+        self.loadImgData()
     }
     
-    func loadListData() {
+    private func loadListData() {
         let params : [String : Any] = ["version":"163", "module":"forumdisplay", "fid":_fid!, "tpp":"15", "charset":"utf-8", "page": "1"]
         let urlStr = DiscussListURL
         Alamofire.request(urlStr, method: .get, parameters: params).responseJSON { (response) in
@@ -67,18 +68,37 @@ class DiscussListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    func loadImgData() {
-        
+    private func loadImgData() {
+        let urlStr = BaseURL + DiscussListImgURL + "/\(_fid!)"
+        Alamofire.request(urlStr).responseJSON { (response) in
+            switch response.result.isSuccess {
+            case true :
+                print(response.result.value!)
+                if let value = response.result.value as? NSDictionary {
+                    let info = value["info"] as? NSDictionary
+                    let imgModel = DiscussImgModel.deserialize(from: info)
+                    //添加headerView
+                    self.setupTableViewHeader(imgModel: imgModel!)
+                }
+            case false :
+                print(response.result.error!)
+            }
+        }
     }
     
-    func sectionDiscussList(discussList : [DiscussListModel]) {
+    private func sectionDiscussList(discussList : [DiscussListModel]) {
         for listModel in discussList {
             if listModel.displayorder == 1 {
-                self.discussListDatas?.append(listModel)
+                self.discussListTopDatas?.append(listModel)
             }else{
                 self.discussListDatas?.append(listModel)
             }
         }
+    }
+    
+    private func setupTableViewHeader(imgModel : DiscussImgModel) {
+        self.headerView.imgModel = imgModel
+        self.tableView.tableHeaderView = self.headerView
     }
     
     //MARK: - tableView dataSource
@@ -106,10 +126,14 @@ class DiscussListViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
+            let listModel = self.discussListTopDatas?[indexPath.row]
             let cell : DiscussListTopCell = DiscussListTopCell.cellWithTableView(tableView: tableView)
+            cell.listModel = listModel
             return cell
         case 1:
+            let listModel = self.discussListDatas?[indexPath.row]
             let cell : DiscussListCell = DiscussListCell.cellWithTableView(tableView: tableView)
+            cell.listModel = listModel
             return cell
         default:
             return UITableViewCell()
@@ -123,9 +147,17 @@ class DiscussListViewController: UIViewController, UITableViewDelegate, UITableV
         let tableView : UITableView = UITableView(frame: self.view.bounds, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60
         return tableView
+    }()
+    
+    lazy var headerView : DiscussListHeaderView = {
+        let headerView : DiscussListHeaderView = DiscussListHeaderView(frame: CGRect(x: 0, y: 0, width: self.tableView.width, height: 150))
+        
+        return headerView
     }()
 
     override func didReceiveMemoryWarning() {

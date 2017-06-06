@@ -18,8 +18,6 @@ class RecommendScrollCell: UICollectionViewCell, UICollectionViewDelegate, UICol
         
         let ID = NSStringFromClass(self)
         let cell : RecommendScrollCell? = collectionView.dequeueReusableCell(withReuseIdentifier: ID, for: indexPath) as? RecommendScrollCell
-        
-        cell?.contentView.backgroundColor = UIColor.yellow
         return cell!
     }
     

@@ -23,8 +23,14 @@ class NewsListViewController: UIViewController, UITableViewDataSource, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.initParams()
         self.addSubViews()
         self.loadData()
+    }
+    
+    //MARK: - private
+    private func initParams() {
+        _sourceType = 1
     }
     
     private func addSubViews() {
@@ -64,11 +70,22 @@ class NewsListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model : NewsListModel = self.listDatas[indexPath.row]
-        let cell = NewsNormalCell.cellWithTableView(tableView: tableView)
-        cell.listModel = model
-        return cell
-        
+        let listModel : NewsListModel = self.listDatas[indexPath.row]
+        if _sourceType == 0 {
+            let cell = NewsImageTitleCell.cellWithTableView(tableView: tableView)
+            cell.listModel = listModel
+            return cell
+        }else{
+            if listModel.showType.intValue == 2 {
+                let cell = NewsTitleImageCell.cellWithTableView(tableView: tableView)
+                cell.listModel = listModel
+                return cell
+            }else{
+                let cell = NewsNormalCell.cellWithTableView(tableView: tableView)
+                cell.listModel = listModel
+                return cell
+            }
+        }
     }
     
     // MARK: - tableView delegate

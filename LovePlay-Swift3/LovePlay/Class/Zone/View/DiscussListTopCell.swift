@@ -63,6 +63,7 @@ class DiscussListTopCell: UITableViewCell {
     var listModel : DiscussListModel? {
         set {
             _listModel = newValue
+            self.titleTextLabel.text = newValue?.subject!
         }
         
         get {
@@ -73,8 +74,14 @@ class DiscussListTopCell: UITableViewCell {
     //MARK: - setter / getter
     lazy var topTextLabel : UILabel = {
         let label : UILabel = UILabel()
+        label.text = "置顶帖"
+        label.textAlignment = NSTextAlignment.center
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = RGB(r: 236, g: 126, b: 150)
+        label.layer.cornerRadius = 5;
+        label.layer.masksToBounds = true;
+        label.layer.borderWidth = 1;
+        label.layer.borderColor = RGB(r: 236, g: 126, b: 150).cgColor
         return label
     }()
     

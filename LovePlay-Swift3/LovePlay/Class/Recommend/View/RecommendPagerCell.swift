@@ -14,8 +14,6 @@ class RecommendPagerCell: UICollectionViewCell {
         
         let ID = NSStringFromClass(self)
         let cell : RecommendPagerCell? = collectionView.dequeueReusableCell(withReuseIdentifier: ID, for: indexPath) as? RecommendPagerCell
-        
-        cell?.contentView.backgroundColor = UIColor.red
         return cell!
     }
     

@@ -49,6 +49,7 @@
 		A78308001EE43BAB000D1FB8 /* ZoneListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78307FF1EE43BAB000D1FB8 /* ZoneListCell.swift */; };
 		A7846D0D1EDD228B001ACC4B /* BaseMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7846D0C1EDD228B001ACC4B /* BaseMacros.swift */; };
 		A7846D131EDD3913001ACC4B /* RecommendDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7846D121EDD3913001ACC4B /* RecommendDetailViewController.swift */; };
+		A7E9B98D1EE6F57B00A8FCC0 /* DiscussImgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E9B98C1EE6F57B00A8FCC0 /* DiscussImgModel.swift */; };
 		E58FF56262C0892D8E5D61B9 /* Pods_LovePlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 683CF1A050185F6490B9BED3 /* Pods_LovePlay.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		A78307FF1EE43BAB000D1FB8 /* ZoneListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoneListCell.swift; sourceTree = "<group>"; };
 		A7846D0C1EDD228B001ACC4B /* BaseMacros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMacros.swift; sourceTree = "<group>"; };
 		A7846D121EDD3913001ACC4B /* RecommendDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendDetailViewController.swift; sourceTree = "<group>"; };
+		A7E9B98C1EE6F57B00A8FCC0 /* DiscussImgModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussImgModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +336,7 @@
 			children = (
 				A78307FD1EE43433000D1FB8 /* ZoneListModel.swift */,
 				A17ED6141EE68F4C003D8503 /* DiscussListModel.swift */,
+				A7E9B98C1EE6F57B00A8FCC0 /* DiscussImgModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				A76A86B41ED1DC2C00FE0396 /* UrlConst.swift in Sources */,
 				A78307FA1EE2B361000D1FB8 /* RecommendTopicModel.swift in Sources */,
 				A76A86BA1ED1F3E800FE0396 /* NewsCommentCell.swift in Sources */,
+				A7E9B98D1EE6F57B00A8FCC0 /* DiscussImgModel.swift in Sources */,
 				A76A86B61ED1EAB000FE0396 /* NewsSectionHeaderView.swift in Sources */,
 				A11866991E7294EF00AE884A /* ViewController.swift in Sources */,
 				A11866C81E729BF800AE884A /* MainNavigationController.swift in Sources */,

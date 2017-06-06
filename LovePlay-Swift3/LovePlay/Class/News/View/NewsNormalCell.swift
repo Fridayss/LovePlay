@@ -71,9 +71,11 @@ class NewsNormalCell: UITableViewCell {
     var listModel : NewsListModel? {
         set {
             _listModel = newValue
-            
-            let imgSrc = (newValue?.imgsrc.first)!
-            let imgURL = URL(string: imgSrc)
+            var imgURL : URL? = URL(string: "")
+            if !(newValue?.imgsrc.isEmpty)!  {
+                let imgSrc = (newValue?.imgsrc.first)!
+                imgURL = URL(string: imgSrc)
+            }
             self.imgView.kf.setImage(with: imgURL)
             
             self.titleTextLabel.text = newValue?.title
@@ -90,25 +92,32 @@ class NewsNormalCell: UITableViewCell {
     // MARK: - lazy load
     lazy var imgView : UIImageView = {
         let imgView : UIImageView = UIImageView()
-        imgView.backgroundColor = UIColor.red
+        
         return imgView
     }()
     
     lazy var titleTextLabel : UILabel = {
         let titleTextLabel : UILabel = UILabel()
         titleTextLabel.numberOfLines = 2
+        titleTextLabel.textColor = RGB(r: 36, g: 36, b: 36)
+        titleTextLabel.font = UIFont.systemFont(ofSize: 16)
         return titleTextLabel
     }()
     
     lazy var replyButton : UIButton = {
         let replyButton : UIButton = UIButton()
-        replyButton.setTitleColor(UIColor.black, for: .normal)
+        replyButton.setTitleColor(RGB(r: 150, g: 150, b: 150), for: .normal)
+        replyButton.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+        replyButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5)
+        replyButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0)
+        replyButton.setTitle("0", for: .normal)
+        replyButton.setImage(UIImage(named: "common_chat_new"), for: .normal)
         return replyButton
     }()
     
     lazy var underLineView : UIView = {
         let underLineView : UIView = UIView()
-        underLineView.backgroundColor = UIColor.lightGray
+        underLineView.backgroundColor = RGB(r: 222, g: 222, b: 222)
         return underLineView
     }()
 }
