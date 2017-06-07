@@ -55,8 +55,9 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
                         self.hotCommentData = commentModel;
                     }
                 }
-                // 请求最新评论
-                self.loadLatestCommentData()
+                
+                // 刷新列表
+                self.tableView.reloadData()
             case false:
                 print(response.result.error as Any)
             }
@@ -109,9 +110,9 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = NewsCommentCell.cellWithTableView(tableView: tableView)
         
         if 0 == indexPath.section {
-//            cell.setupComment(commentItems: hotCommentData?.comments, commmentIds: hotCommentData?.commentIds[indexPath.row])
+            cell.setupComment(commentItems: (self.hotCommentData?.comments)!, commmentIds: self.hotCommentData?.commentIds![indexPath.row] as! NSArray)
         }else{
-        
+            cell.setupComment(commentItems: (self.latestCommentData?.comments)!, commmentIds: self.latestCommentData?.commentIds![indexPath.row] as! NSArray)
         }
         
         return cell

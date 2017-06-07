@@ -15,7 +15,7 @@ class DiscussImgModel: HandyJSON {
     var iconUrl : String?
     var modelDesc : String?
     var modelName : String?
-    var todayPosts : String?
+    var todayPosts : Int? = 0
     var fid : String?
     var weight : String?
     var discuzModelTypeId : String?

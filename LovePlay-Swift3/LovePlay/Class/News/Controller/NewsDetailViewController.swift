@@ -38,7 +38,7 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     private func loadData() {
-        let urlStr = BaseURL + NewsDetailURL + "/\("C72979E100314V88")"
+        let urlStr = BaseURL + NewsDetailURL + "/\(_newsID!)"
         Alamofire.request(urlStr).responseJSON { response in
             switch response.result.isSuccess{
             case true:
@@ -69,6 +69,9 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         case 0:
             return 1
         case 1:
+            if (self.detailModel?.tie?.commentIds) != nil {
+                return (self.detailModel?.tie?.commentIds)!.count
+            }
             return 0
         case 2:
             if (self.detailModel?.article?.relative_sys) != nil {
@@ -130,10 +133,12 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
+        case 1:
+            return 30
         case 2:
             return 30
         default:
-            return 1
+            return CGFloat.leastNormalMagnitude
         }
     }
     
@@ -142,7 +147,7 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         case 1:
             return 40
         default:
-            return 1
+            return CGFloat.leastNormalMagnitude
         }
     }
     
@@ -157,8 +162,11 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = NewsCommentFooterView.sectionHeaderWithTableView(tableView: tableView)
-        return footer
+        if 1 == section {
+            let footer = NewsCommentFooterView.sectionHeaderWithTableView(tableView: tableView)
+            return footer
+        }
+        return UIView()
     }
     
     // MARK: - lazy load

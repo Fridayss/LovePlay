@@ -49,7 +49,7 @@ struct DetailArticleModel : HandyJSON {
 class NewsDetailModel: HandyJSON {
     
     var article : DetailArticleModel?
-    
+    var tie : NewsCommentModel?
     required init(){}
 
 }
