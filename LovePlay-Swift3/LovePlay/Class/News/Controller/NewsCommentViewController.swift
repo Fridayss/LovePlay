@@ -11,7 +11,7 @@ import Alamofire
 
 class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var commentModel : NewsCommentModel?
+//    var commentModel : NewsCommentModel?
     var hotCommentData : NewsCommentModel?
     var latestCommentData : NewsCommentModel?
     fileprivate var _newsID : String?
@@ -40,7 +40,7 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
     
     private func loadData() {
         self.loadHotCommentData()
-        self.loadLatestCommentData()
+//        self.loadLatestCommentData()
     }
     
     // 请求热门评论
@@ -109,11 +109,11 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = NewsCommentCell.cellWithTableView(tableView: tableView)
         
-        if 0 == indexPath.section {
-            cell.setupComment(commentItems: (self.hotCommentData?.comments)!, commmentIds: self.hotCommentData?.commentIds![indexPath.row] as! NSArray)
-        }else{
-            cell.setupComment(commentItems: (self.latestCommentData?.comments)!, commmentIds: self.latestCommentData?.commentIds![indexPath.row] as! NSArray)
-        }
+//        if 0 == indexPath.section {
+//            cell.setupComment(commentItems: (self.hotCommentData?.comments)!, commmentIds: self.hotCommentData?.commentIds![indexPath.row] as! NSArray)
+//        }else{
+//            cell.setupComment(commentItems: (self.latestCommentData?.comments)!, commmentIds: self.latestCommentData?.commentIds![indexPath.row] as! NSArray)
+//        }
         
         return cell
     }

@@ -25,7 +25,7 @@ struct CommentItemModel : HandyJSON {
 
 class NewsCommentModel: HandyJSON {
 //    var commentIds : NSArray?
-    fileprivate var _commentIds : NSArray?
+    var _commentIds : NSArray?
     var commentIds : NSArray? {
         set {
             _commentIds = newValue
@@ -45,10 +45,10 @@ class NewsCommentModel: HandyJSON {
     }
     
 //    var comments : NSDictionary?
-    fileprivate var _comments : NSDictionary?
+    var _comments : NSDictionary?
     var comments : NSDictionary? {
         set {
-            self.comments = newValue
+            _comments = newValue
         }
         
         get {
