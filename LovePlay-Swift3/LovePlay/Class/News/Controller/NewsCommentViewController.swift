@@ -40,7 +40,7 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
     
     private func loadData() {
         self.loadHotCommentData()
-//        self.loadLatestCommentData()
+        self.loadLatestCommentData()
     }
     
     // 请求热门评论
@@ -51,7 +51,8 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
             case true:
                 if let value = response.result.value as? NSDictionary{
                     if let commentModel = NewsCommentModel.deserialize(from: value) {
-                        print(commentModel.commentIds!)
+//                        print(commentModel.commentIdsSB!)
+//                        print(commentModel.commentsSB!)
                         self.hotCommentData = commentModel;
                     }
                 }
@@ -72,7 +73,6 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
             case true:
                 if let value = response.result.value as? NSDictionary{
                     if let commentModel = NewsCommentModel.deserialize(from: value) {
-                        print(commentModel.commentIds!)
                         self.latestCommentData = commentModel;
                     }
                 }
@@ -109,11 +109,16 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = NewsCommentCell.cellWithTableView(tableView: tableView)
         
-//        if 0 == indexPath.section {
-//            cell.setupComment(commentItems: (self.hotCommentData?.comments)!, commmentIds: self.hotCommentData?.commentIds![indexPath.row] as! NSArray)
-//        }else{
-//            cell.setupComment(commentItems: (self.latestCommentData?.comments)!, commmentIds: self.latestCommentData?.commentIds![indexPath.row] as! NSArray)
-//        }
+        if 0 == indexPath.section {
+            if self.hotCommentData?.commentIds != nil {
+                cell.setupComment(commentItems: (self.hotCommentData?.commentsSB)!, commmentIds: self.hotCommentData?.commentIdsSB![indexPath.row] as! NSArray)
+            }
+            
+        }else{
+            if self.latestCommentData?.commentIds != nil {
+                cell.setupComment(commentItems: (self.latestCommentData?.commentsSB)!, commmentIds: self.latestCommentData?.commentIdsSB![indexPath.row] as! NSArray)
+            }
+        }
         
         return cell
     }

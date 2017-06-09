@@ -25,40 +25,32 @@ struct CommentItemModel : HandyJSON {
 
 class NewsCommentModel: HandyJSON {
 //    var commentIds : NSArray?
-    var _commentIds : NSArray?
-    var commentIds : NSArray? {
-        set {
-            _commentIds = newValue
-        }
-        
+//    var comments : NSDictionary?
+    var commentIds : [String]? // json转model对应的key
+    var commentIdsSB : [Any]? { // 自定义一个参数，重写get方法，用于获取处理后的数据
         get {
-            let commentIdsArr = NSArray()
-            if _commentIds?.count != 0 {
-                for floor in _commentIds! {
-                    let floors : Array = (floor as AnyObject).components(separatedBy: ",")
-                    commentIdsArr.adding(floors)
-                }
+            var commentIdsArr = [Any]()
+            for floor : String in commentIds! {
+                let floors : [String] = (floor as AnyObject).components(separatedBy: ",")
+                commentIdsArr.append(floors)
             }
-            
             return commentIdsArr
         }
     }
     
-//    var comments : NSDictionary?
-    var _comments : NSDictionary?
-    var comments : NSDictionary? {
-        set {
-            _comments = newValue
-        }
-        
+    var comments : NSDictionary?
+    var commentsSB : NSDictionary? {
         get {
-            let commentsDict = NSDictionary()
-            _comments?.enumerateKeysAndObjects({ (key, obj, stop) in
+            let commentsDict = NSMutableDictionary()
+            comments?.enumerateKeysAndObjects({ (key, obj, stop) in
                 let commentItemModel : CommentItemModel = CommentItemModel.deserialize(from: obj as? NSDictionary)!
                 commentsDict.setValue(commentItemModel, forKey: key as! String)
             })
-            return self.comments
+            return commentsDict
         }
+        
     }
+    
+
     required init(){}
 }

@@ -88,13 +88,16 @@ class NewsCommentCell: UITableViewCell {
         _commmentIds = commmentIds
         let itemModel : CommentItemModel = commentItems[commmentIds.lastObject!] as! CommentItemModel
         
-        let imgSrc = itemModel.user?.avatar
-        let imgURL = URL(string: imgSrc!)
+        var imgURL : URL? = URL(string: "")
+        if let imgSrc = itemModel.user?.avatar {
+            imgURL = URL(string: imgSrc)
+        }
+//        let imgURL = URL(string: imgSrc!)
         self.avartImgView.kf.setImage(with: imgURL)
         
-        self.nameTextLabel.text = itemModel.user?.nickname
-        self.loctionTextLabel.text = itemModel.user?.location
-        self.voteButton.setTitle((itemModel.vote!).description, for: .normal)
+        self.nameTextLabel.text = itemModel.user?.nickname != nil ? itemModel.user?.nickname : "火星网友"
+        self.loctionTextLabel.text = itemModel.user?.location != nil ? itemModel.user?.location : "火星"
+        self.voteButton.setTitle((itemModel.vote!).description + "顶", for: .normal)
         self.contentTextLabel.text = itemModel.content
         
     }
@@ -103,37 +106,43 @@ class NewsCommentCell: UITableViewCell {
     // MARK: - lazy load
     lazy var avartImgView : UIImageView = {
         let avartImgView = UIImageView()
-        
+        avartImgView.backgroundColor = UIColor.purple
         return avartImgView
     }()
     
     lazy var voteButton : UIButton = {
         let voteButton = UIButton()
-        
+        voteButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        voteButton.contentHorizontalAlignment = .right
+        voteButton.setTitleColor(RGB(r: 163, g: 163, b: 163), for: .normal)
         return voteButton
     }()
     
     lazy var nameTextLabel : UILabel = {
         let nameTextLabel = UILabel()
-        
+        nameTextLabel.font = UIFont.systemFont(ofSize: 14)
+        nameTextLabel.textColor = RGB(r: 186, g: 177, b: 161)
         return nameTextLabel
     }()
     
     lazy var loctionTextLabel : UILabel = {
         let loctionTextLabel = UILabel()
-        
+        loctionTextLabel.font = UIFont.systemFont(ofSize: 12)
+        loctionTextLabel.textColor = RGB(r: 163, g: 163, b: 163)
         return loctionTextLabel
     }()
     
     lazy var contentTextLabel : UILabel = {
         let contentTextLabel = UILabel()
         contentTextLabel.numberOfLines = 0
+        contentTextLabel.font = UIFont.systemFont(ofSize: 14)
+        contentTextLabel.textColor = RGB(r: 50, g: 50, b: 50)
         return contentTextLabel
     }()
     
     lazy var underLineView : UIView = {
-        let contentTextLabel = UIView()
-        
-        return contentTextLabel
+        let underLineView = UIView()
+        underLineView.backgroundColor = RGB(r: 222, g: 222, b: 222)
+        return underLineView
     }()
 }

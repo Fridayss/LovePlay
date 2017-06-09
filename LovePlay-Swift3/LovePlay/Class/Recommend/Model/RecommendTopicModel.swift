@@ -24,8 +24,9 @@ class RecommendTopicModel: HandyJSON {
     var sourceType : Int?
 
     func mapping(mapper: HelpingMapper) {
-        mapper <<<
-            desc <-- "description"
+//        mapper <<<
+//            desc <-- "description"
+        mapper.specify(property: &desc, name: "description")
     }
     
     required init() {
