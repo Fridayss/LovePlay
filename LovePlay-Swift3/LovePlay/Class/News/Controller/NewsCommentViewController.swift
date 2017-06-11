@@ -45,7 +45,7 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
     
     // 请求热门评论
     private func loadHotCommentData() {
-        let urlStr = BaseURL + NewsHotCommentURL + "/\("C72979E100314V88")/0/10/11/2/2"
+        let urlStr = BaseURL + NewsHotCommentURL + "/\(_newsID!)/0/10/11/2/2"
         Alamofire.request(urlStr).responseJSON { response in
             switch response.result.isSuccess{
             case true:
@@ -67,7 +67,7 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
     
     // 请求最新评论
     private func loadLatestCommentData() {
-        let urlStr = BaseURL + NewsLatestCommentURL + "/\("C72979E100314V88")/0/10/6/2/2"
+        let urlStr = BaseURL + NewsLatestCommentURL + "/\(_newsID!)/0/10/6/2/2"
         Alamofire.request(urlStr).responseJSON { response in
             switch response.result.isSuccess{
             case true:
@@ -129,11 +129,19 @@ class NewsCommentViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
+        return CGFloat.leastNormalMagnitude
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = NewsSectionHeaderView.sectionHeaderWithTableView(tableView: tableView)
+        switch section {
+        case 0:
+            header.titleText = "热门跟帖"
+        case 1:
+            header.titleText = "最新跟帖"
+        default:
+            header.titleText = ""
+        }
         return header
     }
     

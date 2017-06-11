@@ -39,17 +39,19 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     private func loadData() {
         let urlStr = BaseURL + NewsDetailURL + "/\(_newsID!)"
-        Alamofire.request(urlStr).responseJSON { response in
+        let params : [String : Any] = ["tieVersion" : "v2", "platform" : "ios", "width" : self.view.width * 2, "height" : self.view.height * 2, "decimal" : "75"]
+        Alamofire.request(urlStr, method : .get, parameters : params).responseJSON { response in
             switch response.result.isSuccess{
             case true:
                 if let value = response.result.value as? NSDictionary{
                     let info = value["info"] as? NSDictionary
-                    if let detailModel = NewsDetailModel.deserialize(from: info){
+                    if let detailModel = NewsDetailModel.deserialize(from: info) {
                         
                         print((detailModel.article?.title)!)
                         
                         self.detailModel = detailModel
                     }
+                    
                     self.tableView.reloadData()
                 }
             case false:
@@ -69,13 +71,13 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         case 0:
             return 1
         case 1:
-            if (self.detailModel?.tie?.commentIds) != nil {
-                return (self.detailModel?.tie?.commentIds)!.count
+            if (self.detailModel?.tie?.commentIdsSB) != nil {
+                return (self.detailModel?.tie?.commentIdsSB!.count)!
             }
             return 0
         case 2:
-            if (self.detailModel?.article?.relative_sys) != nil {
-                return (self.detailModel?.article?.relative_sys)!.count
+            if self.detailModel?.article?.relative_sys != nil {
+                return (self.detailModel?.article?.relative_sys?.count)!
             }
             return 0
         default:
@@ -84,12 +86,10 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         switch indexPath.section {
         case 0:
             let webCell : NewsDetailWebCell = NewsDetailWebCell.cellWithTableView(tableView: tableView)
-            // webView 高度为0，且内容不为空时，传入
+            // webView 高度为0，且内容不为空时，传入HTML内容
             if self.webViewHeight == nil {
                 if let htmlBody = self.detailModel?.article?.body {
                     webCell.htmlBody = htmlBody
@@ -101,20 +101,17 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.tableView.reloadData()
             })
             return webCell
-            
-        case 2 :
+        case 1:
+            let commentCell : NewsCommentCell = NewsCommentCell.cellWithTableView(tableView: tableView)
+            let floors = (self.detailModel?.tie?.commentIdsSB![indexPath.row]) as! NSArray
+            commentCell.setupComment(commentItems: (self.detailModel?.tie?.commentsSB)!, commmentIds: floors)
+            return commentCell
+        case 2:
             let relativeCell : NewsRelativeCell = NewsRelativeCell.cellWithTableView(tableView: tableView)
             relativeCell.relativeModel = self.detailModel?.article?.relative_sys?[indexPath.row]
             return relativeCell
         default:
-            let ID = "cell"
-            var cell : UITableViewCell?
-            cell = tableView.dequeueReusableCell(withIdentifier: ID)
-            if cell == nil {
-                cell = UITableViewCell(style: .default, reuseIdentifier: ID)
-            }
-            cell?.textLabel?.text = "heheheh"
-            return cell!
+            return UITableViewCell()
         }
     }
     
@@ -134,9 +131,15 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 1:
-            return 30
+            if self.detailModel?.tie?.commentIdsSB?.count != 0 {
+                return 30
+            }
+            return CGFloat.leastNormalMagnitude
         case 2:
-            return 30
+            if self.detailModel?.article?.relative_sys?.count != 0 {
+               return 30
+            }
+            return CGFloat.leastNormalMagnitude
         default:
             return CGFloat.leastNormalMagnitude
         }
@@ -145,7 +148,10 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
         case 1:
-            return 40
+            if self.detailModel?.tie?.commentIdsSB?.count != 0 {
+                return 40
+            }
+             return CGFloat.leastNormalMagnitude
         default:
             return CGFloat.leastNormalMagnitude
         }
@@ -154,8 +160,18 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = NewsSectionHeaderView.sectionHeaderWithTableView(tableView: tableView)
         switch section {
+        case 1:
+            if self.detailModel?.tie?.commentIdsSB?.count != 0 {
+                header.titleText = "热门跟帖"
+                return header
+            }
+            return nil
         case 2:
-            return header
+            if self.detailModel?.article?.relative_sys?.count != 0 {
+                header.titleText = "猜你喜欢"
+                return header
+            }
+            return nil
         default:
             return nil
         }
@@ -164,6 +180,12 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if 1 == section {
             let footer = NewsCommentFooterView.sectionHeaderWithTableView(tableView: tableView)
+            footer.titleText = "查看更多跟帖"
+            footer.commentFooterClickBlock {
+                let commentViewController = NewsCommentViewController()
+                commentViewController.newsID = self.newsID!
+                self.navigationController?.pushViewController(commentViewController, animated: true)
+            }
             return footer
         }
         return UIView()

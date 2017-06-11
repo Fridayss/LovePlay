@@ -43,8 +43,8 @@ class DiscussListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     private func loadListData() {
-        let params : [String : Any] = ["version":"163", "module":"forumdisplay", "fid":_fid!, "tpp":"15", "charset":"utf-8", "page": "1"]
         let urlStr = DiscussListURL
+        let params : [String : Any] = ["version":"163", "module":"forumdisplay", "fid":_fid!, "tpp":"15", "charset":"utf-8", "page": "1"]
         Alamofire.request(urlStr, method: .get, parameters: params).responseJSON { (response) in
             switch response.result.isSuccess {
             case true :

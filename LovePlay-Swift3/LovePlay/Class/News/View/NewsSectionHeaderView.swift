@@ -65,13 +65,15 @@ class NewsSectionHeaderView: UITableViewHeaderFooterView {
     // MARK: - lazy load
     lazy var leftLineView : UIView = {
         let leftLineView = UIView()
-        
+        leftLineView.backgroundColor = RGB(r: 218, g: 85, b: 107)
         return leftLineView
     }()
     
     lazy var titleTextlabel : UILabel = {
         let titleTextLabel = UILabel()
         titleTextLabel.text = "header"
+        titleTextLabel.font = UIFont.systemFont(ofSize: 12)
+        titleTextLabel.textColor = RGB(r: 155, g: 155, b: 155)
         return titleTextLabel
     }()
 }

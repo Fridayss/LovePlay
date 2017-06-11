@@ -87,24 +87,27 @@ class NewsRelativeCell: UITableViewCell {
     // MARK: - lazy load
     lazy var imgView : UIImageView = {
         let imgView : UIImageView = UIImageView()
-        imgView.backgroundColor = UIColor.red
         return imgView
     }()
     
     lazy var titleTextLabel : UILabel = {
         let titleTextLabel : UILabel = UILabel()
         titleTextLabel.numberOfLines = 2
+        titleTextLabel.textColor = RGB(r: 36, g: 36, b: 36)
+        titleTextLabel.font = UIFont.systemFont(ofSize: 16)
         return titleTextLabel
     }()
     
     lazy var timeTextLabel : UILabel = {
         let timeTextLabel : UILabel = UILabel()
+        timeTextLabel.font = UIFont.systemFont(ofSize: 10)
+        timeTextLabel.textColor = RGB(r: 150, g: 150, b: 150)
         return timeTextLabel
     }()
     
     lazy var underLineView : UIView = {
         let underLineView : UIView = UIView()
-        underLineView.backgroundColor = UIColor.lightGray
+        underLineView.backgroundColor = RGB(r: 222, g: 222, b: 222)
         return underLineView
     }()
 }

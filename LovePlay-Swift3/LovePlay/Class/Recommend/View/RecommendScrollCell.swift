@@ -57,7 +57,7 @@ class RecommendScrollCell: UICollectionViewCell, UICollectionViewDelegate, UICol
     }
     
     // MARK: - public
-    func scrollPagerDidSelectBlock(didSelectBlock : @escaping ScrollPagerDidSelectBlock) {
+    public func scrollPagerDidSelectBlock(didSelectBlock : @escaping ScrollPagerDidSelectBlock) {
         self.selectBlock = didSelectBlock
     }
     

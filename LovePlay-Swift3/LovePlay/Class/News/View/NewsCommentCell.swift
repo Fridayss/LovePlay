@@ -42,6 +42,7 @@ class NewsCommentCell: UITableViewCell {
         self.addSubview(self.loctionTextLabel)
         self.addSubview(self.contentTextLabel)
         self.addSubview(self.underLineView)
+        self.addSubview(self.replyAreaView)
     }
     
     private func snp_subViews() {
@@ -80,33 +81,53 @@ class NewsCommentCell: UITableViewCell {
             make.top.equalTo(contentTextLabel.snp.bottom).offset(10)
             make.left.right.bottom.equalToSuperview()
         }
+        
+        self.replyAreaView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.avartImgView.snp.bottom).offset(10)
+            make.left.equalTo(self.nameTextLabel)
+            make.right.equalTo(self.voteButton)
+        }
     }
     
     // MARK: - public
     public func setupComment(commentItems : NSDictionary, commmentIds : NSArray) {
         _commentItems = commentItems
         _commmentIds = commmentIds
+        
         let itemModel : CommentItemModel = commentItems[commmentIds.lastObject!] as! CommentItemModel
         
         var imgURL : URL? = URL(string: "")
         if let imgSrc = itemModel.user?.avatar {
             imgURL = URL(string: imgSrc)
         }
-//        let imgURL = URL(string: imgSrc!)
-        self.avartImgView.kf.setImage(with: imgURL)
+//        self.avartImgView.kf.setImage(with: imgURL)
+        self.avartImgView.kf.setImage(with: imgURL, placeholder: UIImage(named: "defult_pho"))
         
         self.nameTextLabel.text = itemModel.user?.nickname != nil ? itemModel.user?.nickname : "火星网友"
         self.loctionTextLabel.text = itemModel.user?.location != nil ? itemModel.user?.location : "火星"
         self.voteButton.setTitle((itemModel.vote!).description + "顶", for: .normal)
         self.contentTextLabel.text = itemModel.content
         
+        if commmentIds.count > 1 {
+            self.contentTextLabel.snp.remakeConstraints({ (make) in
+                make.top.equalTo(self.replyAreaView.snp.bottom).offset(10)
+                make.left.equalTo(self.nameTextLabel)
+                make.right.equalTo(self.voteButton)
+            })
+        } else {
+            self.contentTextLabel.snp.remakeConstraints({ (make) in
+                make.top.equalTo(self.avartImgView.snp.bottom).offset(10)
+                make.left.equalTo(self.nameTextLabel)
+                make.right.equalTo(self.voteButton)
+            })
+        }
+        self.replyAreaView.setupCommentReplyAreaView(items: commentItems, floors: commmentIds)
     }
     
     
     // MARK: - lazy load
     lazy var avartImgView : UIImageView = {
         let avartImgView = UIImageView()
-        avartImgView.backgroundColor = UIColor.purple
         return avartImgView
     }()
     
@@ -144,5 +165,11 @@ class NewsCommentCell: UITableViewCell {
         let underLineView = UIView()
         underLineView.backgroundColor = RGB(r: 222, g: 222, b: 222)
         return underLineView
+    }()
+    
+    lazy var replyAreaView : NewsCommentReplyAreaView = {
+        let replyAreaView = NewsCommentReplyAreaView()
+        
+        return replyAreaView
     }()
 }

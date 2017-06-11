@@ -30,10 +30,13 @@ class NewsCommentModel: HandyJSON {
     var commentIdsSB : [Any]? { // 自定义一个参数，重写get方法，用于获取处理后的数据
         get {
             var commentIdsArr = [Any]()
-            for floor : String in commentIds! {
-                let floors : [String] = (floor as AnyObject).components(separatedBy: ",")
-                commentIdsArr.append(floors)
+            if commentIds != nil {
+                for floor : String in commentIds! {
+                    let floors : [String] = (floor as AnyObject).components(separatedBy: ",")
+                    commentIdsArr.append(floors)
+                }
             }
+            
             return commentIdsArr
         }
     }
