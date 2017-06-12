@@ -100,7 +100,6 @@
                 [cellNode webViewDidFinishLoadBlock:^(CGFloat webViewHeight) {
                     _webViewHeight = webViewHeight;
                     [_tableNode reloadData];
-//                    [_tableNode reloadSection:indexPath.section withRowAnimation:UITableViewRowAnimationNone];
                 }];
             }
             return cellNode;
