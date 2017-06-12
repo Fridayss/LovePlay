@@ -71,7 +71,7 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         case 0:
             return 1
         case 1:
-            if (self.detailModel?.tie?.commentIdsSB) != nil {
+            if self.detailModel?.tie?.commentIdsSB != nil {
                 return (self.detailModel?.tie?.commentIdsSB!.count)!
             }
             return 0
@@ -179,16 +179,19 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if 1 == section {
-            let footer = NewsCommentFooterView.sectionHeaderWithTableView(tableView: tableView)
-            footer.titleText = "查看更多跟帖"
-            footer.commentFooterClickBlock {
-                let commentViewController = NewsCommentViewController()
-                commentViewController.newsID = self.newsID!
-                self.navigationController?.pushViewController(commentViewController, animated: true)
+            if self.detailModel?.tie?.commentIdsSB?.count != 0 {
+                let footer = NewsCommentFooterView.sectionHeaderWithTableView(tableView: tableView)
+                footer.titleText = "查看更多跟帖"
+                footer.commentFooterClickBlock {
+                    let commentViewController = NewsCommentViewController()
+                    commentViewController.newsID = self.newsID!
+                    self.navigationController?.pushViewController(commentViewController, animated: true)
+                }
+                return footer
             }
-            return footer
+            return nil
         }
-        return UIView()
+        return nil
     }
     
     // MARK: - lazy load

@@ -141,6 +141,12 @@ class DiscussListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     //MARK: - tableView delegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let listModel = self.discussListDatas?[indexPath.row]
+        let detailViewControlelr = DiscussDetailViewController()
+        detailViewControlelr.tid = listModel?.tid
+        self.navigationController?.pushViewController(detailViewControlelr, animated: true)
+    }
     
     //MARK: - setter / getter
     lazy var tableView : UITableView = {

@@ -12,7 +12,6 @@ typealias WebViewDidFinishLoadBlock = (_ webHeight : CGFloat) -> ()
 
 class NewsDetailWebCell: UITableViewCell, UIWebViewDelegate {
     
-    var webHeight : CGFloat?
     var finishBlock : WebViewDidFinishLoadBlock?
     
     class func cellWithTableView(tableView : UITableView) -> NewsDetailWebCell {
@@ -85,17 +84,15 @@ class NewsDetailWebCell: UITableViewCell, UIWebViewDelegate {
         
         let webViewHeight = Float((webView.stringByEvaluatingJavaScript(from: jsCode))!)
         
-        print("%f", webViewHeight!)
-        
-        self.webHeight = CGFloat(webViewHeight!);
+        let webHeight = CGFloat(webViewHeight!) + 10
         // update UI
-        self.newsWebView.height = self.webHeight!
+        self.newsWebView.height = webHeight
         self.newsWebView.snp.updateConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
         if finishBlock != nil {
-            finishBlock!(CGFloat(webViewHeight!))
+            finishBlock!(webHeight)
         }
     }
     

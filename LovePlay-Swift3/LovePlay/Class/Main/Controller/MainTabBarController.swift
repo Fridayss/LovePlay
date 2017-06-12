@@ -12,16 +12,17 @@ class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.configureTabBar()
         self.addNewsViewController()
         self.addRecommendViewController()
         self.addZoneViewController()
     }
 
     func configureTabBar() {
+
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : RGB(r: 113, g: 113, b: 113)], for: .normal)
         
-        
-        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : RGB(r: 218, g: 85, b: 107)], for: .selected)
     }
     
     func addNewsViewController(){
@@ -47,7 +48,7 @@ class MainTabBarController: UITabBarController {
         childController.title = title
         childController.tabBarItem.title = title;
         childController.tabBarItem.image = UIImage(named: imageName)
-        childController.tabBarItem.selectedImage = UIImage(named: selectImageName)
+        childController.tabBarItem.selectedImage = UIImage(named: selectImageName)?.withRenderingMode(.alwaysOriginal)
         
         let childNav = MainNavigationController(rootViewController: childController)
         self.addChildViewController(childNav)

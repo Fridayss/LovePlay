@@ -42,7 +42,7 @@ struct DetailArticleModel : HandyJSON {
     var title : String?
     var replyCount : Int?
     var img : [DetailImageModel]?
-    var relative_sys : [DetailRelativeModel]?
+    var relative_sys : [DetailRelativeModel]? = [DetailRelativeModel]()
     
 }
 
