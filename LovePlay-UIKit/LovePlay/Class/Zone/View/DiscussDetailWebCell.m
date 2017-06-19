@@ -29,11 +29,6 @@
     return cell;
 }
 
-- (void)webViewDidFinishLoadBlock:(webViewFinishLoadBlock)finishLoadBlock
-{
-    _finishLoadBlock = finishLoadBlock;
-}
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -51,6 +46,11 @@
 }
 
 #pragma mark - public
+- (void)webViewDidFinishLoadBlock:(webViewFinishLoadBlock)finishLoadBlock
+{
+    _finishLoadBlock = finishLoadBlock;
+}
+
 - (void)setupHtmlBoby:(NSString *)htmlBody
 {
     _htmlBody = htmlBody;

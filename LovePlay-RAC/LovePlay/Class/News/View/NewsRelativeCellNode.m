@@ -37,48 +37,24 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
 - (void)addSubnodes
 {
-    UIImageView *imageNode = [[UIImageView alloc] init];
-    [self.contentView addSubview:imageNode];
-    _imageNode = imageNode;
+    [self.contentView addSubview:self.imageNode];
     
-    UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.numberOfLines = 2;
-    titleTextNode.font = [UIFont systemFontOfSize:16];
-    titleTextNode.textColor = RGB(36, 36, 36);
-    [self.contentView addSubview:titleTextNode];
-    _titleTextNode = titleTextNode;
+    [self.contentView addSubview:self.titleTextNode];
     
-    UILabel *timeInfoTextNode = [[UILabel alloc] init];
-    timeInfoTextNode.font = [UIFont systemFontOfSize:10];
-    timeInfoTextNode.textColor = RGB(150, 150, 150);
-    [self.contentView addSubview:timeInfoTextNode];
-    _timeInfoTextNode = timeInfoTextNode;
+    [self.contentView addSubview:self.timeInfoTextNode];
     
-    UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = RGB(222, 222, 222);
-    [self.contentView addSubview:underLineNode];
-    _underLineNode = underLineNode;
+    [self.contentView addSubview:self.underLineNode];
     
 }
 
-- (void)setupRelativeInfo:(NewsRelativeInfo *)relativeInfo
-{
-    _relativeInfo = relativeInfo;
-    _imageNode.imageURL = [NSURL URLWithString:_relativeInfo.imgsrc];
-    _titleTextNode.text = _relativeInfo.title;
-    _timeInfoTextNode.text = [NSString stringWithFormat:@"%@ %@",_relativeInfo.source, _relativeInfo.ptime];
-}
-
-#pragma mark - layout
-
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.and.height.mas_equalTo(80);
@@ -103,5 +79,58 @@
         make.left.bottom.right.equalTo(self.contentView);
     }];
 }
+
+#pragma mark - public
+- (void)setupRelativeInfo:(NewsRelativeInfo *)relativeInfo
+{
+    _relativeInfo = relativeInfo;
+    _imageNode.imageURL = [NSURL URLWithString:_relativeInfo.imgsrc];
+    _titleTextNode.text = _relativeInfo.title;
+    _timeInfoTextNode.text = [NSString stringWithFormat:@"%@ %@",_relativeInfo.source, _relativeInfo.ptime];
+}
+
+#pragma mark - setter / getter
+- (UIImageView *)imageNode
+{
+    if (!_imageNode) {
+        UIImageView *imageNode = [[UIImageView alloc] init];
+        _imageNode = imageNode;
+    }
+    return  _imageNode;
+}
+
+- (UILabel *)titleTextNode
+{
+    if (!_titleTextNode) {
+        UILabel *titleTextNode = [[UILabel alloc] init];
+        titleTextNode.numberOfLines = 2;
+        titleTextNode.font = [UIFont systemFontOfSize:16];
+        titleTextNode.textColor = RGB(36, 36, 36);
+        _titleTextNode = titleTextNode;
+    }
+    return _titleTextNode;
+}
+
+- (UILabel *)timeInfoTextNode
+{
+    if (!_timeInfoTextNode) {
+        UILabel *timeInfoTextNode = [[UILabel alloc] init];
+        timeInfoTextNode.font = [UIFont systemFontOfSize:10];
+        timeInfoTextNode.textColor = RGB(150, 150, 150);
+        _timeInfoTextNode = timeInfoTextNode;
+    }
+    return _timeInfoTextNode;
+}
+
+- (UIView *)underLineNode
+{
+    if (!_underLineNode) {
+        UIView *underLineNode = [[UIView alloc] init];
+        underLineNode.backgroundColor = RGB(222, 222, 222);
+        _underLineNode = underLineNode;
+    }
+    return _underLineNode;
+}
+
 
 @end

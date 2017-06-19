@@ -91,8 +91,7 @@ class NewsListViewController: UIViewController, UITableViewDataSource, UITableVi
     // MARK: - tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model : NewsListModel = self.listDatas[indexPath.row]
-        let detaiViewController = NewsDetailViewController()
-        detaiViewController.newsID = model.docid
+        let detaiViewController = NewsDetailViewController.init(newsID: model.docid)
         self.navigationController?.pushViewController(detaiViewController, animated: true)
     }
     

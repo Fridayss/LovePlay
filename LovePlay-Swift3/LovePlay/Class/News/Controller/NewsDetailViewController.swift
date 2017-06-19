@@ -13,16 +13,17 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     var detailModel : NewsDetailModel?
     var webViewHeight : CGFloat?
-    fileprivate var _newsID : String?
-    var newsID : String? {
-        set {
-            _newsID = newValue
-        }
-        
-        get {
-            return _newsID
-        }
+    var newsID : String?
+    
+    init(newsID : String) {
+        super.init(nibName: nil, bundle: nil)
+        self.newsID = newsID;
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     private func loadData() {
-        let urlStr = BaseURL + NewsDetailURL + "/\(_newsID!)"
+        let urlStr = BaseURL + NewsDetailURL + "/\(self.newsID!)"
         let params : [String : Any] = ["tieVersion" : "v2", "platform" : "ios", "width" : self.view.width * 2, "height" : self.view.height * 2, "decimal" : "75"]
         Alamofire.request(urlStr, method : .get, parameters : params).responseJSON { response in
             switch response.result.isSuccess{
@@ -192,6 +193,14 @@ class NewsDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             return nil
         }
         return nil
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            let relativeModel : DetailRelativeModel = (self.detailModel?.article?.relative_sys?[indexPath.row])!
+            let detailViewContrller = NewsDetailViewController.init(newsID: relativeModel.docID!)
+            self.navigationController?.pushViewController(detailViewContrller, animated: true)
+        }
     }
     
     // MARK: - lazy load

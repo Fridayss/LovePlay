@@ -37,41 +37,21 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-//        [self sd_autoLayoutSubViews];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
 - (void)addSubnodes
 {
-    UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.numberOfLines = 2;
-    titleTextNode.font = [UIFont systemFontOfSize:16];
-    titleTextNode.textColor = RGB(36, 36, 36);
-    [self.contentView addSubview:titleTextNode];
-    _titleTextNode = titleTextNode;
+    [self.contentView addSubview:self.imageNode];
     
-    UIImageView *imageNode = [[UIImageView alloc] init];
-    [self.contentView addSubview:imageNode];
-    _imageNode = imageNode;
+    [self.contentView addSubview:self.titleTextNode];
     
-    UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = RGB(222, 222, 222);
-    [self.contentView addSubview:underLineNode];
-    _underLineNode = underLineNode;
-
+    [self.contentView addSubview:self.underLineNode];
 }
 
-- (void)setupListInfoModel:(NewsListInfoModel *)listInfoModel
-{
-    _listInfoModel = listInfoModel;
-    _imageNode.imageURL = [NSURL URLWithString:listInfoModel.imgsrc.firstObject];
-    _titleTextNode.text = listInfoModel.title;
-}
-
-#pragma mark - layout
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(10);
@@ -93,5 +73,43 @@
     }];
 }
 
+#pragma mark - public
+- (void)setupListInfoModel:(NewsListInfoModel *)listInfoModel
+{
+    _listInfoModel = listInfoModel;
+    _imageNode.imageURL = [NSURL URLWithString:listInfoModel.imgsrc.firstObject];
+    _titleTextNode.text = listInfoModel.title;
+}
 
+#pragma mark - setter / getter
+- (UIImageView *)imageNode
+{
+    if (!_imageNode) {
+        UIImageView *imageNode = [[UIImageView alloc] init];
+        _imageNode = imageNode;
+    }
+    return  _imageNode;
+}
+
+- (UILabel *)titleTextNode
+{
+    if (!_titleTextNode) {
+        UILabel *titleTextNode = [[UILabel alloc] init];
+        titleTextNode.numberOfLines = 2;
+        titleTextNode.font = [UIFont systemFontOfSize:16];
+        titleTextNode.textColor = RGB(36, 36, 36);
+        _titleTextNode = titleTextNode;
+    }
+    return _titleTextNode;
+}
+
+- (UIView *)underLineNode
+{
+    if (!_underLineNode) {
+        UIView *underLineNode = [[UIView alloc] init];
+        underLineNode.backgroundColor = RGB(222, 222, 222);
+        _underLineNode = underLineNode;
+    }
+    return _underLineNode;
+}
 @end

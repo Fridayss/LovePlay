@@ -90,8 +90,8 @@ class RecommendViewController: UIViewController, UICollectionViewDelegate, UICol
         if 0 == indexPath.section {
             let cell = RecommendScrollCell.cellWithCollectionView(collectionView: collectionView, indexPath: indexPath)
             cell.scrollPagerDidSelectBlock(didSelectBlock: { (docID) in
-                
-                
+                let detailViewContrller = NewsDetailViewController.init(newsID: docID!)
+                self.navigationController?.pushViewController(detailViewContrller, animated: true)
             })
             cell.imgInfoDatas = self.imgInfoDatas
             return cell

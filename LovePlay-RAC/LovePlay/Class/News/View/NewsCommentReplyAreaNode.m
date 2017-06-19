@@ -31,16 +31,7 @@
     return self;
 }
 
-- (void)setupCommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors
-{
-    _commentItemsDict = commentItems;
-    _floors = floors;
-    
-    [self removeAllSubviews];
-
-    [self addSubnodes];
-}
-
+#pragma mark - private
 - (void)addSubnodes
 {
     UIView *lastTopView = nil;
@@ -51,14 +42,13 @@
         [self addSubview:commentReplyNode];
         
         //mas_layout
-        [self mas_autoLayoutSubViewsWithIndex:i commentReplyNode:commentReplyNode lastTopView:lastTopView];
+        [self mas_subViewsWithIndex:i commentReplyNode:commentReplyNode lastTopView:lastTopView];
         
         lastTopView = commentReplyNode;
     }
 }
 
-#pragma mark - layout
-- (void)mas_autoLayoutSubViewsWithIndex:(NSInteger)index commentReplyNode:(NewsCommentReplyNode *)commentReplyNode lastTopView:(UIView *)lastTopView
+- (void)mas_subViewsWithIndex:(NSInteger)index commentReplyNode:(NewsCommentReplyNode *)commentReplyNode lastTopView:(UIView *)lastTopView
 {
     if (0 == index) {
         [commentReplyNode mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -77,6 +67,17 @@
             make.bottom.equalTo(self);
         }];
     }
+}
+
+#pragma mark - public
+- (void)setupCommentItems:(NSDictionary *)commentItems floors:(NSArray *)floors
+{
+    _commentItemsDict = commentItems;
+    _floors = floors;
+    
+    [self removeAllSubviews];
+    
+    [self addSubnodes];
 }
 
 @end

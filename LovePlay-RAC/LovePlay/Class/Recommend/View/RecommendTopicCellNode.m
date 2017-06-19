@@ -24,35 +24,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubnodes];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
+#pragma mark - private
 - (void)addSubnodes
 {
-    UIImageView *imageNode = [[UIImageView alloc] init];
-    [self.contentView addSubview:imageNode];
-    _imageNode = imageNode;
+    [self.contentView addSubview:self.imageNode];
     
-    UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.font = [UIFont systemFontOfSize:12];
-    titleTextNode.textColor = RGB(36, 36, 36);
-    titleTextNode.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:titleTextNode];
-    _titleTextNode = titleTextNode;
+    [self.contentView addSubview:self.titleTextNode];
 }
 
-- (void)setupTopicModel:(RecommendTopicModel *)topicModel
-{
-    _topicModel = topicModel;
-    _imageNode.imageURL = [NSURL URLWithString:_topicModel.iconUrl];
-    _titleTextNode.text = _topicModel.topicName;
-}
-
-#pragma mark - layout
-
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.and.height.mas_equalTo(@78);
@@ -66,4 +51,33 @@
     }];
 }
 
+#pragma mark - public
+- (void)setupTopicModel:(RecommendTopicModel *)topicModel
+{
+    _topicModel = topicModel;
+    _imageNode.imageURL = [NSURL URLWithString:_topicModel.iconUrl];
+    _titleTextNode.text = _topicModel.topicName;
+}
+
+#pragma mark - setter / getter
+- (UIImageView *)imageNode
+{
+    if (!_imageNode) {
+        UIImageView *imageNode = [[UIImageView alloc] init];
+        _imageNode = imageNode;
+    }
+    return _imageNode;
+}
+
+- (UILabel *)titleTextNode
+{
+    if (!_titleTextNode) {
+        UILabel *titleTextNode = [[UILabel alloc] init];
+        titleTextNode.font = [UIFont systemFontOfSize:12];
+        titleTextNode.textColor = RGB(36, 36, 36);
+        titleTextNode.textAlignment = NSTextAlignmentCenter;
+        _titleTextNode = titleTextNode;
+    }
+    return _titleTextNode;
+}
 @end

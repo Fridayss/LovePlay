@@ -19,34 +19,41 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubnodes];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
+#pragma mark - private
 - (void)addSubnodes
 {
-    UILabel *titleTextLabel = [[UILabel alloc] init];
-    titleTextLabel.font = [UIFont systemFontOfSize:14];
-    titleTextLabel.textColor = RGB(36, 36, 36);
-    [self addSubview:titleTextLabel];
-    _titleTextLabel = titleTextLabel;
+    [self addSubview:self.titleTextLabel];
 }
 
-
-- (void)setTitleName:(NSString *)titleName
-{
-    _titleName = titleName;
-    _titleTextLabel.text = titleName;
-    
-}
-
-#pragma mark - layout
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_titleTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self).insets(UIEdgeInsetsMake(0, 8, 0, 8));
     }];
+}
+
+#pragma mark - public
+- (void)setTitleName:(NSString *)titleName
+{
+    _titleName = titleName;
+    _titleTextLabel.text = titleName;
+}
+
+#pragma mark - setter / getter
+- (UILabel *)titleTextLabel
+{
+    if (!_titleTextLabel) {
+        UILabel *titleTextLabel = [[UILabel alloc] init];
+        titleTextLabel.font = [UIFont systemFontOfSize:14];
+        titleTextLabel.textColor = RGB(36, 36, 36);
+        _titleTextLabel = titleTextLabel;
+    }
+    return _titleTextLabel;
 }
 
 @end

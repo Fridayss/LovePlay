@@ -36,42 +36,21 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubNodes];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
 - (void)addSubNodes
 {
-    UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.numberOfLines = 2;
-    titleTextNode.font = [UIFont systemFontOfSize:14];
-    titleTextNode.textColor = RGB(36, 36, 36);
-    [self.contentView addSubview:titleTextNode];
-    _titleTextNode = titleTextNode;
+    [self.contentView addSubview:self.titleTextNode];
     
-    UILabel *descriptionTextNode = [[UILabel alloc] init];
-    descriptionTextNode.font = [UIFont systemFontOfSize:10];
-    descriptionTextNode.textColor = RGB(150, 150, 150);
-    [self.contentView addSubview:descriptionTextNode];
-    _descriptionTextNode = descriptionTextNode;
+    [self.contentView addSubview:self.descriptionTextNode];
     
-    UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = RGB(222, 222, 222);
-    [self.contentView addSubview:underLineNode];
-    _underLineNode = underLineNode;
+    [self.contentView addSubview:self.underLineNode];
 }
 
-- (void)setupForumThread:(ForumThread *)forumThread
-{
-    _forumThread = forumThread;
-    _titleTextNode.text = forumThread.subject;
-    _descriptionTextNode.text = [NSString stringWithFormat:@"%@回复   %@   %@",forumThread.replies, [forumThread.lastpost stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""], forumThread.lastposter];
-}
-
-#pragma mark - layout
-
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_titleTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(10);
@@ -89,6 +68,48 @@
         make.top.equalTo(_descriptionTextNode.mas_bottom).offset(10);
         make.left.bottom.right.equalTo(self.contentView);
     }];
+}
+
+#pragma mark - public
+- (void)setupForumThread:(ForumThread *)forumThread
+{
+    _forumThread = forumThread;
+    _titleTextNode.text = forumThread.subject;
+    _descriptionTextNode.text = [NSString stringWithFormat:@"%@回复   %@   %@",forumThread.replies, [forumThread.lastpost stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""], forumThread.lastposter];
+}
+
+#pragma mark - setter / getter
+- (UILabel *)titleTextNode
+{
+    if (!_titleTextNode) {
+        UILabel *titleTextNode = [[UILabel alloc] init];
+        titleTextNode.numberOfLines = 2;
+        titleTextNode.font = [UIFont systemFontOfSize:14];
+        titleTextNode.textColor = RGB(36, 36, 36);
+        _titleTextNode = titleTextNode;
+    }
+    return _titleTextNode;
+}
+
+- (UILabel *)descriptionTextNode
+{
+    if (!_descriptionTextNode) {
+        UILabel *descriptionTextNode = [[UILabel alloc] init];
+        descriptionTextNode.font = [UIFont systemFontOfSize:10];
+        descriptionTextNode.textColor = RGB(150, 150, 150);
+        _descriptionTextNode = descriptionTextNode;
+    }
+    return _descriptionTextNode;
+}
+
+- (UIView *)underLineNode
+{
+    if (!_underLineNode) {
+        UIView *underLineNode = [[UIView alloc] init];
+        underLineNode.backgroundColor = RGB(222, 222, 222);
+        _underLineNode = underLineNode;
+    }
+    return _underLineNode;
 }
 
 @end

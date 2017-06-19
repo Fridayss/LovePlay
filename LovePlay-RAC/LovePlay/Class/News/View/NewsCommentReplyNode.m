@@ -29,50 +29,25 @@
         _commentItem = commentItem;
         _floor = floor;
         [self addSubnodes];
+        [self mas_subViews];
         [self loadData];
-        [self mas_autoLayoutSubViews];
     }
     return self;
 }
 
+#pragma mark - private
 - (void)addSubnodes
 {
-    UILabel *nameTextNode = [[UILabel alloc] init];
-    nameTextNode.font = [UIFont systemFontOfSize:12];
-    nameTextNode.textColor = RGB(138, 138, 138);
-    [self addSubview:nameTextNode];
-    _nameTextNode = nameTextNode;
+    [self addSubview:self.nameTextNode];
     
-    UILabel *floorTextNode = [[UILabel alloc] init];
-    floorTextNode.font = [UIFont systemFontOfSize:12];
-    floorTextNode.textColor = RGB(64, 64, 64);
-    floorTextNode.textAlignment = NSTextAlignmentRight;
-    [self addSubview:floorTextNode];
-    _floorTextNode = floorTextNode;
+    [self addSubview:self.floorTextNode];
     
-    UILabel *contentTextNode = [[UILabel alloc] init];
-    contentTextNode.numberOfLines = 0;
-    contentTextNode.font = [UIFont systemFontOfSize:14];
-    contentTextNode.textColor = RGB(50, 50, 50);
-    [self addSubview:contentTextNode];
-    _contentTextNode = contentTextNode;
+    [self addSubview:self.contentTextNode];
     
-    UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = RGB(222, 222, 222);
-    [self addSubview:underLineNode];
-    _underLineNode = underLineNode;
-
+    [self addSubview:self.underLineNode];
 }
 
-- (void)loadData
-{
-    _nameTextNode.text = [NSString stringWithFormat:@"%@ %@", _commentItem.user.nickname ? _commentItem.user.nickname : @"火星网友", _commentItem.user.location ? _commentItem.user.location : @"火星"];
-    _floorTextNode.text = [NSString stringWithFormat:@"%@#", @(_floor).stringValue];
-    _contentTextNode.text = _commentItem.content ? _commentItem.content : @"NULL";
-}
-
-#pragma mark - layout
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_floorTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(30).priorityLow();
@@ -99,4 +74,56 @@
     }];
 }
 
+- (void)loadData
+{
+    _nameTextNode.text = [NSString stringWithFormat:@"%@ %@", _commentItem.user.nickname ? _commentItem.user.nickname : @"火星网友", _commentItem.user.location ? _commentItem.user.location : @"火星"];
+    _floorTextNode.text = [NSString stringWithFormat:@"%@#", @(_floor).stringValue];
+    _contentTextNode.text = _commentItem.content ? _commentItem.content : @"NULL";
+}
+
+#pragma mark - setter / getter
+- (UILabel *)nameTextNode
+{
+    if (!_nameTextNode) {
+        UILabel *nameTextNode = [[UILabel alloc] init];
+        nameTextNode.font = [UIFont systemFontOfSize:12];
+        nameTextNode.textColor = RGB(138, 138, 138);
+        _nameTextNode = nameTextNode;
+    }
+    return _nameTextNode;
+}
+
+- (UILabel *)floorTextNode
+{
+    if (!_floorTextNode) {
+        UILabel *floorTextNode = [[UILabel alloc] init];
+        floorTextNode.font = [UIFont systemFontOfSize:12];
+        floorTextNode.textColor = RGB(64, 64, 64);
+        floorTextNode.textAlignment = NSTextAlignmentRight;
+        _floorTextNode = floorTextNode;
+    }
+    return _floorTextNode;
+}
+
+- (UILabel *)contentTextNode
+{
+    if (!_contentTextNode) {
+        UILabel *contentTextNode = [[UILabel alloc] init];
+        contentTextNode.numberOfLines = 0;
+        contentTextNode.font = [UIFont systemFontOfSize:14];
+        contentTextNode.textColor = RGB(50, 50, 50);
+        _contentTextNode = contentTextNode;
+    }
+    return _contentTextNode;
+}
+
+- (UIView *)underLineNode
+{
+    if (!_underLineNode) {
+        UIView *underLineNode = [[UIView alloc] init];
+        underLineNode.backgroundColor = RGB(222, 222, 222);
+        _underLineNode = underLineNode;
+    }
+    return _underLineNode;
+}
 @end
