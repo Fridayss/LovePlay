@@ -26,42 +26,22 @@
     if (self) {
         self.contentView.backgroundColor = [UIColor whiteColor];
         [self addSubnodes];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
+#pragma mark - private
 - (void)addSubnodes
 {
-    UIImageView *imageNode = [[UIImageView alloc] init];
-    [self.contentView addSubview:imageNode];
-    _imageNode = imageNode;
-    
-    UILabel *titleTextLabel = [[UILabel alloc] init];
-    titleTextLabel.font = [UIFont systemFontOfSize:14];
-    titleTextLabel.textColor = RGB(36, 36, 36);
-    [self.contentView addSubview:titleTextLabel];
-    _titleTextLabel = titleTextLabel;
-    
-    UILabel *detailTextLabel = [[UILabel alloc] init];
-    detailTextLabel.font = [UIFont systemFontOfSize:12];
-    detailTextLabel.textColor = RGB(150, 150, 150);
-    [self.contentView addSubview:detailTextLabel];
-    _detailTextLabel = detailTextLabel;
+    [self.contentView addSubview:self.imageNode];
 
+    [self.contentView addSubview:self.titleTextLabel];
+
+    [self.contentView addSubview:self.detailTextLabel];
 }
 
-- (void)setupDiscussItem:(ZoneDiscussItem *)discussItem
-{
-    _discussItem = discussItem;
-    _imageNode.imageURL = [NSURL URLWithString:_discussItem.iconUrl];
-    _titleTextLabel.text = _discussItem.modelName;
-    _detailTextLabel.text = _discussItem.modelDesc;
-}
-
-#pragma mark - layout
-
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(50);
@@ -80,5 +60,47 @@
         make.bottom.equalTo(_imageNode.mas_bottom).offset(-3);
     }];
 }
+
+#pragma mark -  public
+- (void)setupDiscussItem:(ZoneDiscussItem *)discussItem
+{
+    _discussItem = discussItem;
+    _imageNode.imageURL = [NSURL URLWithString:_discussItem.iconUrl];
+    _titleTextLabel.text = _discussItem.modelName;
+    _detailTextLabel.text = _discussItem.modelDesc;
+}
+
+#pragma mark - setter / getter
+- (UIImageView *)imageNode
+{
+    if (!_imageNode) {
+        UIImageView *imageNode = [[UIImageView alloc] init];
+        _imageNode = imageNode;
+    }
+    return _imageNode;
+}
+
+- (UILabel *)titleTextLabel
+{
+    if (!_titleTextLabel) {
+        UILabel *titleTextLabel = [[UILabel alloc] init];
+        titleTextLabel.font = [UIFont systemFontOfSize:14];
+        titleTextLabel.textColor = RGB(36, 36, 36);
+        _titleTextLabel = titleTextLabel;
+    }
+    return _titleTextLabel;
+}
+
+- (UILabel *)detailTextLabel
+{
+    if (!_detailTextLabel) {
+        UILabel *detailTextLabel = [[UILabel alloc] init];
+        detailTextLabel.font = [UIFont systemFontOfSize:12];
+        detailTextLabel.textColor = RGB(150, 150, 150);
+        _detailTextLabel = detailTextLabel;
+    }
+    return _detailTextLabel;
+}
+
 
 @end

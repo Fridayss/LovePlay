@@ -32,24 +32,35 @@
     if (self) {
         self.contentView.backgroundColor = RGB(235, 235, 235);
         [self addSubnodes];
+        [self mas_subViews];
     }
     return self;
 }
 
+#pragma mark - private
 - (void)addSubnodes
 {
-    UIView *leftLineView = [[UIView alloc] init];
-    leftLineView.backgroundColor = RGB(218, 85, 107);
-    [self.contentView addSubview:leftLineView];
-    _leftLineView = leftLineView;
-    
-    UILabel *titleTextLabel = [[UILabel alloc] init];
-    titleTextLabel.textColor = RGB(155, 155, 155);
-    titleTextLabel.font = [UIFont systemFontOfSize:12];
-    [self.contentView addSubview:titleTextLabel];
-    _titleTextLabel = titleTextLabel;
+    [self.contentView addSubview:self.leftLineView];
+
+    [self.contentView addSubview:self.titleTextLabel];
 }
 
+- (void)mas_subViews
+{
+    [self.leftLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_offset(3);
+        make.top.equalTo(self.contentView).mas_offset(5);
+        make.left.top.equalTo(self.contentView).mas_offset(12);
+        make.bottom.top.equalTo(self.contentView).mas_offset(-5);
+    }];
+    
+    [self.titleTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.right.top.equalTo(self.contentView);
+        make.left.equalTo(self.leftLineView.mas_right).mas_offset(8);
+    }];
+}
+
+#pragma mark - public
 - (void)setTitle:(NSString *)title
 {
     _title = title;
@@ -57,13 +68,25 @@
     _titleTextLabel.text = title;
 }
 
-#pragma mark - layout
-- (void)layoutSubviews
+#pragma mark - setter / getter
+- (UIView *)leftLineView
 {
-    [super layoutSubviews];
-    CGFloat edging = 6;
-    _leftLineView.frame = CGRectMake(12, edging, 3, CGRectGetHeight(self.frame)-2*edging);
-    _titleTextLabel.frame = CGRectMake(CGRectGetMaxX(_leftLineView.frame)+ 8, 0, 200, CGRectGetHeight(self.frame));
+    if (!_leftLineView) {
+        UIView *leftLineView = [[UIView alloc] init];
+        leftLineView.backgroundColor = RGB(218, 85, 107);
+        _leftLineView = leftLineView;
+    }
+    return _leftLineView;
 }
 
+- (UILabel *)titleTextLabel
+{
+    if (!_titleTextLabel) {
+        UILabel *titleTextLabel = [[UILabel alloc] init];
+        titleTextLabel.textColor = RGB(155, 155, 155);
+        titleTextLabel.font = [UIFont systemFontOfSize:12];
+        _titleTextLabel = titleTextLabel;
+    }
+    return _titleTextLabel;
+}
 @end

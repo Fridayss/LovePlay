@@ -33,20 +33,25 @@
     if (self) {
         self.contentView.backgroundColor = [UIColor whiteColor];
         [self addSubnodes];
+        [self mas_subViews];
     }
     return self;
 }
 
+#pragma mark - private
 - (void)addSubnodes
 {
-    UILabel *titleTextlabel = [[UILabel alloc] init];
-    titleTextlabel.textColor = RGB(218, 85, 107);
-    titleTextlabel.font = [UIFont systemFontOfSize:14];
-    titleTextlabel.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:titleTextlabel];
-    _titleTextLabel = titleTextlabel;
+    [self.contentView addSubview:self.titleTextLabel];
 }
 
+- (void)mas_subViews
+{
+    [self.titleTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
+}
+
+#pragma mark - public
 - (void)setTitle:(NSString *)title
 {
     _title = title;
@@ -66,12 +71,17 @@
     }
 }
 
-#pragma mark - layout
-- (void)layoutSubviews
+#pragma mark - setter / getter
+- (UILabel *)titleTextLabel
 {
-    [super layoutSubviews];
-    
-    _titleTextLabel.frame = self.bounds;
+    if (!_titleTextLabel) {
+        UILabel *titleTextlabel = [[UILabel alloc] init];
+        titleTextlabel.textColor = RGB(218, 85, 107);
+        titleTextlabel.font = [UIFont systemFontOfSize:14];
+        titleTextlabel.textAlignment = NSTextAlignmentCenter;
+        _titleTextLabel = titleTextlabel;
+    }
+    return _titleTextLabel;
 }
 
 @end

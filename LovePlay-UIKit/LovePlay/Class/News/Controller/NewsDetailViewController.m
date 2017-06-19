@@ -151,14 +151,6 @@
     return UITableViewAutomaticDimension;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 0) {
-//        return _webViewHeight;
-//    }
-//    return UITableViewAutomaticDimension;
-//}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NewsDetailSectionTitleHeaderView *headerView = [NewsDetailSectionTitleHeaderView sectionHeaderWithTableView:tableView];

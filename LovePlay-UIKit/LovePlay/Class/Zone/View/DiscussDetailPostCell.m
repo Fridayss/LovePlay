@@ -40,66 +40,28 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
+#pragma mark - private
 - (void)addSubnodes
 {
-    UIImageView *imageNode = [[UIImageView alloc] init];
-    imageNode.image = [UIImage imageNamed:@"defult_pho"];
-    [self.contentView addSubview:imageNode];
-    _imageNode = imageNode;
+    [self.contentView addSubview:self.imageNode];
     
-    UILabel *nameTextNode = [[UILabel alloc] init];
-    nameTextNode.font = [UIFont systemFontOfSize:14];
-    nameTextNode.textColor = RGB(186, 177, 161);
-    [self.contentView addSubview:nameTextNode];
-    _nameTextNode = nameTextNode;
-    
-    UILabel *timeTextNode = [[UILabel alloc] init];
-    timeTextNode.font = [UIFont systemFontOfSize:12];
-    timeTextNode.textColor = RGB(163, 163, 163);
-    [self.contentView addSubview:timeTextNode];
-    _timeTextNode = timeTextNode;
-    
-    UILabel *floorTextNode = [[UILabel alloc] init];
-    floorTextNode.font = [UIFont systemFontOfSize:12];
-    floorTextNode.textColor = RGB(163, 163, 163);
-    floorTextNode.textAlignment = NSTextAlignmentRight;
-    [self.contentView addSubview:floorTextNode];
-    _floorTextNode = floorTextNode;
-    
-    UILabel *contentTextNode = [[UILabel alloc] init];
-    contentTextNode.numberOfLines = 0;
-    contentTextNode.font = [UIFont systemFontOfSize:14];
-    contentTextNode.textColor = RGB(50, 50, 50);
-    [self.contentView addSubview:contentTextNode];
-    _contentTextNode = contentTextNode;
-    
-    UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = RGB(222, 222, 222);
-    [self.contentView addSubview:underLineNode];
-    _underLineNode = underLineNode;
-    
-//    nameTextNode.backgroundColor = RandomRGB;
-//    timeTextNode.backgroundColor = RandomRGB;
-//    floorTextNode.backgroundColor = RandomRGB;
+    [self.contentView addSubview:self.nameTextNode];
+
+    [self.contentView addSubview:self.timeTextNode];
+
+    [self.contentView addSubview:self.floorTextNode];
+
+    [self.contentView addSubview:self.contentTextNode];
+
+    [self.contentView addSubview:self.underLineNode];
 }
 
-- (void)setupPost:(DiscuzPost *)post floor:(NSInteger)floor
-{
-    _post = post;
-    _floor = floor;
-    _nameTextNode.text = post.author;
-    _timeTextNode.text = [post.dateline stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
-    _floorTextNode.text = [NSString stringWithFormat:@"%@#", @(floor).stringValue];
-    _contentTextNode.text = post.message;
-}
-
-#pragma mark - layout
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(30);
@@ -110,7 +72,7 @@
         make.right.equalTo(self.contentView).offset(-10);
         make.centerY.equalTo(_imageNode);
     }];
-
+    
     [_nameTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_imageNode.mas_right).offset(10);
         make.centerY.equalTo(_imageNode);
@@ -136,4 +98,81 @@
     }];
 }
 
+#pragma mark - public
+- (void)setupPost:(DiscuzPost *)post floor:(NSInteger)floor
+{
+    _post = post;
+    _floor = floor;
+    _nameTextNode.text = post.author;
+    _timeTextNode.text = [post.dateline stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
+    _floorTextNode.text = [NSString stringWithFormat:@"%@#", @(floor).stringValue];
+    _contentTextNode.text = post.message;
+}
+
+#pragma mark - setter / getter
+- (UIImageView *)imageNode
+{
+    if (!_imageNode) {
+        UIImageView *imageNode = [[UIImageView alloc] init];
+        imageNode.image = [UIImage imageNamed:@"defult_pho"];
+        _imageNode = imageNode;
+    }
+    return _imageNode;
+}
+
+- (UILabel *)nameTextNode
+{
+    if (!_nameTextNode) {
+        UILabel *nameTextNode = [[UILabel alloc] init];
+        nameTextNode.font = [UIFont systemFontOfSize:14];
+        nameTextNode.textColor = RGB(186, 177, 161);
+        _nameTextNode = nameTextNode;
+    }
+    return _nameTextNode;
+}
+
+- (UILabel *)timeTextNode
+{
+    if (!_timeTextNode) {
+        UILabel *timeTextNode = [[UILabel alloc] init];
+        timeTextNode.font = [UIFont systemFontOfSize:12];
+        timeTextNode.textColor = RGB(163, 163, 163);
+        _timeTextNode = timeTextNode;
+    }
+    return _timeTextNode;
+}
+
+- (UILabel *)floorTextNode
+{
+    if (!_floorTextNode) {
+        UILabel *floorTextNode = [[UILabel alloc] init];
+        floorTextNode.font = [UIFont systemFontOfSize:12];
+        floorTextNode.textColor = RGB(163, 163, 163);
+        floorTextNode.textAlignment = NSTextAlignmentRight;
+        _floorTextNode = floorTextNode;
+    }
+    return _floorTextNode;
+}
+
+- (UILabel *)contentTextNode
+{
+    if (!_contentTextNode) {
+        UILabel *contentTextNode = [[UILabel alloc] init];
+        contentTextNode.numberOfLines = 0;
+        contentTextNode.font = [UIFont systemFontOfSize:14];
+        contentTextNode.textColor = RGB(50, 50, 50);
+        _contentTextNode = contentTextNode;
+    }
+    return _contentTextNode;
+}
+
+- (UIView *)underLineNode
+{
+    if (!_underLineNode) {
+        UIView *underLineNode = [[UIView alloc] init];
+        underLineNode.backgroundColor = RGB(222, 222, 222);
+        _underLineNode = underLineNode;
+    }
+    return _underLineNode;
+}
 @end

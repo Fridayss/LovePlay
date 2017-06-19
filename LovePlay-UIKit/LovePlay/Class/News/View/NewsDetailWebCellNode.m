@@ -39,24 +39,16 @@
     return self;
 }
 
+#pragma mark - private
+- (void)addSubviews
+{
+    [self.contentView addSubview:self.webView];
+}
+
+#pragma mark - public
 - (void)webViewDidFinishLoadBlock:(webViewFinishLoadBlock)finishLoadBlock
 {
     _finishLoadBlock = finishLoadBlock;
-}
-
-- (void)addSubviews
-{
-    NSLog(@"width -- %f, %f", self.contentView.width, kScreenWidth);
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
-    webView.backgroundColor = [UIColor whiteColor];
-    webView.scalesPageToFit = NO;
-    webView.delegate = self;
-    webView.scrollView.bounces = NO;
-    [webView setAutoresizingMask:UIViewAutoresizingNone];
-    [webView.scrollView setScrollEnabled:NO];
-    [webView.scrollView setScrollsToTop:NO];
-    [self.contentView addSubview:webView];
-    _webView = webView;
 }
 
 - (void)setupHtmlBoby:(NSString *)htmlBody
@@ -68,7 +60,6 @@
     }
 }
 
-#pragma mark - private
 - (NSString *)handleWithHtmlBody:(NSString *)htmlBody
 {
     NSString *html = [htmlBody stringByReplacingOccurrencesOfString:@"\t" withString:@""];
@@ -105,13 +96,30 @@
     if (_webViewHeight > 0) {
         _webView.height = _webViewHeight;
     }
-    
 }
 
+#pragma mark - other
 - (void)dealloc
 {
     _webView.delegate = nil;
     _webView = nil;
 }
 
+
+#pragma mark - setter / getter
+- (UIWebView *)webView
+{
+    if (!_webView) {
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
+        webView.backgroundColor = [UIColor whiteColor];
+        webView.scalesPageToFit = NO;
+        webView.delegate = self;
+        webView.scrollView.bounces = NO;
+        [webView setAutoresizingMask:UIViewAutoresizingNone];
+        [webView.scrollView setScrollEnabled:NO];
+        [webView.scrollView setScrollsToTop:NO];
+        _webView = webView;
+    }
+    return _webView;
+}
 @end

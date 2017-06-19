@@ -27,33 +27,34 @@ static NSString * const imageInfoCell = @"imageInfoCell";
     self = [super initWithFrame:frame];
     if (self) {
         [self addPagerNode];
-        [self mas_autoLayoutSubViews];
-
+        [self mas_subViews];
     }
     return self;
 }
 
+#pragma mark - private
+- (void)addPagerNode
+{
+    [self.contentView addSubview:self.pagerNode];
+}
+
+- (void)mas_subViews
+{
+    [_pagerNode mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.contentView);
+    }];
+}
+
+#pragma mark - public
 - (void)recommendImagePagerSelectedBlock:(imagePagerSelectedBlock)selectedBlock
 {
     _selectedBlock = selectedBlock;
 }
 
-- (void)addPagerNode
+- (void)setupImageInfoDatas:(NSArray *)imageInfoDatas
 {
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
-    flowLayout.itemSize = CGSizeMake(267, self.contentView.height);
-
-    UICollectionView *pagerNode = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:flowLayout];
-    pagerNode.backgroundColor = [UIColor whiteColor];
-    pagerNode.delegate = self;
-    pagerNode.dataSource = self;
-    pagerNode.pagingEnabled = NO;
-    pagerNode.showsHorizontalScrollIndicator = NO;
-    [pagerNode registerClass:[RecommendImageInfoCellNode class] forCellWithReuseIdentifier:imageInfoCell];
-    [self.contentView addSubview:pagerNode];
-    _pagerNode = pagerNode;
+    _imageInfoDatas = imageInfoDatas;
+    [_pagerNode reloadData];
 }
 
 #pragma mark - pagerNode datasource
@@ -82,18 +83,27 @@ static NSString * const imageInfoCell = @"imageInfoCell";
     }
 }
 
-- (void)setupImageInfoDatas:(NSArray *)imageInfoDatas
+
+#pragma mark - setter / getter
+- (UICollectionView *)pagerNode
 {
-    _imageInfoDatas = imageInfoDatas;
-    [_pagerNode reloadData];
+    if (!_pagerNode) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
+        flowLayout.itemSize = CGSizeMake(267, self.contentView.height);
+        
+        UICollectionView *pagerNode = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:flowLayout];
+        pagerNode.backgroundColor = [UIColor whiteColor];
+        pagerNode.delegate = self;
+        pagerNode.dataSource = self;
+        pagerNode.pagingEnabled = NO;
+        pagerNode.showsHorizontalScrollIndicator = NO;
+        [pagerNode registerClass:[RecommendImageInfoCellNode class] forCellWithReuseIdentifier:imageInfoCell];
+        _pagerNode = pagerNode;
+    }
+    return _pagerNode;
 }
 
-#pragma mark - layout
-- (void)mas_autoLayoutSubViews
-{
-    [_pagerNode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.contentView);
-    }];
-}
 
 @end

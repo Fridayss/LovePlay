@@ -31,7 +31,6 @@
     return cell;
 }
 
-
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -39,53 +38,24 @@
 
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubnodes];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
+#pragma mark - private
 - (void)addSubnodes
 {
-    UIImageView *imageNode = [[UIImageView alloc] init];
-    [self.contentView addSubview:imageNode];
-    _imageNode = imageNode;
-    
-    UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.numberOfLines = 2;
-    titleTextNode.font = [UIFont systemFontOfSize:16];
-    titleTextNode.textColor = RGB(36, 36, 36);
-    [self.contentView addSubview:titleTextNode];
-    _titleTextNode = titleTextNode;
-    
-    UIButton *replyBtnNode = [[UIButton alloc] init];
-    replyBtnNode.titleLabel.font = [UIFont systemFontOfSize:10];
-    [replyBtnNode setTitleColor:RGB(150, 150, 150) forState:UIControlStateNormal];
-    [replyBtnNode setImage:[UIImage imageNamed:@"common_chat_new"] forState:UIControlStateNormal];
-    [replyBtnNode setTitle:@"0" forState:UIControlStateNormal];
-    replyBtnNode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    replyBtnNode.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
-    replyBtnNode.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
-    replyBtnNode.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
-    [self.contentView addSubview:replyBtnNode];
-    _replyBtnNode = replyBtnNode;
-    
-    UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = RGB(222, 222, 222);
-    [self.contentView addSubview:underLineNode];
-    _underLineNode = underLineNode;
+    [self.contentView addSubview:self.imageNode];
+
+    [self.contentView addSubview:self.titleTextNode];
+
+    [self.contentView addSubview:self.replyBtnNode];
+
+    [self.contentView addSubview:self.underLineNode];
 }
 
-- (void)setupListInfoModel:(NewsListInfoModel *)listInfoModel
-{
-    _listInfoModel = listInfoModel;
-    _imageNode.imageURL = [NSURL URLWithString:listInfoModel.imgsrc.firstObject];
-    _titleTextNode.text = listInfoModel.title;
-    [_replyBtnNode setTitle:[NSString stringWithFormat:@"%ld", listInfoModel.replyCount] forState:UIControlStateNormal];
-}
-
-#pragma mark - layout
-
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.and.height.mas_equalTo(80);
@@ -113,4 +83,61 @@
     }];
 }
 
+#pragma mark - public
+- (void)setupListInfoModel:(NewsListInfoModel *)listInfoModel
+{
+    _listInfoModel = listInfoModel;
+    _imageNode.imageURL = [NSURL URLWithString:listInfoModel.imgsrc.firstObject];
+    _titleTextNode.text = listInfoModel.title;
+    [_replyBtnNode setTitle:[NSString stringWithFormat:@"%ld", listInfoModel.replyCount] forState:UIControlStateNormal];
+}
+
+#pragma mark - setter / getter
+- (UIImageView *)imageNode
+{
+    if (!_imageNode) {
+        UIImageView *imageNode = [[UIImageView alloc] init];
+        _imageNode = imageNode;
+    }
+    return  _imageNode;
+}
+
+- (UILabel *)titleTextNode
+{
+    if (!_titleTextNode) {
+        UILabel *titleTextNode = [[UILabel alloc] init];
+        titleTextNode.numberOfLines = 2;
+        titleTextNode.font = [UIFont systemFontOfSize:16];
+        titleTextNode.textColor = RGB(36, 36, 36);
+        _titleTextNode = titleTextNode;
+    }
+    return _titleTextNode;
+}
+
+- (UIButton *)replyBtnNode
+{
+    if (!_replyBtnNode) {
+        UIButton *replyBtnNode = [[UIButton alloc] init];
+        replyBtnNode.titleLabel.font = [UIFont systemFontOfSize:10];
+        [replyBtnNode setTitleColor:RGB(150, 150, 150) forState:UIControlStateNormal];
+        [replyBtnNode setImage:[UIImage imageNamed:@"common_chat_new"] forState:UIControlStateNormal];
+        [replyBtnNode setTitle:@"0" forState:UIControlStateNormal];
+        replyBtnNode.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        replyBtnNode.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        replyBtnNode.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
+        replyBtnNode.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+        _replyBtnNode = replyBtnNode;
+    }
+    return _replyBtnNode;
+}
+
+- (UIView *)underLineNode
+{
+    if (!_underLineNode) {
+        UIView *underLineNode = [[UIView alloc] init];
+        underLineNode.backgroundColor = RGB(222, 222, 222);
+        _underLineNode = underLineNode;
+    }
+    return _underLineNode;
+}
 @end

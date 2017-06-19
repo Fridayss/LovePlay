@@ -25,42 +25,21 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubnodes];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
 - (void)addSubnodes
 {
-    UIImageView *imageNode = [[UIImageView alloc] init];
-    imageNode.contentMode = UIViewContentModeScaleAspectFill;
-    imageNode.clipsToBounds = YES;
-    [self addSubview:imageNode];
-    _imageNode = imageNode;
+    [self addSubview:self.imageNode];
     
-    UILabel *titleTextLabel = [[UILabel alloc] init];
-    titleTextLabel.font = [UIFont systemFontOfSize:18];
-    titleTextLabel.textColor = [UIColor whiteColor];
-    [self addSubview:titleTextLabel];
-    _titleTextLabel = titleTextLabel;
-    
-    UILabel *descriptionTextLabel = [[UILabel alloc] init];
-    descriptionTextLabel.font = [UIFont systemFontOfSize:12];
-    descriptionTextLabel.textColor = [UIColor whiteColor];
-    [self addSubview:descriptionTextLabel];
-    _descriptionTextLabel = descriptionTextLabel;
+    [self addSubview:self.titleTextLabel];
+
+    [self addSubview:self.descriptionTextLabel];
 }
 
-- (void)setupImageModel:(DiscussImageModel *)imageModel
-{
-    _imageModel = imageModel;
-    _imageNode.imageURL = [NSURL URLWithString:imageModel.bannerUrl];
-    _titleTextLabel.text = imageModel.modelName;
-    _descriptionTextLabel.text = [NSString stringWithFormat:@"今日：%@",imageModel.todayPosts];
-}
-
-#pragma mark - layout
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_imageNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
@@ -76,6 +55,50 @@
         make.left.right.equalTo(_descriptionTextLabel);
         make.bottom.equalTo(_descriptionTextLabel.mas_top).offset(-5);
     }];
+}
+
+#pragma mark - public
+- (void)setupImageModel:(DiscussImageModel *)imageModel
+{
+    _imageModel = imageModel;
+    _imageNode.imageURL = [NSURL URLWithString:imageModel.bannerUrl];
+    _titleTextLabel.text = imageModel.modelName;
+    _descriptionTextLabel.text = [NSString stringWithFormat:@"今日：%@",imageModel.todayPosts];
+}
+
+#pragma mark - setter / getter
+- (UIImageView *)imageNode
+{
+    if (!_imageNode) {
+        UIImageView *imageNode = [[UIImageView alloc] init];
+        imageNode.contentMode = UIViewContentModeScaleAspectFill;
+        imageNode.clipsToBounds = YES;
+        _imageNode = imageNode;
+    }
+    return _imageNode;
+}
+
+
+- (UILabel *)titleTextLabel
+{
+    if (!_titleTextLabel) {
+        UILabel *titleTextLabel = [[UILabel alloc] init];
+        titleTextLabel.font = [UIFont systemFontOfSize:18];
+        titleTextLabel.textColor = [UIColor whiteColor];
+        _titleTextLabel = titleTextLabel;
+    }
+    return _titleTextLabel;
+}
+
+- (UILabel *)descriptionTextLabel
+{
+    if (!_descriptionTextLabel) {
+        UILabel *descriptionTextLabel = [[UILabel alloc] init];
+        descriptionTextLabel.font = [UIFont systemFontOfSize:12];
+        descriptionTextLabel.textColor = [UIColor whiteColor];
+        _descriptionTextLabel = descriptionTextLabel;
+    }
+    return _descriptionTextLabel;
 }
 
 @end

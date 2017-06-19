@@ -36,47 +36,22 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self addSubNodes];
-        [self mas_autoLayoutSubViews];
+        [self mas_subViews];
     }
     return self;
 }
 
+#pragma mark - private
 - (void)addSubNodes
 {
-    UILabel *topTextNode = [[UILabel alloc] init];
-    topTextNode.font = [UIFont systemFontOfSize:12];
-    topTextNode.textAlignment = NSTextAlignmentCenter;
-    topTextNode.textColor = RGB(236, 126, 150);
-    topTextNode.layer.cornerRadius = 5;
-    topTextNode.layer.masksToBounds = YES;
-    topTextNode.layer.borderWidth = 1;
-    topTextNode.layer.borderColor = RGB(236, 126, 150).CGColor;
-    topTextNode.text = @"置顶帖";
-    [self.contentView addSubview:topTextNode];
-    _topTextNode = topTextNode;
-    
-    UILabel *titleTextNode = [[UILabel alloc] init];
-    titleTextNode.font = [UIFont systemFontOfSize:14];
-    titleTextNode.textColor = RGB(36, 36, 36);
-    [self.contentView addSubview:titleTextNode];
-    _titleTextNode = titleTextNode;
-    
-    UIView *underLineNode = [[UIView alloc] init];
-    underLineNode.backgroundColor = RGB(222, 222, 222);
-    [self.contentView addSubview:underLineNode];
-    _underLineNode = underLineNode;
+    [self.contentView addSubview:self.topTextNode];
 
+    [self.contentView addSubview:self.titleTextNode];
+
+    [self.contentView addSubview:self.underLineNode];
 }
 
-- (void)setupForumThread:(ForumThread *)forumThread
-{
-    _forumThread = forumThread;
-    _titleTextNode.text = forumThread.subject;
-}
-
-#pragma mark - layout
-
-- (void)mas_autoLayoutSubViews
+- (void)mas_subViews
 {
     [_topTextNode mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(45);
@@ -97,4 +72,51 @@
         make.left.bottom.right.equalTo(self.contentView);
     }];
 }
+
+#pragma mark - public
+- (void)setupForumThread:(ForumThread *)forumThread
+{
+    _forumThread = forumThread;
+    _titleTextNode.text = forumThread.subject;
+}
+
+#pragma mark - setter / getter
+- (UILabel *)topTextNode
+{
+    if (!_topTextNode) {
+        UILabel *topTextNode = [[UILabel alloc] init];
+        topTextNode.font = [UIFont systemFontOfSize:12];
+        topTextNode.textAlignment = NSTextAlignmentCenter;
+        topTextNode.textColor = RGB(236, 126, 150);
+        topTextNode.layer.cornerRadius = 5;
+        topTextNode.layer.masksToBounds = YES;
+        topTextNode.layer.borderWidth = 1;
+        topTextNode.layer.borderColor = RGB(236, 126, 150).CGColor;
+        topTextNode.text = @"置顶帖";
+        _topTextNode = topTextNode;
+    }
+    return _topTextNode;
+}
+
+- (UILabel *)titleTextNode
+{
+    if (!_titleTextNode) {
+        UILabel *titleTextNode = [[UILabel alloc] init];
+        titleTextNode.font = [UIFont systemFontOfSize:14];
+        titleTextNode.textColor = RGB(36, 36, 36);
+        _titleTextNode = titleTextNode;
+    }
+    return _titleTextNode;
+}
+
+- (UIView *)underLineNode
+{
+    if (!_underLineNode) {
+        UIView *underLineNode = [[UIView alloc] init];
+        underLineNode.backgroundColor = RGB(222, 222, 222);
+        _underLineNode = underLineNode;
+    }
+    return _underLineNode;
+}
+
 @end
