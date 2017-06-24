@@ -46,9 +46,18 @@
 
 - casa大神组件化方案文章：[iOS应用架构谈 组件化方案](http://casatwy.com/iOS-Modulization.html) + [在现有工程中实施基于CTMediator的组件化方案](http://casatwy.com/modulization_in_action.html)
 
+#### Swift3版本：使用纯swift语言及第三方库
+
+* 网络请求： [**Alamofire**](https://github.com/Alamofire/Alamofire) AFNetworking亲兄弟
+* 自动布局： [**Snapkit**](https://github.com/SnapKit/SnapKit) Masonry亲兄弟
+
 #### …...
 
-后续有时间，将会使用swift重写以上版本
+后续有时间，将会使用方式重写以上版本
+
+## 补充
+
+由于是用来学习和回顾技术的项目，所以并没有对代码进行过多封装，尽量保证各版本项目结构一致，方便查看和对照
 
 ## 致谢
 
