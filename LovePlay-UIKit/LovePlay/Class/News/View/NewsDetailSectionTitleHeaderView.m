@@ -50,8 +50,8 @@
     [self.leftLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_offset(3);
         make.top.equalTo(self.contentView).mas_offset(5);
-        make.left.top.equalTo(self.contentView).mas_offset(12);
-        make.bottom.top.equalTo(self.contentView).mas_offset(-5);
+        make.left.equalTo(self.contentView).mas_offset(12);
+        make.bottom.equalTo(self.contentView).mas_offset(-5);
     }];
     
     [self.titleTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
