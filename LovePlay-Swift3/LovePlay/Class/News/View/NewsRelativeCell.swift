@@ -74,7 +74,7 @@ class NewsRelativeCell: UITableViewCell {
             self.imgView.kf.setImage(with: imgURL)
             
             self.titleTextLabel.text = newValue?.title
-            self.timeTextLabel.text = (newValue?.source)! + " " + (newValue?.ptime)!
+            self.timeTextLabel.text = (newValue?.source ?? "") + " " + (newValue?.ptime)!
         }
         
         get {
