@@ -53,6 +53,7 @@
 
 - casa大神组件化方案文章：[iOS应用架构谈 组件化方案](http://casatwy.com/iOS-Modulization.html) + [在现有工程中实施基于CTMediator的组件化方案](http://casatwy.com/modulization_in_action.html)
 - 这个仓库中的组件化工程只是为了立个flag，组件化项目具体实现请移步：[LovePlayModule](https://github.com/LovePlayModule)，[项目入口点我](https://github.com/LovePlayModule/LovePlay)
+- [组件化的配置及命令行的使用](http://yunschou.github.io/2017/08/mediator-learn-2/)
 
 #### Swift3版本：使用纯swift语言及第三方库
 
@@ -83,9 +84,9 @@
 
 ## 2017-08-08 更新:
 
-* 从年初开始这个项目，有段时间比较忙停更了几个月，到今天AsyncDisplayKit、Masonry、ReactiveCocoa、Swift、组件化几个版本基本完成了，由于是练手项目，部分代码有瑕疵还请见谅
+* 从年初开始这个项目（中途比较忙停更了几个月），到今天AsyncDisplayKit、Masonry、ReactiveCocoa、组件化、Swift几个版本大致完成了，部分代码有瑕疵还请见谅
 
-* 接手的新项目是用Swift开发的，借此机会全身心切入到Swift上来，以后可能就不怎么写OC的代码了
+* 接手的新项目是用Swift3开发的，借此机会全身心切入到Swift上来，以后可能就不怎么写OC代码了
 
 * 8.8
 
