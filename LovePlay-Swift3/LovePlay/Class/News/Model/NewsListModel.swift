@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import HandyJSON
 
-class NewsListModel: NSObject {
+class NewsListModel: HandyJSON {
+    required init() {
+        
+    }
+    
     var digest : String = ""
     var docid : String = ""
     var imgextra : String = ""
@@ -23,9 +28,12 @@ class NewsListModel: NSObject {
     var replyCount : NSNumber = 0
     var showType : NSNumber = 0
 
-    
+    /*
+     // Swift4开始，KVC赋值方式需要在属性前加@objc
+     // 弃用算了
     init(dict : [String : NSObject]) {
         super.init()
+     
         setValuesForKeys(dict)
         
     }
@@ -33,6 +41,6 @@ class NewsListModel: NSObject {
     override func setValue(_ value: Any?, forUndefinedKey key: String) {
         
     }
-    
+    */
     
 }

@@ -63,7 +63,7 @@ class NewsCommentFooterView: UITableViewHeaderFooterView {
     }
     
     //MARK: - target-action
-    func footerButtonClick() {
+    @objc func footerButtonClick() {
         if self.footerClickBlock != nil {
             self.footerClickBlock!()
         }

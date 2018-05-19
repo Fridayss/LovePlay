@@ -19,10 +19,9 @@ class MainTabBarController: UITabBarController {
     }
 
     func configureTabBar() {
-
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : RGB(r: 113, g: 113, b: 113)], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor : RGB(r: 113, g: 113, b: 113)], for: .normal)
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : RGB(r: 218, g: 85, b: 107)], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor : RGB(r: 218, g: 85, b: 107)], for: .selected)
     }
     
     func addNewsViewController(){

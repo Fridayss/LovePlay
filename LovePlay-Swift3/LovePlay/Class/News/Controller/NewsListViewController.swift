@@ -46,14 +46,13 @@ class NewsListViewController: UIViewController, UITableViewDataSource, UITableVi
         Alamofire.request(urlStr).responseJSON { response in
             switch response.result.isSuccess{
             case true:
-                if let value = response.result.value as? [String : AnyObject]{
+                if let value = response.result.value as? NSDictionary {
 //                    let json = JSON(value)
-//                    print(json)
-                    let info = value["info"] as? [NSObject]
+//                    print(value)
+                    let info = value["info"] as? [NSDictionary]
                     for dict in info!{
-                        print(dict)
-                        let model = NewsListModel.init(dict: dict as! [String : NSObject])
-                        self.listDatas.append(model)
+                        let model = NewsListModel.deserialize(from: dict)
+                        self.listDatas.append(model!)
                     }
                     
                     self.tableView.reloadData()
